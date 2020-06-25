@@ -70,7 +70,7 @@ font-7 = basis33:size=12:antialias=false;0
 
 modules-left = i3 bspwm
 modules-center = track
-modules-right = spotify updates cpu memory
+modules-right = battery spotify updates cpu memory
 
 wm-override = i3
 force-restack = true
