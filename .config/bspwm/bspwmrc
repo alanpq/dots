@@ -1,5 +1,5 @@
 #! /bin/sh
-
+HOSTNAME=$(hostname)
 #transmission-daemon &
 xsetroot -cursor_name left_ptr &
 exec sxhkd &
@@ -20,10 +20,14 @@ killall polybar; ~/.script/launch_polybar.sh &>/tmp/polybar.log
 feh --no-fehbg --bg-fill "$HOME/.config/bspwm/wallpaper"
 source $HOME/.config/env
 
-bspc monitor DVI-D-0 -d 1 2 3 4 5
-bspc monitor DP-2    -d 6 7 8 9 10
-#bspc monitor -d I II III IV V VI VII VIII IX X
-
+case $HOSTNAME in
+	gamer-macbook) bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 10;;
+	zwei-pc)
+		bspc monitor DVI-D-0 -d 1 2 3 4 5
+		bspc monitor DP-2    -d 6 7 8 9 10
+	;;
+	*) bspc monitor -d 1 2 3 4 5 6 7 8 9 10;;
+esac
 bspc config border_width        	1
 bspc config window_gap          	5
 
