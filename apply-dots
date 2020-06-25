@@ -27,10 +27,12 @@ echo Symlinking to home directory...
 
 echo
 echo Creating .config symlinks
+mkdir $HOME/.config
 safe_link ".config"
-ln -s ~/.dots/.config/* ~/.config >/dev/null
+ln -s $HOME/.dots/.config/* $HOME/.config >/dev/null
 
 echo
 echo Creating .script symlinks
+mkdir $HOME/.script
 safe_link ".script"
-ln -s ~/.dots/.script/* ~/.script >/dev/null
+ln -s $HOME/.dots/.script/* $HOME/.script >/dev/null
