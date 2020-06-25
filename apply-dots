@@ -20,10 +20,10 @@ safe_link () {
 }
 
 echo Symlinking to home directory...
-echo
-echo Creating root symlinks...
-safe_link
-ln -s ~/.dots/* ~/ >/dev/null
+#echo
+#echo Creating root symlinks...
+#safe_link
+#ln -s ~/.dots/* ~/ >/dev/null
 
 echo
 echo Creating .config symlinks
