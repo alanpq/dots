@@ -1,0 +1,12 @@
+polybar
+albert
+picom
+dunst
+xsetroot
+brightnessctl
+playerctl
+pamixer
+bspwm
+sxhkd
+flameshot
+
