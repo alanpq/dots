@@ -1,0 +1,14 @@
+caarlos0/jvm
+djui/alias-tips
+
+caarlos0/zsh-mkc #make dir and cd (mkc)
+zsh-users/zsh-completions
+
+robbyrussell/oh-my-zsh path:plugins/sudo
+
+#robbyrussell/oh-my-zsh path:plugins/aws
+geometry-zsh/geometry
+
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-history-substring-search
+

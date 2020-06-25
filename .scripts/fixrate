@@ -1,0 +1,11 @@
+#xrandr --output DVI-D-0 --mode 1920x1080 --rate 144; xrandr --output DP-2 --mode 1920x1080 --rate 144;
+
+killall compton
+killall picom
+
+MONITORS=(`xrandr | grep -Po '(.+) (?=connected)'`)
+for i in "${MONITORS[@]}"; do
+	xrandr --output $i --mode 1920x1080 --rate 144;
+done
+
+picom -b --use-damage --glx-no-stencil --experimental-backends

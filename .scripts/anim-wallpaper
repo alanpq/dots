@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -f "$ANIMWALLPAPER" ]; then
+	killall mpv
+	killall xwinwrap
+	xwinwrap -g 1920x1080+0+0 -ov -- mpv --loop-file=inf -wid WID --input-media-keys=no --no-input-default-bindings --no-osc "$ANIM_WALLPAPER" & 
+	xwinwrap -g 1920x1080+1920+0 -ov -- mpv --loop-file=inf -wid WID --input-media-keys=no --no-input-default-bindings --no-osc "$ANIM_WALLPAPER" & 
+else 
+	echo "$ANIMWALLPAPER does not exist"
+fi
+
+

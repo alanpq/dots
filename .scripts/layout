@@ -1,0 +1,9 @@
+#!/bin/bash
+if [[ $1 == "secondvert" ]]
+then
+  xrandr --output DP-2 --rotate left --pos 1920x0
+  xrandr --output DVI-D-0 --pos 0x760
+else
+  xrandr --output DVI-D-0 --pos 0x0
+  xrandr --output DP-2 --rotate normal --right-of DVI-D-0
+fi

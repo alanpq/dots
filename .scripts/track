@@ -1,0 +1,19 @@
+#!/bin/bash
+
+while getopts 'o' OPTION; do
+	case ${OPTION} in
+		o)
+		  touch /tmp/TRACKLINE
+		  cat /tmp/TRACKLINE
+		  exit 0
+		  ;;	
+		*)	echo 'bruh';;
+	esac
+done
+
+while read -r LINE; do
+	echo $LINE > /tmp/TRACKLINE
+	echo $LINE
+done
+
+echo "" > /tmp/TRACKLINE

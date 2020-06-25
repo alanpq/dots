@@ -1,0 +1,63 @@
+#!/bin/bash
+
+killbar () {
+    kill $(cat /tmp/$1_$2)
+    rm "/tmp/$1_$2"
+}
+
+startbar () {
+    MONITOR=$2 nohup polybar --reload $3 & echo $! > "/tmp/$1_$2"
+}
+
+togglebar () {
+    if [ -f "/tmp/$1_$2" ]; then
+        echo "$1_$2 exists, killing.."
+        killbar $1 $2
+    else
+        echo "$1_$2 no exist, starting.."
+        startbar $1 $2 $3
+    fi
+}
+
+while getopts 's:' OPTION; do
+    case ${OPTION} in
+        s)    target="${OPTARG}";;
+        *)    1>&2 printf 'toggle_polybar: %s: Unsupported option.\n' "${OPTION}";;
+    esac
+done
+
+if [ $target ]; then
+    echo $target
+    togglebar "POLYBAR_BOTTOM" $target bottom
+    togglebar "POLYBAR_TOP" $target top
+    
+else
+    raw=$(xdotool getmouselocation)
+    regex="x:([0-9]+).+y:([0-9]+)"
+    if [[ $raw =~ $regex ]]
+    then
+        x=${BASH_REMATCH[1]}
+        y=${BASH_REMATCH[2]}
+        echo "$x, $y"
+        if [ $x -lt 1920 ]
+        then
+            echo killing dvi-d-0
+            toggle_polybar -s DVI-D-0
+            # kill $(cat /tmp/POLYBAR_BOTTOM_DVI-D-0)
+            # rm '/tmp/POLYBAR_BOTTOM_DVI-D-0'
+
+            # kill $(cat /tmp/POLYBAR_TOP_DVI-D-0)
+            # rm '/tmp/POLYBAR_TOP_DVI-D-0'
+        else
+            echo killing dp-2
+            toggle_polybar -s DP-2
+            # kill $(cat /tmp/POLYBAR_BOTTOM_DP-2)
+            # rm '/tmp/POLYBAR_BOTTOM_DP-2'
+
+            # kill $(cat /tmp/POLYBAR_TOP_DP-2)
+            # rm '/tmp/POLYBAR_TOP_DP-2'
+        fi
+    else
+        echo "Failed to get mouse location!"
+    fi
+fi

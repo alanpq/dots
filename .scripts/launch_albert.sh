@@ -1,0 +1,3 @@
+killall albert
+albert &
+

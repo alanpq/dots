@@ -1,0 +1,2 @@
+#!/bin/bash
+picom -b --use-damage --glx-no-stencil --experimental-backends --transparent-clipping
