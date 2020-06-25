@@ -32,5 +32,5 @@ ln -s ~/.dots/.config/* ~/.config >/dev/null
 
 echo
 echo Creating .script symlinks
-safe_link ".scripts"
-ln -s ~/.dots/.scripts/* ~/.scripts >/dev/null
+safe_link ".script"
+ln -s ~/.dots/.script/* ~/.script >/dev/null
