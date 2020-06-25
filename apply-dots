@@ -1,0 +1,36 @@
+#!/bin/bash
+# TODO: remove .dots folder as required name
+safe_link () {
+	local FILES=($(ls $HOME/.dots/$1))
+	for f in ${FILES[@]}; do
+		file="$HOME/$1/$f"
+		if [[ -z $1 ]]; then
+			file="$HOME/$f"
+		fi
+		#echo $file
+		local REPLY=n
+		test -f "$file" || test -d "$file" && read -p "Do you want to overwrite the file '$file'? (Y/n)"
+		if [[ $REPLY =~ [nN] ]]; then
+			echo "Skipping file '$file'..."
+			continue
+		fi
+		echo "Overwriting '$file'..."
+		rm $file
+	done
+}
+
+echo Symlinking to home directory...
+echo
+echo Creating root symlinks...
+safe_link
+ln -s ~/.dots/* ~/ >/dev/null
+
+echo
+echo Creating .config symlinks
+safe_link ".config"
+ln -s ~/.dots/.config/* ~/.config >/dev/null
+
+echo
+echo Creating .script symlinks
+safe_link ".scripts"
+ln -s ~/.dots/.scripts/* ~/.scripts >/dev/null
