@@ -80,7 +80,7 @@ tray-detached = false
 
 [module/track]
 type = custom/script
-exec = /home/gamer/scripts/track -o
+exec = ~/.script/track -o
 interval = 1
 
 
