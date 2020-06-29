@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 HOSTNAME=$(hostname)
 #transmission-daemon &
 xsetroot -cursor_name left_ptr &
