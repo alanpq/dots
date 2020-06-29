@@ -3,6 +3,7 @@ albert
 picom
 dunst
 xsetroot
+xgetres
 brightnessctl
 playerctl
 pamixer
