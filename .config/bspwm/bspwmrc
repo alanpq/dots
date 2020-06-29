@@ -31,6 +31,8 @@ esac
 bspc config border_width        	1
 bspc config window_gap          	5
 
+bspc config normal_border_color $(xgetres background)
+
 bspc config top_padding			30
 bspc config bottom_padding		30
 
