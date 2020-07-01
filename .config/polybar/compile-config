@@ -1,0 +1,14 @@
+#!/usr/bin/python
+import re
+import subprocess
+def evalGroup(match):
+        n = subprocess.run(match.group(1), shell=True, capture_output=True, text=True)
+        return n.stdout.strip()
+data = ""
+with open("config.template", "r") as file:
+        data = file.read()
+
+with open("config", "w") as file:	
+        new = re.sub("##{(.+)}", evalGroup, data) 
+        file.write(new)
+

@@ -1,7 +1,7 @@
 [bar/top]
 monitor = ${env:MONITOR:}
 width = 100%
-height = 40
+height = ##{test $(hostname) == 'gamer-macbook' && echo 40 || echo 27}
 
 wm-restack = bspwm
 override-redirect = true
@@ -29,9 +29,9 @@ font-1 = unifont:size=8;5
 font-2 = FontAwesome:size=8;5
 font-3 = NotoSans-Regular:size=8;5
 font-4 = MaterialIcons:size=10;6
-font-0 = Termsynu:size=17:antialias=false;5
+font-0 = Termsynu:size=##{test $(hostname) == 'gamer-macbook' && echo 17 || echo 8}:antialias=false;5
 font-6 = Hack:size=8:antialias=true;5
-font-7 = basis33:size=30:antialias=false;5
+font-7 = basis33:size=##{test $(hostname) == 'gamer-macbook' && echo 30 || echo 12}:antialias=false;5
 
 modules-left = powermenu mpd
 modules-center = date
@@ -41,7 +41,7 @@ modules-right = volume wireless-network wired-network
 monitor = ${env:MONITOR:}
 bottom = true
 width = 100%
-height = 40
+height = ##{test $(hostname) == 'gamer-macbook' && echo 40 || echo 27}
 
 wm-restack = bspwm
 override-redirect = true
@@ -60,13 +60,13 @@ module-margin-left = 0
 module-margin-right = 6
 
 font-5 = NotoSans-Regular:size=8;1
-font-1 = unifont:size=15;-3
-font-2 = FontAwesome:size=15;0
-font-3 = NotoSans-Regular:size=15;-1
+font-1 = unifont:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8};-3
+font-2 = FontAwesome:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8};0
+font-3 = NotoSans-Regular:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8};-1
 font-4 = MaterialIcons:size=10;-1
-font-0 = Termsynu:size=15:antialias=false;0
-font-6 = Hack:size=15:antialias=true;0
-font-7 = basis33:size=23:antialias=false;0
+font-0 = Termsynu:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8}:antialias=false;0
+font-6 = Hack:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8}:antialias=true;0
+font-7 = basis33:size=##{test $(hostname) == 'gamer-macbook' && echo 23 || echo 12}:antialias=false;0
 
 modules-left = i3 bspwm
 modules-center = track
@@ -85,7 +85,7 @@ interval = 1
 
 [module/debug]
 type = custom/script
-exec = echo "/home/gamer"
+exec = echo "##{echo $HOME}"
 interval = 1
 
 [module/updates]
