@@ -15,7 +15,7 @@ safe_link () {
 			continue
 		fi
 		echo "Overwriting '$file'..."
-		rm $file
+		rm -r $file
 	done
 }
 
