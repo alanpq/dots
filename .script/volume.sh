@@ -1,7 +1,7 @@
 #!/bin/sh
 
 polybar-msg cmd show
-xdo raise -a "polybar-level_eDP1"
+xdo raise -a "polybar-level_DVI-D-0"
 
 sleep 1
 

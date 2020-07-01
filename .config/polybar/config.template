@@ -1,3 +1,71 @@
+[colors]
+background = #000
+foreground = #fff
+
+[bar/level]
+width = 10%
+height = 4.3%
+offset-x = 45%
+offset-y = 5%
+radius = 22
+fixed-center = true
+bottom = false
+
+background = #11FFFFFF
+foreground = ${colors.background}
+
+border-size = 0
+border-color = #000
+
+padding-left = 2
+padding-right = 2
+
+module-margin-left = 0
+module-margin-right = 1
+ 
+font-0 = Hack Nerd Font:pixelsize=14:style=Medium Condensed;5
+font-1 = Material Design Icons Desktop:pixelsize=20;5
+font-2 = Hack Nerd Font:pixelsize=20:style=Medium Condensed;7
+ 
+modules-center = xbacklight pulseaudio
+
+override-redirect = true
+
+scroll-up = bspwm-desknext
+scroll-down = bspwm-deskprev
+
+cursor-click = ns-resize 
+cursor-scroll = ns-resize 
+
+enable-ipc = true
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <label-volume><bar-volume>
+label-volume = "󰎇 "
+label-volume-foreground = ${root.foreground}
+
+label-muted = 󰎊 Muted
+label-muted-foreground = #000
+
+bar-volume-width = 10
+bar-volume-foreground-0 = ${colors.background}
+bar-volume-foreground-1 = ${colors.background}
+bar-volume-foreground-2 = ${colors.background}
+bar-volume-foreground-3 = ${colors.background}
+bar-volume-foreground-4 = #fb8720
+bar-volume-foreground-5 = #fb5a20
+bar-volume-foreground-6 = #fb2020
+bar-volume-gradient = false
+bar-volume-indicator = "%{T3}%{T-}"
+bar-volume-indicator-font = 2
+bar-volume-fill = ━
+bar-volume-fill-font = 2
+bar-volume-empty = ━
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = #11000000
+
 [bar/top]
 monitor = ${env:MONITOR:}
 width = 100%
@@ -18,6 +86,8 @@ line-size = 2
 padding-right = 4
 module-margin-left = 0
 module-margin-right = 6
+
+enable-click = true
 
 #font-0 = NotoSans-Regular:size=8;-1
 #font-1 = MaterialIcons:size=10;0.75
@@ -83,11 +153,6 @@ type = custom/script
 exec = ~/.script/track -o
 interval = 1
 
-[module/debug]
-type = custom/script
-exec = echo "##{echo $HOME}"
-interval = 1
-
 [module/updates]
 type = custom/script
 exec = ~/.config/polybar/updates-arch-combined.sh
@@ -102,8 +167,10 @@ type = custom/script
 interval = 1
 format-prefix = " "
 format = <label>
-exec = python ~/.config/polybar/spotify_status.py -f '{play_pause} {song} - {artist} ({album})' -t 100 -p ',' --playpause-font=2
+exec = python ~/.config/polybar/spotify_status.py -f '{play_pause} {song} - {artist} ({album})' -t 100 -p ',' --playpause-font=2
 format-underline = #1db954
+
+click-left = playerctl play-pause
 
 [module/backlight]
 type = internal/xbacklight
@@ -287,13 +354,25 @@ animation-packetloss-1 = 
 animation-packetloss-1-foreground = ${bar/top.foreground}
 animation-packetloss-framerate = 500
 
-[module/wired-network]
+[module/old-wired-network]
 type = internal/network
 interface = enp0s31f6
 interval = 3.0
 
 label-connected =   %local_ip%
 label-disconnected-foreground = #66
+enable-click = false
+click-right = dunstify left
+scroll-up = dunstify up
+cursor-click = pointer
+
+[module/wired-network]
+type = custom/script
+interval = 3.0
+exec = ip -4 -o addr show dev enp0s31f6 | grep -Po '[\d\.]*' | grep -m 1 '\.' | tee /tmp/ipaddr
+
+click-left = xclip -i /tmp/ipaddr -selection clipboard && dunstify 'Local IP' 'copied to clipboard.'
+click-right = curl ipinfo.io/ip | xclip -selection clipboard && dunstify 'Public IP' 'copied to clipboard.'
 
 [module/volume]
 type = internal/volume

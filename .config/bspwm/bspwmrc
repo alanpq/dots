@@ -13,6 +13,7 @@ pidof albert || albert &
 
 rm /tmp/POLYBAR_*
 killall polybar; ~/.script/launch_polybar.sh &>/tmp/polybar.log
+
 #timer-checkupdates.sh &
 ~/.script/SPTN.sh &
 ~/.script/MO.sh &

@@ -21,3 +21,4 @@ for m in $(polybar --list-monitors | cut -d":" -f1); do
     index=$(($index+1))
 done
 
+polybar level &
