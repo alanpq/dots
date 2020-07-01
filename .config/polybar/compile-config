@@ -1,14 +1,17 @@
 #!/usr/bin/python
 import re
 import subprocess
+import os
+
 def evalGroup(match):
         n = subprocess.run(match.group(1), shell=True, capture_output=True, text=True)
         return n.stdout.strip()
 data = ""
-with open("config.template", "r") as file:
+absPath = os.path.dirname(os.path.realpath(__file__))
+with open(os.path.join(absPath, "config.template"), "r") as file:
         data = file.read()
 
-with open("config", "w") as file:	
+with open(os.path.join(absPath, "config"), "w") as file:	
         new = re.sub("##{(.+)}", evalGroup, data) 
         file.write(new)
 
