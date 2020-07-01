@@ -1,10 +1,14 @@
 ################################################
 #               WM CONTROLS                    #
 ################################################
-,
+
 # make sxhkd reload its configuration files:
+#super + shift + r
+#	pkill -USR1 -x sxhkd && dunstify -r 500 "SXHKD" "config reloaded"
+
+# dmenu choice for restarting specific application
 super + shift + r
-	pkill -USR1 -x sxhkd && dunstify -r 500 "SXHKD" "config reloaded"
+	~/.script/reload.sh &
 
 #
 # bspwm hotkeys
