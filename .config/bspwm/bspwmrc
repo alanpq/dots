@@ -3,7 +3,7 @@ HOSTNAME=$(hostname)
 #transmission-daemon &
 xsetroot -cursor_name left_ptr &
 exec sxhkd &
-picom --experimental-backends --backend glx -b &
+picom -b --experimental-backends &
 killall dunst; dunst &
 #killall polybar; ~/.script/dock.sh &>/tmp/dock.log
 #auto-connect-bt.sh &
@@ -18,10 +18,19 @@ killall polybar; ~/.script/launch_polybar.sh &>/tmp/polybar.log
 ~/.script/MO.sh &
 
 feh --no-fehbg --bg-fill "$HOME/.config/bspwm/wallpaper"
-source $HOME/.config/env
+#source $HOME/.config/env
+
+
+bspc config top_padding			30
+bspc config bottom_padding		30
 
 case $HOSTNAME in
-	gamer-macbook) bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 10;;
+	gamer-macbook) 
+		bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 10
+		
+		bspc config top_padding 40
+		bspc config bottom_padding 40
+	;;
 	zwei-pc)
 		bspc monitor DVI-D-0 -d 1 2 3 4 5
 		bspc monitor DP-2    -d 6 7 8 9 10
@@ -31,8 +40,7 @@ esac
 bspc config border_width        	1
 bspc config window_gap          	5
 
-bspc config top_padding			30
-bspc config bottom_padding		30
+
 
 bspc config split_ratio          	0.52
 bspc config borderless_monocle   	true
