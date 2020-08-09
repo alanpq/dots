@@ -202,7 +202,7 @@
 
 [discord]
     appname = discord
-    format  = ""
+    format  = "<b>%s</b>\n%b"
     script = ~/.config/dunst/scripts/discord.sh
 
 [spotify]
