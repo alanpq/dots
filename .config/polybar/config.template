@@ -83,6 +83,7 @@ foreground = #ccffffff
 line-color = ${bar/bottom.background}
 line-size = 2
 
+padding-left = 3
 padding-right = 4
 module-margin-left = 0
 module-margin-right = 6
@@ -103,8 +104,8 @@ font-0 = Termsynu:size=##{test $(hostname) == 'gamer-macbook' && echo 17 || echo
 font-6 = Hack:size=8:antialias=true;5
 font-7 = basis33:size=##{test $(hostname) == 'gamer-macbook' && echo 30 || echo 12}:antialias=false;5
 
-modules-left = powermenu mpd
-modules-center = date
+modules-left = date
+modules-center = spotify
 modules-right = volume wireless-network wired-network
 
 [bar/bottom]
@@ -140,7 +141,7 @@ font-7 = basis33:size=##{test $(hostname) == 'gamer-macbook' && echo 23 || echo 
 
 modules-left = i3 bspwm
 modules-center = track
-modules-right = battery spotify updates cpu memory
+modules-right = battery updates cpu memory
 
 wm-override = i3
 force-restack = true
@@ -168,7 +169,7 @@ interval = 1
 format-prefix = " "
 format = <label>
 exec = python ~/.config/polybar/spotify_status.py -f '{play_pause} {song} - {artist} ({album})' -t 100 -p ',' --playpause-font=2
-format-underline = #1db954
+format-overline = #1db954
 
 click-left = playerctl play-pause
 
@@ -322,7 +323,7 @@ type = internal/date
 date =   %%{F#fff}%d%%{F#99}/%m/%Y (%A) %%{F-} %%{F#fff}%I:%M%%{F-} %p
 date-alt = %%{F#fff}%A, %d %B %Y  %%{F#fff}%I:%M%%{F#666}:%%{F#56baef}%S%%{F-} %p
 
-format-overline = #41C3F1
+#format-overline = #41C3F1
 
 [module/memory]
 type = internal/memory
