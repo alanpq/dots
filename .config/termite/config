@@ -6,43 +6,76 @@ cell_height_scale = 1
 
 
 [colors]
-# hard contrast: background = #1d2021
-background = rgba(40, 40, 40, 0.6)
-# soft contrast: background = #32302f
+# hard contrast = background = #1d2021
+background = rgba(20, 20, 25, 1)
+# #212123
+# soft contrast = background = #32302f
 foreground = #ebdbb2
 foreground_bold = #ebdbb2
 
-# dark0 + gray
-color0 = #282828
-color8 = #928374
+# black dark/light
+color0 =                          #1f1a28
+color8 =                          #585858
 
-# neutral_red + bright_red
-color1 = #cc241d
-color9 = #fb4934
+# red dark/light
+color1 =                          #ab4642
+color9 =                          #ab4642
 
-# neutral_green + bright_green
-color2 = #98971a
-color10 = #b8bb26
+# green dark/light
+color2 =                          #7E807E
+color10 =                         #8D8F8D
 
-# neutral_yellow + bright_yellow
-color3 = #d79921
-color11 = #fabd2f
+# yellow dark/light
+color3 =                          #f7ca88
+color11 =                         #f7ca88
 
-# neutral_blue + bright_blue
-color4 = #458588
-color12 = #83a598
+# blue dark/light
+color4 =                          #7cafc2
+color12 =                         #7cafc2
 
-# neutral_purple + bright_purple
-color5 = #b16286
-color13 = #d3869b
+# magenta dark/light
+color5 =                          #ba8baf
+color13 =                         #ba8baf
 
-# neutral_aqua + faded_aqua
-color6 = #689d6a
-color14 = #8ec07c
+# cyan dark/light
+color6 =                          #1ABB9B
+color14 =                         #1ABB9B
 
-# light4 + light1
-color7 = #a89984
-color15 = #ebdbb2
+# white dark/light
+color7 =                          #d8d8d8
+color15 =                         #f8f8f8
 
-# vim: ft=dosini cms=#%s
+## dark0 + gray
+#color0 = #282828
+#color8 = #928374
+
+## neutral_red + bright_red
+#color1 = #cc241d
+#color9 = #fb4934
+
+## neutral_green + bright_green
+#color2 = #98971a
+#color10 = #b8bb26
+
+## neutral_yellow + bright_yellow
+#color3 = #d79921
+#color11 = #fabd2f
+
+## neutral_blue + bright_blue
+#color4 = #458588
+#color12 = #83a598
+
+## neutral_purple + bright_purple
+#color5 = #b16286
+#color13 = #d3869b
+
+## neutral_aqua + faded_aqua
+#color6 = #689d6a
+#color14 = #8ec07c
+
+## light4 + light1
+#color7 = #a89984
+#color15 = #ebdbb2
+
+# vim = ft=dosini cms=#%s
 
