@@ -1,4 +1,4 @@
-CHOICE=$(echo $'sxhkd\npolybar' | dmenu -i)
+CHOICE=$(echo $'sxhkd\npolybar\ndunst' | dmenu -i)
 
 
 case "$CHOICE" in
