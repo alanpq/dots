@@ -22,3 +22,5 @@ for m in $(polybar --list-monitors | cut -d":" -f1); do
 done
 
 polybar level &
+sleep 1
+polybar-msg cmd hide
