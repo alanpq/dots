@@ -37,6 +37,12 @@ super + y
 mod4 + g
 	bspc node -s biggest.local
 
+
+super + semicolon
+  bspc node @parent -R 90
+
+super + apostrophe
+  bspc node @parent -R 270
 #
 # state/flags
 #
