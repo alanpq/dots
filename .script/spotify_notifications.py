@@ -18,7 +18,7 @@ def on_track_change(player, e):
     path = "/tmp/" + str(int(random() * 1000)) + ".jpeg"
     print(path)
     urlretrieve(e['mpris:artUrl'], path)
-    Popen(['notify-send', track_info, "-i", path])
+    Popen(['dunstify', track_info, "-r", "12345" "-i", path])
 
 player.on('metadata', on_track_change)
 
