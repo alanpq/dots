@@ -1,12 +1,12 @@
 eval "$(dircolors)"
 
-export PATH=$PATH:/home/gamer/.gem/ruby/2.7.0/bin
-export PATH=$PATH:/home/gamer/scripts/
-export PATH=$PATH:/home/gamer/.script/
-export PATH=$PATH:/home/gamer/Android/Sdk/ndk/21.0.6113669/
-export ANDROID_SDK_ROOT="/home/gamer/Android/Sdk/"
-export NDK_ROOT="/home/gamer/Android/Sdk/ndk/21.0.6113669"
-export ANDROID_NDK_HOME="/home/gamer/Android/Sdk/ndk/21.0.6113669"
+export PATH=$PATH:~/.gem/ruby/2.7.0/bin
+export PATH=$PATH:~/scripts/
+export PATH=$PATH:~/.script/
+export PATH=$PATH:~/Android/Sdk/ndk/21.0.6113669/
+export ANDROID_SDK_ROOT="~/Android/Sdk/"
+export NDK_ROOT="~/Android/Sdk/ndk/21.0.6113669"
+export ANDROID_NDK_HOME="~/Android/Sdk/ndk/21.0.6113669"
 
 #=========================== GEOMETRY CONFIG ======================================
 #-general
@@ -51,7 +51,7 @@ zstyle ':completion:*' group-name ''
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 zstyle ':completion:*' menu select=1
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle :compinstall filename '/home/gamer/.zshrc'
+zstyle :compinstall filename '~/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -73,4 +73,4 @@ alias dir='dir --color'
 
 
 
-source /home/gamer/.zsh_plugins.sh
+source ~/.zsh_plugins.sh
