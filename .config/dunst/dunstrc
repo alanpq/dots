@@ -204,6 +204,7 @@
     appname = discord
     format  = "<b>%s</b>\n%b"
     script = ~/.config/dunst/scripts/discord.sh
+    background = "#7289DA"
 
 [spotify]
     body = *Spotify*
