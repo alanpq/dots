@@ -114,7 +114,7 @@ try:
             song = label_with_font.format(font=font, label=song)
             album = label_with_font.format(font=font, label=album)
 
-        print(output.format(artist=artist, song=song, play_pause=play_pause, album=album))
+        print(output.format(artist=artist, song=song, play_pause=play_pause, album=album) + " ")
 
 except Exception as e:
     if isinstance(e, dbus.exceptions.DBusException):

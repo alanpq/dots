@@ -1,6 +1,6 @@
 [colors]
-background = #000
-foreground = #fff
+background = #fff
+foreground = ##{xgetres background}
 
 [bar/level]
 width = 10%
@@ -44,10 +44,10 @@ type = internal/pulseaudio
 
 format-volume = <label-volume><bar-volume>
 label-volume = "󰎇 "
-label-volume-foreground = ${root.foreground}
+label-volume-foreground = ${colors.foreground}
 
 label-muted = 󰎊 Muted
-label-muted-foreground = #000
+label-muted-foreground = ${colors.foreground}
 
 bar-volume-width = 10
 bar-volume-foreground-0 = ${colors.background}
@@ -69,7 +69,7 @@ bar-volume-empty-foreground = #11000000
 [bar/top]
 monitor = ${env:MONITOR:}
 width = 100%
-height = ##{test $(hostname) == 'gamer-macbook' && echo 40 || echo 27}
+height = ##{test $(hostname) == 'gamer-macbook' && echo 40 || echo 30}
 
 wm-restack = bspwm
 override-redirect = true
@@ -78,15 +78,15 @@ offset-x = 0
 offset-y = 0
 
 background = #00000000
-foreground = #ccffffff
+foreground = $(colors.foreground)
 
 line-color = ${bar/bottom.background}
 line-size = 2
 
-padding-left = 3
-padding-right = 4
+padding-left = 0
+padding-right = 1
 module-margin-left = 0
-module-margin-right = 6
+module-margin-right = 2
 
 enable-click = true
 
@@ -95,14 +95,19 @@ enable-click = true
 #font-2 = Termsynu:size=8:antialias=false;-2
 #font-3 = FontAwesome:size=10;1
 
-font-5 = NotoSans-Regular:size=8;5
-font-1 = unifont:size=8;5
-font-2 = FontAwesome:size=8;5
-font-3 = NotoSans-Regular:size=8;5
-font-4 = MaterialIcons:size=10;6
-font-0 = Termsynu:size=##{test $(hostname) == 'gamer-macbook' && echo 17 || echo 8}:antialias=false;5
-font-6 = Hack:size=8:antialias=true;5
-font-7 = basis33:size=##{test $(hostname) == 'gamer-macbook' && echo 30 || echo 12}:antialias=false;5
+font-0 = lemon:size=15:antialias=false;2
+font-1 = lemon:size=15:antialias=false;2
+font-2 = FontAwesome:size=8;2
+font-3 = Hack:size=15:antialias=false;2
+
+#font-0 = Termsynu:size=##{test $(hostname) == 'gamer-macbook' && echo 17 || echo 8}:antialias=false;5
+#font-1 = unifont:size=8;5
+#font-2 = FontAwesome:size=8;5
+#font-3 = NotoSans-Regular:size=8;5
+#font-4 = MaterialIcons:size=10;6
+#font-5 = NotoSans-Regular:size=8;5
+#font-6 = Hack:size=8:antialias=true;5
+#font-7 = basis33:size=##{test $(hostname) == 'gamer-macbook' && echo 30 || echo 12}:antialias=false;5
 
 modules-left = date
 modules-center = spotify
@@ -112,7 +117,7 @@ modules-right = volume wireless-network wired-network
 monitor = ${env:MONITOR:}
 bottom = true
 width = 100%
-height = ##{test $(hostname) == 'gamer-macbook' && echo 40 || echo 27}
+height = ##{test $(hostname) == 'gamer-macbook' && echo 40 || echo 30}
 
 wm-restack = bspwm
 override-redirect = true
@@ -126,18 +131,23 @@ foreground = ${bar/top.foreground}
 line-color = ${bar/top.background}
 line-size = 2
 
-padding-right = 4
+padding-right = 1
 module-margin-left = 0
-module-margin-right = 6
+module-margin-right = 2
 
-font-5 = NotoSans-Regular:size=8;1
-font-1 = unifont:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8};-3
-font-2 = FontAwesome:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8};0
-font-3 = NotoSans-Regular:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8};-1
-font-4 = MaterialIcons:size=10;-1
-font-0 = Termsynu:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8}:antialias=false;0
-font-6 = Hack:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8}:antialias=true;0
-font-7 = basis33:size=##{test $(hostname) == 'gamer-macbook' && echo 23 || echo 12}:antialias=false;0
+font-0 = lemon:size=15:antialias=false;0
+font-1 = lemon:size=15:antialias=false;0
+font-2 = FontAwesome:size=8;0
+font-3 = Hack:size=9:antialias=false;-1
+
+#font-0 = Termsynu:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8}:antialias=false;0
+#font-1 = unifont:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8};-3
+#font-2 = FontAwesome:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8};0
+#font-3 = NotoSans-Regular:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8};-1
+#font-4 = MaterialIcons:size=10;-1
+#font-5 = NotoSans-Regular:size=8;1
+#font-6 = Hack:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8}:antialias=true;0
+#font-7 = basis33:size=##{test $(hostname) == 'gamer-macbook' && echo 23 || echo 12}:antialias=false;0
 
 modules-left = i3 bspwm
 modules-center = track
@@ -153,7 +163,7 @@ tray-detached = false
 type = custom/script
 exec = "w -hs | wc -l"
 interval = 1
-format-prefix = " "
+format-prefix = " "
 format = <label>
 format-underline = #f76c2c
 
@@ -167,19 +177,21 @@ type = custom/script
 exec = ~/.config/polybar/updates-arch-combined.sh
 interval = 600
 
-format-prefix = "%{T3}  %{T-}"
+format-prefix = ""
 format = <label>
 format-underline = #733da0
 
 [module/spotify]
 type = custom/script
-interval = 1
+interval = 0.1
 format-prefix = " "
 format = <label>
-exec = python ~/.config/polybar/spotify_status.py -f '{play_pause} {song} - {artist} ({album})' -t 100 -p ',' --playpause-font=2
-format-overline = #1db954
+exec = python ~/.config/polybar/spotify_status.py -f '{play_pause} {song} - {artist} ({album})' -t 100 -p ',' --playpause-font=2
+label = %output% 
+format-background = #1db954
+format-foreground = #fff
 
-click-left = playerctl play-pause
+click-left = playerctl -p spotify play-pause
 click-right = ~/.config/dunst/scripts/spotify.sh &
 
 [module/backlight]
@@ -249,72 +261,30 @@ label-focused = %name%
 label-focused-foreground = #fff
 label-focused-background = #773f3f3f
 label-focused-underline = #c9665e
-label-focused-padding = 4
+label-focused-padding = 1
 
 label-occupied = %name%
-label-occupied-padding = 4
+label-occupied-padding = 1
 label-occupied-underline = #845359
 
 label-empty = %name%
-label-empty-padding = 4
+label-empty-padding = 1
 
 label-urgent = %name%
 label-urgent-foreground = #000000
 label-urgent-background = #bd2c40
 label-urgent-underline = #9b0a20
-label-urgent-padding = 4
+label-urgent-padding = 1
 
 label-monitor = %name%
-
-[module/i3]
-type = internal/i3
-;only show workspaces from that monitor on that monitor's bar
-pin-workspaces = true
-;split workspace name on ':'
-strip-wsnumbers = true
-;sort workspace by index instead of by output
-index-sort = true
-
-enable-click = true
-
-enable-scroll = false
-wrapping-scroll = false
-reverse-scroll = false
-
-;fuzzy match labels when assigning icons
-fuzzy-match = true
-
-format = <label-state> <label-mode>
-
-label-mode = %mode%
-label-mode-padding = 2
-label-mode-background = #e60053
-
-label-focused = %index%
-label-focused-foreground = #fff
-label-focused-background = #773f3f3f
-label-focused-underline = #c9665e
-label-focused-padding = 4
-
-label-unfocused = %index%
-label-unfocused-padding = 4
-
-label-visible = %index%
-label-visible-underline = #555555
-label-visible-padding = 4
-
-label-urgent = %index%
-label-urgent-foreground = #000000
-label-urgent-background = #bd2c40
-label-urgent-padding = 4
 
 [module/cpu]
 type = internal/cpu
 interval = 0.5
 format = <label> <ramp-coreload>
-label = CPU %{T8}%percentage:3%%%{T-}
+label =  CPU%{T8}%percentage:3%%%{T-}
 
-ramp-coreload-spacing = 1
+ramp-coreload-spacing = 0
 ramp-coreload-0 = ▁
 ramp-coreload-1 = ▂
 ramp-coreload-2 = ▃
@@ -324,16 +294,36 @@ ramp-coreload-5 = ▆
 ramp-coreload-6 = ▇
 ramp-coreload-7 = █
 
+#ramp-coreload-0 = █
+#ramp-coreload-1 = █
+#ramp-coreload-2 = █
+#ramp-coreload-3 = █
+#ramp-coreload-4 = █
+#ramp-coreload-5 = █
+#ramp-coreload-6 = █
 format-underline = #74ecf7
+format-foreground = #fff
 
 [module/date]
-type = internal/date
+type = custom/script
 #date =    %%{F#99}%Y-%m-%d%%{F-}  %%{F#fff}%I:%M%%{F-} %p
 #date =   %%{F#fff}%d%%{F#99}/%m/%Y (%A) %%{F-} %%{F#fff}%I:%M%%{F-} %p
 #date-alt = %%{F#fff}%A, %d %B %Y  %%{F#fff}%I:%M%%{F#666}:%%{F#56baef}%S%%{F-} %p
 
-date     =  %%{F#fff}%eth%%{F-} %B - %A   %%{F#fff}%I:%M%%{F-} %p
-date-alt =  %%{F#fff}%eth%%{F-} %B - %A   %%{F#fff}%I:%M%%{F-}:%S %p
+#date     = %eth %B - %A
+#date-alt = %eth %B - %A
+
+#time = %I:%M %p
+#time-alt = %I:%M:%S %p
+
+#label = %date% %time% 
+#padding = 10
+interval = 1
+exec = date +" %a %e`~/.script/date_ordinal` %B %Y - %I:%M %p"
+
+format = <label>
+format-background = #ddd
+format-foreground = ${colors.foreground}
 
 #format-overline = #41C3F1
 
@@ -343,6 +333,7 @@ format = <label>%
 label = RAM %{T8}%percentage_used:3%%{T-}
 
 format-underline = #f4c946
+#format-foreground = $(colors.foreground)
 
 [module/wireless-network]
 type = internal/network
@@ -350,22 +341,15 @@ interface = wlp5s0
 interval = 3.0
 ping-interval = 10
 
-format-connected = <ramp-signal> <label-connected>
+format-connected = <ramp-signal><label-connected>
 label-connected = %essid%
-label-disconnected =    not connected
+label-disconnected = not connected
 label-disconnected-foreground = #66
 
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-
-animation-packetloss-0 = 
-animation-packetloss-0-foreground = #ffa64c
-animation-packetloss-1 = 
-animation-packetloss-1-foreground = ${bar/top.foreground}
-animation-packetloss-framerate = 500
+ramp-signal-0 =  
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
 
 [module/old-wired-network]
 type = internal/network
@@ -394,7 +378,7 @@ headphone-mixer = Headphone
 headphone-id = 9
 
 format-volume = <ramp-volume> <label-volume>
-label-muted =   muted
+label-muted =  muted
 label-muted-foreground = #66
 
 ramp-volume-0 = 
