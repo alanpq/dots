@@ -24,6 +24,6 @@ while [ "$(echo $running | wc -w)" -gt "2" ]; do
 done
 
 # Watch if spotify change its track
-playerctl -F metadata mpris:trackid 2> /dev/null|while read -r line; do
+playerctl -p spotify -F metadata mpris:trackid 2> /dev/null|while read -r line; do
 	$HOME/.config/dunst/scripts/spotify.sh &
 done
