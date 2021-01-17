@@ -172,6 +172,7 @@ exec = python ~/.config/polybar/spotify_status.py -f '{play_pause} {song} - {art
 format-overline = #1db954
 
 click-left = playerctl play-pause
+click-right = ~/.config/dunst/scripts/spotify.sh &
 
 [module/backlight]
 type = internal/xbacklight
