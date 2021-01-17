@@ -141,13 +141,21 @@ font-7 = basis33:size=##{test $(hostname) == 'gamer-macbook' && echo 23 || echo 
 
 modules-left = i3 bspwm
 modules-center = track
-modules-right = battery updates cpu cputemp memory
+modules-right = w battery updates cpu cputemp memory
 
 wm-override = i3
 force-restack = true
 
 tray-position = right
 tray-detached = false
+
+[module/w]
+type = custom/script
+exec = "w -hs | wc -l"
+interval = 1
+format-prefix = " "
+format = <label>
+format-underline = #f76c2c
 
 [module/track]
 type = custom/script
