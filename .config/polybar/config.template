@@ -7,11 +7,11 @@ width = 10%
 height = 4.3%
 offset-x = 45%
 offset-y = 5%
-radius = 22
+radius = 0
 fixed-center = true
 bottom = false
 
-background = #11FFFFFF
+background = #0000FF
 foreground = ${colors.background}
 
 border-size = 0
@@ -43,28 +43,30 @@ enable-ipc = true
 type = internal/pulseaudio
 
 format-volume = <label-volume><bar-volume>
-label-volume = "󰎇 "
-label-volume-foreground = ${colors.foreground}
+label-volume = ""
+label-volume-foreground = #fff
 
-label-muted = 󰎊 Muted
-label-muted-foreground = ${colors.foreground}
+label-muted = "Muted"
+label-muted-foreground = #fff
 
 bar-volume-width = 10
-bar-volume-foreground-0 = ${colors.background}
-bar-volume-foreground-1 = ${colors.background}
-bar-volume-foreground-2 = ${colors.background}
-bar-volume-foreground-3 = ${colors.background}
-bar-volume-foreground-4 = #fb8720
-bar-volume-foreground-5 = #fb5a20
-bar-volume-foreground-6 = #fb2020
+;bar-volume-foreground-0 = #0000ff
+;bar-volume-foreground-1 = #0000ff 
+;bar-volume-foreground-2 = #0000ff 
+;bar-volume-foreground-3 = #0000ff 
+;bar-volume-foreground-4 = #fb8720
+;bar-volume-foreground-5 = #fb5a20
+;bar-volume-foreground-6 = #fb2020
 bar-volume-gradient = false
-bar-volume-indicator = "%{T3}%{T-}"
-bar-volume-indicator-font = 2
-bar-volume-fill = ━
-bar-volume-fill-font = 2
-bar-volume-empty = ━
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = #11000000
+bar-volume-indicator = ▮
+;bar-volume-indicator-font = 2
+bar-volume-fill = ▮
+;bar-volume-fill-font = 2
+bar-volume-empty = ▮ 
+;bar-volume-empty-font = 2
+bar-volume-indicator-foreground = #fff
+bar-volume-fill-foreground = #fff
+bar-volume-empty-foreground = #0000aa
 
 [bar/top]
 monitor = ${env:MONITOR:}
