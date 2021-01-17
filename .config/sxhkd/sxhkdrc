@@ -160,7 +160,7 @@ XF86MonBrightnessDown
 
 # Terminal
 {mod4,super} + Return
-	termite
+	kitty
 
 {mod4,super} + m
 	killall pavucontrol || pavucontrol
