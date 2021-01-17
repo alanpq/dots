@@ -43,7 +43,7 @@ esac
 bspc config border_width        	1
 bspc config window_gap          	5
 
-bspc config focused_border_color 	$(xgetres color8)
+bspc config focused_border_color 	\#395084
 bspc config normal_border_color 	$(xgetres background)
 #bspc config normal_border_color 	\#111824
 
