@@ -137,10 +137,10 @@ padding-right = 1
 module-margin-left = 0
 module-margin-right = 2
 
-font-0 = lemon:size=15:antialias=false;0
-font-1 = lemon:size=15:antialias=false;0
-font-2 = FontAwesome:size=8;0
-font-3 = Hack:size=9:antialias=false;-1
+font-0 = lemon:size=15:antialias=false;1
+font-1 = lemon:size=15:antialias=false;1
+font-2 = FontAwesome:size=8;1
+font-3 = Hack:size=9:antialias=false;0
 
 #font-0 = Termsynu:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8}:antialias=false;0
 #font-1 = unifont:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8};-3
