@@ -24,8 +24,8 @@ hsetroot -solid $(xgetres background)
 #source $HOME/.config/env
 
 
-bspc config top_padding			28
-bspc config bottom_padding		28
+bspc config top_padding			30
+bspc config bottom_padding		30
 
 case $HOSTNAME in
 	gamer-macbook) 
