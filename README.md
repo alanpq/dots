@@ -18,6 +18,7 @@ check out dependencies.txt
 - [x] make todo list :)
 - [ ] fix `.dots` directory name requirement in install script
 - [ ] actually install home directory level config (.bashrc, etc)
+- [ ] config overrides for specific hostnames
 - [ ] additional install functionality
 	- [ ] cherry pick dot files
 - [ ] improve polybar config templating engine (readability bro :/)
