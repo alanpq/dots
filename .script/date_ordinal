@@ -1,0 +1,22 @@
+
+#!/bin/bash
+n=$(date +"%d")
+
+if [ $n -ge 11 -a $n -le 13 ] ; then
+  echo "th"
+else
+ case $(( $n%10 )) in
+ 1)
+   echo st
+   ;;
+ 2)
+   echo nd
+   ;;
+ 3)
+   echo rd
+   ;;
+ *)
+   echo th
+   ;;
+ esac
+fi

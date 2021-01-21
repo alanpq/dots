@@ -185,7 +185,7 @@ format-underline = #733da0
 
 [module/spotify]
 type = custom/script
-interval = 0.1
+interval = 1
 format-prefix = " "
 format = <label>
 exec = python ~/.config/polybar/spotify_status.py -f '{play_pause} {song} - {artist} ({album})' -t 100 -p ',' --playpause-font=2
@@ -321,7 +321,7 @@ type = custom/script
 #label = %date% %time% 
 #padding = 10
 interval = 1
-exec = date +" %a %e`~/.script/date_ordinal` %B %Y - %I:%M %p"
+exec = date +" %a %e`~/.script/date_ordinal` %B %Y - %I:%M %p "
 
 format = <label>
 format-background = #ddd

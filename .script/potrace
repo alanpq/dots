@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# A fontforge autotrace script for vectorizing bitmap fonts.
+
+# This script is designed for use with fontforge, see:
+# http://monsterfacegames.blogspot.com/2013/10/creating-pixel-font-for-your-game.html
+# https://stackoverflow.com/questions/3750124/how-to-convert-a-bitmap-font-fon-into-a-truetype-font-ttf/8350648
+
+# Script was based on:
+# https://gist.github.com/bendmorris/7170209
+# ... but reduces filter radius, which I found gives better results.
+
+argv=("$0" "$@")
+last=${argv[$#]}
+cat "$last" > /tmp/PISS
+startwidth=$(identify -format "%w" -- "$last")
+startheight=$(identify -format "%h" -- "$last")
+newwidth=$(( $startwidth * 40))
+newheight=$(( $startheight * 40))
+cat "$last" | convert -scale "${newwidth}x${newheight}" - - > /tmp/PRESHIT
+cat "$last" |
+    /home/gamer/build/potrace/src/mkbitmap -f 3 -s 1 -g  |
+    convert -scale "${newwidth}x${newheight}" - -  > /tmp/SHIT
+echo "${argv[@]:1:$#-1}" > /tmp/DEBG
+cat "$last" |
+    /home/gamer/build/potrace/src/mkbitmap -f 2 -s 1 -g |
+    convert -scale "${newwidth}x${newheight}" - - |
+    /home/gamer/build/potrace/src/potrace \
+        --turdsize 0 \
+        --opttolerance 0 \
+        --longcurve \
+        -a 0 \
+        "${argv[@]:1:$#-1}" \
+        -r 2880 # 2880
