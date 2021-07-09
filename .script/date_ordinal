@@ -1,6 +1,6 @@
 
 #!/bin/bash
-n=$(date +"%d")
+n=$(date +"%-d")
 
 if [ $n -ge 11 -a $n -le 13 ] ; then
   echo "th"
