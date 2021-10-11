@@ -4,6 +4,7 @@ picom
 dunst
 xsetroot
 xgetres
+xdo
 brightnessctl
 playerctl
 pamixer
