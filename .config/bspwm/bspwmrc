@@ -23,9 +23,13 @@ hsetroot -solid $(xgetres background)
 
 #source $HOME/.config/env
 
+gap=5
 
-bspc config top_padding			30
-bspc config bottom_padding		30
+bspc config top_padding			$((20-$gap))
+bspc config bottom_padding		$((25-$gap))
+bspc config left_padding		-$gap
+bspc config right_padding		-$gap
+bspc config window_gap			$gap
 
 case $HOSTNAME in
 	gamer-macbook) 
@@ -34,6 +38,11 @@ case $HOSTNAME in
 		bspc config top_padding 40
 		bspc config bottom_padding 40
 	;;
+	gamer-think)
+		xinput set-prop 12 404 0.7 # accel speed
+		xinput set-prop 12 407 0, 1 # 2nd accel profile
+		xinput set-prop 12 394 0 # disable while typing
+	;;
 	zwei-pc)
 		bspc monitor DVI-D-0 -d 1 2 3 4 5
 		bspc monitor DP-2    -d 6 7 8 9 10
@@ -41,7 +50,6 @@ case $HOSTNAME in
 	*) bspc monitor -d 1 2 3 4 5 6 7 8 9 10;;
 esac
 bspc config border_width        	1
-bspc config window_gap          	5
 
 bspc config focused_border_color 	\#395084
 bspc config normal_border_color 	$(xgetres background)
@@ -49,7 +57,7 @@ bspc config normal_border_color 	$(xgetres background)
 
 bspc config split_ratio          	0.52
 bspc config borderless_monocle   	true
-bspc config gapless_monocle      	true
+bspc config gapless_monocle      	false # leave off for negative padding
 bspc config focus_follows_pointer true
 bspc config pointer_follows_focus false
 bspc config single_monocle	 	    true
