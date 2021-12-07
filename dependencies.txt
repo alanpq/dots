@@ -2,7 +2,7 @@ polybar
 albert
 picom
 dunst
-xsetroot
+xorg-xsetroot
 xgetres
 xdo
 brightnessctl
@@ -11,4 +11,4 @@ pamixer
 bspwm
 sxhkd
 flameshot
-
+kitty

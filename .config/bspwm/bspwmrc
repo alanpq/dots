@@ -1,25 +1,5 @@
 #!/bin/sh
 HOSTNAME=$(hostname)
-#transmission-daemon &
-xsetroot -cursor_name left_ptr &
-exec sxhkd &
-picom --experimental-backends --backend glx -b &
-killall dunst; dunst &
-#killall polybar; ~/.script/dock.sh &>/tmp/dock.log
-#auto-connect-bt.sh &
-#remaps &
-
-pidof albert || albert &
-
-rm /tmp/POLYBAR_*
-killall polybar; ~/.script/launch_polybar.sh &>/tmp/polybar.log
-
-#timer-checkupdates.sh &
-~/.script/SPTN.sh &
-~/.script/MO.sh &
-
-#feh --no-fehbg --bg-fill "$HOME/.config/bspwm/wallpaper"
-hsetroot -solid $(xgetres background)
 
 #source $HOME/.config/env
 
@@ -119,3 +99,26 @@ lid=$(wmctrl -lx | grep lf.lf| cut -d' ' -f1| head -1) \
 
 # Because spotify won't listen
 setsid -f start-spotify > /dev/null 2>&1 &
+
+# OTHER APPLICATIONS
+
+#transmission-daemon &
+xsetroot -cursor_name left_ptr &
+exec sxhkd &
+picom --experimental-backends --backend glx -b &
+killall dunst; dunst &
+#killall polybar; ~/.script/dock.sh &>/tmp/dock.log
+#auto-connect-bt.sh &
+#remaps &
+
+pidof albert || albert &
+
+rm /tmp/POLYBAR_*
+killall polybar; ~/.script/launch_polybar.sh &>/tmp/polybar.log
+
+#timer-checkupdates.sh &
+~/.script/SPTN.sh &
+~/.script/MO.sh &
+
+#feh --no-fehbg --bg-fill "$HOME/.config/bspwm/wallpaper"
+hsetroot -solid $(xgetres background)
