@@ -1,0 +1,460 @@
+[colors]
+background = #fff
+foreground = ##{xgetres background}
+
+[bar/level]
+width = 15%
+height = 4.3%
+offset-x = 42.5%
+offset-y = 5%
+radius = 0
+fixed-center = true
+bottom = false
+
+background = #0000FF
+foreground = ${colors.background}
+
+border-size = 0
+border-color = #000
+
+padding-left = 2
+padding-right = 2
+
+module-margin-left = 0
+module-margin-right = 1
+ 
+font-0 = Hack Nerd Font:pixelsize=14:style=Medium Condensed;5
+font-1 = Material-Icons:pixelsize=20;5
+font-2 = Hack Nerd Font:pixelsize=20:style=Medium Condensed;7
+ 
+modules-center = backlight pulseaudio
+
+override-redirect = true
+
+scroll-up = bspwm-desknext
+scroll-down = bspwm-deskprev
+
+cursor-click = ns-resize 
+cursor-scroll = ns-resize 
+
+enable-ipc = true
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <label-volume><bar-volume>
+label-volume = ""
+label-volume-foreground = #fff
+
+label-muted = Muted
+label-muted-foreground = #fff
+
+bar-volume-format = %fill%%empty%
+
+bar-volume-width = 10
+;bar-volume-foreground-0 = #0000ff
+;bar-volume-foreground-1 = #0000ff 
+;bar-volume-foreground-2 = #0000ff 
+;bar-volume-foreground-3 = #0000ff 
+;bar-volume-foreground-4 = #fb8720
+;bar-volume-foreground-5 = #fb5a20
+;bar-volume-foreground-6 = #fb2020
+bar-volume-gradient = false
+bar-volume-indicator = ▮
+;bar-volume-indicator-font = 2
+bar-volume-fill = ▮
+;bar-volume-fill-font = 2
+bar-volume-empty = ▮ 
+;bar-volume-empty-font = 2
+bar-volume-indicator-foreground = #0000aa
+bar-volume-fill-foreground = #fff
+bar-volume-empty-foreground = #0000aa
+
+[bar/top]
+monitor = ${env:MONITOR:}
+width = 100%
+height = ##{test $(hostname) == 'gamer-macbook' && echo 40 || echo 25}
+
+wm-restack = bspwm
+override-redirect = true
+
+offset-x = 0
+offset-y = 0
+
+background = #00000000
+foreground = $(colors.foreground)
+
+line-color = ${bar/bottom.background}
+line-size = 2
+
+padding-left = 1
+padding-right = 1
+module-margin-left = 0
+module-margin-right = 2
+
+enable-click = true
+
+#font-0 = NotoSans-Regular:size=8;-1
+#font-1 = MaterialIcons:size=10;0.75
+#font-2 = Termsynu:size=8:antialias=false;-2
+#font-3 = FontAwesome:size=10;1
+
+font-0 = SourceCodePro:size=11:style=Regular:antialias=true;2
+font-1 = MaterialIcons:size=11;3
+font-2 = HackRegular:size=15:antialias=false;2
+
+#font-0 = Termsynu:size=##{test $(hostname) == 'gamer-macbook' && echo 17 || echo 8}:antialias=false;5
+#font-1 = unifont:size=8;5
+#font-2 = FontAwesome:size=8;5
+#font-3 = NotoSans-Regular:size=8;5
+#font-4 = MaterialIcons:size=10;6
+#font-5 = NotoSans-Regular:size=8;5
+#font-6 = Hack:size=8:antialias=true;5
+#font-7 = basis33:size=##{test $(hostname) == 'gamer-macbook' && echo 30 || echo 12}:antialias=false;5
+
+modules-left = date
+modules-center = spotify
+modules-right = volume net-test wireless-network wired-network
+
+[bar/bottom]
+monitor = ${env:MONITOR:}
+bottom = true
+width = 100%
+height = ##{test $(hostname) == 'gamer-macbook' && echo 40 || echo 25}
+
+wm-restack = bspwm
+override-redirect = true
+
+offset-x = 0
+offset-y = 0
+
+background = ${bar/top.background}
+foreground = ${bar/top.foreground}
+
+line-color = ${bar/top.background}
+line-size = 2
+
+padding-right = 1
+module-margin-left = 0
+module-margin-right = 2
+
+#font-0 = Hack-Mono:size=10:antialias=true;1
+font-0 = Hack-Mono:size=10:antialias=true;1
+font-1 = SourceCodeProLight:size=15:antialias=true;1
+font-2 = MaterialIcons:size=11;2
+font-3 = Hack:size=9:antialias=false;0
+
+#font-0 = Termsynu:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8}:antialias=false;0
+#font-1 = unifont:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8};-3
+#font-2 = FontAwesome:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8};0
+#font-3 = NotoSans-Regular:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8};-1
+#font-4 = MaterialIcons:size=10;-1
+#font-5 = NotoSans-Regular:size=8;1
+#font-6 = Hack:size=##{test $(hostname) == 'gamer-macbook' && echo 15 || echo 8}:antialias=true;0
+#font-7 = basis33:size=##{test $(hostname) == 'gamer-macbook' && echo 23 || echo 12}:antialias=false;0
+
+modules-left = i3 bspwm
+#modules-center = track
+modules-right = w battery updates cpu cputemp memory
+
+wm-override = i3
+force-restack = true
+
+tray-position = right
+tray-detached = false
+
+[module/w]
+type = custom/script
+exec = "w -hs | wc -l"
+interval = 1
+format-prefix = ""
+format = <label>
+format-underline = #f76c2c
+
+[module/track]
+type = custom/script
+exec = ~/.script/track -o
+interval = 1
+
+[module/updates]
+type = custom/script
+exec = ~/.config/polybar/updates-arch-combined.sh
+interval = 600
+
+format-prefix = ""
+format = <label>
+format-underline = #733da0
+
+[module/spotify]
+type = custom/script
+interval = 2
+format-prefix = ""
+format = <label>
+exec = "~/.config/polybar/spotify_status.py -f '{play_pause} {song} - {artist} ({album})' -t 100 2>/dev/null -p ','"
+#-p ',' --playpause-font=1
+label = %output%
+format-background = #1db954
+format-foreground = #fff
+
+click-left = playerctl play-pause
+click-right = ~/.config/dunst/scripts/spotify.sh &
+
+[module/backlight]
+type = internal/backlight
+format = <ramp> <bar>
+
+card = intel_backlight
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+
+bar-format = %fill%%empty%
+
+bar-width = 10
+bar-gradient = false
+bar-indicator = ▮
+bar-fill = ▮
+bar-empty = ▮ 
+bar-indicator-foreground = #0000aa
+bar-fill-foreground = #fff
+bar-empty-foreground = #0000aa
+
+
+[module/battery]
+type = internal/battery
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = #f53c3c
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = #ffa900
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-font = 3
+
+bar-capacity-width = 10
+bar-capacity-format = %{+u}%{+o}%fill%%empty%%{-u}%{-o}
+bar-capacity-fill = █
+bar-capacity-fill-foreground = #ddffffff
+bar-capacity-fill-font = 3
+bar-capacity-empty = █
+bar-capacity-empty-font = 3
+bar-capacity-empty-foreground = #44ffffff
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+#animation-charging-font = 3
+
+[module/bspwm]
+type = internal/bspwm
+pin-workspaces = true
+inline-mode = false
+
+enable-click = true
+enable-scroll = false
+
+fuzzy-match = true
+
+format = <label-state> <label-mode>
+
+label-default-foreground = #f00
+
+label-focused = %name%
+label-focused-foreground = ${colors.foreground}
+label-focused-background = #c9665e
+label-focused-underline = #845359
+label-focused-padding = 1
+
+label-occupied = %name%
+label-occupied-foreground = #55ffffff
+label-occupied-padding = 1
+label-occupied-underline = #845359
+
+label-empty = %name%
+label-empty-padding = 1
+label-empty-foreground = #33ffffff
+
+label-urgent = %name%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-underline = #9b0a20
+label-urgent-padding = 1
+
+label-monitor = %name%
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+format = <label> <ramp-coreload>
+label =  CPU%{T8}%percentage:3%%%{T-}
+
+ramp-coreload-spacing = 0
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+
+#ramp-coreload-0 = █
+#ramp-coreload-1 = █
+#ramp-coreload-2 = █
+#ramp-coreload-3 = █
+#ramp-coreload-4 = █
+#ramp-coreload-5 = █
+#ramp-coreload-6 = █
+format-underline = #74ecf7
+format-foreground = #fff
+
+[module/date]
+type = custom/script
+#date =    %%{F#99}%Y-%m-%d%%{F-}  %%{F#fff}%I:%M%%{F-} %p
+#date =   %%{F#fff}%d%%{F#99}/%m/%Y (%A) %%{F-} %%{F#fff}%I:%M%%{F-} %p
+#date-alt = %%{F#fff}%A, %d %B %Y  %%{F#fff}%I:%M%%{F#666}:%%{F#56baef}%S%%{F-} %p
+
+#date     = %eth %B - %A
+#date-alt = %eth %B - %A
+
+#time = %I:%M %p
+#time-alt = %I:%M:%S %p
+
+#label = %date% %time% 
+#padding = 10
+interval = 1
+exec = date +" %a %e`~/.script/date_ordinal` %B %Y - %{F#fff}%I:%M %p %{F-}"
+
+format = <label>
+format-background = #00000000
+format-foreground = #55ffffff
+
+#format-overline = #41C3F1
+
+[module/memory]
+type = internal/memory
+format = <label>%
+label = RAM %{T8}%percentage_used:3%%{T-}
+
+format-underline = #f4c946
+#format-foreground = $(colors.foreground)
+
+[module/wireless-network]
+type = internal/network
+interface = ##{test $(hostname) == 'gamer-macbook' && echo wlp3s0 || echo wlan0}
+interval = 3.0
+ping-interval = 10
+
+format-connected = <ramp-signal><label-connected>
+label-connected = %essid%
+label-disconnected = wifi disconnected
+label-disconnected-foreground = #66
+
+ramp-signal-0 =  
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+
+[module/old-wired-network]
+type = internal/network
+interface = enp0s31f6
+interval = 3.0
+
+label-connected =   %local_ip%
+label-disconnected-foreground = #66
+enable-click = false
+click-right = dunstify left
+scroll-up = dunstify up
+cursor-click = pointer
+
+[module/net-test]
+type = custom/script
+interval = 3.0
+exec = ~/.config/polybar/net-test.sh 2>/dev/null || echo "no internet"
+format =  <label>
+
+[module/wired-network]
+type = custom/script
+interval = 3.0
+#device = enp0s31f6
+#exec = ip -4 -o addr show dev ${module/wired-network.device} | grep -Po '[\d\.]*' | grep -m 1 '\.' | tee /tmp/ipaddr
+
+exec = ~/.config/polybar/wired-network.sh ##{test $(hostname) == 'gamer-macbook' && echo '' || echo enp0s31f6}
+format =  <label>
+click-left = xclip -i /tmp/ipaddr -selection clipboard && dunstify 'Local IP' 'copied to clipboard.'
+click-right = curl ipinfo.io/ip | xclip -selection clipboard && dunstify 'Public IP' 'copied to clipboard.'
+
+[module/volume]
+type = internal/volume
+speaker-mixer = Speaker
+headphone-mixer = Headphone
+headphone-id = 9
+
+format-volume = <ramp-volume> <label-volume>
+label-muted =  muted
+label-muted-foreground = #66
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+
+[module/powermenu]
+type = custom/menu
+
+format-padding = 5
+
+label-open = 
+label-close = 
+
+menu-0-0 = Terminate WM
+menu-0-0-padding-right = 6 
+menu-0-0-padding-left = 2
+menu-0-0-foreground = #22a0f9
+menu-0-0-exec = bspc quit -1
+menu-0-1 = Reboot
+menu-0-1-padding-right = 6 
+menu-0-1-foreground = #22a0f9
+menu-0-1-exec = menu_open-1
+menu-0-2 = Power off
+menu-0-2-padding-right = 6 
+menu-0-2-foreground = #22a0f9
+menu-0-2-exec = menu_open-2
+
+menu-1-0 = Cancel
+menu-1-0-foreground = #22a0f9
+menu-1-0-exec = menu_open-0
+menu-1-1 = Reboot
+menu-1-1-foreground = #22a0f9
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = Power off
+menu-2-0-foreground = #22a0f9
+menu-2-0-exec = sudo poweroff
+menu-2-1 = Cancel
+menu-2-1-foreground = #22a0f9
+menu-2-1-exec = menu_open-0
+
+[module/cputemp]
+type = internal/temperature
+interval = 0.5
+thermal-zone = 2
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input
+
+base-temperature = 20
+warn-temperature = 70
+
+label-underline = #41C3F1
+
+; vim:ft=dosini
+
