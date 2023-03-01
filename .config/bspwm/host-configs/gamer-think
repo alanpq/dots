@@ -1,0 +1,4 @@
+#!/bin/sh
+xinput set-prop 12 404 0.7  # accel speed
+xinput set-prop 12 407 0, 1 # 2nd accel profile
+xinput set-prop 12 394 0    # disable while typing

@@ -1,0 +1,27 @@
+#!/bin/bash
+HOSTNAME=$(hostname)
+
+bash $HOME/.config/bspwm/bspc
+
+#source $HOME/.config/env
+
+# Because spotify won't listen
+setsid -f start-spotify > /dev/null 2>&1 &
+
+# OTHER APPLICATIONS
+
+pidof sxhkd || exec sxhkd &
+
+pidof picom || picom --experimental-backends --backend glx -b &
+
+pidof dunst || dunst &
+pidof albert || albert &
+pidof polybar || ~/.script/launch_polybar.sh &>/tmp/polybar.log
+
+#timer-checkupdates.sh &
+~/.script/SPTN.sh &
+~/.script/MO.sh &
+
+#feh --no-fehbg --bg-fill "$HOME/.config/bspwm/wallpaper"
+hsetroot -solid $(xgetres background)
+xsetroot -cursor_name left_ptr &
