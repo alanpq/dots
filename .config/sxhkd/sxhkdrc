@@ -199,7 +199,7 @@ control + {Print, Insert}
 
 # Toggle picom
 {mod4,super} + F9
-  pkill picom || picom -b --experimental-backends
+  pkill picom || picom -b
 
 # Scratchpad
 {mod4,super} + a
