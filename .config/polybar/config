@@ -12,7 +12,7 @@ fixed-center = true
 bottom = false
 
 background = #0000FF
-foreground = ${colors.background}
+foreground = #000000
 
 border-size = 0
 border-color = #000
@@ -23,8 +23,8 @@ padding-right = 2
 module-margin-left = 0
 module-margin-right = 1
  
-font-0 = Hack Nerd Font:pixelsize=14:style=Medium Condensed;5
-font-1 = Material-Icons:pixelsize=20;5
+font-0 = Hack-Regular:pixelsize=14:style=Medium Condensed;5
+font-1 = MaterialIcons-Regular:pixelsize=20;5
 font-2 = Hack Nerd Font:pixelsize=20:style=Medium Condensed;7
  
 modules-center = backlight pulseaudio
@@ -51,7 +51,7 @@ label-muted-foreground = #fff
 
 bar-volume-format = %fill%%empty%
 
-bar-volume-width = 10
+bar-volume-width = 20
 ;bar-volume-foreground-0 = #0000ff
 ;bar-volume-foreground-1 = #0000ff 
 ;bar-volume-foreground-2 = #0000ff 
@@ -60,11 +60,11 @@ bar-volume-width = 10
 ;bar-volume-foreground-5 = #fb5a20
 ;bar-volume-foreground-6 = #fb2020
 bar-volume-gradient = false
-bar-volume-indicator = ▮
+bar-volume-indicator =█
 ;bar-volume-indicator-font = 2
-bar-volume-fill = ▮
+bar-volume-fill =█
 ;bar-volume-fill-font = 2
-bar-volume-empty = ▮ 
+bar-volume-empty =█
 ;bar-volume-empty-font = 2
 bar-volume-indicator-foreground = #0000aa
 bar-volume-fill-foreground = #fff
@@ -81,7 +81,7 @@ override-redirect = true
 offset-x = 0
 offset-y = 0
 
-background = #00000000
+background = #55000000
 foreground = $(colors.foreground)
 
 line-color = ${bar/bottom.background}
@@ -198,6 +198,9 @@ format-foreground = #fff
 
 click-left = playerctl play-pause
 click-right = ~/.config/dunst/scripts/spotify.sh &
+
+scroll-up = pamixer --sink music_sink -i 5
+scroll-down = pamixer --sink music_sink -d 5
 
 [module/backlight]
 type = internal/backlight
@@ -336,7 +339,7 @@ interval = 1
 exec = date +" %a %e`~/.script/date_ordinal` %B %Y - %{F#fff}%I:%M %p %{F-}"
 
 format = <label>
-format-background = #00000000
+format-background = ${bar.top.background}
 format-foreground = #55ffffff
 
 #format-overline = #41C3F1
