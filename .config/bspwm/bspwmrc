@@ -1,6 +1,8 @@
 #!/bin/bash
 HOSTNAME=$(hostname)
 
+$HOME/.xinitrc
+
 bash $HOME/.config/bspwm/bspc
 
 #source $HOME/.config/env
@@ -22,6 +24,6 @@ pidof polybar || ~/.script/launch_polybar.sh &>/tmp/polybar.log
 ~/.script/SPTN.sh &
 ~/.script/MO.sh &
 
-#feh --no-fehbg --bg-fill "$HOME/.config/bspwm/wallpaper"
-hsetroot -solid $(xgetres background)
+feh --no-fehbg --bg-scale "$HOME/Pictures/wallpapers" -z
+#hsetroot -solid $(xgetres background)
 xsetroot -cursor_name left_ptr &
