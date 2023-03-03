@@ -17,6 +17,9 @@ super + shift + r
 super + {_,shift + }{1-9,0}
   bspc {desktop -f, node -d} '^{1-9,10}' --follow
 
+super + {_,shift + }{F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12}
+  bspc {desktop -f, node -d} '^{11,12,13,14,15,16,17,18,19,20,21,22}' --follow
+
 # quit/restart bspwm
 super + r
   bspc wm -r && dunstify -r 500 "BSPWM" "bspwm reloaded"
@@ -198,7 +201,7 @@ control + {Print, Insert}
   pcmanfm
 
 # Toggle picom
-{mod4,super} + F9
+{mod4,super} + shift + F9
   pkill picom || picom -b
 
 # Scratchpad
