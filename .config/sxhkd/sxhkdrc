@@ -136,11 +136,11 @@ XF86AudioPlay
 
 # Volume up
 XF86AudioRaiseVolume 
-  pamixer -i 10 ; ~/.script/volume.sh
+  pamixer -i 5 ; ~/.script/volume.sh
 
 # Volume down
 XF86AudioLowerVolume 
-  pamixer -d 10 ; ~/.script/volume.sh
+  pamixer -d 5 ; ~/.script/volume.sh
 
 # Volume mute
 XF86AudioMute 
