@@ -46,6 +46,9 @@ parser.add_argument(
     dest='play_pause_font'
 )
 
+from subprocess import check_output
+def get_pid(name):
+    return str(check_output(["pidof",name]).strip())[2:-1]
 
 args = parser.parse_args()
 
@@ -76,7 +79,7 @@ if args.play_pause is not None:
 try:
     session_bus = dbus.SessionBus()
     spotify_bus = session_bus.get_object(
-        'org.mpris.MediaPlayer2.spotifyd',
+        'org.mpris.MediaPlayer2.spotifyd.instance' + get_pid("spotifyd"),
         '/org/mpris/MediaPlayer2'
     )
 
@@ -128,5 +131,6 @@ try:
 except Exception as e:
     if isinstance(e, dbus.exceptions.DBusException) or isinstance(e, dbus.exceptions.Introspect):
         print('')
+        print(e)
     else:
         print(type(e).__name__)
