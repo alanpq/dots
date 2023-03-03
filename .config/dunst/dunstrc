@@ -409,6 +409,10 @@
 #    msg_urgency = critical
 #    fullscreen = show
 
+[spotify]
+    body = *Spotify*
+    format = "%b\n[ <span font_desc='Ubuntu Mono 9'><i>%s</i></span> ]"
+    background = "#191414"
 #[espeak]
 #    summary = "*"
 #    script = dunst_espeak.sh
