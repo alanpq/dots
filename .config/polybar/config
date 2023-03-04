@@ -214,11 +214,11 @@ ramp-2 = 
 
 bar-format = %fill%%empty%
 
-bar-width = 10
+bar-width = 20
 bar-gradient = false
-bar-indicator = ▮
-bar-fill = ▮
-bar-empty = ▮ 
+bar-indicator =█
+bar-fill =█
+bar-empty =█ 
 bar-indicator-foreground = #0000aa
 bar-fill-foreground = #fff
 bar-empty-foreground = #0000aa
