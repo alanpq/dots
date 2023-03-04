@@ -201,8 +201,8 @@ control + {Print, Insert}
   pcmanfm
 
 # Toggle picom
-{mod4,super} + shift + F9
-  pkill picom || picom -b
+{mod4,super} + ctrl + F9
+  $HOME/.script/toggle_compositor
 
 # Scratchpad
 {mod4,super} + a

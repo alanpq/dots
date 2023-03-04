@@ -1,0 +1,7 @@
+#!/bin/bash
+if pkill picom; then
+  dunstify "Compositor off."
+else
+  picom -b
+  dunstify "Compositor on."
+fi
