@@ -12,6 +12,9 @@ setsid -f start-spotify > /dev/null 2>&1 &
 
 # OTHER APPLICATIONS
 
+kill $(pgrep eww_fullscreen_workaround -f)
+~/.config/bspwm/scripts/eww_fullscreen_workaround.sh &
+
 pidof sxhkd || exec sxhkd &
 
 pidof picom || picom --experimental-backends --backend glx -b &
@@ -23,6 +26,7 @@ pidof polybar || ~/.script/launch_polybar.sh &>/tmp/polybar.log
 #timer-checkupdates.sh &
 ~/.script/SPTN.sh &
 ~/.script/MO.sh &
+
 
 feh --no-fehbg --bg-scale "$HOME/Pictures/wallpapers" -z
 #hsetroot -solid $(xgetres background)
