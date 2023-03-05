@@ -1,0 +1,29 @@
+(deflisten eth
+	:initial "{}"
+	"scripts/network ethernet"
+)
+
+(defvar ethernet_rev false)
+
+(defwidget ethernet [] 
+  (eventbox
+			:class {
+				"ethernet network " + eth.state
+			}
+			:onhover "${eww} update ethernet_rev=true"
+			:onhoverlost "${eww} update ethernet_rev=false"
+			:halign "end"
+			:visible {eth != "{}"}
+			:tooltip {eth.device}
+			(box
+					:vexpand "false"
+					:hexpand "false"
+					:space-evenly "false"
+				(button
+					:class "icon"
+					:onclick "networkmanager_dmenu"
+					; :limit-width 12
+					"󰈀")
+		)
+	)
+)

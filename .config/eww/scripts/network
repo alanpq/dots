@@ -1,0 +1,41 @@
+#!/bin/bash
+device_type=$1
+poll () {
+  active_device=$(nmcli c show --active | grep "$device_type")
+  name=""
+  # echo $active_device
+  if [ -n "$active_device" ] ; then
+    # TODO: tell if we can reach internet
+    # status=$(nmcli g | grep -oE "disconnected")
+    name=$(echo $active_device | awk 'NF{NF--}{NF--}{NF--};1')
+    device=$(echo $active_device | awk '{print ($(NF))}')
+
+    state="connected"
+  else
+    state="disconnected"
+  fi
+
+  echo "{\"device\":\"$device\",\"name\":\"$name\",\"state\":\"$state\"}"
+}
+
+poll
+nmcli m | while read
+do
+  poll
+done
+
+
+
+# if [ $status ] ; then
+#     icon="󰤮 "
+#     text=""
+#     col="#575268"
+
+# else
+#   icon="󰤨 "
+#   text="${essid}"
+#   col="#a1bdce"
+# fi
+
+
+

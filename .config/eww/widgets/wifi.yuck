@@ -1,0 +1,38 @@
+(deflisten wlan 
+	:initial "{}"
+	"scripts/network wifi"
+)
+
+(defvar wifi_rev false)
+
+(defwidget wifi [] 
+  (eventbox
+			:class {
+				"wifi network " + wlan.state
+			}
+			:onhover "${eww} update wifi_rev=true"
+			:onhoverlost "${eww} update wifi_rev=false"
+			:halign "end"
+			:visible {wlan != "{}"}
+			:tooltip {wlan.device}
+			(box
+					:vexpand "false"
+					:hexpand "false"
+					:space-evenly "false"
+				(button
+					:class "icon"
+					:onclick "networkmanager_dmenu"
+					{wlan.state == "connected" ? "󰤨" : "󰤮"}
+				)
+				(revealer
+					:transition "slideright"
+					:reveal {wlan.name != "" && wifi_rev}
+					:duration "350ms"
+					(label   
+						:class "name"
+						:text "${wlan.name}"
+			  )
+			)
+		)
+	)
+)
