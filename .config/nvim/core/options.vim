@@ -79,7 +79,8 @@ set titlestring=
 set titlestring=%{utils#Get_titlestr()}
 
 " Line numbers
-set number
+set number relativenumber
+set nu rnu " hybrid line numbers (cur line = real line)
 set numberwidth=1
 
 " Persistent undo even after you close a file and re-open it
