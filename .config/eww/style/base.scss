@@ -1,7 +1,7 @@
 * {
   all: unset; //Unsets everything so you can style everything from scratch
   font-family: "IosevkaTermNerdFont";
-  font-size: 19px;
+  // font-size: 19px;
 }
 
 // Global Styles
@@ -9,6 +9,7 @@
   background-color: rgba(0, 0, 0, 0.3);
   color: #b0b4bc;
   padding: 0 0.5em;
+  font-size: 16px;
 }
 
 .bar.top {
