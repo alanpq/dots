@@ -5,10 +5,11 @@
 (include "./widgets/music.yuck")
 (include "./widgets/datetime.yuck")
 (include "./widgets/battery.yuck")
+(include "./widgets/wifi.yuck")
 
 (include "./widgets/sidestuff.yuck")
 
-(defwindow top
+(defwindow eww-bar-top
   :monitor 0
   :windowtype "dock"
   :geometry (geometry :x "0%"
@@ -19,14 +20,14 @@
   :stacking "bg"
   :wm-ignore true
   ; :reserve (struts :side "top" :distance "4%")
-  (centerbox :class "bar" :orientation "h"
+  (centerbox :class "bar top" :orientation "h"
     (datetime)
     (music)
-    (empty)
+    (wifi)
   )
 )
 
-(defwindow bottom
+(defwindow eww-bar-bottom
   :monitor 0
   :windowtype "dock"
   :geometry (geometry
@@ -39,7 +40,7 @@
   :stacking "bg"
   :wm-ignore true
   ; :reserve (struts :side "bottom" :distance "4%")
-  (centerbox :class "bar" :orientation "h"
+  (centerbox :class "bar bottom" :orientation "h"
     (workspaces)
     (empty)
     (sidestuff)
