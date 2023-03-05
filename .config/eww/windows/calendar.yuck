@@ -1,0 +1,10 @@
+(include "./widgets/calendar.yuck")
+
+(defwindow calendar
+	:geometry (geometry :x "5%" 
+						:y "26px" 
+            :anchor "top left"
+						:width "250px" 
+						:height "160px"
+    )
+(cal))
