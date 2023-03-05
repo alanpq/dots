@@ -6,6 +6,7 @@
 (include "./widgets/datetime.yuck")
 (include "./widgets/battery.yuck")
 (include "./widgets/wifi.yuck")
+(include "./widgets/ethernet.yuck")
 
 (include "./widgets/sidestuff.yuck")
 
@@ -23,7 +24,11 @@
   (centerbox :class "bar top" :orientation "h"
     (datetime)
     (music)
-    (wifi)
+    (box
+      :halign "end"
+      :space-evenly false
+      (wifi)
+      (ethernet))
   )
 )
 

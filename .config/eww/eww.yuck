@@ -1,5 +1,7 @@
 (include "./windows/bars.yuck")
 
+(defvar eww "/usr/bin/eww -c $HOME/.config/eww")
+
 (defwidget empty []
   (box)
 )
