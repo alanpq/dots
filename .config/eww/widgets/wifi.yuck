@@ -27,7 +27,7 @@
 				(revealer
 					:transition "slideright"
 					:reveal {wlan.name != "" && wifi_rev}
-					:duration "350ms"
+					:duration "300ms"
 					(label   
 						:class "name"
 						:text "${wlan.name}"
