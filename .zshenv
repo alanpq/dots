@@ -1,5 +1,6 @@
 # PATH
 PATH="$HOME/bin:$PATH"
+PATH="$HOME/.script:$PATH"
 
 if hash ruby 2>/dev/null ; then
   PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
@@ -13,9 +14,8 @@ fi
 
 export PATH
 
-export TERMINAL=xst
-export TERM=xst-256color
-
+export TERMINAL=kitty
+export TERM=kitty
 # GPG
 export GPG_TTY=$(tty)
 export GPG_AGENT_INFO=""
