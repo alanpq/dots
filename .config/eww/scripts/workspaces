@@ -1,0 +1,7 @@
+#!/bin/bash
+
+bspc query -T --monitor
+bspc subscribe desktop node_flag | while read
+do
+  bspc query -T --monitor
+done

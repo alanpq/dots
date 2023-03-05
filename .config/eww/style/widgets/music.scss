@@ -1,0 +1,28 @@
+.music {
+  color: black;
+
+  box {
+    padding: 0 0.5em;
+  }
+
+
+  background: #d3d3d3;
+  &:hover {
+    background-color: #ffffff;
+  }
+
+  &.firefox {
+    background: #c31717;
+    color: white;
+    &:hover {
+      background-color: #d63e3e;
+    }
+  }
+
+  &.spotifyd, &.spotify {
+    background: #1ed760;
+    &:hover {
+      background-color: #39df73;
+    }
+  }
+}

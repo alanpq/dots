@@ -1,0 +1,5 @@
+(include "./windows/bars.yuck")
+
+(defwidget empty []
+  (box)
+)

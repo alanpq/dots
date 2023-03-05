@@ -1,0 +1,47 @@
+(include "./widgets/lib/metric.yuck")
+
+(include "./widgets/workspaces.yuck")
+(include "./widgets/volume.yuck")
+(include "./widgets/music.yuck")
+(include "./widgets/datetime.yuck")
+(include "./widgets/battery.yuck")
+
+(include "./widgets/sidestuff.yuck")
+
+(defwindow top
+  :monitor 0
+  :windowtype "dock"
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "90%"
+                      :height "10px"
+                      :anchor "top center")
+  :stacking "bg"
+  :wm-ignore true
+  ; :reserve (struts :side "top" :distance "4%")
+  (centerbox :class "bar" :orientation "h"
+    (datetime)
+    (music)
+    (empty)
+  )
+)
+
+(defwindow bottom
+  :monitor 0
+  :windowtype "dock"
+  :geometry (geometry
+    :x "0%"
+    :y "0%"
+    :width "90%"
+    :height "10px"
+    :anchor "bottom center"
+  )
+  :stacking "bg"
+  :wm-ignore true
+  ; :reserve (struts :side "bottom" :distance "4%")
+  (centerbox :class "bar" :orientation "h"
+    (workspaces)
+    (empty)
+    (sidestuff)
+  )
+)

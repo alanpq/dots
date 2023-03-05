@@ -1,0 +1,26 @@
+.workspaces {
+  button {
+    // height: 1em;
+    min-width: 1em;
+    margin: 0;
+    padding: 0 0.25em;
+    color: rgba(255,255,255,0.2);
+    &:hover {
+      background: rgba(211, 93, 111, 0.287);
+    }
+  
+    &.occupied {
+      color: white;
+      // background: rgba(211, 93, 111, 0.221);
+    }
+    
+    &.active {
+      background: #D35D6E;
+      color: black;
+    }
+    
+    &.urgent {
+      background: #fa302c;
+    }
+  }
+}

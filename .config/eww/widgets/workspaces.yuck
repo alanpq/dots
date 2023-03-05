@@ -1,0 +1,38 @@
+(deflisten workspaces
+  :initial `{"desktops":[]}`
+  "scripts/workspaces"
+)
+
+; fucking kill me i hate jq
+; jq '.desktops[] | select(.name == "4").root | [..|.client?.urgent] | any(.)'
+; this recursively goes through the root object for a given desktop,
+; and if any of the .client's inside the root window or its children have .urgent == true,
+; this will return true, otherwise you get false
+
+(defwidget workspaces []
+  (box 
+    :orientation "h"
+    :halign "start"
+    :class "workspaces"
+    (box
+      :orientation "h"
+      ; :spacing 5
+      :space-evenly "false"
+      (for d in {workspaces.desktops}
+        (eventbox
+          :cursor "pointer"
+          (button 
+            :class {
+              (d.id == workspaces.focusedDesktopId ? "active ": "") +
+              ((d.focusedNodeId != 0) ? "occupied ": "") +
+              (jq(d, ".root | [..|.client?.urgent?] | any(.)") ? "urgent " : "")
+            }
+            :tooltip "Switch to workspace ${d.name}"
+            :onclick "bspc desktop -f ${d.name}"
+            (label
+              :text {d.name}
+              :class "workspace_buttons")))
+      )
+    )
+  )
+)

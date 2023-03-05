@@ -1,0 +1,8 @@
+(defpoll volume :interval "1s" :initial 0
+  "scripts/get-volume")
+
+(defwidget volume []
+  (metric :label "🔊"
+  :value volume
+  :onchange "amixer -D pulse sset Master {}%")
+)

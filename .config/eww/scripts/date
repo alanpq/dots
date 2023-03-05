@@ -1,0 +1,24 @@
+#!/bin/bash
+
+n=$(date +"%-d")
+suffix=""
+if [ $n -ge 11 -a $n -le 13 ] ; then
+  suffix="th"
+else
+ case $(( $n%10 )) in
+ 1)
+   suffix="st"
+   ;;
+ 2)
+   suffix="nd"
+   ;;
+ 3)
+   suffix="rd"
+   ;;
+ *)
+   suffix="th"
+   ;;
+ esac
+fi
+
+date +"%a %e$suffix %B %Y"

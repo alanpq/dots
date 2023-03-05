@@ -1,0 +1,15 @@
+.battery {
+
+  // &.full {
+  //   color: rgb(243, 128, 56);
+  // }
+  // &.normal {
+  //   color: rgb(255, 65, 65);
+  // }
+  &.low {
+    color: rgb(243, 128, 56);
+  }
+  &.critical {
+    color: rgb(245, 38, 38);
+  }
+}

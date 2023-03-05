@@ -1,0 +1,38 @@
+(deflisten music
+  :initial "{}"
+  "playerctl --follow metadata --format \'\{\"player\":\"{{playerName}}\",\"title\":\"{{title}}\",\"artist\":\"{{ artist }}\",\"album\":\"{{album}}\"\,\"url\":\"{{xesam:url}}\"}\' || true")
+
+; playerctl \
+;  --follow metadata \
+; --format '{"player":"{{playerName}}","title":"{{title}}","artist":"{{ artist }}","album":"{{album}}}' || true
+
+(defwidget music []
+  (eventbox 
+      :class {
+        "music " +
+        music.player ; for player specific colours
+      }
+      :halign "center"
+      :cursor "pointer"
+      :tooltip "Play/Pause"
+      :visible {music != "{}"}
+      :onclick "playerctl -p ${music.player} play-pause &"
+      :onrightclick "~/.config/dunst/scripts/spotify.sh &"
+      :dragtype "text"
+      :dragvalue "${music.url}"
+    (box
+        :orientation "h"
+        :space-evenly false
+        :halign "center"
+      {
+        "🎵 " +
+        "${music.title} - ${music.artist} " +
+        ( ; if the thing is too long, we don't need to include the album
+          ; with the check being <50, the max chars this module can be should be 50 + 2+4+2+2 = 60
+          music.album != "" ? (strlength(music.title+music.album) < 50
+            ? "(${music.album}) " : "(..) ") : ""
+        ) +
+        "🎵"
+      })
+  )
+)

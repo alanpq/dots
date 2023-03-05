@@ -1,0 +1,27 @@
+
+;         
+;0 25  50  75  100
+(defwidget battery [bat]
+  (box
+    :class {
+      "battery " + 
+      (bat.status == "Charging" ? "charging " : "") +
+      (
+        bat.capacity > 75 ? "full " : 
+        bat.capacity > 50 ? "normal " :
+        bat.capacity > 15 ? "low " :
+        "critical "
+      )
+    }
+    (label :class "icon" :text {
+      bat.status == "Charging" ? "󰚥" : 
+        (
+          bat.capacity > 75 ? " " : 
+          bat.capacity > 50 ? " " :
+          bat.capacity > 25 ? " " :
+          " "
+        )
+    })
+    (label :text "${bat.capacity}%")
+  )
+)

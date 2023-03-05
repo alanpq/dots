@@ -1,0 +1,17 @@
+(defpoll date :interval "10s"
+  "scripts/date")
+(defpoll time :interval "5s"
+  "scripts/time")
+
+(defwidget datetime []
+  (eventbox
+    :class "datetime"
+    :halign "start"
+    (box 
+         :halign "start"
+         :space-evenly false
+      (label :class "date" :text "${date} - ")
+      (label :class "time" :text "${time}")
+    )
+  )
+)
