@@ -1,8 +1,12 @@
 scriptencoding utf-8
 
+" change fillchars for folding, vertical split, end of buffer, and message separator
+set fillchars=fold:\ ,vert:\│,eob:\ ,msgsep:‾
+
 " Time in milliseconds to wait for a mapped sequence to complete,
 " see https://unix.stackexchange.com/q/36882/221410 for more info
 set timeoutlen=5000
+set updatetime=500  " For CursorHold events
 
 " Clipboard settings, always use clipboard for all delete, yank, change, put
 " operation, see https://stackoverflow.com/q/30691466/6064933
@@ -78,6 +82,19 @@ set title
 set titlestring=
 set titlestring=%{utils#Get_titlestr()}
 
+" Completion behaviour
+" set completeopt+=noinsert  " Auto select the first completion entry
+set completeopt+=menuone  " Show menu even if there is only one item
+set completeopt-=preview  " Disable the preview window
+
+set pumheight=10  " Maximum number of items to show in popup menu
+set pumblend=10  " pseudo transparency for completion menu
+
+set winblend=0  " pseudo transparency for floating window
+
+" Insert mode key word completion setting
+set complete+=kspell complete-=w complete-=b complete-=u complete-=t
+
 " Line numbers
 set number relativenumber
 set nu rnu " hybrid line numbers (cur line = real line)
@@ -92,3 +109,36 @@ set virtualedit=block  " Virtual edit is useful for visual block edit
 " see https://stackoverflow.com/q/32669814/6064933
 set formatoptions+=mM
 
+set tildeop
+
+set synmaxcol=250
+set nostartofline
+
+" External program to use for grep command
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+  set grepformat=%f:%l:%c:%m
+endif
+
+" Enable true color support. Do not set this option if your terminal does not
+" support true colors! For a comprehensive list of terminals supporting true
+" colors, see https://github.com/termstandard/colors and https://gist.github.com/XVilka/8346728.
+set termguicolors
+
+" Set up cursor color and shape in various mode, ref:
+" https://github.com/neovim/neovim/wiki/FAQ#how-to-change-cursor-color-in-the-terminal
+set guicursor=n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor20
+
+"set signcolumn=yes:1
+set signcolumn=yes
+" Remove certain character from file name pattern matching
+set isfname-==
+set isfname-=,
+
+" diff options
+set diffopt=
+set diffopt+=vertical  " show diff in vertical position
+set diffopt+=filler  " show filler for deleted lines
+set diffopt+=closeoff  " turn off diff when one file window is closed
+set diffopt+=context:3  " context for diff
+set diffopt+=internal,indent-heuristic,algorithm:histogram

@@ -1,11 +1,3 @@
-" Remove trailing white space, see https://vi.stackexchange.com/a/456/15292
-function! utils#StripTrailingWhitespaces() abort
-  let l:save = winsaveview()
-  " vint: next-line -ProhibitCommandRelyOnUser -ProhibitCommandWithUnintendedSideEffect
-  keeppatterns %s/\v\s+$//e
-  call winrestview(l:save)
-endfunction
-
 " Create command alias safely, see https://stackoverflow.com/q/3878692/6064933
 " The following two functions are taken from answer below on SO:
 " https://stackoverflow.com/a/10708687/6064933
@@ -33,20 +25,6 @@ endfunction
 function! utils#HasColorscheme(name) abort
   let l:pat = printf('colors/%s.vim', a:name)
   return !empty(globpath(&runtimepath, l:pat))
-endfunction
-
-" Check if an Airline theme exists in runtimepath.
-function! utils#HasAirlinetheme(name) abort
-  let l:pat = printf('autoload/airline/themes/%s.vim', a:name)
-  return !empty(globpath(&runtimepath, l:pat))
-endfunction
-
-" Generate random integers in the range [Low, High] in pure vimscrpt,
-" adapted from https://stackoverflow.com/a/12739441/6064933
-function! utils#RandInt(Low, High) abort
-  " Use lua to generate random int. It is faster. Ref: https://stackoverflow.com/a/20157671/6064933
-  call luaeval('math.randomseed(os.time())')
-  return luaeval(printf('math.random(%s, %s)', a:Low, a:High))
 endfunction
 
 " Custom fold expr, adapted from https://vi.stackexchange.com/a/9094/15292
@@ -117,18 +95,18 @@ function! utils#MoveSelection(direction) abort
   if a:direction ==# 'up'
     if l:start_line == 1
       " we can also directly use `normal gv`, see https://stackoverflow.com/q/9724123/6064933
-      normal gv
+      normal! gv
       return
     endif
     silent execute printf('%s,%smove-2', l:start_line, l:end_line)
-    normal gv
+    normal! gv
   elseif a:direction ==# 'down'
     if l:end_line == line('$')
-      normal gv
+      normal! gv
       return
     endif
     silent execute printf('%s,%smove+%s', l:start_line, l:end_line, l:num_line)
-    normal gv
+    normal! gv
   endif
 endfunction
 
@@ -138,11 +116,70 @@ function! utils#Get_titlestr() abort
   if g:is_linux
       let l:title_str = hostname() . '  '
   endif
-  let l:title_str = l:title_str . expand('%:p:~') . '  '
-  if &buflisted
-    let l:title_str = l:title_str . strftime('%Y-%m-%d %H:%M',getftime(expand('%')))
+
+  let l:buf_path = expand('%:p:~')
+  let l:title_str = l:title_str . l:buf_path . '  '
+  if &buflisted && l:buf_path != ""
+    let l:title_str = l:title_str . strftime('%Y-%m-%d %H:%M:%S%z', getftime(expand('%')))
   endif
 
   return l:title_str
 endfunction
 
+" Output current time or unix timestamp in human-readable format.
+function! utils#iso_time(timestamp) abort
+  if a:timestamp
+    return strftime('%Y-%m-%d %H:%M:%S%z', a:timestamp)
+  endif
+
+  return strftime('%Y-%m-%d %H:%M:%S%z')
+endfunction
+
+" Check if we are inside a Git repo.
+function! utils#Inside_git_repo() abort
+  let res = system('git rev-parse --is-inside-work-tree')
+  if match(res, 'true') == -1
+    return v:false
+  else
+    " Manually trigger a special user autocmd InGitRepo (to use it for
+    " lazyloading of fugitive by packer.nvim).
+    " See also https://github.com/wbthomason/packer.nvim/discussions/534.
+    doautocmd User InGitRepo
+    return v:true
+  endif
+endfunction
+
+function! utils#GetGitBranch()
+  let l:res = systemlist('git rev-parse --abbrev-ref HEAD')[0]
+  if match(l:res, 'fatal') != -1
+    return ''
+  else
+    return l:res
+  endif
+endfunction
+
+" Redirect command output to a register for later processing.
+" Ref: https://stackoverflow.com/q/2573021/6064933 and https://unix.stackexchange.com/q/8101/221410 .
+function! utils#CaptureCommandOutput(command) abort
+  let l:tmp = @m
+  redir @m
+  silent! execute a:command
+  redir END
+
+  "create a scratch buffer for dumping the text, ref: https://vi.stackexchange.com/a/11311/15292.
+  tabnew | setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
+
+  let l:lines = split(@m, '\n')
+  call nvim_buf_set_lines(0, 0, 0, 0, l:lines)
+
+  let @m = l:tmp
+endfunction
+
+" Edit all files matching the given patterns.
+function! utils#MultiEdit(patterns) abort
+  for p in a:patterns
+    for f in glob(p, 0, 1)
+      execute 'edit ' . f
+    endfor
+  endfor
+endfunction

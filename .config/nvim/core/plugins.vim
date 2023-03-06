@@ -1,38 +1,16 @@
 scriptencoding utf-8
 
-call plug#begin()
+" Plugin specification and lua stuff
+lua require('plugins')
 
-Plug 'joshdick/onedark.vim' " theme
-Plug 'vim-airline/vim-airline'
-
-Plug 'sheerun/vim-polyglot' " language pack
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " code completion
-Plug 'lepture/vim-jinja'
-
-Plug 'junegunn/vim-easy-align'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
-
-Plug 'jbyuki/nabla.nvim'
-
-call plug#end()
-
-let s:plugin_config_list = [
-      \ 'coc.vim'
-      \ ]
-
-for s:fname in s:plugin_config_list
-  execute printf('source %s/%s', g:nvim_config_root, s:fname)
-endfor
-
-nnoremap <F5> :lua require("nabla").action()<CR>
-
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+" Use short names for common plugin manager commands to simplify typing.
+" To use these shortcuts: first activate command line with `:`, then input the
+" short alias, e.g., `pi`, then press <space>, the alias will be expanded to
+" the full command automatically.
+call utils#Cabbrev('pi', 'PackerInstall')
+call utils#Cabbrev('pud', 'PackerUpdate')
+call utils#Cabbrev('pc', 'PackerClean')
+call utils#Cabbrev('ps', 'PackerSync')
 
 """ MARKDOWN PREVIEW
 
