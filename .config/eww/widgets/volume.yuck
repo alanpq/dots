@@ -2,7 +2,7 @@
   "scripts/get-volume")
 
 (defwidget volume []
-  (metric :label "🔊"
+  (metric :label "󰕾"
   :value volume
   :onchange "amixer -D pulse sset Master {}%")
 )
