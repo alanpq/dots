@@ -1,6 +1,7 @@
 (include "./windows/bars.yuck")
 (include "./windows/calendar.yuck")
 
+(defpoll config :initial "{}" :interval "3600s" "./scripts/host-config")
 (defvar eww "/usr/bin/eww -c $HOME/.config/eww")
 
 (defwidget empty []

@@ -3,9 +3,10 @@
 ;0 25  50  75  100
 (defwidget battery [bat]
   (box
+    :visible {bat != ""}
     :class {
       "battery " + 
-      (bat.status == "Charging" ? "charging " : "") +
+      (bat?.status == "Charging" ? "charging " : "") +
       (
         bat.capacity > 75 ? "full " : 
         bat.capacity > 50 ? "normal " :
@@ -14,7 +15,7 @@
       )
     }
     (label :class "icon" :text {
-      bat.status == "Charging" ? "󰚥" : 
+      bat?.status == "Charging" ? "󰚥" : 
         (
           bat.capacity > 75 ? " " : 
           bat.capacity > 50 ? " " :

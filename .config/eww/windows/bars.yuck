@@ -10,17 +10,7 @@
 
 (include "./widgets/sidestuff.yuck")
 
-(defwindow eww-bar-top
-  :monitor 0
-  :windowtype "dock"
-  :geometry (geometry :x "0%"
-                      :y "0%"
-                      :width "90%"
-                      :height "10px"
-                      :anchor "top center")
-  :stacking "bg"
-  :wm-ignore true
-  ; :reserve (struts :side "top" :distance "4%")
+(defwidget top-bar [] 
   (centerbox :class "bar top" :orientation "h"
     (datetime)
     (music)
@@ -32,8 +22,27 @@
   )
 )
 
-(defwindow eww-bar-bottom
-  :monitor 0
+(defwidget bottom-bar [mon]
+  (centerbox :class "bar bottom" :orientation "h"
+    (workspaces :mon mon)
+    (empty)
+    (sidestuff)
+  )
+)
+
+(defwindow eww-bar-top-0
+  :windowtype "dock"
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "90%"
+                      :height "10px"
+                      :anchor "top center")
+  :stacking "bg"
+  :wm-ignore true
+  (top-bar)
+)
+
+(defwindow eww-bar-bottom-0
   :windowtype "dock"
   :geometry (geometry
     :x "0%"
@@ -44,10 +53,30 @@
   )
   :stacking "bg"
   :wm-ignore true
-  ; :reserve (struts :side "bottom" :distance "4%")
-  (centerbox :class "bar bottom" :orientation "h"
-    (workspaces)
-    (empty)
-    (sidestuff)
+  (bottom-bar :mon {config?.monitors?.[0]})
+)
+(defwindow eww-bar-top-1
+  :windowtype "dock"
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "90%"
+                      :height "10px"
+                      :anchor "top center")
+  :stacking "bg"
+  :wm-ignore true
+  (top-bar)
+)
+
+(defwindow eww-bar-bottom-1
+  :windowtype "dock"
+  :geometry (geometry
+    :x "0%"
+    :y "0%"
+    :width "90%"
+    :height "10px"
+    :anchor "bottom center"
   )
+  :stacking "bg"
+  :wm-ignore true
+  (bottom-bar :mon {config?.monitors?.[1]})
 )
