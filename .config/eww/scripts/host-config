@@ -1,2 +1,7 @@
 #!/bin/bash
-jq . "./host-configs/$(hostname).json"
+file="./host-configs/$(hostname).json"
+if [[ -f $file ]] then
+  jq . "./host-configs/$(hostname).json"
+else
+  echo "{}"
+fi
