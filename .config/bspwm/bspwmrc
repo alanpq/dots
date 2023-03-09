@@ -21,7 +21,9 @@ pidof picom || picom -b &
 
 pidof dunst || dunst &
 pidof albert || albert &
-pidof polybar || ~/.script/launch_polybar.sh &>/tmp/polybar.log
+#pidof polybar || ~/.script/launch_polybar.sh &>/tmp/polybar.log
+
+./scripts/open_eww.sh &
 
 #timer-checkupdates.sh &
 ~/.script/SPTN.sh &
