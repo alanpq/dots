@@ -17,7 +17,7 @@ kill $(pgrep eww_fullscreen_workaround -f)
 
 pidof sxhkd || exec sxhkd &
 
-pidof picom || picom --experimental-backends --backend glx -b &
+pidof picom || picom -b &
 
 pidof dunst || dunst &
 pidof albert || albert &
