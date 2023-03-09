@@ -403,16 +403,23 @@
 #        If the notification is already drawn, it won't get undrawn.
 # pushback: same as delay, but when switching into fullscreen, the notification will get
 #           withdrawn from screen again and will get delayed like a new notification
-#[fullscreen_delay_everything]
-#    fullscreen = delay
-#[fullscreen_show_critical]
-#    msg_urgency = critical
-#    fullscreen = show
+[fullscreen_delay_everything]
+  fullscreen = delay
+[fullscreen_show_critical]
+  msg_urgency = critical
+  fullscreen = show
 
 [spotify]
-    body = *Spotify*
-    format = "%b\n[ <span font_desc='Ubuntu Mono 9'><i>%s</i></span> ]"
-    background = "#191414"
+  body = *Spotify*
+  format = "%b\n[ <span font_desc='Ubuntu Mono 9'><i>%s</i></span> ]"
+  background = "#191414"
+
+[discord]
+  appname = discord
+  #format  = "<b>%s</b>\n%b"
+  script = ~/.config/dunst/scripts/discord.sh
+  max_icon_size = 32
+
 #[espeak]
 #    summary = "*"
 #    script = dunst_espeak.sh
