@@ -17,17 +17,19 @@ kill $(pgrep eww_fullscreen_workaround -f)
 
 pidof sxhkd || exec sxhkd &
 
-pidof picom || picom --experimental-backends --backend glx -b &
+pidof picom || picom -b &
 
 pidof dunst || dunst &
 pidof albert || albert &
-pidof polybar || ~/.script/launch_polybar.sh &>/tmp/polybar.log
+#pidof polybar || ~/.script/launch_polybar.sh &>/tmp/polybar.log
+
+./scripts/open_eww.sh &
 
 #timer-checkupdates.sh &
 ~/.script/SPTN.sh &
 ~/.script/MO.sh &
 
 
-feh --no-fehbg --bg-scale "$HOME/Pictures/wallpapers" -z
+feh --no-fehbg --bg-scale "$HOME/Pictures/wallpapers" -z &
 #hsetroot -solid $(xgetres background)
 xsetroot -cursor_name left_ptr &
