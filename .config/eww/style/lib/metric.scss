@@ -1,6 +1,10 @@
 .metric {
   font-size: 0.8rem;
 
+  .label {
+    font-size: 1.3rem;
+  }
+
   scale trough {
     all: unset;
     background-color: #4e4e4e;

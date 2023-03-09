@@ -1,8 +1,19 @@
+(include "widgets/lib/meter.yuck");
+
+
 (defwidget sidestuff []
-  (box :class "sidestuff" :orientation "h" :spacing 10 :space-evenly false :halign "end"
+  (box :class "sidestuff" :orientation "h" :spacing 2 :space-evenly false :halign "end"
     (volume)
     ;(battery :bat {EWW_BATTERY.BAT0})
-    (label :text " ${round(EWW_RAM.used_mem_perc,0)}%")
-    (label :text "💾 ${round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}%")
+    (meter
+      :class "ram"
+      :value {round(EWW_RAM.used_mem_perc,0)}
+      :tooltip "% RAM"
+    )
+    (meter
+      :class "disk"
+      :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+      :tooltip "% Disk"
+    )
   )
 )

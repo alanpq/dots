@@ -1,0 +1,28 @@
+.meter {
+  $thickness: 2px;
+  $icon_size: 8px;
+  $icon_pad: 2px;
+  padding: 0 2px;
+  margin-bottom: 2px;
+
+  background: rgba(0, 0, 0, 0.288);
+  border-radius: 50%;
+
+  // min-width: 10px;
+
+  // border-radius: 10px;
+  .icon {
+    $icon_margin: $icon_size/2 + $icon_pad;
+    margin: $icon_margin;
+    margin-right: $icon_margin + 3;
+    font-size: $icon_size;
+    opacity: 0.5;
+  }
+}
+
+.ram {
+  color: rgb(209, 122, 41);
+}
+.disk {
+  color: rgb(142, 41, 209);
+}

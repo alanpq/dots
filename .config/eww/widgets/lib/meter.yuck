@@ -1,0 +1,17 @@
+(defwidget meter [value tooltip ?class]
+  (box
+    :class "meter ${class}" :vexpand "false" :hexpand "false" 
+    (circular-progress
+      :value {value}
+      :start-at 75
+      :clockwise true
+      :thickness 4
+      (button 
+        :class "icon"
+        :tooltip "${value}${tooltip}"
+        :onclick "$HOME/.config/eww/bar/scripts/pop system"
+        ""
+      )
+    )
+)
+)
