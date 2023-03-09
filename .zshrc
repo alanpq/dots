@@ -16,6 +16,10 @@ zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
 zstyle ':completion:*' verbose true
 
+HISTFILE=~/.history
+HISTSIZE=5000
+SAVEHIST=1000
+
 setopt autocd extendedglob nomatch
 unsetopt beep notify
 bindkey -e
@@ -29,7 +33,7 @@ bindkey "^[[3;5~" kill-word # ctrl + delete
 # ALIASES
 
 alias sudo='nocorrect sudo -E '
-alias vim='nvim'
+alias vim='nocorrect nvim'
 
 alias g='git'
 alias gs='git status'
@@ -39,12 +43,15 @@ alias gp='git push'
 
 alias icat='kitty +kitten icat'
 
-alias ls="exa"
+alias ls="nocorrect exa"
 alias ll="ls -l"
 alias la="ls -la"
 
 alias ssh="TERM=xterm-kitty ssh"
 
+alias rm="nocorrect echo Sorry mate, use \'trash-put\'"
+
+alias ocr="flameshot gui -s -r > /tmp/ocr && tesseract -l eng /tmp/ocr /tmp/ocr_out && cat /tmp/ocr_out.txt; \\rm /tmp/ocr; \\rm /tmp/ocr_out.txt"
 # END ALIASES
 
 # source antidote
