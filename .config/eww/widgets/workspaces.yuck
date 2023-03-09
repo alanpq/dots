@@ -1,5 +1,5 @@
 (deflisten workspaces
-  :initial `{"desktops":[]}`
+  :initial "{}"
   "scripts/workspaces"
 )
 
@@ -9,7 +9,7 @@
 ; and if any of the .client's inside the root window or its children have .urgent == true,
 ; this will return true, otherwise you get false
 
-(defwidget workspaces []
+(defwidget workspaces [mon]
   (box 
     :orientation "h"
     :halign "start"
@@ -18,12 +18,12 @@
       :orientation "h"
       ; :spacing 5
       :space-evenly "false"
-      (for d in {workspaces.desktops}
+      (for d in {workspaces == "{}" ? [] : workspaces?.[mon].desktops}
         (eventbox
           :cursor "pointer"
           (button 
             :class {
-              (d.id == workspaces.focusedDesktopId ? "active ": "") +
+              (d.id == workspaces?.[mon].focusedDesktopId ? "active ": "") +
               ((d.focusedNodeId != 0) ? "occupied ": "") +
               (jq(d, ".root | [..|.client?.urgent?] | any(.)") ? "urgent " : "")
             }

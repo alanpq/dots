@@ -1,7 +1,31 @@
 #!/bin/bash
 
-bspc query -T --monitor
+query_monitor() {
+  mon=$1
+  idx=$2
+  OUTPUT[$idx]=$(bspc query -T -m $mon)
+}
+
+output_all() {
+  for o in "${OUTPUT[@]}"; do
+    echo "$o "
+  done
+}
+
+
+
+MONITORS=($(jq -r ".monitors | @sh" host-configs/$(hostname).json | tr -d \'))
+declare -a OUTPUT
+
+query() {
+  for mon in "${!MONITORS[@]}"; do 
+    query_monitor ${MONITORS[$mon]} $mon
+  done
+  echo $(echo "$(output_all)" | jq -s 'group_by(.name) | map({key: .[0].name, value: .[0]}) | from_entries' -c)
+}
+
+query
 bspc subscribe desktop node_flag | while read
 do
-  bspc query -T --monitor
+  query
 done
