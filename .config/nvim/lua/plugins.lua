@@ -72,9 +72,17 @@ packer.startup {
         ts_update()
       end,
     }
-  
+    
+    -- file explorer
+    use {
+      "kyazdani42/nvim-tree.lua",
+      requires = { "kyazdani42/nvim-web-devicons" },
+      config = [[require('config.nvim-tree')]],
+    }
+
     use({
       "iamcco/markdown-preview.nvim",
+      opt = true,
       run = function() vim.fn["mkdp#util#install"]() end,
     })
 

@@ -1,5 +1,5 @@
 local masonlsp = require("mason-lspconfig")
-local lsp = require("config.lsp")
+local lsp = require("config.lsp-onattach")
 masonlsp.setup({
   automatic_installation = true,
 })
