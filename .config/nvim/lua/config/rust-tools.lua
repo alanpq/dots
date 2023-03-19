@@ -5,10 +5,13 @@ local rt = require("rust-tools")
 rt.setup({
   server = {
     on_attach = function(client, bufnr)
+      vim.o.tabstop = 2
+      vim.o.softtabstop = 2
+      vim.o.shiftwidth = 2
       -- Hover actions
       vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
       -- Code action groups
-      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+      vim.keymap.set("n", "<leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
       --lsp.on_attach(client, bufnr)
     end,
     settings = {

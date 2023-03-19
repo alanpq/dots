@@ -65,3 +65,6 @@ keymap.set("n", "<leader>v", "printf('`[%s`]', getregtype()[0])", {
   expr = true,
   desc = "reselect last pasted area",
 })
+
+-- Always use very magic mode for searching
+keymap.set("n", "/", [[/\v]])
