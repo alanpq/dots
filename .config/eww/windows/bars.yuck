@@ -34,7 +34,7 @@
   :windowtype "dock"
   :geometry (geometry :x "0%"
                       :y "0%"
-                      :width "90%"
+                      :width "100%"
                       :height "10px"
                       :anchor "top center")
   :stacking "bg"
@@ -47,7 +47,7 @@
   :geometry (geometry
     :x "0%"
     :y "0%"
-    :width "90%"
+    :width "100%"
     :height "10px"
     :anchor "bottom center"
   )
