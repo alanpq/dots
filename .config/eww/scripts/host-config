@@ -1,6 +1,6 @@
 #!/bin/bash
 file="./host-configs/$(hostname).json"
-if [[ -f $file ]] then
+if [[ -f $file ]]; then
   jq . "./host-configs/$(hostname).json"
 else
   echo "{}"
