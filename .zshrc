@@ -52,6 +52,9 @@ alias ssh="TERM=xterm-kitty ssh"
 alias rm="nocorrect echo Sorry mate, use \'trash-put\'"
 
 alias ocr="flameshot gui -s -r > /tmp/ocr && tesseract -l eng /tmp/ocr /tmp/ocr_out && cat /tmp/ocr_out.txt; \\rm /tmp/ocr; \\rm /tmp/ocr_out.txt"
+
+alias proj='source $HOME/.script/cd_project.sh'
+
 # END ALIASES
 
 # source antidote
