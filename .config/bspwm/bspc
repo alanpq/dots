@@ -33,6 +33,7 @@ bspc config external_rules_command $HOME/.config/bspwm/external_rules
 
 bash "$HOME/.config/bspwm/host-configs/$(hostname)"
 
+bspc rule -a klipr state='floating'
 bspc rule -a Gimp desktop='^7' state='floating'
 bspc rule -a minecraft-launcher state='floating'
 bspc rule -a discord desktop='^9' follow=off
