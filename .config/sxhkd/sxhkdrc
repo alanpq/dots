@@ -151,11 +151,11 @@ XF86AudioMute
 
 # Brightness up
 XF86MonBrightnessUp
-  brightnessctl set +10% ; volume.sh
+  brightnessctl set +10% ; $HOME/.script/desktop/volume.sh
 
 # Brightnes down
 XF86MonBrightnessDown
-  [ $(($(brightnessctl g)-750)) -le "0" ] && brightnessctl set 1% || brightnessctl set 10%- ; volume.sh
+  [ $(($(brightnessctl g)-750)) -le "0" ] && brightnessctl set 1% || brightnessctl set 10%- ; $HOME/.script/desktop/volume.sh
 
 ################################################
 #              APPLICATIONS                    #
@@ -163,7 +163,7 @@ XF86MonBrightnessDown
 
 # Terminal
 {mod4,super} + Return
-  kitty
+  kitty $HOME
 
 # Audio Mixer
 {mod4,super} + m
