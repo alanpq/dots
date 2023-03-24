@@ -22,7 +22,7 @@ echo bars: ${bars[@]}
 echo monitors: ${monitors[@]}
 echo bar_idxs: ${bar_idxs[@]}
 
-bspc subscribe node_state desktop_focus | while read -r _ mon _ _ state flag; do
+bspc subscribe node_state node_add node_remove node_geometry desktop_focus | while read -r _ mon _ _ state flag; do
   if [[ "$state" != fullscreen ]]; then continue; fi
   echo "===== fullscreen change ===="
   for bar in "${bars[@]}"; do 
