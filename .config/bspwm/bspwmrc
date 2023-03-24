@@ -1,9 +1,9 @@
 #!/bin/bash
 HOSTNAME=$(hostname)
 
-$HOME/.xinitrc
+$HOME/.xinitrc &
 
-bash $HOME/.config/bspwm/bspc
+bash $HOME/.config/bspwm/bspc &
 
 #source $HOME/.config/env
 
