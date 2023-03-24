@@ -1,8 +1,8 @@
 (deflisten music
   :initial "{}"
-  "playerctl --follow metadata --format \'\{\"player\":\"{{playerName}}\",\"title\":\"{{title}}\",\"artist\":\"{{ artist }}\",\"album\":\"{{album}}\"\,\"url\":\"{{xesam:url}}\"}\' || true")
+  "playerctl -p spotifyd --follow metadata --format \'\{\"player\":\"{{playerName}}\",\"title\":\"{{title}}\",\"artist\":\"{{ artist }}\",\"album\":\"{{album}}\"\,\"url\":\"{{xesam:url}}\"}\' || true")
 
-; playerctl \
+; playerctl -p spotifyd \
 ;  --follow metadata \
 ; --format '{"player":"{{playerName}}","title":"{{title}}","artist":"{{ artist }}","album":"{{album}}}' || true
 
