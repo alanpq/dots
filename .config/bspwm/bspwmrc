@@ -20,7 +20,7 @@ pidof sxhkd || exec sxhkd &
 pidof picom || picom -b &
 
 pidof dunst || dunst &
-pidof albert || albert &
+exec "${SCRIPT}/desktop/albert.sh" &
 #pidof polybar || ~/.script/launch_polybar.sh &>/tmp/polybar.log
 
 ./scripts/open_eww.sh &
