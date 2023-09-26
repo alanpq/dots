@@ -12,7 +12,19 @@
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.joypixels.acceptLicense = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nixpkgs.overlays = [
+    (self: super: {
+      nix-direnv = super.nix-direnv.override { enableFlakes = true; };
+    })
+  ];
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+    };
+    registry = { nixpkgs.flake = nixpkgs; };
+    nixPath = [ "nixpkgs=${nixpkgs.outPath}" ];
+  };
 
   # Use the GRUB 2 boot loader.
   # boot.loader.grub.enable = true;
@@ -58,10 +70,18 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+    extraPackages = with pkgs; [ 
+      vaapiVdpau
+      nvidia-vaapi-driver
+      libvdpau-va-gl
+    ];
   };
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;
+
+    # can resolve tearing
+    forceFullCompositionPipeline = true;
 
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
     powerManagement.enable = false;
@@ -86,14 +106,32 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = ["nvidia"];
-
-  # Enable the Plasma 5 Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  # # Enable the Plasma 5 Desktop Environment.
+  # services.xserver.displayManager.sddm.enable = true;
+  # services.xserver.desktopManager.plasma5.enable = true;
   
+  services.xserver = {
+    enable = true;
+    exportConfiguration = true;
+    videoDrivers = [ "nvidia" ];
+
+    windowManager.i3 = {
+      enable = true;
+      extraPackages = with pkgs; [dmenu rofi polybar];
+    };
+
+    displayManager.defaultSession = "none+i3";
+    displayManager.lightdm = {
+      enable = true;
+      greeter.enable = true;
+      greeters.slick = {
+        enable = true;
+        draw-user-backgrounds = false;
+      }
+    }
+  };
+
+  services.fstrim.enable = true;
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -111,7 +149,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.alan = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" "networkmanager" "audio" ];
   };
 
   sound.enable = false;
