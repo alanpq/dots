@@ -12,7 +12,7 @@ rec {
     "Font Awesome 5 Free"
   ];
   monospace = [
-    "MonoStroom for Powerline"
+    "Iosevka"
     "Blobmoji"
     "Twitter Color Emoji"
     "JoyPixels"

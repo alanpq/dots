@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running `nixos-help`).
 
-{ config, pkgs, ... }:
+{ config, pkgs, nixpkgs, ... }:
 
 {
   imports =
@@ -121,14 +121,15 @@
     };
 
     displayManager.defaultSession = "none+i3";
+    displayManager.sddm.enable = false;
     displayManager.lightdm = {
       enable = true;
       greeter.enable = true;
       greeters.slick = {
         enable = true;
         draw-user-backgrounds = false;
-      }
-    }
+      };
+    };
   };
 
   services.fstrim.enable = true;
@@ -147,11 +148,13 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.mutableUsers = false;
   users.users.alan = {
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" "networkmanager" "audio" ];
+    hashedPassword = "$y$j9T$9jzotD/.eDyZVY5AhWOhR.$px7JIqj1HWi9JF8trRkbajyGaM3u4uOXZy4icMOfuaC";
   };
-
+  
   sound.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -205,6 +208,7 @@
 
   fonts = {
     packages = with pkgs; [
+      iosevka
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
@@ -249,8 +253,8 @@
   # ============== PERSISTENCE RELATED CONFIG ================
   environment.etc = {
     nixos.source = "/persist/etc/nixos";
-    passwd.source = "/persist/etc/passwd";
-    shadow.source = "/persist/etc/shadow";
+    #passwd.source = "/persist/etc/passwd";
+    #shadow.source = "/persist/etc/shadow";
 
     #group.source = "/persist/etc/group";
     subgid.source = "/persist/etc/subgid";
