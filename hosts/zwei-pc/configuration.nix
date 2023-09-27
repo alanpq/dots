@@ -66,6 +66,7 @@
   #   useXkbConfig = true; # use xkbOptions in tty.
   # };
 
+  services.picom.enable = true;
   hardware.opengl = {
     enable = true;
     driSupport = true;
@@ -109,7 +110,7 @@
   # # Enable the Plasma 5 Desktop Environment.
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
-  
+  programs.dconf.enable = true;
   services.xserver = {
     enable = true;
     exportConfiguration = true;
