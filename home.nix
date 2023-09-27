@@ -38,6 +38,14 @@ in {
       la = "ls -a";
       ll = "ls -l";
       lal = "ls -al";
+
+      g = "git";
+      gs = "git status";
+      gp = "git push";
+      gl = "git pull";
+      ga = "git add";
+      gc = "git commit";
+
       update = "sudo nixos-rebuild switch";
     };
     history = {
