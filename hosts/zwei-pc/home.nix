@@ -34,6 +34,24 @@ in {
   programs.feh.enable = true;
   programs.pywal.enable = true;
 
+  programs.ssh = {
+    enable = true;
+    controlMaster = "auto"; # connection multiplexing
+    matchBlocks = {
+      "vm" = {
+        hostname = "192.168.122.249";
+        identityFile = "~/.ssh/id_vm";
+      };
+      "ein" = {
+        hostname = "gs.alanp.me";
+      };
+      "vps" = {
+        hostname = builtins.concatStringsSep "." ["65" "21" "108" "226"]; # revolutionary anti-scraper technology
+        user = "root";
+      };
+    };
+  };
+
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
       autoconnect = ["qemu:///system"];
