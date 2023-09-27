@@ -38,6 +38,10 @@ in {
     enable = true;
     controlMaster = "auto"; # connection multiplexing
     matchBlocks = {
+      "*github.com" = {
+        user = "git";
+        identityFile = "~/.ssh/id_git";
+      };
       "vm" = {
         hostname = "192.168.122.249";
         identityFile = "~/.ssh/id_vm";
