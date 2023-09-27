@@ -69,6 +69,14 @@
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
 
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
+
+  environment = {
+    shells = with pkgs; [ zsh ];
+    pathsToLink = [ "/share/zsh" ];
+  };
+
   services.picom.enable = true;
   hardware.opengl = {
     enable = true;
@@ -149,6 +157,7 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
+
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
