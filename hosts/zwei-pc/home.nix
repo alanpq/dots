@@ -25,12 +25,21 @@ in {
 
     wine
     winetricks
+
+    virt-manager
   ];
 
   qt.style.name = "kvantum";
 
   programs.feh.enable = true;
   programs.pywal.enable = true;
+
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
+  };
 
   services.picom = {
     enable = true;

@@ -66,6 +66,9 @@
   #   useXkbConfig = true; # use xkbOptions in tty.
   # };
 
+  virtualisation.libvirtd.enable = true;
+  programs.dconf.enable = true;
+
   services.picom.enable = true;
   hardware.opengl = {
     enable = true;
@@ -110,7 +113,6 @@
   # # Enable the Plasma 5 Desktop Environment.
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
-  programs.dconf.enable = true;
   services.xserver = {
     enable = true;
     exportConfiguration = true;
@@ -152,7 +154,7 @@
   users.mutableUsers = false;
   users.users.alan = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "networkmanager" "audio" ];
+    extraGroups = [ "wheel" "docker" "networkmanager" "audio" "libvirtd" ];
     hashedPassword = "$y$j9T$9jzotD/.eDyZVY5AhWOhR.$px7JIqj1HWi9JF8trRkbajyGaM3u4uOXZy4icMOfuaC";
   };
   
