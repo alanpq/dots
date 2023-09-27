@@ -41,7 +41,7 @@
             config.allowUnfree = true;
           };
         in {
-
+          fluent-kv = pkgs.callPackage ./pkgs/fluent.nix { };
         };
       formatter = nixpkgs.legacyPackages.${system}.nixfmt;
     });
