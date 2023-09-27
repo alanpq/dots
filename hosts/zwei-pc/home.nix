@@ -34,54 +34,6 @@ in {
   programs.feh.enable = true;
   programs.pywal.enable = true;
 
-  programs.zsh = {
-    enable = true;
-    shellAliases = {
-      la = "ls -a";
-      ll = "ls -l";
-      lal = "ls -al";
-      update = "sudo nixos-rebuild switch";
-    };
-    history = {
-      path = "${config.xdg.dataHome}/zsh/history";
-    };
-    enableAutosuggestions = true;
-    syntaxHighlighting = {
-      enable = true;
-    };
-    zplug = {
-      enable = true;
-      plugins = [
-        { name = "zsh-users/zsh-autosuggestions"; } # Simple plugin installation
-        { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; } # Installations with additional options. For the list of options, please refer to Zplug README.
-      ];
-    };
-    initExtra = "
-      source .p10k.zsh
-    ";
-  };
-
-  programs.ssh = {
-    enable = true;
-    controlMaster = "auto"; # connection multiplexing
-    matchBlocks = {
-      "*github.com" = {
-        user = "git";
-        identityFile = "~/.ssh/id_git";
-      };
-      "vm" = {
-        hostname = "192.168.122.249";
-        identityFile = "~/.ssh/id_vm";
-      };
-      "ein" = {
-        hostname = "gs.alanp.me";
-      };
-      "vps" = {
-        hostname = builtins.concatStringsSep "." ["65" "21" "108" "226"]; # revolutionary anti-scraper technology
-        user = "root";
-      };
-    };
-  };
 
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
@@ -158,7 +110,7 @@ in {
       "bar/top" = {
         monitor = "DVI-D-0";
         bottom = false;
-        font-0 = "Iosevka:size=11"; # text
+        font-0 = "Iosevka:size=6"; # text
         font-1 =
           "Font Awesome 6 Free:size=9:style=Solid"; # globe, antenna signal
         font-2 =
