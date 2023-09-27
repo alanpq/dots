@@ -52,7 +52,7 @@
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "Europe/London";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -75,6 +75,10 @@
   environment = {
     shells = with pkgs; [ zsh ];
     pathsToLink = [ "/share/zsh" ];
+
+    sessionVariables = {
+      QT_QPA_PLATFORMTHEME = "qt5ct";
+    };
   };
 
   services.picom.enable = true;
