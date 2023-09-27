@@ -14,9 +14,20 @@ in {
     playerctl
     nitrogen
     dolphin
+
     lxappearance
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.qt5ct
+    libsForQt5.kdegraphics-thumbnailers
+    libsForQt5.qtstyleplugins
+
+    libsForQt5.breeze-icons
+    materia-kde-theme
+    whitesur-kde
+    whitesur-gtk-theme
+    capitaine-cursors # cursor theme
+
+    fluent-kv
 
     discord
     steam
@@ -29,7 +40,32 @@ in {
     virt-manager
   ];
 
-  qt.style.name = "kvantum";
+  gtk.enable = true;
+  # gtk.iconTheme.package = pkgs.papirus-icon-theme;
+  # gtk.iconTheme.name = "Papirus-Dark";
+  gtk.iconTheme.package = pkgs.libsForQt5.breeze-icons;
+  gtk.iconTheme.name = "Adwaita";
+
+  gtk.theme.package = pkgs.materia-theme;
+  gtk.theme.name = "Materia-dark-compact";
+  
+  qt.enable = true;
+  # qt.platformTheme = "kvantum";
+  # qt.style.package = pkgs.materia-theme;
+  # qt.style.name = "Materia-dark-compacto";
+  # qt.style.name = "kvantum";
+
+  xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
+    [General]
+    theme=FluentDark
+  '';
+
+  home.sessionVariables = {
+    QT_STYLE_OVERRIDE = "kvantum";
+    QT_QPA_PLATFORMTHEME="qt5ct";
+    GTK_USE_PORTAL = 1;
+  };
+
 
   programs.feh.enable = true;
   programs.pywal.enable = true;
@@ -110,25 +146,26 @@ in {
       "bar/top" = {
         monitor = "DVI-D-0";
         bottom = false;
-        font-0 = "Iosevka:size=6"; # text
+        font-0 = "Iosevka:size=10"; # text
         font-1 =
-          "Font Awesome 6 Free:size=9:style=Solid"; # globe, antenna signal
+          "Font Awesome 6 Free:size=10:style=Solid"; # globe, antenna signal
         font-2 =
-          "Noto Sans Symbols 2:size=9"; # no sound, volume 1, volume 2, volume 3, disk
-        font-3 = "Noto Sans Mono:size=9"; # bars
+          "Noto Sans Symbols 2:size=10"; # no sound, volume 1, volume 2, volume 3, disk
+        font-3 = "Noto Sans Mono:size=10"; # bars
         modules.left = "window";
         modules.right =
           "cpu memory volume wired-network wireless-network date";
 
         module.margin = 1;
-        height = 18;
+        height = 19;
+        padding = 2;
 
         background = "#000000ff";
         foreground = "#ccffffff";
         border.size = "2pt";
 
         line.color = "\${bar/top.background}";
-        line.size = 18;
+        line.size = 19;
 
         separator = "|";
 
