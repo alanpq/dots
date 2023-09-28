@@ -145,6 +145,13 @@ in {
     };
   };
 
+  programs.kitty = {
+    enable = true;
+    settings = {
+      background_opacity = "0.85";
+    };
+  };
+
   services.polybar = {
     enable = true;
     package = pkgs.polybar.override {
