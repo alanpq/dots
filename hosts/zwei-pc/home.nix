@@ -90,7 +90,7 @@ in {
 
   services.picom = {
     enable = true;
-    # backend = "xrender";
+    backend = "glx";
     shadow = false;
     menuOpacity = 0.9;
     inactiveOpacity = 1.0;
@@ -100,6 +100,11 @@ in {
       # glx-copy-from-front = true;
       # glx-swap-method = 1;
       # xrender-sync-fence = true;
+      blur = {
+        method = "dual_kawase";
+        strength = 10;
+      };
+      blur-background-exclude = ''name *?= "polybar"'';
       wintypes = {
         tooltip = {
           fade = true;
