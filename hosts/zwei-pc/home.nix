@@ -237,25 +237,25 @@ in {
         ramp.coreload-0.foreground = "#aaff77";
         ramp.coreload-1.text = "%{T4}▂%{T-}";
         ramp.coreload-1.font = 5;
-        ramp.coreload-1.foreground = "#aaff77";
+        ramp.coreload-1.foreground = "#A4FA48";
         ramp.coreload-2.text = "%{T4}▃%{T-}";
         ramp.coreload-2.font = 5;
-        ramp.coreload-2.foreground = "#aaff77";
+        ramp.coreload-2.foreground = "#BDFB22";
         ramp.coreload-3.text = "%{T4}▄%{T-}";
         ramp.coreload-3.font = 5;
-        ramp.coreload-3.foreground = "#aaff77";
+        ramp.coreload-3.foreground = "#FBE922";
         ramp.coreload-4.text = "%{T4}▅%{T-}";
         ramp.coreload-4.font = 5;
         ramp.coreload-4.foreground = "#fba922";
         ramp.coreload-5.text = "%{T4}▆%{T-}";
         ramp.coreload-5.font = 5;
-        ramp.coreload-5.foreground = "#fba922";
+        ramp.coreload-5.foreground = "#FB7922";
         ramp.coreload-6.text = "%{T4}▇%{T-}";
         ramp.coreload-6.font = 5;
         ramp.coreload-6.foreground = "#ff5555";
         ramp.coreload-7.text = "%{T4}█%{T-}";
         ramp.coreload-7.font = 5;
-        ramp.coreload-7.foreground = "#ff5555";
+        ramp.coreload-7.foreground = "#FF3838";
       };
 
       "module/date" = {
