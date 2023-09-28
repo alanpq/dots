@@ -104,7 +104,7 @@ in {
         method = "dual_kawase";
         strength = 10;
       };
-      blur-background-exclude = ''name *?= "polybar"'';
+      # blur-background-exclude = ''name *?= "polybar"'';
       wintypes = {
         tooltip = {
           fade = true;
@@ -182,8 +182,8 @@ in {
         height = 19;
         padding = 2;
 
-        background = "#000000ff";
-        foreground = "#ccffffff";
+        background = "#00000000";
+        foreground = "#FF000000";
         border.size = "2pt";
 
         line.color = "\${bar/top.background}";
