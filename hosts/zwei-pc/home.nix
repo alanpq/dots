@@ -70,6 +70,16 @@ in {
   programs.feh.enable = true;
   programs.pywal.enable = true;
 
+  programs.rofi = {
+    enable = true;
+    plugins = [ pkgs.rofi-calc ];
+    theme."*" = let 
+      inherit (config.lib.formats.rasi) mkLiteral;
+    in {
+      text-color = mkLiteral "@foreground";
+    };
+    theme."@import" = lib.mkForce "${config.xdg.cacheHome}/wal/colors-rofi-light.rasi";
+  };
 
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
