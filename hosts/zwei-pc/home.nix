@@ -27,6 +27,10 @@ in {
     whitesur-gtk-theme
     capitaine-cursors # cursor theme
 
+    xdg-desktop-portal
+    libsForQt5.xdg-desktop-portal-kde
+    libsForQt5.kdialog
+
     fluent-kv
 
     discord
@@ -34,10 +38,20 @@ in {
     prismlauncher
     lutris
 
+    radare2
+    iaito
+
     wine
     winetricks
 
+    aseprite
+    ldtk
+
     virt-manager
+    postman
+    mongodb-compass
+
+    obs-studio
   ];
 
   gtk.enable = true;
@@ -48,7 +62,7 @@ in {
 
   gtk.theme.package = pkgs.materia-theme;
   gtk.theme.name = "Materia-dark-compact";
-  
+
   qt.enable = true;
   # qt.platformTheme = "kvantum";
   # qt.style.package = pkgs.materia-theme;
@@ -62,8 +76,8 @@ in {
 
   home.sessionVariables = {
     QT_STYLE_OVERRIDE = "kvantum";
-    QT_QPA_PLATFORMTHEME="qt5ct";
-    GTK_USE_PORTAL = 1;
+    QT_QPA_PLATFORMTHEME = "qt5ct";
+    # GTK_USE_PORTAL = 1;
   };
 
 
@@ -73,18 +87,20 @@ in {
   programs.rofi = {
     enable = true;
     plugins = [ pkgs.rofi-calc ];
-    theme."*" = let 
-      inherit (config.lib.formats.rasi) mkLiteral;
-    in {
-      text-color = mkLiteral "@foreground";
-    };
+    theme."*" =
+      let
+        inherit (config.lib.formats.rasi) mkLiteral;
+      in
+      {
+        text-color = mkLiteral "@foreground";
+      };
     theme."@import" = lib.mkForce "${config.xdg.cacheHome}/wal/colors-rofi-light.rasi";
   };
 
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
     };
   };
 
@@ -345,223 +361,227 @@ in {
     };
   };
 
-  xsession.windowManager.i3 = let
-    alt = "Mod1";
-    # numlock = "Mod2";
-    # <unset> = "Mod3" ;
-    super = "Mod4";
-  in {
-    enable = true;
-    config = rec {
-      terminal = "${pkgs.kitty}/bin/kitty";
-      menu = "${pkgs.rofi}/bin/rofi";
+  xsession.windowManager.i3 =
+    let
+      alt = "Mod1";
+      # numlock = "Mod2";
+      # <unset> = "Mod3" ;
+      super = "Mod4";
+    in
+    {
+      enable = true;
+      config = rec {
+        terminal = "${pkgs.kitty}/bin/kitty";
+        menu = "${pkgs.rofi}/bin/rofi";
 
-      fonts = {
-        names = [ "monospace" ];
-        size = 9.0;
-      };
-
-      modifier = super;
-
-      floating = {
-        modifier = "${modifier}";
-        criteria = [
-          { class = "Pavucontrol"; }
-          { class = "Calendar"; }
-          { class = "zoom"; }
-          { title = "Zoom Meeting"; }
-        ];
-      };
-
-      window = {
-        hideEdgeBorders = "both";
-        commands = [{
-          criteria = { class = ".*"; };
-          command = "border pixel 1";
-        }];
-      };
-
-      focus = {
-        mouseWarping = false;
-        followMouse = true;
-      };
-
-      gaps = {
-        inner = 15;
-        top = -5;
-      };
-
-      startup = [{ command = "${pkgs.nitrogen}/bin/nitrogen --restore"; } {command = "${pkgs.picom}/bin/picom";} {command = "polybar";}];
-
-      assigns = {
-        "9" = [ { class = "^discord$"; } { class = "^telegram-desktop$"; } ];
-      };
-
-      keybindings = with pkgs; {
-        "Print" = "exec ${flameshot}/bin/flameshot full -c";
-        "Shift+Insert" = "exec ${flameshot}/bin/flameshot gui -r | ${xclip}/bin/xclip -selection clipboard -t image/png";
-        "${modifier}+Return" = "exec ${terminal}";
-        "${modifier}+c" = "exec ${gnome.zenity}/bin/zenity --calendar";
-        
-        "${modifier}+q" = "kill";
-        "${modifier}+Shift+r" = "restart";
-        
-        "${modifier}+space" = "exec ${menu} -show drun";
-        "${alt}+Tab" = "exec ${menu} -show window";
-
-        # "${modifier}+Shift+c"
-        "${modifier}+Left" = "focus left";
-        "${modifier}+Down" = "focus down";
-        "${modifier}+Up" = "focus up";
-        "${modifier}+Right" = "focus right";
-
-        "${modifier}+Shift+Left" = "move left";
-        "${modifier}+Shift+Down" = "move down";
-        "${modifier}+Shift+Up" = "move up";
-        "${modifier}+Shift+Right" = "move right";
-
-        "${modifier}+h" = "split h";
-        "${modifier}+v" = "split v";
-
-        "${modifier}+f" = "fullscreen toggle";
-
-        "${modifier}+Shift+s" = "layout stacking";
-        "${modifier}+Shift+w" = "layout tabbed";
-        "${modifier}+Shift+e" = "layout toggle split";
-
-        "${modifier}+Shift+space" = "floating toggle";
-
-        # "${modifier}+a" = "focus parent";
-        # "${modifier}+d" = "focus"
-
-        "Control+${alt}+l" = "exec dm-tool lock";
-
-        "${modifier}+r" = ''mode "resize"'';
-
-        "XF86AudioRaiseVolume" = "exec amixer -q set Master 5%+ unmute";
-        "XF86AudioLowerVolume" = "exec amixer -q set Master 5%- unmute";
-        "XF86AudioMute" = "exec amixer -q set Master toggle";
-        "${modifier}+XF86AudioRaiseVolume" = "exec amixer -q set Master 1%+ unmute && pkill -RTMIN+1 i3blocks";
-        "${modifier}+XF86AudioLowerVolume" = "exec amixer -q set Master 1%- unmute && pkill -RTMIN+1 i3blocks";
-        "XF86AudioPlay" = "exec playerctl play";
-        "XF86AudioPause" = "exec playerctl pause";
-        "XF86AudioNext" = "exec playerctl next";
-        "XF86AudioPrev" = "exec playerctl previous";
-        "${modifier}+Ctrl+space" = "exec playerctl play-pause";
-
-        "${modifier}+slash" = "exec splatmoji copy";
-        
-        "${modifier}+1" = "workspace 1";
-        "${modifier}+2" = "workspace 2";
-        "${modifier}+3" = "workspace 3";
-        "${modifier}+4" = "workspace 4";
-        "${modifier}+5" = "workspace 5";
-        "${modifier}+6" = "workspace 6";
-        "${modifier}+7" = "workspace 7";
-        "${modifier}+8" = "workspace 8";
-        "${modifier}+9" = "workspace 9";
-        "${modifier}+10" = "workspace 10";
-        "${modifier}+Shift+1" = "move container to workspace 1; workspace 1";
-        "${modifier}+Shift+2" = "move container to workspace 2; workspace 2";
-        "${modifier}+Shift+3" = "move container to workspace 3; workspace 3";
-        "${modifier}+Shift+4" = "move container to workspace 4; workspace 4";
-        "${modifier}+Shift+5" = "move container to workspace 5; workspace 5";
-        "${modifier}+Shift+6" = "move container to workspace 6; workspace 6";
-        "${modifier}+Shift+7" = "move container to workspace 7; workspace 7";
-        "${modifier}+Shift+8" = "move container to workspace 8; workspace 8";
-        "${modifier}+Shift+9" = "move container to workspace 9; workspace 9";
-        "${modifier}+Shift+0" = "move container to workspace 10; workspace 10";
-
-
-        "${modifier}+F1" = "workspace 11";
-        "${modifier}+F2" = "workspace 12";
-        "${modifier}+F3" = "workspace 13";
-        "${modifier}+F4" = "workspace 14";
-        "${modifier}+F5" = "workspace 15";
-        "${modifier}+F6" = "workspace 16";
-        "${modifier}+F7" = "workspace 17";
-        "${modifier}+F8" = "workspace 18";
-        "${modifier}+F9" = "workspace 19";
-        "${modifier}+F10" = "workspace 20";
-        "${modifier}+F11" = "workspace 21";
-        "${modifier}+F12" = "workspace 22";
-        "${modifier}+Shift+F1" = "move container to workspace 11; workspace 11";
-        "${modifier}+Shift+F2" = "move container to workspace 12; workspace 12";
-        "${modifier}+Shift+F3" = "move container to workspace 13; workspace 13";
-        "${modifier}+Shift+F4" = "move container to workspace 14; workspace 14";
-        "${modifier}+Shift+F5" = "move container to workspace 15; workspace 15";
-        "${modifier}+Shift+F6" = "move container to workspace 16; workspace 16";
-        "${modifier}+Shift+F7" = "move container to workspace 17; workspace 17";
-        "${modifier}+Shift+F8" = "move container to workspace 18; workspace 18";
-        "${modifier}+Shift+F9" = "move container to workspace 19; workspace 19";
-        "${modifier}+Shift+F10" = "move container to workspace 20; workspace 20";
-        "${modifier}+Shift+F11" = "move container to workspace 21; workspace 21";
-        "${modifier}+Shift+F12" = "move container to workspace 22; workspace 22";
-      };
-
-      modes = {
-        resize = {
-          "Left" = "resize shrink width 10 px or 10 ppt";
-          "Down" = "resize grow height 10 px or 10 ppt";
-          "Up" = "resize shrink height 10 px or 10 ppt";
-          "Right" = "resize grow width 10 px or 10 ppt";
-
-          # back to normal: Enter or Escape
-          "Return" = ''mode "default"'';
-          "Escape" = ''mode "default"'';
+        fonts = {
+          names = [ "monospace" ];
+          size = 9.0;
         };
+
+        modifier = super;
+
+        floating = {
+          modifier = "${modifier}";
+          criteria = [
+            { class = "Pavucontrol"; }
+            { class = "Calendar"; }
+            { class = "zoom"; }
+            { title = "Zoom Meeting"; }
+            { class = "mag-text"; }
+            { class = "basics"; }
+          ];
+        };
+
+        window = {
+          hideEdgeBorders = "both";
+          commands = [{
+            criteria = { class = ".*"; };
+            command = "border pixel 1";
+          }];
+        };
+
+        focus = {
+          mouseWarping = true;
+          followMouse = true;
+        };
+
+        gaps = {
+          inner = 15;
+          top = -5;
+        };
+
+        startup = [{ command = "${pkgs.nitrogen}/bin/nitrogen --restore"; } { command = "${pkgs.picom}/bin/picom"; } { command = "polybar"; }];
+
+        assigns = {
+          "9" = [{ class = "^discord$"; } { class = "^telegram-desktop$"; }];
+        };
+
+        keybindings = with pkgs; {
+          "Print" = "exec ${flameshot}/bin/flameshot full -c";
+          "Shift+Insert" = "exec ${flameshot}/bin/flameshot gui -r | ${xclip}/bin/xclip -selection clipboard -t image/png";
+          "${modifier}+Return" = "exec ${terminal}";
+          "${modifier}+c" = "exec ${gnome.zenity}/bin/zenity --calendar";
+
+          "${modifier}+q" = "kill";
+          "${modifier}+Shift+r" = "restart";
+
+          "${modifier}+space" = "exec ${menu} -show drun";
+          "${alt}+Tab" = "exec ${menu} -show window";
+
+          # "${modifier}+Shift+c"
+          "${modifier}+Left" = "focus left";
+          "${modifier}+Down" = "focus down";
+          "${modifier}+Up" = "focus up";
+          "${modifier}+Right" = "focus right";
+
+          "${modifier}+Shift+Left" = "move left";
+          "${modifier}+Shift+Down" = "move down";
+          "${modifier}+Shift+Up" = "move up";
+          "${modifier}+Shift+Right" = "move right";
+
+          "${modifier}+h" = "split h";
+          "${modifier}+v" = "split v";
+
+          "${modifier}+f" = "fullscreen toggle";
+
+          "${modifier}+Shift+s" = "layout stacking";
+          "${modifier}+Shift+w" = "layout tabbed";
+          "${modifier}+Shift+e" = "layout toggle split";
+
+          "${modifier}+Shift+space" = "floating toggle";
+
+          # "${modifier}+a" = "focus parent";
+          # "${modifier}+d" = "focus"
+
+          "Control+${alt}+l" = "exec dm-tool lock";
+
+          "${modifier}+r" = ''mode "resize"'';
+
+          "XF86AudioRaiseVolume" = "exec amixer -q set Master 5%+ unmute";
+          "XF86AudioLowerVolume" = "exec amixer -q set Master 5%- unmute";
+          "XF86AudioMute" = "exec amixer -q set Master toggle";
+          "${modifier}+XF86AudioRaiseVolume" = "exec amixer -q set Master 1%+ unmute && pkill -RTMIN+1 i3blocks";
+          "${modifier}+XF86AudioLowerVolume" = "exec amixer -q set Master 1%- unmute && pkill -RTMIN+1 i3blocks";
+          "XF86AudioPlay" = "exec playerctl play";
+          "XF86AudioPause" = "exec playerctl pause";
+          "XF86AudioNext" = "exec playerctl next";
+          "XF86AudioPrev" = "exec playerctl previous";
+          "${modifier}+Ctrl+space" = "exec playerctl play-pause";
+
+          "${modifier}+slash" = "exec splatmoji copy";
+
+          "${modifier}+1" = "workspace 1";
+          "${modifier}+2" = "workspace 2";
+          "${modifier}+3" = "workspace 3";
+          "${modifier}+4" = "workspace 4";
+          "${modifier}+5" = "workspace 5";
+          "${modifier}+6" = "workspace 6";
+          "${modifier}+7" = "workspace 7";
+          "${modifier}+8" = "workspace 8";
+          "${modifier}+9" = "workspace 9";
+          "${modifier}+0" = "workspace 10";
+          "${modifier}+Shift+1" = "move container to workspace 1; workspace 1";
+          "${modifier}+Shift+2" = "move container to workspace 2; workspace 2";
+          "${modifier}+Shift+3" = "move container to workspace 3; workspace 3";
+          "${modifier}+Shift+4" = "move container to workspace 4; workspace 4";
+          "${modifier}+Shift+5" = "move container to workspace 5; workspace 5";
+          "${modifier}+Shift+6" = "move container to workspace 6; workspace 6";
+          "${modifier}+Shift+7" = "move container to workspace 7; workspace 7";
+          "${modifier}+Shift+8" = "move container to workspace 8; workspace 8";
+          "${modifier}+Shift+9" = "move container to workspace 9; workspace 9";
+          "${modifier}+Shift+0" = "move container to workspace 10; workspace 10";
+
+
+          "${modifier}+F1" = "workspace 11";
+          "${modifier}+F2" = "workspace 12";
+          "${modifier}+F3" = "workspace 13";
+          "${modifier}+F4" = "workspace 14";
+          "${modifier}+F5" = "workspace 15";
+          "${modifier}+F6" = "workspace 16";
+          "${modifier}+F7" = "workspace 17";
+          "${modifier}+F8" = "workspace 18";
+          "${modifier}+F9" = "workspace 19";
+          "${modifier}+F10" = "workspace 20";
+          "${modifier}+F11" = "workspace 21";
+          "${modifier}+F12" = "workspace 22";
+          "${modifier}+Shift+F1" = "move container to workspace 11; workspace 11";
+          "${modifier}+Shift+F2" = "move container to workspace 12; workspace 12";
+          "${modifier}+Shift+F3" = "move container to workspace 13; workspace 13";
+          "${modifier}+Shift+F4" = "move container to workspace 14; workspace 14";
+          "${modifier}+Shift+F5" = "move container to workspace 15; workspace 15";
+          "${modifier}+Shift+F6" = "move container to workspace 16; workspace 16";
+          "${modifier}+Shift+F7" = "move container to workspace 17; workspace 17";
+          "${modifier}+Shift+F8" = "move container to workspace 18; workspace 18";
+          "${modifier}+Shift+F9" = "move container to workspace 19; workspace 19";
+          "${modifier}+Shift+F10" = "move container to workspace 20; workspace 20";
+          "${modifier}+Shift+F11" = "move container to workspace 21; workspace 21";
+          "${modifier}+Shift+F12" = "move container to workspace 22; workspace 22";
+        };
+
+        modes = {
+          resize = {
+            "Left" = "resize shrink width 10 px or 10 ppt";
+            "Down" = "resize grow height 10 px or 10 ppt";
+            "Up" = "resize shrink height 10 px or 10 ppt";
+            "Right" = "resize grow width 10 px or 10 ppt";
+
+            # back to normal: Enter or Escape
+            "Return" = ''mode "default"'';
+            "Escape" = ''mode "default"'';
+          };
+        };
+
+        bars = [
+          # TODO: test empty
+        ];
+
+        workspaceOutputAssign =
+          map (x: { output = "DVI-D-0"; workspace = toString x; }) [ 1 2 3 4 5 6 7 8 9 10 ] ++
+          map (x: { output = "DP-2"; workspace = toString x; }) [ 11 12 13 14 15 16 17 18 19 20 21 22 ]
+        ;
+
+        # colors = let
+        #   bgColor = "#2f343f";
+        #   inactiveBgColor = "#2f343f";
+        #   inactiveBorderColor = "#585c65";
+        #   textColor = "#f3f4f5";
+        #   inactiveTextColor = "#676e7d";
+        #   urgentBgColor = "#e53935";
+        #   indicatorColor = "#a0a0a0";
+        # in {
+        #   focused = {
+        #     border = bgColor;
+        #     background = bgColor;
+        #     text = textColor;
+        #     indicator = indicatorColor;
+        #     childBorder = "#285577";
+        #   };
+        #   unfocused = {
+        #     border = inactiveBorderColor;
+        #     background = inactiveBgColor;
+        #     text = inactiveTextColor;
+        #     indicator = indicatorColor;
+        #     childBorder = "#222222";
+        #   };
+        #   focusedInactive = {
+        #     border = inactiveBorderColor;
+        #     background = inactiveBgColor;
+        #     text = inactiveTextColor;
+        #     indicator = indicatorColor;
+        #     childBorder = "#5f676a";
+        #   };
+        #   urgent = {
+        #     border = urgentBgColor;
+        #     background = urgentBgColor;
+        #     text = textColor;
+        #     indicator = indicatorColor;
+        #     childBorder = "#900000";
+        #   };
+        # };
       };
-
-      bars = [
-        # TODO: test empty
-      ];
-
-      workspaceOutputAssign = 
-        map (x: {output = "DVI-D-0"; workspace=toString x;}) [1 2 3 4 5 6 7 8 9 10] ++
-        map (x: {output = "DP-2"; workspace=toString x;}) [11 12 13 14 15 16 17 18 19 20 21 22]
-      ;
-
-      # colors = let
-      #   bgColor = "#2f343f";
-      #   inactiveBgColor = "#2f343f";
-      #   inactiveBorderColor = "#585c65";
-      #   textColor = "#f3f4f5";
-      #   inactiveTextColor = "#676e7d";
-      #   urgentBgColor = "#e53935";
-      #   indicatorColor = "#a0a0a0";
-      # in {
-      #   focused = {
-      #     border = bgColor;
-      #     background = bgColor;
-      #     text = textColor;
-      #     indicator = indicatorColor;
-      #     childBorder = "#285577";
-      #   };
-      #   unfocused = {
-      #     border = inactiveBorderColor;
-      #     background = inactiveBgColor;
-      #     text = inactiveTextColor;
-      #     indicator = indicatorColor;
-      #     childBorder = "#222222";
-      #   };
-      #   focusedInactive = {
-      #     border = inactiveBorderColor;
-      #     background = inactiveBgColor;
-      #     text = inactiveTextColor;
-      #     indicator = indicatorColor;
-      #     childBorder = "#5f676a";
-      #   };
-      #   urgent = {
-      #     border = urgentBgColor;
-      #     background = urgentBgColor;
-      #     text = textColor;
-      #     indicator = indicatorColor;
-      #     childBorder = "#900000";
-      #   };
-      # };
-    };
-    extraConfig = ''
+      extraConfig = ''
     '';
-  };
+    };
 
 }

@@ -42,6 +42,7 @@
           };
         in {
           fluent-kv = pkgs.callPackage ./pkgs/fluent.nix { };
+          postman = pkgs.callPackage ./pkgs/postman/default.nix { };
         };
       formatter = nixpkgs.legacyPackages.${system}.nixfmt;
     });

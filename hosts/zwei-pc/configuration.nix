@@ -286,6 +286,8 @@
     "L /var/lib/NetworkManager/secret_key - - - - /persist/var/lib/NetworkManager/secret_key"
     "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
     "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
+    
+    "L /var/lib/libvirt - - - - /persist/var/lib/libvirt"
   ];
   security.sudo.extraConfig = ''
     # rollback results in sudo lectures after each reboot

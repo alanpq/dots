@@ -7,13 +7,25 @@ in {
   home.packages = with pkgs; [
     tree
     vim
+
+    htop
+    file
+    killall
+    nixpkgs-fmt
+
+    keepassxc
   ];
 
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    # profiles."6pg7f79a".settings = {
+    #   "widget.use-xdg-desktop-portal.file-picker" = 1;
+    # };
+  };
   programs.vscode.enable = true;
   programs.git = {
     enable = true;
-    userEmail = lib.concatStrings [ "${user}""panayotov""@""gmail"".com"];
+    userEmail = lib.concatStrings [ "${user}" "panayotov" "@" "gmail" ".com" ];
     userName = "Alan Panayotov";
     aliases = {
       lg =
@@ -67,6 +79,14 @@ in {
     ";
   };
 
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true; # see note on other shells below
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
+  programs.bash.enable = true;
+
   programs.ssh = {
     enable = true;
     controlMaster = "auto"; # connection multiplexing
@@ -76,14 +96,14 @@ in {
         identityFile = "~/.ssh/id_git";
       };
       "vm" = {
-        hostname = "192.168.122.249";
+        hostname = "192.168.122.34";
         identityFile = "~/.ssh/id_vm";
       };
       "ein" = {
         hostname = "gs.alanp.me";
       };
       "vps" = {
-        hostname = builtins.concatStringsSep "." ["65" "21" "108" "226"]; # revolutionary anti-scraper technology
+        hostname = builtins.concatStringsSep "." [ "65" "21" "108" "226" ]; # revolutionary anti-scraper technology
         user = "root";
       };
     };
