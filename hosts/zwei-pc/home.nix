@@ -38,6 +38,7 @@ in {
     prismlauncher
     lutris
 
+    # reverse engineering
     radare2
     iaito
 
@@ -45,7 +46,7 @@ in {
     winetricks
 
     aseprite
-    ldtk
+    ldtk # 2d tilemap editor
 
     virt-manager
     postman
@@ -87,6 +88,9 @@ in {
   programs.rofi = {
     enable = true;
     plugins = [ pkgs.rofi-calc ];
+    extraConfig  = {
+      modi = "drun,ssh";
+    };
     theme."*" =
       let
         inherit (config.lib.formats.rasi) mkLiteral;
@@ -102,6 +106,10 @@ in {
       autoconnect = [ "qemu:///system" ];
       uris = [ "qemu:///system" ];
     };
+  };
+
+  services.deadd-notification-center = {
+    enable = true;
   };
 
   services.picom = {
@@ -390,6 +398,7 @@ in {
             { title = "Zoom Meeting"; }
             { class = "mag-text"; }
             { class = "basics"; }
+            { class = "client"; }
           ];
         };
 
@@ -421,7 +430,9 @@ in {
           "Print" = "exec ${flameshot}/bin/flameshot full -c";
           "Shift+Insert" = "exec ${flameshot}/bin/flameshot gui -r | ${xclip}/bin/xclip -selection clipboard -t image/png";
           "${modifier}+Return" = "exec ${terminal}";
-          "${modifier}+c" = "exec ${gnome.zenity}/bin/zenity --calendar";
+          "${modifier}+Shift+Return" = "exec ${firefox}/bin/firefox";
+          "${modifier}+c" = "exec ${menu} -show calc";
+          "${modifier}+Shift+c" = "exec ${gnome.zenity}/bin/zenity --calendar";
 
           "${modifier}+q" = "kill";
           "${modifier}+Shift+r" = "restart";

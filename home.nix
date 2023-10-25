@@ -4,6 +4,10 @@ let user = "alan";
 in {
   programs.home-manager.enable = true;
 
+  imports = [
+    ./services/deadd-notification-center.nix
+  ];
+
   home.packages = with pkgs; [
     tree
     vim
