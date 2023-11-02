@@ -55,11 +55,46 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1694959747,
+        "narHash": "sha256-CXQ2MuledDVlVM5dLC4pB41cFlBWxRw4tCBsFrq3cRk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "970a59bd19eff3752ce552935687100c46e820a5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "secrix": "secrix"
+      }
+    },
+    "secrix": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1697469666,
+        "narHash": "sha256-PXRmuRClRy0Uj23SszPR0sDgnObRaVPWvUfCvabIzo4=",
+        "owner": "Platonic-Systems",
+        "repo": "secrix",
+        "rev": "ef52d767048a78f9375078450d2844a454ce1e7b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Platonic-Systems",
+        "repo": "secrix",
+        "type": "github"
       }
     },
     "systems": {

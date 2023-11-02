@@ -8,9 +8,10 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    secrix.url = "github:Platonic-Systems/secrix";
   };
 
-  outputs = { self, nixpkgs, flake-utils, home-manager }@inputs:
+  outputs = { self, nixpkgs, flake-utils, home-manager, secrix }@inputs:
     {
       nixosConfigurations.zwei-pc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -33,6 +34,9 @@
         inherit system;
         config.allowUnfree = true;
         overlays = builtins.attrValues self.overlays;
+      };
+      apps = {
+        secrix = inputs.secrix.secrix self;
       };
       packages = # does this override consumers' setting or will it error later? also apparently precludes x-compile
         let

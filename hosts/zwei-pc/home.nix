@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-let user = "alan";
-in {
+{ config, pkgs, lib, ... }@inputs:
+let
+  user = "alan";
+  monitors = [ "DP-2" "DVI-D-0" ];
+in
+{
   home.username = "${user}";
   home.homeDirectory = "/home/${user}";
   home.stateVersion = "23.05";
@@ -32,6 +35,8 @@ in {
     libsForQt5.kdialog
 
     fluent-kv
+
+    chromium
 
     discord
     steam
@@ -88,7 +93,8 @@ in {
   programs.rofi = {
     enable = true;
     plugins = [ pkgs.rofi-calc ];
-    extraConfig  = {
+    extraConfig = {
+
       modi = "drun,ssh";
     };
     theme."*" =
@@ -111,6 +117,11 @@ in {
   services.deadd-notification-center = {
     enable = true;
   };
+
+  services.kdeconnect = {
+    enable = true;
+  };
+
 
   services.picom = {
     enable = true;
@@ -176,199 +187,11 @@ in {
     };
   };
 
-  services.polybar = {
-    enable = true;
-    package = pkgs.polybar.override {
-      i3Support = true;
-      alsaSupport = true;
-      iwSupport = true;
-      githubSupport = true;
-    };
-    script = ''
-      polybar top --config=${config.xdg.configHome}/polybar/config.ini & \
-      polybar bottom --config=${config.xdg.configHome}/polybar/config.ini &
-    '';
-    settings = {
-      "bar/top" = {
-        monitor = "DVI-D-0";
-        bottom = false;
-        font-0 = "Iosevka:size=10"; # text
-        font-1 =
-          "Font Awesome 6 Free:size=10:style=Solid"; # globe, antenna signal
-        font-2 =
-          "Noto Sans Symbols 2:size=10"; # no sound, volume 1, volume 2, volume 3, disk
-        font-3 = "Noto Sans Mono:size=10"; # bars
-        modules.left = "window";
-        modules.right =
-          "cpu memory volume wired-network wireless-network date";
-
-        module.margin = 1;
-        height = 19;
-        padding = 2;
-
-        background = "#00000000";
-        foreground = "#FF000000";
-        border.size = "2pt";
-
-        line.color = "\${bar/top.background}";
-        line.size = 19;
-
-        separator = "|";
-
-        locale = "en_US.UTF-8";
-      };
-
-      "bar/bottom" = {
-        monitor = "DVI-D-0";
-        bottom = true;
-        font-0 = "Iosevka:size=11"; # text
-        font-1 =
-          "Font Awesome 6 Free:size=9:style=Solid"; # globe, antenna signal
-        font-2 =
-          "Noto Sans Symbols 2:size=9"; # no sound, volume 1, volume 2, volume 3, disk
-        font-3 = "Noto Sans Mono:size=9"; # bars
-        modules.left = "workspaces";
-
-        module.margin = 1;
-        height = 18;
-
-        background = "#000000ff";
-        foreground = "#ccffffff";
-        border.size = "2pt";
-
-        line.color = "\${bar/top.background}";
-        line.size = 18;
-
-        separator = "|";
-
-        locale = "en_US.UTF-8";
-      };
-
-      "module/window" = {
-        type = "internal/xwindow";
-        label.text = "%title%";
-        label.maxlen = 100;
-      };
-
-      "module/cpu" = {
-        type = "internal/cpu";
-        interval = 2;
-        format = "<label> <ramp-coreload>";
-        label = "CPU";
-
-        ramp.coreload-0.text = "%{T4}▁%{T-}";
-        ramp.coreload-0.font = 5;
-        ramp.coreload-0.foreground = "#aaff77";
-        ramp.coreload-1.text = "%{T4}▂%{T-}";
-        ramp.coreload-1.font = 5;
-        ramp.coreload-1.foreground = "#A4FA48";
-        ramp.coreload-2.text = "%{T4}▃%{T-}";
-        ramp.coreload-2.font = 5;
-        ramp.coreload-2.foreground = "#BDFB22";
-        ramp.coreload-3.text = "%{T4}▄%{T-}";
-        ramp.coreload-3.font = 5;
-        ramp.coreload-3.foreground = "#FBE922";
-        ramp.coreload-4.text = "%{T4}▅%{T-}";
-        ramp.coreload-4.font = 5;
-        ramp.coreload-4.foreground = "#fba922";
-        ramp.coreload-5.text = "%{T4}▆%{T-}";
-        ramp.coreload-5.font = 5;
-        ramp.coreload-5.foreground = "#FB7922";
-        ramp.coreload-6.text = "%{T4}▇%{T-}";
-        ramp.coreload-6.font = 5;
-        ramp.coreload-6.foreground = "#ff5555";
-        ramp.coreload-7.text = "%{T4}█%{T-}";
-        ramp.coreload-7.font = 5;
-        ramp.coreload-7.foreground = "#FF3838";
-      };
-
-      "module/date" = {
-        type = "internal/date";
-        date.text = "%A, %d %B %Y (%d/%m/%y) %H:%M";
-      };
-
-      "module/workspaces" = {
-        type = "internal/i3";
-        pin-workspaces = true; # only show workspaces for that monitor
-      };
-
-      "module/memory" = {
-        type = "internal/memory";
-        interval = 3;
-        format = "<label>";
-        label = "RAM %gb_used%/%gb_total%";
-      };
-
-      "module/wired-network" = {
-        type = "internal/network";
-        interface = "enp0s31f6";
-        interval = 10;
-        label.connected = "%{T2}🖥️%{T-} %local_ip%";
-        label.disconnected.foreground = "#66";
-      };
-
-      "module/wireless-network" = {
-        type = "internal/network";
-        interface = "wlp5s0";
-        interval = 10;
-        label.connected = "%{T2}📶%{T-} %local_ip%";
-        label.disconnected.foreground = "#66";
-      };
-
-      "module/volume" = {
-        type = "internal/alsa";
-        master.mixer = "Master";
-        #headphone-mixer = Headphone
-        #headphone-id = 9
-
-        format.volume = "<ramp-volume><label-volume>";
-        label.muted.text = "%{T3}🔇%{T-} 00%";
-        label.muted.foreground = "#aa";
-
-        ramp.volume-0 = "%{T3}🔈%{T-} ";
-        ramp.volume-1 = "%{T3}🔉%{T-} ";
-        ramp.volume-2 = "%{T3}🔊%{T-} ";
-      };
-
-      "module/powermenu" = {
-        type = "custom/menu";
-
-        label-open = "Menu |";
-        label-close = "Close ->";
-
-        # menu-0-0.text = "Terminate WM ";
-        # menu-0-0.foreground = "#fba922";
-        # menu-0-0.exec = "bspc quit -1";
-        # menu-0-1.text = "Reboot ";
-        # menu-0-1.foreground = "#fba922";
-        # menu-0-1.exec = "menu_open-1";
-        # menu-0-2.text = "Power off ";
-        # menu-0-2.foreground = "#fba922";
-        # menu-0-2.exec = "menu_open-2";
-
-        menu-0-0.text = "Cancel ";
-        menu-0-0.foreground = "#fba922";
-        menu-0-0.exec = "menu_open-0";
-        menu-0-1.text = "Reboot ";
-        menu-0-1.foreground = "#fba922";
-        menu-0-1.exec = "reboot";
-
-        menu-1-0.text = "Power off ";
-        menu-1-0.foreground = "#fba922";
-        menu-1-0.exec = "shutdown now";
-        menu-1-1.text = "Cancel ";
-        menu-1-1.foreground = "#fba922";
-        menu-1-1.exec = "menu_open-0";
-      };
-
-      "module/clock" = {
-        type = "internal/date";
-        interval = 2;
-        date = "%%{F#999}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M%%{F-}";
-      };
-    };
+  services.polybar = import ./polybar { inherit monitors; inherit pkgs; inherit config; };
+  xdg.configFile.i3 = {
+    source = ./i3;
+    recursive = true;
   };
-
   xsession.windowManager.i3 =
     let
       alt = "Mod1";
@@ -466,6 +289,8 @@ in {
           # "${modifier}+d" = "focus"
 
           "Control+${alt}+l" = "exec dm-tool lock";
+
+          "${modifier}+x" = "exec ~/.config/i3/keepass.sh";
 
           "${modifier}+r" = ''mode "resize"'';
 

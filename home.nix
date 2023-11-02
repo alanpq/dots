@@ -16,6 +16,7 @@ in {
     file
     killall
     nixpkgs-fmt
+    git-crypt
 
     keepassxc
   ];
@@ -100,7 +101,7 @@ in {
         identityFile = "~/.ssh/id_git";
       };
       "vm" = {
-        hostname = "192.168.122.34";
+        hostname = "192.168.122.106";
         identityFile = "~/.ssh/id_vm";
       };
       "ein" = {
