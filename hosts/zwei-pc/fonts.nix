@@ -12,6 +12,7 @@ rec {
     "Font Awesome 5 Free"
   ];
   monospace = [
+    "IosevkaTerm"
     "Iosevka"
     "Blobmoji"
     "Twitter Color Emoji"

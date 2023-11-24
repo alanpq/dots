@@ -18,6 +18,8 @@ in
     nitrogen
     dolphin
 
+    nushell
+
     lxappearance
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.qt5ct
@@ -38,7 +40,10 @@ in
 
     chromium
 
-    discord
+    (discord.override {
+      withOpenASAR = true;
+      withVencord = true;
+    })
     steam
     prismlauncher
     lutris
@@ -58,6 +63,11 @@ in
     mongodb-compass
 
     obs-studio
+    gamemode
+
+    barrier
+
+    # discord-screenaudio # broken
   ];
 
   gtk.enable = true;
@@ -177,12 +187,37 @@ in
           };
         };
       };
+      "left-vertical" = {
+        fingerprint = {
+          DVI-D-0 = "00ffffffffffff000469e12401010101241b010380351e78ea9de5a654549f260d5054b7ef00714f8180814081c081009500b3000101023a801871382d40582c4500132b2100001e000000fd0032961ea021000a202020202020000000fc0056473234380a20202020202020000000ff0048394c4d51533032383734330a01df020104008a4d80a070382c4030203500132b2100001afe5b80a07038354030203500132b2100001a866f80a07038404030203500132b2100001afc7e80887038124018203500132b2100001e000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000bb";
+          DP-2 = "00ffffffffffff000469a42401010101241b0104a5351e783a9de5a654549f260d5054b7ef00714f8180814081c081009500b3000101023a801871382d40582c4500132b2100001e000000fd0032961ea021000a202020202020000000fc0056473234380a20202020202020000000ff0048394c4d51533032383732350a01a6020318f14b900504030201111213141f2309070783010000023a801871382d40582c4500132b2100001e8a4d80a070382c4030203500132b2100001afe5b80a07038354030203500132b2100001a866f80a07038404030203500132b2100001afc7e80887038124018203500132b2100001e0000000000000000000000000073";
+        };
+        config = {
+          DVI-D-0 = {
+            enable = true;
+            crtc = 0;
+            position = "0x0";
+            rotate = "left";
+            mode = "1920x1080";
+            rate = "144.00";
+          };
+          DP-2 = {
+            enable = true;
+            crtc = 1;
+            primary = true;
+            position = "1080x600";
+            mode = "1920x1080";
+            rate = "144.00";
+          };
+        };
+      };
     };
   };
 
   programs.kitty = {
     enable = true;
     settings = {
+      font_size = "11";
       background_opacity = "0.85";
     };
   };
@@ -203,7 +238,7 @@ in
       enable = true;
       config = rec {
         terminal = "${pkgs.kitty}/bin/kitty";
-        menu = "${pkgs.rofi}/bin/rofi";
+        menu = "${config.programs.rofi.finalPackage}/bin/rofi";
 
         fonts = {
           names = [ "monospace" ];
@@ -221,6 +256,7 @@ in
             { title = "Zoom Meeting"; }
             { class = "mag-text"; }
             { class = "basics"; }
+            { title = "rust-voice"; }
             { class = "client"; }
           ];
         };
@@ -239,11 +275,13 @@ in
         };
 
         gaps = {
-          inner = 15;
+          inner = 5;
           top = -5;
         };
 
-        startup = [{ command = "${pkgs.nitrogen}/bin/nitrogen --restore"; } { command = "${pkgs.picom}/bin/picom"; } { command = "polybar"; }];
+        startup = [
+          { command = "~/.config/i3/startup.sh"; }
+        ];
 
         assigns = {
           "9" = [{ class = "^discord$"; } { class = "^telegram-desktop$"; }];
@@ -254,7 +292,7 @@ in
           "Shift+Insert" = "exec ${flameshot}/bin/flameshot gui -r | ${xclip}/bin/xclip -selection clipboard -t image/png";
           "${modifier}+Return" = "exec ${terminal}";
           "${modifier}+Shift+Return" = "exec ${firefox}/bin/firefox";
-          "${modifier}+c" = "exec ${menu} -show calc";
+          "${modifier}+c" = "exec ${menu} -show calc -modi calc -no-show-match -no-sort -calc-command \"echo -n '{result}' | xclip -selection clipboard\"";
           "${modifier}+Shift+c" = "exec ${gnome.zenity}/bin/zenity --calendar";
 
           "${modifier}+q" = "kill";
@@ -373,8 +411,8 @@ in
         ];
 
         workspaceOutputAssign =
-          map (x: { output = "DVI-D-0"; workspace = toString x; }) [ 1 2 3 4 5 6 7 8 9 10 ] ++
-          map (x: { output = "DP-2"; workspace = toString x; }) [ 11 12 13 14 15 16 17 18 19 20 21 22 ]
+          map (x: { output = "DP-2"; workspace = toString x; }) [ 1 2 3 4 5 6 7 8 9 10 ] ++
+          map (x: { output = "DVI-D-0"; workspace = toString x; }) [ 11 12 13 14 15 16 17 18 19 20 21 22 ]
         ;
 
         # colors = let

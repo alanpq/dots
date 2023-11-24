@@ -6,17 +6,20 @@ in {
 
   imports = [
     ./services/deadd-notification-center.nix
+    ./configs/nvim
   ];
 
   home.packages = with pkgs; [
     tree
-    vim
 
     htop
     file
     killall
     nixpkgs-fmt
     git-crypt
+
+    xclip
+    jq
 
     keepassxc
   ];
@@ -63,6 +66,8 @@ in {
       ga = "git add";
       gc = "git commit";
 
+      vim = "nvim";
+
       update = "sudo nixos-rebuild switch";
     };
     history = {
@@ -88,7 +93,7 @@ in {
     enable = true;
     enableBashIntegration = true; # see note on other shells below
     enableZshIntegration = true;
-    nix-direnv.enable = true;
+    # nix-direnv.enable = true;
   };
   programs.bash.enable = true;
 
@@ -101,7 +106,7 @@ in {
         identityFile = "~/.ssh/id_git";
       };
       "vm" = {
-        hostname = "192.168.122.106";
+        hostname = "192.168.122.238";
         identityFile = "~/.ssh/id_vm";
       };
       "ein" = {

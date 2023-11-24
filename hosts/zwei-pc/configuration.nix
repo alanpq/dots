@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -21,6 +22,8 @@
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
+      substituters = [ "https://nix-gaming.cachix.org" ];
+      trusted-public-keys = [ "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" ];
     };
     registry = { nixpkgs.flake = nixpkgs; };
     nixPath = [ "nixpkgs=${nixpkgs.outPath}" ];
@@ -49,7 +52,7 @@
   networking.hostName = "zwei-pc"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Europe/London";
@@ -86,7 +89,7 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs; [ 
+    extraPackages = with pkgs; [
       vaapiVdpau
       nvidia-vaapi-driver
       libvdpau-va-gl
@@ -115,7 +118,7 @@
     open = false;
 
     # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
+    # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
@@ -132,7 +135,7 @@
 
     windowManager.i3 = {
       enable = true;
-      extraPackages = with pkgs; [dmenu rofi polybar];
+      extraPackages = with pkgs; [ dmenu rofi polybar ];
     };
 
     displayManager.defaultSession = "none+i3";
@@ -170,7 +173,7 @@
     extraGroups = [ "wheel" "docker" "networkmanager" "audio" "libvirtd" ];
     hashedPassword = "$y$j9T$9jzotD/.eDyZVY5AhWOhR.$px7JIqj1HWi9JF8trRkbajyGaM3u4uOXZy4icMOfuaC";
   };
-  
+
   sound.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -182,6 +185,18 @@
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
   };
+
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+        xdg-desktop-portal-kde
+      ];
+    };
+  };
+  services.flatpak.enable = true;
 
   virtualisation = {
     docker.enable = true;
@@ -224,6 +239,7 @@
 
   fonts = {
     packages = with pkgs; [
+      (nerdfonts.override { fonts = [ "IosevkaTerm" ]; })
       iosevka
       noto-fonts
       noto-fonts-cjk
@@ -274,21 +290,32 @@
 
     #group.source = "/persist/etc/group";
     subgid.source = "/persist/etc/subgid";
-    subuid.source = "/persist/etc/subuid";    
+    subuid.source = "/persist/etc/subuid";
 
     adjtime.source = "/persist/etc/adjtime";
     NIXOS.source = "/persist/etc/NIXOS";
     machine-id.source = "/persist/etc/machine-id";
-    
+
     "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections";
   };
   systemd.tmpfiles.rules = [
     "L /var/lib/NetworkManager/secret_key - - - - /persist/var/lib/NetworkManager/secret_key"
     "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
     "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
-    
-    "L /var/lib/libvirt - - - - /persist/var/lib/libvirt"
+
+    # "L /var/lib/libvirt - - - - /persist/var/lib/libvirt"
   ];
+
+  fileSystems."/var/lib/libvirt" = {
+    depends = [
+      "/persist"
+      "/"
+    ];
+    device = "/persist/var/lib/libvirt";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
   security.sudo.extraConfig = ''
     # rollback results in sudo lectures after each reboot
     Defaults lecture = never
