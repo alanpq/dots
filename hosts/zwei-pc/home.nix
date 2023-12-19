@@ -18,6 +18,8 @@ in
     nitrogen
     dolphin
 
+    vlc
+
     nushell
 
     lxappearance
@@ -252,11 +254,13 @@ in
           criteria = [
             { class = "Pavucontrol"; }
             { class = "Calendar"; }
+            { class = "dolphin"; }
             { class = "zoom"; }
             { title = "Zoom Meeting"; }
             { class = "mag-text"; }
             { class = "basics"; }
             { title = "rust-voice"; }
+            { title = "klipr"; }
             { class = "client"; }
           ];
         };

@@ -20,6 +20,8 @@ in {
 
     xclip
     jq
+    unzip
+    usql
 
     keepassxc
   ];
@@ -81,6 +83,7 @@ in {
       enable = true;
       plugins = [
         { name = "zsh-users/zsh-autosuggestions"; } # Simple plugin installation
+        { name = "extract"; tags = [ from:oh-my-zsh ]; }
         { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; } # Installations with additional options. For the list of options, please refer to Zplug README.
       ];
     };
