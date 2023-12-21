@@ -4,58 +4,92 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    hardware.url = "github:nixos/nixos-hardware";
+
+    nix-colors.url = "github:misterio77/nix-colors";
+
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     secrix.url = "github:Platonic-Systems/secrix";
 
-    nix-gaming.url = "github:fufexan/nix-gaming";
+    nix-gaming = {
+      url = "github:fufexan/nix-gaming";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprland = {
+      url = "github:hyprwm/hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprwm-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+    
+    nh = {
+      url = "github:viperML/nh";
+      inputs.nixpkgs.follows = "nixpkgs"; # override this repo's nixpkgs snapshot
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, home-manager, secrix, nix-gaming }@inputs:
+  outputs = { self, nixpkgs, flake-utils, home-manager, secrix, ... }@inputs:
+    let
+      inherit (self) outputs;
+      lib = nixpkgs.lib // home-manager.lib;
+      systems = [ "x86_64-linux" "aarch64-linux" ];
+      forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
+      pkgsFor = lib.genAttrs systems (system: import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      });
+    in
     {
-      nixosConfigurations.zwei-pc = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = inputs;
-        modules = [
-          { nixpkgs.overlays = builtins.attrValues self.overlays; }
-          ./hosts/zwei-pc/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.alan = import ./hosts/zwei-pc/home.nix;
-          }
-        ];
+      inherit lib;
+      nixosModules = import ./modules/nixos;
+      homeManagerModules = import ./modules/home-manager;
+      # templates = import ./templates;
+
+      overlays = import ./overlays { inherit inputs outputs; };
+      # hydraJobs = import ./hydra.nix { inherit inputs outputs; };
+
+      packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
+      devShells = forEachSystem (pkgs: import ./shell.nix { inherit pkgs; });
+      formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
+
+      wallpapers = import ./home/alan/wallpapers;
+      
+      nixosConfigurations = {
+        # Main desktop
+        zwei = lib.nixosSystem {
+          modules = [ ./hosts/zwei-pc ];
+          specialArgs = { inherit inputs outputs; };
+        };
+        # Laptop
+        gamer-think = lib.nixosSystem {
+          modules = [ ./hosts/gamer-think ];
+          specialArgs = { inherit inputs outputs; };
+        };
+
       };
 
-      overlays = (import ./util.nix).mkOverlays self.packages;
-    } // flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
+      homeConfigurations = {
+        "alan@zwei" = lib.homeManagerConfiguration {
+          modules = [ ./home/alan/zwei.nix ];
+          pkgs = pkgsFor.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
         };
-      in
-      {
-        legacyPackages = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-          overlays = builtins.attrValues self.overlays;
+        "alan@gamer-think" = lib.homeManagerConfiguration {
+          modules = [ ./home/alan/gamer-think.nix ];
+          pkgs = pkgsFor.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
         };
-        apps = {
-          secrix = inputs.secrix.secrix self;
-        };
-        devShell = with pkgs; mkShell {
-          buildInputs = [ lua-language-server lua ];
-        };
-        packages = # does this override consumers' setting or will it error later? also apparently precludes x-compile
-          {
-            fluent-kv = pkgs.callPackage ./pkgs/fluent.nix { };
-            postman = pkgs.callPackage ./pkgs/postman/default.nix { };
-            discord-screenaudio = pkgs.libsForQt5.callPackage ./pkgs/discord-screenaudio.nix { };
-          };
-        formatter = nixpkgs.legacyPackages.${system}.nixfmt;
-      });
+      };
+    };
 }
