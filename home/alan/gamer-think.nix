@@ -12,7 +12,7 @@
     # ./features/music
   ];
 
-  colorscheme = inputs.nix-colors.colorschemes.paraiso;
+  colorscheme = inputs.nix-colors.colorschemes.atlas;
   wallpaper = outputs.wallpapers.firewatch-purple;
 
   monitors = [
