@@ -7,6 +7,8 @@
     ../common/optional/greetd.nix
     ../common/optional/wireless.nix
     ../common/optional/lightd.nix
+    ../common/optional/pipewire.nix
+    ../common/optional/gamemode.nix
     
     ../common/users/alan
   ];
