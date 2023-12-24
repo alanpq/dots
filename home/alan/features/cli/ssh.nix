@@ -17,10 +17,12 @@ in
       };
       "ein" = {
         hostname = "gs.alanp.me";
+        identityFile = "~/.ssh/id_ein";
       };
       "vps" = {
         hostname = builtins.concatStringsSep "." [ "65" "21" "108" "226" ]; # revolutionary anti-scraper technology
         user = "root";
+        identityFile = "~/.ssh/id_vps";
       };
     };
   };

@@ -19,15 +19,19 @@
       "SUPERSHIFT,q,killactive"
       "SUPERSHIFT,e,exit"
 
+      "SUPERSHIFT,s,pin,active"
+
       "SUPER,s,togglesplit"
       "SUPER,f,fullscreen,1"
       "SUPERSHIFT,f,fullscreen,0"
       "SUPERSHIFT,space,togglefloating"
 
       "SUPER,minus,splitratio,-0.25"
+      "SUPERCONTROL,minus,splitratio,-0.1"
       "SUPERSHIFT,minus,splitratio,-0.3333333"
 
       "SUPER,equal,splitratio,0.25"
+      "SUPERCONTROL,equal,splitratio,0.1"
       "SUPERSHIFT,equal,splitratio,0.3333333"
 
       "SUPER,g,togglegroup"

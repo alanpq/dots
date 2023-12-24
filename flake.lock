@@ -314,7 +314,8 @@
         "nix-colors": "nix-colors",
         "nix-gaming": "nix-gaming",
         "nixpkgs": "nixpkgs",
-        "secrix": "secrix"
+        "secrix": "secrix",
+        "sops-nix": "sops-nix"
       }
     },
     "secrix": {
@@ -324,14 +325,35 @@
       "locked": {
         "lastModified": 1701493419,
         "narHash": "sha256-Aa6uQcHp1vABB0FlMsMVMI0Vhk91VozLoSkAT7L7PMU=",
-        "owner": "Platonic-Systems",
-        "repo": "secrix",
+        "path": "/nix/store/98lwscv1mals8603q8if81c0b34yslbw-source",
         "rev": "c5d193ae564b93ffa3e5a950fb7666760e0ae324",
+        "type": "path"
+      },
+      "original": {
+        "id": "secrix",
+        "type": "indirect"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "nixpkgs-stable": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1702937567,
+        "narHash": "sha256-bUNl3GPqRgTGp13+oV1DrYa1/NHuGHo5SKmr+RqC/2g=",
+        "owner": "mic92",
+        "repo": "sops-nix",
+        "rev": "f7db64b88dabc95e4f7bee20455f418e7ab805d4",
         "type": "github"
       },
       "original": {
-        "owner": "Platonic-Systems",
-        "repo": "secrix",
+        "owner": "mic92",
+        "repo": "sops-nix",
         "type": "github"
       }
     },

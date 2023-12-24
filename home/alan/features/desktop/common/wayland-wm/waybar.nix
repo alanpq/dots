@@ -50,15 +50,16 @@ in
       mesonFlags = (oa.mesonFlags or  [ ]) ++ [ "-Dexperimental=true" ];
     });
     systemd.enable = true;
-    settings = {
+    settings = let inherit (config.colorscheme) colors; in {
       primary = {
-        mode = "dock";
+        # mode = "dock";
         layer = "top";
         height = 40;
         margin = "6";
         position = "top";
         modules-left = [
-          "custom/menu"
+          # "custom/menu"
+          "clock"
         ] ++ (lib.optionals hasSway [
           "sway/workspaces"
           "sway/mode"
@@ -73,7 +74,6 @@ in
         modules-center = [
           "pulseaudio"
           "battery"
-          "clock"
           "custom/unread-mail"
           "custom/gpg-agent"
         ];
@@ -84,12 +84,11 @@ in
           # TODO: currently broken for some reason
           # "custom/gammastep"
           "tray"
-          "custom/hostname"
         ];
 
         clock = {
           interval = 1;
-          format = "{:%d/%m %H:%M:%S}";
+          format = "{:%d/%m %H:%M:<span alpha='60%'>%S</span>}";
           format-alt = "{:%Y-%m-%d %H:%M:%S %z}";
           on-click-left = "mode";
           tooltip-format = ''
@@ -327,8 +326,8 @@ in
         opacity: 0.85;
         padding: 0;
         background-color: #${colors.base01};
-        border: 2px solid #${colors.base0C};
-        border-radius: 10px;
+        /* border: 2px solid #${colors.base0C};*/
+        border-radius: 10px 0 0 10px;
         color: #${colors.base05};
       }
 
@@ -349,6 +348,7 @@ in
       }
 
       #clock {
+        font-family: ${config.fontProfiles.monospace.family};
         background-color: #${colors.base0C};
         color: #${colors.base01};
         padding-left: 15px;

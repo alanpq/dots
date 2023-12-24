@@ -5,7 +5,7 @@
     ./features/desktop/wireless
     ./features/desktop/common/vscode.nix
     # ./features/rgb
-    # ./features/productivity
+    ./features/productivity
     # ./features/pass
     # ./features/games
     # ./features/games/star-citizen.nix

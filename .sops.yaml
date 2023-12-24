@@ -1,0 +1,17 @@
+# FIXME: replace alan key with a real pgp key
+keys:
+  - &users:
+    - &alan age1j5ctvwn4w5uqvdgtsc63vyccat4mt5v627wtteh5m4j5z3am8yaqwdexfa
+  - &hosts
+    - &gamer-think age1ghyfehzdenstl80fy4ywgmcqxmpnv0727y5rh0hhcve82k6qh4wq66san6
+creation_rules:
+  - path_regex: hosts/gamer-think/secrets.ya?ml$
+    key_groups:
+      - age:
+        - *gamer-think
+        - *alan
+  - path_regex: hosts/common/secrets.ya?ml$
+    key_groups:
+      - age:
+        - *gamer-think
+        - *alan

@@ -5,6 +5,7 @@
     ./locale.nix
     ./nix.nix
     ./openssh.nix
+    ./sops.nix
     ./steam-hardware.nix
     ./systemd-initrd.nix
     ./gamemode.nix
