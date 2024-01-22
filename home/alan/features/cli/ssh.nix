@@ -15,6 +15,12 @@ in
         hostname = "192.168.122.238";
         identityFile = "~/.ssh/id_vm";
       };
+      "devbox-101" = {
+        user = "admin";
+        hostname = "192.168.122.238";
+        port = 22101;
+        identityFile = "~/.ssh/id_vm";
+      };
       "ein" = {
         hostname = "gs.alanp.me";
       };
