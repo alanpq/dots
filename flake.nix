@@ -32,7 +32,7 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
-    
+
     nh = {
       url = "github:viperML/nh";
       inputs.nixpkgs.follows = "nixpkgs"; # override this repo's nixpkgs snapshot
@@ -64,10 +64,10 @@
       formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
 
       wallpapers = import ./home/alan/wallpapers;
-      
+
       nixosConfigurations = {
         # Main desktop
-        zwei = lib.nixosSystem {
+        zwei-pc = lib.nixosSystem {
           modules = [ ./hosts/zwei-pc ];
           specialArgs = { inherit inputs outputs; };
         };
@@ -80,8 +80,8 @@
       };
 
       homeConfigurations = {
-        "alan@zwei" = lib.homeManagerConfiguration {
-          modules = [ ./home/alan/zwei.nix ];
+        "alan@zwei-pc" = lib.homeManagerConfiguration {
+          modules = [ ./home/alan/zwei-pc.nix ];
           pkgs = pkgsFor.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
         };
