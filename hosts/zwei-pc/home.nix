@@ -47,6 +47,7 @@ in
       withVencord = true;
     })
     steam
+    steam-run
     prismlauncher
     lutris
 
@@ -68,6 +69,10 @@ in
     gamemode
 
     barrier
+
+    godot_4
+
+    signal-desktop
 
     # discord-screenaudio # broken
   ];
@@ -262,6 +267,7 @@ in
             { title = "rust-voice"; }
             { title = "klipr"; }
             { class = "client"; }
+            { instance = "Godot_Engine"; }
           ];
         };
 
