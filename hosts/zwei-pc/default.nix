@@ -1,7 +1,8 @@
 { pkgs, inputs, ... }: {
   imports = [
     inputs.hardware.nixosModules.common-cpu-intel
-    inputs.hardware.nixosModules.common-gpu-nvidia
+    inputs.hardware.nixosModules.common-gpu-intel
+    inputs.hardware.nixosModules.common-gpu-nvidia-nonprime
     inputs.hardware.nixosModules.common-pc-ssd # fstrim is here
     ./hardware-configuration.nix
     ../common/global
@@ -9,20 +10,11 @@
     ../common/optional/ephemeral-btrfs.nix
 
     ../common/optional/libvirt.nix
-    ../common/optional/greetd.nix
+    ../common/optional/tui-greetd.nix
+    ../common/optional/systemd-boot.nix
 
     ../common/users/alan
   ];
-
-
-  # Use the systemd-boot EFI boot loader.
-  # boot.loader = {
-  #   systemd-boot = {
-  #     enable = true;
-  #     consoleMode = "max";
-  #   };
-  #   efi.canTouchEfiVariables = true;
-  # };
 
 
   boot = {

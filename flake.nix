@@ -13,7 +13,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    secrix.url = "github:Platonic-Systems/secrix";
+    sops-nix = {
+      url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
+    };
 
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
@@ -39,7 +43,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, home-manager, secrix, ... }@inputs:
+  outputs = { self, nixpkgs, flake-utils, home-manager, ... }@inputs:
     let
       inherit (self) outputs;
       lib = nixpkgs.lib // home-manager.lib;
