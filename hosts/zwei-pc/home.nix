@@ -74,6 +74,9 @@ in
 
     signal-desktop
 
+
+    inputs.nix-gaming.packages.${pkgs.system}.osu-lazer-bin
+
     # discord-screenaudio # broken
   ];
 

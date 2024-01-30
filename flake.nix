@@ -23,6 +23,8 @@
           ./hosts/zwei-pc/configuration.nix
           home-manager.nixosModules.home-manager
           {
+
+            home-manager.extraSpecialArgs = inputs;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.alan = import ./hosts/zwei-pc/home.nix;
