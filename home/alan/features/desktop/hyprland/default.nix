@@ -35,8 +35,8 @@
 
     settings = {
       general = {
-        gaps_in = 15;
-        gaps_out = 20;
+        gaps_in = 5;
+        gaps_out = 0;
         border_size = 2.7;
         cursor_inactive_timeout = 4;
         "col.active_border" = "0xff${config.colorscheme.colors.base0C}";
