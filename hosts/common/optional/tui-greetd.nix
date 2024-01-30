@@ -7,6 +7,8 @@ let
   alanCfg = homeCfgs.alan;
   gtkTheme = alanCfg.gtk.theme;
   iconTheme = alanCfg.gtk.iconTheme;
+
+  session = "${alanCfg.wayland.windowManager.hyprland.package}/bin/Hyprland";
   # wallpaper = alanCfg.wallpaper;
 in
 {
@@ -22,9 +24,12 @@ in
 
   services.greetd = {
     enable = true;
-    settings.default_session = {
-      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --sessions '${lib.concatStringsSep ":" homeSharePaths}'";
-      user = "greeter";
+    # vt = 2;
+    settings = {
+      default_session = {
+        command = ''${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --remember --remember-user-session --cmd ${session}'';
+        user = "greeter";
+      };
     };
   };
 }

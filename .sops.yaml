@@ -4,7 +4,7 @@ keys:
     - &alan 111D6C0637278F94E3438D9B6B2B471B33BC4E0B
   # Hosts
   - &hosts:
-    - &zwei-pc age1uyxxw4jhffq4py3uw09fxwjafk8n5smd5qs5av8w4yt9pjqz79psrlgues
+    - &zwei-pc age1n54qel5raqedqst3n6mtmzu5ptyrrddfznzpxrpjev3vaapd3fvsxj6vyr
 
 creation_rules:
   - path_regex: hosts/zwei-pc/secrets.ya?ml$

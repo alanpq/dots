@@ -1,4 +1,4 @@
-{ pkgs, inputs, ...}: {
+{ pkgs, inputs, ... }: {
   imports = [
     inputs.hardware.nixosModules.lenovo-thinkpad-t14
     ./hardware-configuration.nix
@@ -7,7 +7,7 @@
     ../common/optional/greetd.nix
     ../common/optional/wireless.nix
     ../common/optional/lightd.nix
-    
+
     ../common/users/alan
   ];
 

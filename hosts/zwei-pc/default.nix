@@ -9,13 +9,14 @@
 
     ../common/optional/ephemeral-btrfs.nix
 
+    ../common/optional/pipewire.nix
+
     ../common/optional/libvirt.nix
     ../common/optional/tui-greetd.nix
     ../common/optional/systemd-boot.nix
 
     ../common/users/alan
   ];
-
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
@@ -33,9 +34,36 @@
     kdeconnect.enable = true;
   };
 
+  services.xserver = {
+    enable = true;
+    videoDrivers = [ "nvidia" ];
+    # displayManager.gdm = {
+    #   enable = true;
+    #   wayland = true;
+    # };
+  };
+
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "nvidia";
+    XDG_SESSION_TYPE = "wayland";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    WLR_NO_HARDWARE_CURSORS = "1";
+  };
 
   hardware = {
-    opengl.enable = true;
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
+      setLdLibraryPath = true;
+    };
+    nvidia.modesetting.enable = true;
     opentabletdriver.enable = true;
   };
 
@@ -63,16 +91,6 @@
 
     # "L /var/lib/libvirt - - - - /persist/var/lib/libvirt"
   ];
-
-  fileSystems."/var/lib/libvirt" = {
-    depends = [
-      "/persist"
-      "/"
-    ];
-    device = "/persist/var/lib/libvirt";
-    fsType = "none";
-    options = [ "bind" ];
-  };
 
   security.sudo.extraConfig = ''
     # rollback results in sudo lectures after each reboot

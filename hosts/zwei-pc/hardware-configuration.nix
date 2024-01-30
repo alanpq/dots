@@ -40,6 +40,7 @@
       device = "/dev/disk/by-uuid/a9d79ce9-6936-4482-a6cd-4780d09fa87e";
       fsType = "btrfs";
       options = [ "subvol=persist" "compress=zstd" "noatime" ];
+      neededForBoot = true;
     };
 
   fileSystems."/var/log" =

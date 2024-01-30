@@ -6,6 +6,7 @@
 { lib, config, ... }:
 let
   hostname = config.networking.hostName;
+  hostnameEscape = builtins.replaceStrings ["-"] ["\\x2d"] hostname;
   wipeScript = ''
     mkdir /tmp -p
     MNTPOINT=$(mktemp -d)
@@ -34,10 +35,10 @@ in
       description = "Rollback btrfs rootfs";
       wantedBy = [ "initrd.target" ];
       requires = [
-        "dev-disk-by\\x2dlabel-${hostname}.device"
+        "dev-disk-by\\x2dlabel-${hostnameEscape}.device"
       ];
       after = [
-        "dev-disk-by\\x2dlabel-${hostname}.device"
+        "dev-disk-by\\x2dlabel-${hostnameEscape}.device"
         "systemd-cryptsetup@${hostname}.service"
       ];
       before = [ "sysroot.mount" ];

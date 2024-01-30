@@ -6,6 +6,7 @@
     ./locale.nix
     ./nix.nix
     ./openssh.nix
+    ./optin-persistence.nix
     ./sops.nix
     ./steam-hardware.nix
     ./systemd-initrd.nix

@@ -5,6 +5,7 @@
     ./direnv.nix
     ./gh.nix
     ./git.nix
+    ./gpg.nix
     ./nix-index.nix
     ./pfetch.nix
     ./ranger.nix
@@ -27,6 +28,8 @@
     jq # JSON pretty printer and manipulator
     # trekscii # Cute startrek cli printer
     timer # To help with my ADHD paralysis
+
+    git-crypt
 
     nil # Nix LSP
     nixfmt # Nix formatter

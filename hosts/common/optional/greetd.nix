@@ -9,9 +9,12 @@ let
   iconTheme = alanCfg.gtk.iconTheme;
   # wallpaper = alanCfg.wallpaper;
 
+
+  # val=$(udevadm info -a -n /dev/dri/card1 | grep boot_vga | rev | cut -c 2)
+  # WLR_DRM_DEVICES=\"/dev/dri/card$val\" 
+
   sway-kiosk = command: "
-    val=$(udevadm info -a -n /dev/dri/card1 | grep boot_vga | rev | cut -c 2)
-    WLR_DRM_DEVICES=\"/dev/dri/card$val\" ${lib.getExe pkgs.sway} --unsupported-gpu --config ${pkgs.writeText "kiosk.config" ''
+    ${lib.getExe pkgs.sway} --unsupported-gpu --config ${pkgs.writeText "kiosk.config" ''
     output * bg #000000 solid_color
     xwayland disable
     input "type:touchpad" {

@@ -20,19 +20,22 @@
 
   monitors = [
     {
-      name = "DP-2";
+      name = "DP-3";
       width = 1920;
       height = 1080;
       workspace = "1";
       x = 1080;
       y = 600;
+      refreshRate = 144;
       primary = true;
     }
     {
-      name = "DVI-D-0";
-      width = 1080;
-      height = 1920;
+      name = "DVI-D-1";
+      width = 1920;
+      height = 1080;
       workspace = "2";
+      refreshRate = 144;
+      transform = 1; # rotate 90 deg
       x = 0;
     }
   ];

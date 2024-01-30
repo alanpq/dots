@@ -4,8 +4,9 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    hardware.url = "github:nixos/nixos-hardware";
 
+    hardware.url = "github:nixos/nixos-hardware";
+    impermanence.url = "github:nix-community/impermanence";
     nix-colors.url = "github:misterio77/nix-colors";
 
     home-manager = {
