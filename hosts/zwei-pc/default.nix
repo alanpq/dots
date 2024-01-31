@@ -53,12 +53,16 @@
     WLR_NO_HARDWARE_CURSORS = "1";
   };
 
+  # TODO: put these aliases with the associated packages (exa, bat, etc)
   environment.shellAliases = {
     ls = "exa";
     ll = "exa -l";
     la = "exa -la";
-    ip = "ip -color";
     tree = "exa -T";
+
+    ip = "ip -color";
+
+    cat = "bat --paging never";
   };
 
   hardware = {
