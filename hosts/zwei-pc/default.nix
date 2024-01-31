@@ -23,6 +23,8 @@
     binfmt.emulatedSystems = [ "aarch64-linux" "i686-linux" ];
   };
 
+  powerManagement.cpuFreqGovernor = "performance";
+
   networking = {
     hostName = "zwei-pc";
     useDHCP = true;
