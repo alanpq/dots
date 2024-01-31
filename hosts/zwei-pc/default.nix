@@ -53,6 +53,14 @@
     WLR_NO_HARDWARE_CURSORS = "1";
   };
 
+  environment.shellAliases = {
+    ls = "exa";
+    ll = "exa -l";
+    la = "exa -la";
+    ip = "ip -color";
+    tree = "exa -T";
+  };
+
   hardware = {
     opengl = {
       enable = true;
