@@ -16,6 +16,9 @@
     extraConfig = {
       core = { editor = "${pkgs.vim}/bin/vim"; };
       url."git@github.com:".insteadOf = "https://github.com/";
+      commit = {
+        gpgsign = true;
+      };
       push = {
         default = "current";
         autoSetupRemote = true;

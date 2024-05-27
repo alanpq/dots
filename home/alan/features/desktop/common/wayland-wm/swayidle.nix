@@ -18,7 +18,7 @@ let
 in
 {
   services.swayidle = {
-    enable = true;
+    enable =false;
     systemdTarget = "graphical-session.target";
     timeouts =
       # Lock screen

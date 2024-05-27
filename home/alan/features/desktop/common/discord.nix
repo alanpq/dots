@@ -2,7 +2,7 @@
 
 let inherit (config.colorscheme) colors;
 in {
-  home.packages = with pkgs; [ discord discocss ];
+  home.packages = with pkgs; [ vesktop discord discocss ];
 
   # home.persistence = {
   #   "/persist/home/alan".directories = [ ".config/discord" ];

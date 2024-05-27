@@ -5,9 +5,9 @@ let
     hyprland = config.wayland.windowManager.hyprland.package;
   }).overrideAttrs (old: {
     # Yeet the initialization notification (I hate it)
-    # postPatch = (old.postPatch or "") + ''
-    #   ${lib.getExe pkgs.gnused} -i '/Initialized successfully/d' main.cpp
-    # '';
+    postPatch = (old.postPatch or "") + ''
+      ${lib.getExe pkgs.gnused} -i '/Initialized successfully/d' main.cpp
+    '';
   });
 in
 {

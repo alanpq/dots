@@ -4,7 +4,7 @@
     ../common/wayland-wm
 
     ./basic-binds.nix
-    ./hyprbars.nix
+    # ./hyprbars.nix
   ];
 
   xdg.portal = {
@@ -23,6 +23,7 @@
     xwayland.enable = true;
     package = pkgs.inputs.hyprland.hyprland.override {
       # enableNvidiaPatches = true;
+      enableXWayland = true;
     };
     systemd = {
       enable = true;
@@ -37,13 +38,15 @@
       general = {
         gaps_in = 5;
         gaps_out = 0;
-        border_size = 2.7;
-        cursor_inactive_timeout = 4;
+        border_size = 3;
         "col.active_border" = "0xff${config.colorscheme.colors.base0C}";
         "col.inactive_border" = "0xff${config.colorscheme.colors.base02}";
       };
-      workspace_swipe = true;
-      workspace_swipe_fingers = 4;
+      cursor = {
+        inactive_timeout = 4;
+      };
+      # workspace_swipe = true;
+      # workspace_swipe_fingers = 4;
       group = {
         "col.border_active" = "0xff${config.colorscheme.colors.base0B}";
         "col.border_inactive" = "0xff${config.colorscheme.colors.base04}";
@@ -70,12 +73,17 @@
         "blur,waybar"
         "ignorezero,waybar"
       ];
+      windowrulev2 = [
+        "opacity 1.0 override,initialTitle:(Discord Popout)"
+        "opacity 1.0 override,class:(firefox),title:(.*)(- YouTube — Mozilla Firefox)$"
+        "float,class:(klipr)$"
+      ];
       blurls = [
         "waybar"
       ];
 
       decoration = {
-        active_opacity = 0.94;
+        active_opacity = 1.0;
         inactive_opacity = 0.75;
         fullscreen_opacity = 1.0;
         rounding = 5;
@@ -165,6 +173,11 @@
           "CONTROL,Print,exec,${grimblast} --notify --freeze copy screen"
           "SUPER,Print,exec,${grimblast} --notify --freeze copy area"
           "ALT,Print,exec,${grimblast} --notify --freeze copy area"
+          ",Insert,exec,${grimblast} --notify --freeze copy output"
+          "SHIFT,Insert,exec,${grimblast} --notify --freeze copy active"
+          "CONTROL,Insert,exec,${grimblast} --notify --freeze copy screen"
+          "SUPER,Insert,exec,${grimblast} --notify --freeze copy area"
+          "ALT,Insert,exec,${grimblast} --notify --freeze copy area"
           # Tally counter
           "SUPER,z,exec,${notify-send} -t 1000 $(${tly} time) && ${tly} add && ${gtk-play} -i dialog-information" # Add new entry
           "SUPERCONTROL,z,exec,${notify-send} -t 1000 $(${tly} time) && ${tly} undo && ${gtk-play} -i dialog-warning" # Undo last entry
