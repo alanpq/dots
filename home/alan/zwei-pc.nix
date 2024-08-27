@@ -33,6 +33,10 @@
     radare2
     obs-studio
     jetbrains.webstorm
+    jetbrains.rust-rover
+    jetbrains-toolbox
+
+    imhex
   ];
 
   monitors = [
