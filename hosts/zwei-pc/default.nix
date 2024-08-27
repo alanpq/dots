@@ -63,6 +63,7 @@
       chainloader /EFI/Microsoft/Boot/bootmgfw.efi
     }
   '';
+  boot.loader.grub.configurationLimit = 5;
 
   powerManagement.cpuFreqGovernor = "performance";
 
