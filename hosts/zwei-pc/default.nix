@@ -7,30 +7,33 @@
     ./hardware-configuration.nix
     ../common/global
 
+    ../common/optional/kde.nix
+
     ../common/optional/ephemeral-btrfs.nix
 
     ../common/optional/pipewire.nix
 
     ../common/optional/docker.nix
     ../common/optional/libvirt.nix
-    ../common/optional/tui-greetd.nix
+    # ../common/optional/tui-greetd.nix
     ../common/optional/grub.nix
     ../common/optional/fonts
+    ../common/optional/nix-ld.nix
 
     ../common/users/alan
   ];
 
   services.ollama = {
-  #package = pkgs.unstable.ollama; # Uncomment if you want to use the unstable channel, see https://fictionbecomesfact.com/nixos-unstable-channel
-  enable = true;
-  acceleration = "cuda"; # Or "rocm"
-  #environmentVariables = { # I haven't been able to get this to work myself yet, but I'm sharing it for the sake of completeness
+    #package = pkgs.unstable.ollama; # Uncomment if you want to use the unstable channel, see https://fictionbecomesfact.com/nixos-unstable-channel
+    enable = true;
+    acceleration = "cuda"; # Or "rocm"
+    #environmentVariables = { # I haven't been able to get this to work myself yet, but I'm sharing it for the sake of completeness
     # HOME = "/home/ollama";
     # OLLAMA_MODELS = "/home/ollama/models";
     # OLLAMA_HOST = "0.0.0.0:11434"; # Make Ollama accesible outside of localhost
     # OLLAMA_ORIGINS = "http://localhost:8080,http://192.168.0.10:*"; # Allow access, otherwise Ollama returns 403 forbidden due to CORS
-  #};
-};
+    #};
+  };
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
@@ -73,11 +76,11 @@
     dconf.enable = true;
     kdeconnect.enable = true;
   };
-services.flatpak.enable = true;
-xdg.portal = {
-  enable = true;
-  extraPortals = [ pkgs.inputs.hyprland.xdg-desktop-portal-hyprland ];
-};
+  services.flatpak.enable = true;
+  # xdg.portal = {
+  #   enable = true;
+  #   extraPortals = [ pkgs.inputs.hyprland.xdg-desktop-portal-hyprland ];
+  # };
   services.xserver = {
     enable = true;
     videoDrivers = [ "nvidia" ];
@@ -88,30 +91,30 @@ xdg.portal = {
   };
 
   environment.sessionVariables = {
-    GDK_BACKEND = "wayland,x11";
-    SDL_VIDEODRIVER = "wayland";
-    CLUTTER_BACKEND = "wayland";
-    MOZ_ENABLE_WAYLAND = "1";
-    MOZ_DISABLE_RDD_SANDBOX = "1";
-    _JAVA_AWT_VM_NONREPARENTING = "1";
-    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    QT_QPA_PLATFORM = "wayland";
-    LIBVA_DRIVER_NAME = "nvidia";
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    __NV_PRIME_RENDER_OFFLOAD = "1";
-    __VK_LAYER_NV_optimus = "NVIDIA_only";
-    PROTON_ENABLE_NGX_UPDATER = "1";
-    NVD_BACKEND = "direct";
-    __GL_VRR_ALLOWED = "1";
-    WLR_DRM_NO_ATOMIC = "1";
-    WLR_USE_LIBINPUT = "1";
-    # XWAYLAND_NO_GLAMOR = "1"; # with this you'll need to use gamescope for gaming
-    __GL_MaxFramesAllowed = "1";
-    WLR_RENDERER_ALLOW_SOFTWARE = "1";
-    XDG_SESSION_TYPE = "wayland";
-    VDPAU_DRIVER = "va_gl";
-    NIXOS_OZONE_WL = "1";
+    # GDK_BACKEND = "wayland,x11";
+    # SDL_VIDEODRIVER = "wayland";
+    # CLUTTER_BACKEND = "wayland";
+    # MOZ_ENABLE_WAYLAND = "1";
+    # MOZ_DISABLE_RDD_SANDBOX = "1";
+    # _JAVA_AWT_VM_NONREPARENTING = "1";
+    # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    # QT_QPA_PLATFORM = "wayland";
+    # LIBVA_DRIVER_NAME = "nvidia";
+    # GBM_BACKEND = "nvidia-drm";
+    # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    # __NV_PRIME_RENDER_OFFLOAD = "1";
+    # __VK_LAYER_NV_optimus = "NVIDIA_only";
+    # PROTON_ENABLE_NGX_UPDATER = "1";
+    # NVD_BACKEND = "direct";
+    # __GL_VRR_ALLOWED = "1";
+    # WLR_DRM_NO_ATOMIC = "1";
+    # WLR_USE_LIBINPUT = "1";
+    # # XWAYLAND_NO_GLAMOR = "1"; # with this you'll need to use gamescope for gaming
+    # __GL_MaxFramesAllowed = "1";
+    # WLR_RENDERER_ALLOW_SOFTWARE = "1";
+    # XDG_SESSION_TYPE = "wayland";
+    # VDPAU_DRIVER = "va_gl";
+    # NIXOS_OZONE_WL = "1";
   };
 
   # TODO: put these aliases with the associated packages (exa, bat, etc)
@@ -129,14 +132,12 @@ xdg.portal = {
   hardware = {
     opengl = {
       enable = true;
-      driSupport = true;
       driSupport32Bit = true;
       extraPackages = with pkgs; [
         vaapiVdpau
         libvdpau-va-gl
       ];
       extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
-      setLdLibraryPath = true;
     };
     nvidia = {
       open = false;

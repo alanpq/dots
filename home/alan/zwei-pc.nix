@@ -1,7 +1,7 @@
 { inputs, outputs, pkgs, ... }: {
   imports = [
     ./global
-    ./features/desktop/hyprland
+    ./features/desktop/kde
     ./features/desktop/wireless
 
     ./features/desktop/common/vscode.nix
