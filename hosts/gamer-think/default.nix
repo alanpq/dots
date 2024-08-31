@@ -1,5 +1,7 @@
 { pkgs, inputs, ...}: {
   imports = [
+    inputs.hardware.nixosModules.common-cpu-intel
+    inputs.hardware.nixosModules.common-gpu-intel
     inputs.hardware.nixosModules.lenovo-thinkpad-t14
     ./hardware-configuration.nix
     ../common/global
@@ -18,6 +20,7 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.supportedFilesystems = [ "ntfs" "vfat" ];
 
   networking = {
     hostName = "gamer-think";
