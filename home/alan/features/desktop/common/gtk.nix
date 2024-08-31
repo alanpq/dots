@@ -15,8 +15,10 @@ rec {
       package = gtkThemeFromScheme { scheme = config.colorscheme; };
     };
     iconTheme = {
-      name = "Papirus";
-      package = pkgs.papirus-icon-theme;
+      # name = "Papirus";
+      # package = pkgs.papirus-icon-theme;
+      name = "Adwaita-dark";
+      package = pkgs.gnome.gnome-themes-extra;
     };
   };
 

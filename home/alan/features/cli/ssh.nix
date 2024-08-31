@@ -12,8 +12,15 @@ in
         identityFile = "~/.ssh/id_git";
       };
       "vm" = {
-        hostname = "192.168.122.238";
+        hostname = "192.168.122.35";
         identityFile = "~/.ssh/id_vm";
+      };
+      "devbox-101" = {
+        hostname = "127.0.0.1";
+        port = 22101;
+        identityFile = "~/.ssh/id_vm";
+        proxyJump = "vm";
+        user = "admin";
       };
       "ein" = {
         hostname = "gs.alanp.me";

@@ -14,8 +14,10 @@
     NIX_CONFIG = "extra-experimental-features = nix-command flakes repl-flake";
     nativeBuildInputs = with pkgs; [
       nix
+      nixpkgs-fmt
       home-manager
       git
+      git-crypt
 
       sops
       ssh-to-age

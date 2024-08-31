@@ -5,6 +5,7 @@
     ./direnv.nix
     ./gh.nix
     ./git.nix
+    ./gpg.nix
     ./nix-index.nix
     ./pfetch.nix
     ./ranger.nix
@@ -30,8 +31,11 @@
     # trekscii # Cute startrek cli printer
     timer # To help with my ADHD paralysis
 
+    git-crypt
+
     nil # Nix LSP
     nixfmt # Nix formatter
+    nixpkgs-fmt # also nix formatter
     nvd # Differ
     nix-output-monitor
     # nh # Nice wrapper for NixOS and HM

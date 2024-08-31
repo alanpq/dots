@@ -4,5 +4,5 @@
   # pass-secret-service = import ./pass-secret-service.nix;
   shellcolor = import ./shellcolor.nix;
   wallpaper = import ./wallpaper.nix;
-  xdg-portal = import ./xdg-portal.nix;
+  # xdg-portal = import ./xdg-portal.nix;
 }

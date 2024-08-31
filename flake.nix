@@ -4,9 +4,15 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    hardware.url = "github:nixos/nixos-hardware";
 
+    hardware.url = "github:nixos/nixos-hardware";
+    impermanence.url = "github:nix-community/impermanence";
     nix-colors.url = "github:misterio77/nix-colors";
+
+    nix-ld = {
+      url = "github:Mic92/nix-ld";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -25,7 +31,7 @@
     };
 
     hyprland = {
-      url = "github:hyprwm/hyprland";
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprwm-contrib = {
@@ -36,14 +42,14 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
-    
+
     nh = {
       url = "github:viperML/nh";
       inputs.nixpkgs.follows = "nixpkgs"; # override this repo's nixpkgs snapshot
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, home-manager, secrix, ... }@inputs:
+  outputs = { self, nixpkgs, flake-utils, home-manager, ... }@inputs:
     let
       inherit (self) outputs;
       lib = nixpkgs.lib // home-manager.lib;
@@ -68,10 +74,10 @@
       formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
 
       wallpapers = import ./home/alan/wallpapers;
-      
+
       nixosConfigurations = {
         # Main desktop
-        zwei = lib.nixosSystem {
+        zwei-pc = lib.nixosSystem {
           modules = [ ./hosts/zwei-pc ];
           specialArgs = { inherit inputs outputs; };
         };
@@ -84,8 +90,8 @@
       };
 
       homeConfigurations = {
-        "alan@zwei" = lib.homeManagerConfiguration {
-          modules = [ ./home/alan/zwei.nix ];
+        "alan@zwei-pc" = lib.homeManagerConfiguration {
+          modules = [ ./home/alan/zwei-pc.nix ];
           pkgs = pkgsFor.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
         };

@@ -10,6 +10,8 @@ local sources = {
     extra_args = {"--edition", "2021"},
   }),
 
+   formatting.treefmt,
+
    lint.shellcheck,
 }
 

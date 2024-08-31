@@ -8,6 +8,7 @@
     ./gtk.nix
     ./kdeconnect.nix
     ./pavucontrol.nix
+    ./pcmanfm.nix
     ./playerctl.nix
     ./qt.nix
   ];
