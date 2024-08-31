@@ -16,7 +16,7 @@
         h = left; l = right; k = up; j = down;
       };
     in [
-      "SUPERSHIFT,q,killactive"
+      "SUPER,q,killactive"
       "SUPERSHIFT,e,exit"
 
       "SUPERSHIFT,s,pin,active"
