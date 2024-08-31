@@ -16,6 +16,8 @@
     comma # Install and run programs by sticking a , before them
     distrobox # Nice escape hatch, integrates docker images with my environment
 
+    tmux # self explanatory
+
     bc # Calculator
     bottom # System viewer
     ncdu # TUI disk usage
