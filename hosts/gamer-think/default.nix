@@ -5,6 +5,7 @@
     ../common/global
 
     ../common/optional/greetd.nix
+    ../common/optional/docker.nix
     ../common/optional/wireless.nix
     ../common/optional/lightd.nix
     ../common/optional/pipewire.nix
