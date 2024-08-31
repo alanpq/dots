@@ -7,6 +7,7 @@
     ./features/desktop/common/vscode.nix
 
     ./features/games
+    ./features/productivity
 
     ./features/libvirt
     # ./features/rgb
