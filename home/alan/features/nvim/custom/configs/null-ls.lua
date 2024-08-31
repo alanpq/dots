@@ -6,7 +6,9 @@ local lint = null_ls.builtins.diagnostics
 local sources = {
    formatting.prettier,
    formatting.stylua,
-   formatting.rustfmt,
+   formatting.rustfmt.with({
+    extra_args = {"--edition", "2021"},
+  }),
 
    lint.shellcheck,
 }
