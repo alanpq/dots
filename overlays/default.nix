@@ -8,6 +8,10 @@ in
   # Third party overlays
   nh = inputs.nh.overlays.default;
 
+  stable-replacements = final: prev: {
+    swaylock-effects = inputs.nixpkgs-stable.legacyPackages.${prev.system}.swaylock-effects;
+  };
+
   # For every flake input, aliases 'pkgs.inputs.${flake}' to
   # 'inputs.${flake}.packages.${pkgs.system}' or
   # 'inputs.${flake}.legacyPackages.${pkgs.system}'
