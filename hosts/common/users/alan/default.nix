@@ -36,5 +36,4 @@ in
   home-manager.users.alan = import ../../../../home/alan/${config.networking.hostName}.nix;
 
   services.geoclue2.enable = true;
-  security.pam.services = { swaylock = { }; };
 }
