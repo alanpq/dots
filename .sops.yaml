@@ -4,7 +4,7 @@ keys:
     - &alan 111D6C0637278F94E3438D9B6B2B471B33BC4E0B
   # Hosts
   - &hosts:
-    - &gamer-think age1ghyfehzdenstl80fy4ywgmcqxmpnv0727y5rh0hhcve82k6qh4wq66san6
+    - &gamer-think age1wxml3qqg7r23u6w3ppj59lrljrqveah70l2dyg35trwz9gzwcakse7m496
     - &zwei-pc age1n54qel5raqedqst3n6mtmzu5ptyrrddfznzpxrpjev3vaapd3fvsxj6vyr
 
 creation_rules:
