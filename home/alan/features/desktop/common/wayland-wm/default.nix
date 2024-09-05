@@ -7,6 +7,7 @@
     ./mako.nix
     ./swayidle.nix
     ./swaylock.nix
+    ./hyprlock.nix
     ./waybar.nix
     ./wofi.nix
     ./zathura.nix
