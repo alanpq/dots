@@ -31,6 +31,16 @@ in
     formats = prev.formats // import ../pkgs/formats { pkgs = final; };
   };
 
+  node-pkgs = final: prev: {
+    myNodePkgs = final.callPackage ../pkgs/node/node-packages.nix {
+      nodeEnv = final.callPackage ../pkgs/node/node-env.nix (with final; {
+        inherit stdenv lib python2 runCommand writeTextFile writeShellScript;
+        inherit nodejs;
+        libtool = if stdenv.isDarwin then cctools or darwin.cctools else null;
+      });
+    };
+  };
+
   # Modifies existing packages
   modifications = final: prev: {
     pfetch = prev.pfetch.overrideAttrs (oldAttrs: {
