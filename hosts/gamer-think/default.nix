@@ -20,7 +20,14 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = [ "ntfs" "vfat" ];
+  boot.supportedFilesystems = [ "ntfs" "vfat" "ext4" "lvm" ];
+  boot.initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/2acacb9f-fe23-4c80-bf96-695fe89adbf3";
+
+  fileSystems."/" = pkgs.lib.mkForce {
+    device = "/dev/pool/root";
+    fsType = "ext4";
+  };
+  swapDevices = [{device = "/dev/pool/swap";}];
 
   networking = {
     hostName = "gamer-think";
@@ -39,5 +46,5 @@
     opentabletdriver.enable = true;
   };
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "24.05";
 }
