@@ -16,7 +16,11 @@
     inputs.hyprwm-contrib.grimblast
     # hyprslurp
     hyprpicker
+    hyprcursor
+    inputs.rose-pine-hyprcursor.default
   ];
+
+  
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -35,6 +39,9 @@
     };
 
     settings = {
+      env = [
+        "HYPRCURSOR_THEME,rose-pine-hyprcursor"
+      ];
       general = {
         gaps_in = 5;
         gaps_out = 0;
@@ -125,6 +132,7 @@
 
       exec = [
         "${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill"
+        "hyprctl setcursor rose-pine-hyprcursor 35"
       ];
 
       bind =
