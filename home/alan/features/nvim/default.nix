@@ -5,17 +5,13 @@
     vimAlias = true;
   };
 
-  xdg.configFile."nvim/lua/custom" = {
-    source = ./custom;
-    recursive = true;
-  };
+  home.packages = with pkgs; [
+    lazygit
+    myNodePkgs."@vtsls/language-server"
+  ];
 
   xdg.configFile."nvim" = {
-    source = builtins.fetchGit {
-      url = "https://github.com/NvChad/NvChad.git";
-      rev = "9d37797e6f9856ef25cfa266cff43f764e828827";
-      allRefs = true;
-    };
+    source = ./config;
     recursive = true;
   };
 }

@@ -4,7 +4,8 @@ local formatting = null_ls.builtins.formatting
 local lint = null_ls.builtins.diagnostics
 
 local sources = {
-   formatting.prettier,
+   -- formatting.biome,
+   formatting.prettierd,
    formatting.stylua,
    formatting.rustfmt.with({
     extra_args = {"--edition", "2021"},
