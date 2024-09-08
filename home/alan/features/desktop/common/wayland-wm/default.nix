@@ -5,8 +5,7 @@
     ./gammastep.nix
     ./kitty.nix
     ./mako.nix
-    ./swayidle.nix
-    ./swaylock.nix
+    ./hypridle.nix
     ./hyprlock.nix
     ./waybar.nix
     ./wofi.nix

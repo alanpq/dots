@@ -20,7 +20,7 @@
     inputs.rose-pine-hyprcursor.default
   ];
 
-  
+
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -132,8 +132,13 @@
 
       exec = [
         "${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill"
-        "hyprctl setcursor rose-pine-hyprcursor 35"
       ];
+      exec-once = [
+        "hyprctl setcursor rose-pine-hyprcursor 35"
+      ] ++
+      (lib.optionals config.services.hypridle.enable [
+        "${pkgs.hypridle}/bin/hypridle"
+      ]);
 
       bind =
         let
