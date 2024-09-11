@@ -23,18 +23,6 @@
     ../common/users/alan
   ];
 
-  services.ollama = {
-    #package = pkgs.unstable.ollama; # Uncomment if you want to use the unstable channel, see https://fictionbecomesfact.com/nixos-unstable-channel
-    enable = true;
-    acceleration = "cuda"; # Or "rocm"
-    #environmentVariables = { # I haven't been able to get this to work myself yet, but I'm sharing it for the sake of completeness
-    # HOME = "/home/ollama";
-    # OLLAMA_MODELS = "/home/ollama/models";
-    # OLLAMA_HOST = "0.0.0.0:11434"; # Make Ollama accesible outside of localhost
-    # OLLAMA_ORIGINS = "http://localhost:8080,http://192.168.0.10:*"; # Allow access, otherwise Ollama returns 403 forbidden due to CORS
-    #};
-  };
-
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     binfmt.emulatedSystems = [ "aarch64-linux" "i686-linux" ];
@@ -50,7 +38,6 @@
     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
   '';
   security.polkit.enable = true;
-
 
   # set $FS_UUID to the UUID of the EFI partition
   boot.loader.grub.extraEntries = ''
@@ -116,18 +103,6 @@
     # XDG_SESSION_TYPE = "wayland";
     # VDPAU_DRIVER = "va_gl";
     # NIXOS_OZONE_WL = "1";
-  };
-
-  # TODO: put these aliases with the associated packages (exa, bat, etc)
-  environment.shellAliases = {
-    ls = "exa";
-    ll = "exa -l";
-    la = "exa -la";
-    tree = "exa -T";
-
-    ip = "ip -color";
-
-    cat = "bat --paging never";
   };
 
   hardware = {

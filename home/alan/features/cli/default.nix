@@ -13,6 +13,14 @@
     ./ssh.nix
     ./starship.nix
   ];
+  home.shellAliases = {
+    ip = "ip -color";
+
+    ls = "exa";
+    ll = "exa -l";
+    la = "exa -la";
+    tree = "exa -T";
+  };
   home.packages = with pkgs; [
     comma # Install and run programs by sticking a , before them
     distrobox # Nice escape hatch, integrates docker images with my environment
