@@ -2,9 +2,9 @@
 let inherit (config.colorscheme) colors;
 in {
   programs.shellcolor = {
-    enable = true;
+    enable = false;
     settings = {
-      base00 = "${colors.base00}";
+      # base00 = "${colors.base00}";
       base01 = "${colors.base01}";
       base02 = "${colors.base02}";
       base03 = "${colors.base03}";
