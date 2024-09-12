@@ -1,7 +1,8 @@
 { inputs, outputs, pkgs, ... }: {
   imports = [
     ./global
-    ./features/desktop/kde
+    # ./features/desktop/kde
+    ./features/desktop/hyprland
     ./features/desktop/wireless
 
     ./features/desktop/common/vscode.nix
@@ -24,7 +25,7 @@
 
   services.vscode-server.enable = true;
 
-  colorscheme = inputs.nix-colors.colorschemes.paraiso;
+  colorscheme = inputs.nix-colors.colorschemes.heetch;
   wallpaper = outputs.wallpapers.firewatch-purple;
 
   home.packages = with pkgs; [
@@ -56,7 +57,7 @@
       height = 1080;
       workspace = "2";
       refreshRate = 144;
-      transform = 1; # rotate 90 deg
+      # transform = 1; # rotate 90 deg
       x = 0;
       primary = true;
     }

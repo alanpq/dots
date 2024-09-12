@@ -7,7 +7,8 @@
     ./hardware-configuration.nix
     ../common/global
 
-    ../common/optional/kde.nix
+    # ../common/optional/kde.nix
+    ../common/optional/tui-greetd.nix
 
     ../common/optional/ephemeral-btrfs.nix
 
@@ -15,7 +16,6 @@
 
     ../common/optional/docker.nix
     ../common/optional/libvirt.nix
-    # ../common/optional/tui-greetd.nix
     ../common/optional/grub.nix
     ../common/optional/fonts
     ../common/optional/nix-ld.nix
@@ -65,10 +65,10 @@
     kdeconnect.enable = true;
   };
   services.flatpak.enable = true;
-  # xdg.portal = {
-  #   enable = true;
-  #   extraPortals = [ pkgs.inputs.hyprland.xdg-desktop-portal-hyprland ];
-  # };
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.inputs.hyprland.xdg-desktop-portal-hyprland ];
+  };
   services.xserver = {
     enable = true;
     videoDrivers = [ "nvidia" ];
@@ -79,6 +79,10 @@
   };
 
   environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "nvidia";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    __GL_VRR_ALLOWED = "1";
+    AQ_DRM_NO_ATOMIC = "1"; # use legacy DRM interface instead of atomic mode setting.
     # GDK_BACKEND = "wayland,x11";
     # SDL_VIDEODRIVER = "wayland";
     # CLUTTER_BACKEND = "wayland";
@@ -87,22 +91,18 @@
     # _JAVA_AWT_VM_NONREPARENTING = "1";
     # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
     # QT_QPA_PLATFORM = "wayland";
-    # LIBVA_DRIVER_NAME = "nvidia";
     # GBM_BACKEND = "nvidia-drm";
-    # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     # __NV_PRIME_RENDER_OFFLOAD = "1";
     # __VK_LAYER_NV_optimus = "NVIDIA_only";
     # PROTON_ENABLE_NGX_UPDATER = "1";
     # NVD_BACKEND = "direct";
-    # __GL_VRR_ALLOWED = "1";
-    # WLR_DRM_NO_ATOMIC = "1";
     # WLR_USE_LIBINPUT = "1";
     # # XWAYLAND_NO_GLAMOR = "1"; # with this you'll need to use gamescope for gaming
     # __GL_MaxFramesAllowed = "1";
     # WLR_RENDERER_ALLOW_SOFTWARE = "1";
     # XDG_SESSION_TYPE = "wayland";
     # VDPAU_DRIVER = "va_gl";
-    # NIXOS_OZONE_WL = "1";
+    NIXOS_OZONE_WL = "1";
   };
 
   hardware = {
