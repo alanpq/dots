@@ -96,8 +96,13 @@
         rounding = 5;
         blur = {
           enabled = true;
-          size = 5;
-          passes = 3;
+          size = 3;
+          passes = 5;
+          noise = 0.05;
+          contrast = 0.7;
+          brightness = 0.8172;
+          vibrancy = 0.5;
+          vibrancy_darkness = 0.0;
           new_optimizations = true;
           ignore_opacity = true;
         };
