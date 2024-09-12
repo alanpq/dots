@@ -30,6 +30,10 @@ in
         command = ''${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --remember --remember-user-session --cmd ${session}'';
         user = "greeter";
       };
+      initial_session = {
+        command = ''${session}'';
+        user = "alan";
+      };
     };
   };
 }

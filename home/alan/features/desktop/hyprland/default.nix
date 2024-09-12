@@ -136,6 +136,10 @@
       exec-once = [
         "hyprctl setcursor rose-pine-hyprcursor 35"
       ] ++
+      (lib.optionals config.programs.hyprlock.enable [
+        "${pkgs.hyprlock}/bin/hyprlock --immediate"
+      ])
+      ++
       (lib.optionals config.services.hypridle.enable [
         "${pkgs.hypridle}/bin/hypridle"
       ]);
