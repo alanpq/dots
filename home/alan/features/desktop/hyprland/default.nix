@@ -77,8 +77,8 @@
         new_window_takes_over_fullscreen = 2;
       };
       layerrule = [
-        "blur,waybar"
-        "ignorezero,waybar"
+        # "blur,waybar"
+        # "ignorezero,waybar"
       ];
       windowrulev2 = [
         "opacity 1.0 override,initialTitle:(Discord Popout)"
@@ -86,7 +86,7 @@
         "float,class:(klipr)$"
       ];
       blurls = [
-        "waybar"
+        # "waybar"
       ];
 
       decoration = {

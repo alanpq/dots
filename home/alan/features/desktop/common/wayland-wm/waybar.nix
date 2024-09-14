@@ -54,12 +54,17 @@ in
       primary = {
         # mode = "dock";
         layer = "top";
-        height = 40;
-        margin = "6";
         position = "top";
+
+        height = 40;
+        margin = "0";
+        margin-left = 10;
+        margin-right = 10;
+
+        spacing = "0";
+
         modules-left = [
           # "custom/menu"
-          "clock"
         ] ++ (lib.optionals hasSway [
           "sway/workspaces"
           "sway/mode"
@@ -72,28 +77,34 @@ in
         ];
 
         modules-center = [
-          "pulseaudio"
-          "battery"
           "custom/unread-mail"
           "custom/gpg-agent"
         ];
 
         modules-right = [
           "network"
+          "pulseaudio"
+          "backlight"
+          "battery"
           "custom/tailscale-ping"
           # TODO: currently broken for some reason
           # "custom/gammastep"
           "tray"
+          "clock"
         ];
 
         clock = {
           interval = 1;
-          format = "{:%d/%m %H:%M:<span alpha='60%'>%S</span>}";
+          format = "{0:%d/%m %H:%M:}<span alpha='60%'>{0:%S}</span>";
+          # format = "{:%d-%m}";
           format-alt = "{:%Y-%m-%d %H:%M:%S %z}";
           on-click-left = "mode";
-          tooltip-format = ''
-            <big>{:%Y %B}</big>
-            <tt><small>{calendar}</small></tt>'';
+          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+          calendar-weeks-pos = "right";
+          today-format = "<span color='#f38ba8'><b><u>{}</u></b></span>";
+          format-calendar = "<span color='#f2cdcd'><b>{}</b></span>";
+          format-calendar-weeks = "<span color='#94e2d5'><b>W{:%U}</b></span>";
+          format-calendar-weekdays = "<span color='#f9e2af'><b>{}</b></span>";
         };
         pulseaudio = {
           format = "{icon}  {volume}%";
@@ -308,80 +319,224 @@ in
     # x y z -> top, horizontal, bottom
     # w x y z -> top, right, bottom, left
     style = let inherit (config.colorscheme) colors; in /* css */ ''
-      * {
-        font-family: ${config.fontProfiles.regular.family}, ${config.fontProfiles.monospace.family};
-        font-size: 12pt;
-        padding: 0 8px;
-      }
+      @define-color base #1e1e2e;
+    @define-color mantle #181825;
+    @define-color crust #11111b;
 
-      .modules-right {
-        margin-right: -15px;
-      }
+    @define-color text #cdd6f4;
+    @define-color subtext0 #a6adc8;
+    @define-color subtext1 #bac2de;
 
-      .modules-left {
-        margin-left: -15px;
-      }
+    @define-color surface0 rgba(22, 25, 37, 0.9);
+    @define-color surface1 #45475a;
+    @define-color surface2 #585b70;
+    @define-color surface3 #394161;
 
-      window#waybar {
-        opacity: 0.85;
-        padding: 0;
-        background-color: #${colors.base01};
-        /* border: 2px solid #${colors.base0C};*/
-        border-radius: 10px 0 0 10px;
-        color: #${colors.base05};
-      }
+    @define-color overlay0 #6c7086;
+    @define-color overlay1 #7f849c;
+    @define-color overlay2 #9ba3c3;
 
-      #workspaces button {
-        background-color: #${colors.base01};
-        color: #${colors.base05};
-        padding: 5px 1px;
-        margin: 3px 0;
-      }
-      #workspaces button.hidden {
-        background-color: #${colors.base01};
-        color: #${colors.base04};
-      }
-      #workspaces button.focused,
-      #workspaces button.active {
-        background-color: #${colors.base0A};
-        color: #${colors.base01};
-      }
+    @define-color blue #89b4fa;
+    @define-color lavender #b4befe;
+    @define-color sapphire #74c7ec;
+    @define-color sky #89dceb;
+    @define-color teal #94e2d5;
+    @define-color green #a6e3a1;
+    @define-color yellow #f9e2af;
+    @define-color peach #fab387;
+    @define-color maroon #eba0ac;
+    @define-color red #f38ba8;
+    @define-color mauve #cba6f7;
+    @define-color pink #f5c2e7;
+    @define-color flamingo #f2cdcd;
+    @define-color rosewater #f5e0dc;
 
-      #clock {
-        font-family: ${config.fontProfiles.monospace.family};
-        background-color: #${colors.base0C};
-        color: #${colors.base01};
-        padding-left: 15px;
-        padding-right: 15px;
-        margin-top: 0;
-        margin-bottom: 0;
-        border-radius: 10px;
-      }
+    /* =============================== */
+    /* Universal Styling */
+    * {
+      border: none;
+      border-radius: 0;
+      font-family: 'CaskaydiaCove Nerd Font', monospace;
+      font-size: 13px;
+      min-height: 0;
+      color: @text;
+    }
 
-      #custom-menu {
-        background-color: #${colors.base0C};
-        color: #${colors.base00};
-        padding-left: 15px;
-        padding-right: 22px;
-        margin: 0;
-        border-radius: 10px;
+    /* =============================== */
+
+
+    /* =============================== */
+    /* Bar Styling */
+#waybar {
+      background: transparent;
+      color: @text;
+    }
+
+    /* =============================== */
+
+
+    /* =============================== */
+    /* Main Modules */
+#custom-launcher,
+#workspaces,
+#window,
+#tray,
+#backlight,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#mpd,
+#custom-music.Stopped {
+      background: @surface0;
+    }
+
+
+    /* =============================== */
+    /* Music/PlayerCTL Module */
+#custom-music {
+      color: @mauve;
+    }
+
+    /* =============================== */
+
+
+    /* =============================== */
+    /* Network Module */
+#network {
+      color: @blue;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      margin-right: 0px;
+      padding-right: 5px;
+    }
+
+    /* =============================== */
+
+
+    /* =============================== */
+    /* PulseAudio Module */
+#pulseaudio {
+      color: @mauve;
+      border-radius: 0;
+      margin-right: 0px;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+    /* =============================== */
+
+
+    /* =============================== */
+    /* Backlight Module */
+#backlight {
+      color: @teal;
+      border-radius: 0;
+      margin-right: 0px;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+    /* =============================== */
+
+
+    /* =============================== */
+    /* Battery Module */
+#battery {
+      color: @green;
+      border-radius: 0;
+      margin-right: 0px;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+#battery.charging {
+      color: @green;
+    }
+
+#battery.warning:not(.charging) {
+      color: @maroon;
+    }
+
+#battery.critical:not(.charging) {
+      color: @red;
+      animation-name: blink;
+      animation-duration: 1s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+
+    @keyframes blink {
+      to {
+        background: @red;
+        color: @surface1;
       }
-      #custom-hostname {
-        background-color: #${colors.base0C};
-        color: #${colors.base00};
-        padding-left: 15px;
-        padding-right: 18px;
-        margin-right: 0;
-        margin-top: 0;
-        margin-bottom: 0;
-        border-radius: 10px;
-      }
-      #custom-currentplayer {
-        padding-right: 0;
-      }
-      #tray {
-        color: #${colors.base05};
-      }
+    }
+
+    /* =============================== */
+
+    /* Notifications Module */
+#custom-notifications {
+      color: @mauve;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      padding-left: 5px;
+      padding-right: 1.25rem;
+    }
+
+
+    /* =============================== */
+    /* Tray Module */
+#tray {
+      color: @mauve;
+      padding-right: 1.25rem;
+    }
+
+    /* =============================== */
+
+
+    /* =============================== */
+    /* |       Custom Modules        | */
+    /* =============================== */
+#custom-custom {
+      color: @peach;
+      padding-right: 1.25rem;
+      margin-right: 0px;
+    }
+
+    /* Screenshot */
+#custom-ss {
+      color: @mauve;
+      padding-right: 1.5rem;
+    }
+
+    /* Wallpaper */
+#custom-cycle_wall {
+      background: linear-gradient(45deg, rgba(245, 194, 231, 1) 0%, rgba(203, 166, 247, 1) 0%, rgba(243, 139, 168, 1) 13%, rgba(235, 160, 172, 1) 26%, rgba(250, 179, 135, 1) 34%, rgba(249, 226, 175, 1) 49%, rgba(166, 227, 161, 1) 65%, rgba(148, 226, 213, 1) 77%, rgba(137, 220, 235, 1) 82%, rgba(116, 199, 236, 1) 88%, rgba(137, 180, 250, 1) 95%);
+      background-size: 500% 500%;
+      animation: gradient 7s linear infinite;
+    }
+
+    /* Notifications Module */
+#custom-clipboard {
+      color: @mauve;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      margin-right: 0px;
+      padding-right: 8px;
+    }
+
+    /* Powermenu Module */
+#custom-power {
+      color: @mauve;
+      /* border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      padding-left: 8px; */
+      padding-right: 1.20rem;
+    }
+
+    /* =============================== */
     '';
   };
 }
