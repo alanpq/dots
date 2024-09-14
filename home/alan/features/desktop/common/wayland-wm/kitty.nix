@@ -25,9 +25,12 @@ in
       shell_integration = "no-rc"; # I prefer to do it manually
       scrollback_lines = 4000;
       scrollback_pager_history_size = 2048;
-      window_padding_width = 15;
+      window_padding_width = 10;
       foreground = "#${colors.base05}";
       background = "#${colors.base00}";
+      second_transparent_background = "#${colors.base00}";
+      background_opacity = "0.6";
+      background_tint_gaps = "1.0";
       selection_background = "#${colors.base05}";
       selection_foreground = "#${colors.base00}";
       url_color = "#${colors.base04}";
