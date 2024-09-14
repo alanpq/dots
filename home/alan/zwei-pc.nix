@@ -1,4 +1,6 @@
-{ inputs, outputs, pkgs, ... }: {
+{ inputs, outputs, pkgs, ... }: let
+  lib = pkgs.lib;
+in {
   imports = [
     ./global
     # ./features/desktop/kde
@@ -27,6 +29,10 @@
 
   colorscheme = inputs.nix-colors.colorschemes.heetch;
   wallpaper = outputs.wallpapers.firewatch-purple;
+
+  services.hypridle = {
+    enable = lib.mkForce false;
+  };
 
   home.packages = with pkgs; [
     bruno
