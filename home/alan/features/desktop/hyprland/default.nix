@@ -45,7 +45,7 @@
       general = {
         gaps_in = 5;
         gaps_out = 0;
-        border_size = 3;
+        border_size = 1;
         "col.active_border" = "0xff${config.colorscheme.colors.base0C}";
         "col.inactive_border" = "0xff${config.colorscheme.colors.base02}";
       };
