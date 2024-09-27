@@ -53,15 +53,17 @@ kill_pid_file() {
     fi
 }
 
+dir=$(mktemp -d)
+
 # PID of the cava process and while loop launched from the script
-cava_waybar_pid="/tmp/cava_waybar_pid"
+cava_waybar_pid="${dir}/cava_waybar_pid"
 
 # Clean pipe for cava
-cava_waybar_pipe="/tmp/cava_waybar.fifo"
+cava_waybar_pipe="${dir}/cava_waybar.fifo"
 clean_create_pipe $cava_waybar_pipe
 
 # Custom cava config
-cava_waybar_config="/tmp/cava_waybar_config"
+cava_waybar_config="${dir}/cava_waybar_config"
 echo "
 [general]
 mode = normal
@@ -76,7 +78,7 @@ ascii_max_range = 7
 " > $cava_waybar_config
 
 # Clean pipe for playerctl
-playerctl_waybar_pipe="/tmp/playerctl_waybar.fifo"
+playerctl_waybar_pipe="${dir}/playerctl_waybar.fifo"
 clean_create_pipe $playerctl_waybar_pipe
 
 # playerctl output into playerctl_waybar_pipe
