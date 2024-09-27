@@ -89,6 +89,8 @@ while read -r line; do
     # Kill the cava process to stop the input to cava_waybar_pipe
     kill_pid_file $cava_waybar_pid
 
+    echo "$line" | jq --unbuffered --compact-output
+
     # If the class says "Playing" and equilizer is enabled
     # then show the cava equilizer
     if [[ $EQUILIZER == 1 && $(echo $line | jq -r '.class') == 'Playing' ]]; then
@@ -109,7 +111,5 @@ while read -r line; do
 
         # Save the while loop PID into the file as well
         echo $! >> $cava_waybar_pid
-    else
-        echo "$line" | jq --unbuffered --compact-output
     fi
 done < $playerctl_waybar_pipe
