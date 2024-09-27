@@ -27,7 +27,7 @@ in {
 
   services.vscode-server.enable = true;
 
-  colorscheme = inputs.nix-colors.colorschemes.heetch;
+  colorscheme = inputs.nix-colors.colorschemes.apathy;
   wallpaper = outputs.wallpapers.firewatch-purple;
 
   services.hypridle = {
