@@ -12,7 +12,8 @@
 
     ../common/optional/ephemeral-btrfs.nix
 
-    ../common/optional/pipewire.nix
+    ../common/optional/pipewire
+    ../common/optional/pipewire/bluetooth.nix
 
     ../common/optional/docker.nix
     ../common/optional/libvirt.nix
