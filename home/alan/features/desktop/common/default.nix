@@ -9,6 +9,7 @@
     ./kdeconnect.nix
     ./pavucontrol.nix
     ./pcmanfm.nix
+    ./thunar.nix
     ./playerctl.nix
     ./qt.nix
   ];
