@@ -22,6 +22,7 @@ in
       size = 12;
     };
     settings = {
+      allow_remote_control = true;
       shell_integration = "no-rc"; # I prefer to do it manually
       scrollback_lines = 4000;
       scrollback_pager_history_size = 2048;
