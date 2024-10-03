@@ -5,7 +5,7 @@ local options = {
     html = { "prettierd" },
     javascript = { "prettierd" },
     typescript = { "prettierd" },
-    
+
     ["*"] = { "codespell" },
     ["_"] = { "trim_whitespace" },
   },

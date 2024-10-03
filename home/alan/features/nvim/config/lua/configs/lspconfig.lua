@@ -19,7 +19,6 @@ end
 lspconfig.rust_analyzer.setup {
   on_attach = nvlsp.on_attach,
   -- capabilities = capabilities,
-
 }
 -- configuring single server, example: typescript
 -- lspconfig.tsserver.setup {

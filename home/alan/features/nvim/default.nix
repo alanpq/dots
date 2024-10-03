@@ -3,6 +3,9 @@
     enable = true;
     viAlias = true;
     vimAlias = true;
+    plugins = with pkgs; [
+      tree-sitter-grammars.tree-sitter-nix
+    ];
   };
 
   home.packages = with pkgs; [
