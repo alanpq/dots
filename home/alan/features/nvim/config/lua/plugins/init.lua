@@ -26,7 +26,34 @@ return {
         "bash",
         "rust",
         "toml",
+        "markdown",
+        "markdown_inline",
+        "comment",
+      },
+      indent = { enable = true },
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+      },
+      context_commentstring = {
+        enable = true,
+        enable_autocmd = false,
+      },
+      markdown_fenced_languages = {
+        "vim",
+        "lua",
+        "python",
+        "javascript",
+        "typescript",
+        "rust",
+        "c",
+        "cpp",
       },
     },
   },
-}
+},
+
+{
+  "JoosepAlviste/nvim-ts-context-commentstring",
+  lazy = false,
+},
