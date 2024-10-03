@@ -1,14 +1,21 @@
 local options = {
   formatters_by_ft = {
+    nix = { "alejandra" },
     lua = { "stylua" },
-    css = { "prettierd" },
-    html = { "prettierd" },
-    javascript = { "prettierd" },
-    typescript = { "prettierd" },
+    css = { "prettierd", "prettier", stop_after_first = true },
+    html = { "prettierd", "prettier", stop_after_first = true },
+    javascript = { "prettierd", "prettier", stop_after_first = true },
+    typescript = { "prettierd", "prettier", stop_after_first = true },
+
+    python = { "isort", "black" },
+    rust = { "rustfmt", lsp_format = "fallback" },
 
     ["*"] = { "codespell" },
     ["_"] = { "trim_whitespace" },
   },
+
+  -- TODO: look into making a vscode's `modificationsIfAvailable` equivalent
+  -- https://github.com/stevearc/conform.nvim/issues/92
 
   format_on_save = {
     -- These options will be passed to conform.format()
