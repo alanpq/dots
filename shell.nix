@@ -15,6 +15,9 @@
     nativeBuildInputs = with pkgs; [
       nix
       nixpkgs-fmt
+
+      stylua
+
       home-manager
       git
       git-crypt
