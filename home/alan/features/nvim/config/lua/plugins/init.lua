@@ -51,9 +51,9 @@ return {
       },
     },
   },
-},
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    lazy = false,
+  },
+}
 
-{
-  "JoosepAlviste/nvim-ts-context-commentstring",
-  lazy = false,
-},
