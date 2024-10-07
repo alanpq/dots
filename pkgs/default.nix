@@ -17,6 +17,8 @@
   tly = pkgs.callPackage ./tly { };
   hyprslurp = pkgs.callPackage ./hyprslurp { };
 
+  librespot = pkgs.callPackage ./librespot.nix { };
+
   # My slightly customized plymouth theme, just makes the blue outline white
   # plymouth-spinner-monochrome = pkgs.callPackage ./plymouth-spinner-monochrome { };
 }
