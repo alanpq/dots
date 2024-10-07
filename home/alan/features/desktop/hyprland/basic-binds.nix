@@ -1,4 +1,28 @@
-{ lib, ... }: {
+{ lib, pkgs, config, ... }: let 
+  # window classes that should be minimised instead of killed
+  minimiseClasses = [
+    "Steam"
+    # "org.keepassxc.KeePassXC"
+  ];
+
+  killactive = pkgs.writeShellApplication {
+    name = "killactive";
+    runtimeInputs = with pkgs; [xdotool config.wayland.windowManager.hyprland.package ];
+    text = ''
+      declare -a raw=(${lib.concatStringsSep " " (lib.map (x: "\"${x}\"" ) minimiseClasses)})
+      declare -A classes # required: declare explicit associative array
+      for key in "''${!raw[@]}"; do classes[''${raw[$key]}]="$key"; done  # see below
+
+      class="$(hyprctl activewindow -j | jq -r ".class")"
+      echo "$class"
+      if [ ''${classes[$class]+_} ]; then
+        xdotool getactivewindow windowunmap
+      else
+        hyprctl dispatch killactive ""
+      fi
+    '';
+  } + "/bin/killactive";
+in {
   wayland.windowManager.hyprland.settings = {
     bindm = [
       "SUPER,mouse:272,movewindow"
@@ -16,7 +40,7 @@
         h = left; l = right; k = up; j = down;
       };
     in [
-      "SUPER,q,killactive"
+      "SUPER,q,exec,${killactive}"
       "SUPERSHIFT,e,exit"
 
       "SUPERSHIFT,s,pin,active"
