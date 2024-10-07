@@ -12,6 +12,7 @@
     ./thunar.nix
     ./playerctl.nix
     ./qt.nix
+    ./spotify-player.nix
   ];
   xdg.portal.enable = true;
 }
