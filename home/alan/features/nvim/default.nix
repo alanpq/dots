@@ -10,6 +10,7 @@
 
   home.packages = with pkgs; [
     lazygit
+    nil
     myNodePkgs."@vtsls/language-server"
   ];
 
