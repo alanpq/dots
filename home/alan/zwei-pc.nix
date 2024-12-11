@@ -1,4 +1,9 @@
-{ inputs, outputs, pkgs, ... }: let
+{
+  inputs,
+  outputs,
+  pkgs,
+  ...
+}: let
   lib = pkgs.lib;
 in {
   imports = [
@@ -40,9 +45,6 @@ in {
     iaito
     radare2
     obs-studio
-    jetbrains.webstorm
-    jetbrains.rust-rover
-    jetbrains-toolbox
 
     imhex
   ];
