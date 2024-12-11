@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./hyprland-vnc.nix
     ./gammastep.nix
@@ -22,7 +21,7 @@
     pulseaudio
     slurp
     waypipe
-    wf-recorder
+    # wf-recorder
     wl-clipboard
     wl-mirror
     # wl-mirror-pick
@@ -34,8 +33,8 @@
     MOZ_ENABLE_WAYLAND = 1;
     QT_QPA_PLATFORM = "wayland";
     LIBSEAT_BACKEND = "logind";
-#    NIXOS_OZONE_WL = "1";
+    #    NIXOS_OZONE_WL = "1";
   };
 
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-wlr];
 }
