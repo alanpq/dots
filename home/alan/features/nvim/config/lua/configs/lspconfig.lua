@@ -4,7 +4,7 @@ require("nvchad.configs.lspconfig").defaults()
 local lspconfig = require "lspconfig"
 
 -- EXAMPLE
-local servers = { "html", "cssls", "clangd", "vtsls", "svelte", "nil_ls" }
+local servers = { "html", "cssls", "clangd", "vtsls", "svelte", "nil_ls", "tailwindcss" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- lsps with default config
@@ -16,10 +16,10 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-lspconfig.rust_analyzer.setup {
-  on_attach = nvlsp.on_attach,
-  -- capabilities = capabilities,
-}
+-- lspconfig.rust_analyzer.setup {
+--   on_attach = nvlsp.on_attach,
+--   -- capabilities = capabilities,
+-- }
 -- configuring single server, example: typescript
 -- lspconfig.tsserver.setup {
 --   on_attach = nvlsp.on_attach,

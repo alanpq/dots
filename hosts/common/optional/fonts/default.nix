@@ -1,12 +1,16 @@
-{ pkgs, lib, config, ... }:
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   nixpkgs.config.joypixels.acceptLicense = true;
   fonts = {
     packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "IosevkaTerm" ]; })
+      (nerdfonts.override {fonts = ["IosevkaTerm"];})
       iosevka
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       noto-fonts-emoji-blob-bin
       noto-fonts-extra

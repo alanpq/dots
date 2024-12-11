@@ -26,6 +26,10 @@
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
 
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -57,57 +61,61 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, home-manager, ... }@inputs:
-    let
-      inherit (self) outputs;
-      lib = nixpkgs.lib // home-manager.lib;
-      systems = [ "x86_64-linux" "aarch64-linux" ];
-      forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
-      pkgsFor = lib.genAttrs systems (system: import nixpkgs {
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    home-manager,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
+    lib = nixpkgs.lib // home-manager.lib;
+    systems = ["x86_64-linux" "aarch64-linux"];
+    forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
+    pkgsFor = lib.genAttrs systems (system:
+      import nixpkgs {
         inherit system;
         config.allowUnfree = true;
       });
-    in
-    {
-      inherit lib;
-      nixosModules = import ./modules/nixos;
-      homeManagerModules = import ./modules/home-manager;
-      # templates = import ./templates;
+  in {
+    inherit lib;
+    nixosModules = import ./modules/nixos;
+    homeManagerModules = import ./modules/home-manager;
+    # templates = import ./templates;
 
-      overlays = import ./overlays { inherit inputs outputs; };
-      # hydraJobs = import ./hydra.nix { inherit inputs outputs; };
+    overlays = import ./overlays {inherit inputs outputs;};
+    # hydraJobs = import ./hydra.nix { inherit inputs outputs; };
 
-      packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
-      devShells = forEachSystem (pkgs: import ./shell.nix { inherit pkgs; });
-      formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
+    packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs;});
+    devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
+    formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
 
-      wallpapers = import ./home/alan/wallpapers;
+    wallpapers = import ./home/alan/wallpapers;
 
-      nixosConfigurations = {
-        # Main desktop
-        zwei-pc = lib.nixosSystem {
-          modules = [ ./hosts/zwei-pc ];
-          specialArgs = { inherit inputs outputs; };
-        };
-        # Laptop
-        gamer-think = lib.nixosSystem {
-          modules = [ ./hosts/gamer-think ];
-          specialArgs = { inherit inputs outputs; };
-        };
-
+    nixosConfigurations = {
+      # Main desktop
+      zwei-pc = lib.nixosSystem {
+        modules = [./hosts/zwei-pc];
+        specialArgs = {inherit inputs outputs;};
       };
-
-      homeConfigurations = {
-        "alan@zwei-pc" = lib.homeManagerConfiguration {
-          modules = [ ./home/alan/zwei-pc.nix ];
-          pkgs = pkgsFor.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-        };
-        "alan@gamer-think" = lib.homeManagerConfiguration {
-          modules = [ ./home/alan/gamer-think.nix ];
-          pkgs = pkgsFor.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-        };
+      # Laptop
+      gamer-think = lib.nixosSystem {
+        modules = [./hosts/gamer-think];
+        specialArgs = {inherit inputs outputs;};
       };
     };
+
+    homeConfigurations = {
+      "alan@zwei-pc" = lib.homeManagerConfiguration {
+        modules = [./home/alan/zwei-pc.nix];
+        pkgs = pkgsFor.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+      };
+      "alan@gamer-think" = lib.homeManagerConfiguration {
+        modules = [./home/alan/gamer-think.nix];
+        pkgs = pkgsFor.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+      };
+    };
+  };
 }

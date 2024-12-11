@@ -5,6 +5,7 @@
     vimAlias = true;
     plugins = with pkgs; [
       tree-sitter-grammars.tree-sitter-nix
+      vimPlugins.rustaceanvim
     ];
   };
 

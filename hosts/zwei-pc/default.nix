@@ -1,4 +1,9 @@
-{ pkgs, inputs, config, ... }: {
+{
+  pkgs,
+  inputs,
+  config,
+  ...
+}: {
   imports = [
     inputs.hardware.nixosModules.common-cpu-intel
     # inputs.hardware.nixosModules.common-gpu-intel
@@ -26,8 +31,8 @@
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-    binfmt.emulatedSystems = [ "aarch64-linux" "i686-linux" ];
-    supportedFilesystems = [ "ntfs" ];
+    binfmt.emulatedSystems = ["aarch64-linux" "i686-linux"];
+    supportedFilesystems = ["ntfs"];
     kernelParams = [
       "nvidia_drm.fbdev=1"
     ];
@@ -65,14 +70,13 @@
     dconf.enable = true;
     kdeconnect.enable = true;
   };
-  services.flatpak.enable = true;
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.inputs.hyprland.xdg-desktop-portal-hyprland ];
+    extraPortals = [pkgs.inputs.hyprland.xdg-desktop-portal-hyprland];
   };
   services.xserver = {
     enable = true;
-    videoDrivers = [ "nvidia" ];
+    videoDrivers = ["nvidia"];
     # displayManager.gdm = {
     #   enable = true;
     #   wayland = true;
@@ -114,7 +118,7 @@
         vaapiVdpau
         libvdpau-va-gl
       ];
-      extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [libva];
     };
     nvidia = {
       open = false;

@@ -1,3 +1,4 @@
+local nvlsp = require "nvchad.configs.lspconfig"
 return {
   {
     "stevearc/conform.nvim",
@@ -26,6 +27,9 @@ return {
         "bash",
         "rust",
         "toml",
+        "svelte",
+        "javascript",
+        "typescript",
         "markdown",
         "markdown_inline",
         "comment",
@@ -45,6 +49,7 @@ return {
         "python",
         "javascript",
         "typescript",
+        "svelte",
         "rust",
         "c",
         "cpp",
@@ -55,5 +60,19 @@ return {
     "JoosepAlviste/nvim-ts-context-commentstring",
     lazy = false,
   },
+  {
+    "mrcjkb/rustaceanvim",
+    version = "^5",
+    ft = { "rust" },
+    config = function(_, _)
+      vim.g.rustaceanvim = {
+        server = {
+          on_attach = nvlsp.on_attach,
+          on_init = nvlsp.on_init,
+          capabilities = nvlsp.capabilities,
+          load_vscode_settings = false,
+        },
+      }
+    end,
+  },
 }
-
