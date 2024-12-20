@@ -6,6 +6,11 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     flake-utils.url = "github:numtide/flake-utils";
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hardware.url = "github:nixos/nixos-hardware";
     impermanence.url = "github:nix-community/impermanence";
     nix-colors.url = "github:misterio77/nix-colors";
@@ -59,12 +64,18 @@
       url = "github:viperML/nh";
       inputs.nixpkgs.follows = "nixpkgs"; # override this repo's nixpkgs snapshot
     };
+
+    alanp-web = {
+      url = "path:/home/alan/Projects/website/";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
     flake-utils,
+    disko,
     home-manager,
     ...
   } @ inputs: let
@@ -101,6 +112,12 @@
       # Laptop
       gamer-think = lib.nixosSystem {
         modules = [./hosts/gamer-think];
+        specialArgs = {inherit inputs outputs;};
+      };
+
+      # Hetzner VPS
+      zephyr = lib.nixosSystem {
+        modules = [disko.nixosModules.disko ./hosts/zephyr];
         specialArgs = {inherit inputs outputs;};
       };
     };
