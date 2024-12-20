@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -13,6 +18,7 @@
     lazygit
     nil
     myNodePkgs."@vtsls/language-server"
+    alejandra
   ];
 
   xdg.configFile."nvim" = {
