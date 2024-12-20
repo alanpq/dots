@@ -3,7 +3,7 @@ trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM
 
 BARS=8;
 FRAMERATE=60;
-EQUILIZER=1;
+EQUILIZER=0;
 
 # Get script options
 while getopts 'b:f:m:eh' flag; do
