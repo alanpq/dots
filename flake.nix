@@ -66,7 +66,7 @@
     };
 
     alanp-web = {
-      url = "path:/home/alan/Projects/website/";
+      url = "github:alanpq/website";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     heardle = {

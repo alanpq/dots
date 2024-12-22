@@ -281,8 +281,8 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1734824883,
-        "narHash": "sha256-P8vbmYhtl3lQVoeOPC4HVWxgwgSUro3pipcZFKGcBME=",
+        "lastModified": 1734829275,
+        "narHash": "sha256-I6A7ik9k51jIEPT5kqnWBfQZ5JuKzec9nW+YbjbkFpY=",
         "path": "/home/alan/Projects/heardle/",
         "type": "path"
       },
