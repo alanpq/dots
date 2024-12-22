@@ -69,6 +69,10 @@
       url = "path:/home/alan/Projects/website/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    heardle = {
+      url = "path:/home/alan/Projects/heardle/";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
