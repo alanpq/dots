@@ -32,6 +32,7 @@ return {
         "typescript",
         "markdown",
         "markdown_inline",
+        "glimmer", -- .hbs
         "comment",
       },
       indent = { enable = true },
