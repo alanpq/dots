@@ -26,7 +26,7 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = ["ntfs" "vfat" "ext4" "lvm"];
+  boot.supportedFilesystems = ["ntfs" "vfat" "ext4" "lvm" "btrfs"];
   boot.initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/2acacb9f-fe23-4c80-bf96-695fe89adbf3";
 
   fileSystems."/" = pkgs.lib.mkForce {
