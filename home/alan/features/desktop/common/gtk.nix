@@ -1,9 +1,11 @@
-{ config, pkgs, inputs, ... }:
-
-let
-  inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
-in
-rec {
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}: let
+  inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
+in rec {
   gtk = {
     enable = true;
     font = {
@@ -12,13 +14,13 @@ rec {
     };
     theme = {
       name = "${config.colorscheme.slug}";
-      package = gtkThemeFromScheme { scheme = config.colorscheme; };
+      package = gtkThemeFromScheme {scheme = config.colorscheme;};
     };
     iconTheme = {
       # name = "Papirus";
       # package = pkgs.papirus-icon-theme;
       name = "Adwaita-dark";
-      package = pkgs.gnome.gnome-themes-extra;
+      package = pkgs.gnome-themes-extra;
     };
   };
 
@@ -30,5 +32,5 @@ rec {
     };
   };
 
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 }
