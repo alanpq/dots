@@ -19,6 +19,8 @@
   colorscheme = inputs.nix-colors.colorschemes.heetch;
   wallpaper = outputs.wallpapers.firewatch-purple;
 
+  home.stateVersion = "24.05";
+
   monitors = [
     {
       name = "eDP-1";
