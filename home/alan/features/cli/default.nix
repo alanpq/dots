@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   imports = [
     ./bash.nix
     ./bat.nix
@@ -7,7 +7,7 @@
     ./git.nix
     ./gpg.nix
     ./nix-index.nix
-    ./pfetch.nix
+    # ./pfetch.nix
     ./ranger.nix
     ./shellcolor.nix
     ./ssh.nix
