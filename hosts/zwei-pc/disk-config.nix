@@ -3,7 +3,7 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/disk/by-id/CHANGEME";
+        device = "/dev/disk/by-id/ata-Samsung_SSD_870_EVO_4TB_S758NX0W712595W";
         content = {
           type = "gpt";
           partitions = {
@@ -36,7 +36,7 @@
                 settings = {
                   allowDiscards = true; # allow TRIM requests to the device
                   fallbackToPassword = true;
-                  keyFile = "/dev/disk/by-partlabel/LUKSKEY";
+                  # keyFile = "/dev/disk/by-partlabel/LUKSKEY";
                 };
                 content = {
                   type = "btrfs";
