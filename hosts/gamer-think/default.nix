@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -28,6 +29,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = ["ntfs" "vfat" "ext4" "lvm" "btrfs"];
   boot.initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/2acacb9f-fe23-4c80-bf96-695fe89adbf3";
+
+  services.openssh.settings.PasswordAuthentication = lib.mkForce true;
+  services.openssh.settings.KbdInteractiveAuthentication = lib.mkForce true;
 
   fileSystems."/" = pkgs.lib.mkForce {
     device = "/dev/pool/root";

@@ -123,6 +123,12 @@
         modules = [disko.nixosModules.disko ./hosts/zephyr];
         specialArgs = {inherit inputs outputs;};
       };
+
+      live-usb = lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [./hosts/live-usb];
+        specialArgs = {inherit inputs outputs;};
+      };
     };
 
     homeConfigurations = {
@@ -133,6 +139,11 @@
       };
       "alan@gamer-think" = lib.homeManagerConfiguration {
         modules = [./home/alan/gamer-think.nix];
+        pkgs = pkgsFor.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+      };
+      "alan@live-usb" = lib.homeManagerConfiguration {
+        modules = [./home/alan/live-usb.nix];
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };
