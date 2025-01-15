@@ -45,7 +45,7 @@ in {
 
   monitors = [
     {
-      name = "DP-6";
+      name = "DP-5";
       width = 1920;
       height = 1080;
       workspace = "1";
