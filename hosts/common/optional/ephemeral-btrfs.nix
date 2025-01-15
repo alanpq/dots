@@ -1,17 +1,18 @@
 # This file contains an ephemeral btrfs root configuration
-
 # NOTE: this module assumes you have your filesystems sorted, so be careful :)
-
 # TODO: perhaps partition using disko in the future
-{ lib, config, ... }:
-let
+{
+  lib,
+  config,
+  ...
+}: let
   hostname = config.networking.hostName;
   hostnameEscape = builtins.replaceStrings ["-"] ["\\x2d"] hostname;
   wipeScript = ''
     mkdir /tmp -p
     MNTPOINT=$(mktemp -d)
     (
-      mount -t btrfs -o subvol=/ /dev/disk/by-label/${hostname} "$MNTPOINT"
+      mount -t btrfs -o subvol=/ /dev/mapper/enc "$MNTPOINT"
       trap 'umount "$MNTPOINT"' EXIT
 
       echo "Cleaning root subvolume"
@@ -26,14 +27,13 @@ let
     )
   '';
   phase1Systemd = config.boot.initrd.systemd.enable;
-in
-{
+in {
   boot.initrd = {
-    supportedFilesystems = [ "btrfs" ];
+    supportedFilesystems = ["btrfs"];
     postDeviceCommands = lib.mkIf (!phase1Systemd) (lib.mkBefore wipeScript);
     systemd.services.restore-root = lib.mkIf phase1Systemd {
       description = "Rollback btrfs rootfs";
-      wantedBy = [ "initrd.target" ];
+      wantedBy = ["initrd.target"];
       requires = [
         "dev-disk-by\\x2dlabel-${hostnameEscape}.device"
       ];
@@ -41,7 +41,7 @@ in
         "dev-disk-by\\x2dlabel-${hostnameEscape}.device"
         "systemd-cryptsetup@${hostname}.service"
       ];
-      before = [ "sysroot.mount" ];
+      before = ["sysroot.mount"];
       unitConfig.DefaultDependencies = "no";
       serviceConfig.Type = "oneshot";
       script = wipeScript;
@@ -74,5 +74,4 @@ in
   #     options = [ "subvol=swap" "noatime" ];
   #   };
   # };
-
 }
