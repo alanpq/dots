@@ -45,7 +45,7 @@ in {
 
   monitors = [
     {
-      name = "DP-5";
+      name = "DVI-D-1";
       width = 1920;
       height = 1080;
       workspace = "1";
@@ -54,7 +54,7 @@ in {
       refreshRate = 144;
     }
     {
-      name = "DVI-D-1";
+      name = "DP-5";
       width = 1920;
       height = 1080;
       workspace = "2";
