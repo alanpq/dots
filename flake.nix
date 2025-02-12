@@ -34,10 +34,10 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-gaming = {
-      url = "github:fufexan/nix-gaming";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nix-gaming = {
+    #   url = "github:fufexan/nix-gaming";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     hyprland = {
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
