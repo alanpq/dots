@@ -70,10 +70,7 @@
     dconf.enable = true;
     kdeconnect.enable = true;
   };
-  xdg.portal = {
-    enable = true;
-    extraPortals = [pkgs.inputs.hyprland.xdg-desktop-portal-hyprland];
-  };
+
   services.xserver = {
     enable = true;
     videoDrivers = ["nvidia"];
