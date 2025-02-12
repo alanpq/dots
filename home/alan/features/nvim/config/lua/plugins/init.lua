@@ -33,6 +33,7 @@ return {
         "markdown",
         "markdown_inline",
         "glimmer", -- .hbs
+        "glsl",
         "comment",
       },
       indent = { enable = true },
