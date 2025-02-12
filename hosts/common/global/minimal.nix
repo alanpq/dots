@@ -22,6 +22,8 @@
     };
   };
 
+  environment.systemPackages = [inputs.nh];
+
   hardware.enableRedistributableFirmware = true;
 
   security.polkit.enable = true;
