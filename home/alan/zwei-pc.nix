@@ -49,18 +49,18 @@ in {
       width = 1920;
       height = 1080;
       workspace = "1";
-      x = 1920;
-      y = 0;
       refreshRate = 144;
+      x = 0;
     }
     {
       name = "DP-5";
       width = 1920;
       height = 1080;
+      x = 1920;
+      y = 0;
       workspace = "2";
       refreshRate = 144;
       # transform = 1; # rotate 90 deg
-      x = 0;
       primary = true;
     }
   ];
