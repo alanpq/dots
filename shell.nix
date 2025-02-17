@@ -29,6 +29,7 @@
       ssh-to-age
       gnupg
       age
+      nh
     ];
   };
 }
