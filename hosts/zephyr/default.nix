@@ -37,6 +37,7 @@
 
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKKUWJ2oqT2pcU1LR8iOG03FXh8rBsUg8yNfEi13yofq alan@gamer-think"
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDV4FQ1An54LmVlMoNbAEKaOouVd2Jgd31lp0fiod5R56noBA8v8kQoFZALtmqMB1iLvEtReeclmSxfuwJMpqf3xZQQ/5dsGaFHsPFSA0AdlJmEnSDdzWXHDzFvGRWLhULggQAjN+Gw1SMe4nzrcxfxk5gbxtRXz4oI0lTDCcL743qWh1LxUV1gJgcpPD/mLwx51GAp4KeDIuLcTlW9D7RzVc1SGeI13VOKjHkY7AiiBsY+3oEJpmvnAop0vMdLdoIddIWYD1uVW9U9VN/rIexQyrC0phJqZCQjdYaFLgTfSor5THdEK0TMlNOd6NZ/zm66fMpTKav94XDPonNb+LGwISgjh2Stpworqq9TpslotVmKAKg33GnlTOhGMy63Fx/+xu7FCl8nzEMG6QtAsTk6KnoQzK0gYckyreRDD/+A6tH8CQ5C5h/gt3w0VX0dBVOprO15w6QTrK4xoPqyLLXoJBtvGEnpRmINGkZXaaAlwRTN6PsLqzOxefBW9shDFm0= alan@zwei-pc"
   ];
 
   services.alanp-web = {
