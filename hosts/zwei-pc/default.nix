@@ -121,7 +121,7 @@
     };
     nvidia = {
       open = false;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
       modesetting.enable = true;
     };
     opentabletdriver.enable = true;
