@@ -13,7 +13,11 @@
   ];
 
   xdg.portal = {
-    extraPortals = lib.mkForce [pkgs.inputs.hyprland.xdg-desktop-portal-hyprland];
+    extraPortals = lib.mkForce [
+      pkgs.inputs.hyprland.xdg-desktop-portal-hyprland
+      pkgs.kdePackages.xdg-desktop-portal-kde
+      pkgs.xdg-desktop-portal-gtk
+    ];
     configPackages = [pkgs.inputs.hyprland.hyprland];
   };
 
