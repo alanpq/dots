@@ -41,6 +41,8 @@ in {
     obs-studio
 
     imhex
+    zed-editor
+    vlc
   ];
 
   monitors = [
