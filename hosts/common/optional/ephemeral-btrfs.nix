@@ -35,10 +35,10 @@ in {
       description = "Rollback btrfs rootfs";
       wantedBy = ["initrd.target"];
       requires = [
-        "dev-disk-by\\x2dlabel-${hostnameEscape}.device"
+        # "dev-disk-by\\x2dlabel-${hostnameEscape}.device"
       ];
       after = [
-        "dev-disk-by\\x2dlabel-${hostnameEscape}.device"
+        # "dev-disk-by\\x2dlabel-${hostnameEscape}.device"
         "systemd-cryptsetup@${hostname}.service"
       ];
       before = ["sysroot.mount"];
