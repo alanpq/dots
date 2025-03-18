@@ -104,9 +104,9 @@
           "opacity 1.0 override,class:(firefox),title:(.*)(- YouTube — Mozilla Firefox)$"
           "float,title:^(klipr)$"
         ]
-        ++ (
+        ++ ( # quick float by class rules
           map (x: "float,class:^(${x})$")
-          ["xdg-desktop-portal-gtk" "qalculate-gtk"]
+          ["xdg-desktop-portal-gtk" "qalculate-gtk" "blender"]
         );
       blurls = [
         # "waybar"
