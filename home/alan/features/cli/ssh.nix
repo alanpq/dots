@@ -1,8 +1,10 @@
-{ outputs, lib, ... }:
-let
-  hostnames = builtins.attrNames outputs.nixosConfigurations;
-in
 {
+  outputs,
+  lib,
+  ...
+}: let
+  hostnames = builtins.attrNames outputs.nixosConfigurations;
+in {
   programs.ssh = {
     enable = true;
     controlMaster = "auto"; # connection multiplexing
@@ -26,8 +28,15 @@ in
         hostname = "gs.alanp.me";
         identityFile = "~/.ssh/id_ein";
       };
+      "pi" = {
+        hostname = "raspberrypi";
+        user = "pi";
+        port = 22;
+        proxyJump = "ein";
+        identityFile = "~/.ssh/id_pi";
+      };
       "vps" = {
-        hostname = builtins.concatStringsSep "." [ "65" "21" "108" "226" ]; # revolutionary anti-scraper technology
+        hostname = builtins.concatStringsSep "." ["65" "21" "108" "226"]; # revolutionary anti-scraper technology
         user = "root";
         identityFile = "~/.ssh/id_vps";
       };
