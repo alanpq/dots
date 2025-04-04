@@ -26,6 +26,8 @@
     ../common/optional/fonts
     ../common/optional/nix-ld.nix
 
+    ../common/optional/hyprspace.nix
+
     ../common/optional/thunar.nix
 
     ../common/users/alan

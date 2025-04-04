@@ -5,7 +5,7 @@ keys:
   # Hosts
   - &hosts:
     - &gamer-think age1wxml3qqg7r23u6w3ppj59lrljrqveah70l2dyg35trwz9gzwcakse7m496
-    - &zwei-pc age1n54qel5raqedqst3n6mtmzu5ptyrrddfznzpxrpjev3vaapd3fvsxj6vyr
+    - &zwei-pc age18vakqv3hzk030lusaanj0z52cke4trcf2je7dj94mansm8rujqts5tf2u3
 
 creation_rules:
   - path_regex: hosts/gamer-think/secrets.ya?ml$

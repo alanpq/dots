@@ -9,5 +9,6 @@
     ./gamemode.nix
     ./optin-persistence.nix
     ./systemd-initrd.nix
+    inputs.hyprspace.nixosModules.default
   ];
 }
