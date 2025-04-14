@@ -11,6 +11,7 @@
     plugins = with pkgs; [
       tree-sitter-grammars.tree-sitter-nix
       vimPlugins.rustaceanvim
+      vimPlugins.markdown-preview-nvim
     ];
   };
 
