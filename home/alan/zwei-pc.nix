@@ -43,6 +43,8 @@ in {
     imhex
     zed-editor
     vlc
+
+    jetbrains.idea-ultimate
   ];
 
   monitors = [
