@@ -69,6 +69,11 @@
       inputs.nixpkgs.follows = "nixpkgs"; # override this repo's nixpkgs snapshot
     };
 
+    neovim = {
+      url = "github:alanpq/neovim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     alanp-web = {
       url = "github:alanpq/website";
       inputs.nixpkgs.follows = "nixpkgs";
