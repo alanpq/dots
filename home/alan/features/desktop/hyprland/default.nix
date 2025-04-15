@@ -61,6 +61,7 @@
     };
 
     settings = {
+      ecosystem.no_update_news = true;
       env = [
         "HYPRCURSOR_THEME,rose-pine-hyprcursor"
       ];
