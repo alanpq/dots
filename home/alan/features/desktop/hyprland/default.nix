@@ -189,6 +189,7 @@
         playerctld = "${config.services.playerctld.package}/bin/playerctld";
         makoctl = "${config.services.mako.package}/bin/makoctl";
         wofi = "${config.programs.wofi.package}/bin/wofi";
+        sherlock = "${pkgs.inputs.sherlock.bin}/bin/sherlock";
         # pass-wofi = "${pkgs.pass-wofi.override {
         #   pass = config.programs.password-store.package;
         # }}/bin/pass-wofi";
@@ -266,6 +267,10 @@
         (lib.optionals config.programs.wofi.enable [
           "SUPER,space,exec,${wofi} -S drun -w 1 -H 70%"
           "SUPER,x,exec,${wofi} -S run"
+        ])
+        ++ (lib.optionals config.programs.sherlock.enable [
+          "SUPER,space,exec,${sherlock} -S drun -w 1 -H 70%"
+          "SUPER,x,exec,${sherlock} -S run"
         ]);
       # ++ (lib.optionals config.programs.password-store.enable [
       #   ",Scroll_Lock,exec,${pass-wofi}" # fn+k

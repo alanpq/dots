@@ -17,6 +17,8 @@ in {
     ./features/games
     ./features/productivity
 
+    ./features/desktop/common/sherlock.nix
+
     ./features/libvirt
     # ./features/rgb
     # ./features/productivity
@@ -32,6 +34,8 @@ in {
   services.hypridle = {
     enable = lib.mkForce false;
   };
+
+  programs.wofi.enable = lib.mkForce false;
 
   home.packages = with pkgs; [
     bruno

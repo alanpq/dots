@@ -68,6 +68,7 @@
       url = "github:viperML/nh";
       inputs.nixpkgs.follows = "nixpkgs"; # override this repo's nixpkgs snapshot
     };
+    sherlock.url = "github:Skxxtz/sherlock";
 
     neovim = {
       url = "github:alanpq/neovim";
