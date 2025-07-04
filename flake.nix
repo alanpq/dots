@@ -80,7 +80,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     heardle = {
-      url = "path:/home/alan/Projects/heardle/";
+      url = "git+ssh://git@github.com/alanpq/heardle/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

@@ -443,14 +443,17 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1738331961,
-        "narHash": "sha256-br71uhTHhNev5V+3Foq9eGGYtw8tPd1yD5oe1KyW5rE=",
-        "path": "/home/alan/Projects/heardle/",
-        "type": "path"
+        "lastModified": 1735012468,
+        "narHash": "sha256-e695ryeUHpdx8/MWNavJsZV5tPbykx3fuTodSFOpJOo=",
+        "ref": "refs/heads/main",
+        "rev": "3c4b8329c75d52b8775cc478fdbeb538318bc158",
+        "revCount": 48,
+        "type": "git",
+        "url": "ssh://git@github.com/alanpq/heardle/"
       },
       "original": {
-        "path": "/home/alan/Projects/heardle/",
-        "type": "path"
+        "type": "git",
+        "url": "ssh://git@github.com/alanpq/heardle/"
       }
     },
     "hercules-ci-effects": {
