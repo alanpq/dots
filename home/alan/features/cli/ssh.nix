@@ -25,6 +25,7 @@ in {
         user = "admin";
       };
       "ein" = {
+        user = "root";
         hostname = "gs.alanp.me";
         identityFile = "~/.ssh/id_ein";
       };
