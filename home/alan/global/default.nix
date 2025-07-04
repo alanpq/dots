@@ -13,6 +13,7 @@ in {
     [
       inputs.impermanence.nixosModules.home-manager.impermanence
       inputs.nix-colors.homeManagerModule
+      inputs.sherlock.homeManagerModules.default
       ../features/cli
       ../features/nvim
     ]
