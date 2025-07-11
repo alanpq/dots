@@ -53,7 +53,7 @@ in {
 
   monitors = [
     {
-      name = "DVI-D-1";
+      name = "DP-6";
       width = 1920;
       height = 1080;
       workspace = "1";
@@ -61,7 +61,7 @@ in {
       x = 0;
     }
     {
-      name = "DP-5";
+      name = "DVI-D-1";
       width = 1920;
       height = 1080;
       x = 1920;
