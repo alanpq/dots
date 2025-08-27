@@ -58,7 +58,9 @@ in {
       height = 1080;
       workspace = "1";
       refreshRate = 144;
-      x = 0;
+      x = 840;
+      y = -450;
+      transform = 1;
     }
     {
       name = "DVI-D-1";
