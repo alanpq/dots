@@ -2,7 +2,7 @@
   description = "my dots :)";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/734386e44a79717a89613654a9762aa37d1d4fdf";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -68,7 +68,11 @@
       url = "github:viperML/nh";
       inputs.nixpkgs.follows = "nixpkgs"; # override this repo's nixpkgs snapshot
     };
-    sherlock.url = "github:Skxxtz/sherlock";
+
+    sherlock = {
+      url = "github:Skxxtz/sherlock";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     neovim = {
       url = "github:alanpq/neovim";

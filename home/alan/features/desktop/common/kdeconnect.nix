@@ -1,16 +1,15 @@
-{ pkgs, lib, ... }:
-
-let
-
-  kdeconnect-cli = "${pkgs.plasma5Packages.kdeconnect-kde}/bin/kdeconnect-cli";
+{
+  pkgs,
+  lib,
+  ...
+}: let
+  kdeconnect-cli = "${pkgs.kdePackages.kdeconnect-kde}/bin/kdeconnect-cli";
   fortune = "${pkgs.fortune}/bin/fortune";
 
   script-fortune = pkgs.writeShellScriptBin "fortune" ''
     ${kdeconnect-cli} -d $(${kdeconnect-cli} --list-available --id-only) --ping-msg "$(${fortune})"
   '';
-
-in
-{
+in {
   # Hide all .desktop, except for org.kde.kdeconnect.settings
   xdg.desktopEntries = {
     "org.kde.kdeconnect.sms" = {
@@ -33,7 +32,6 @@ in
   services.kdeconnect = {
     enable = true;
     indicator = true;
-
   };
 
   xdg.configFile = {
@@ -44,3 +42,4 @@ in
   #   "/persist/home/alan".directories = [ ".config/kdeconnect" ];
   # };
 }
+
