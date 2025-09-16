@@ -11,7 +11,9 @@
     ./hardware-configuration.nix
     ../common/global
 
-    ../common/optional/greetd.nix
+    # ../common/optional/greetd.nix
+    ../common/optional/tui-greetd.nix
+
     ../common/optional/docker.nix
     ../common/optional/wireless.nix
     ../common/optional/lightd.nix
@@ -23,6 +25,8 @@
 
     ../common/users/alan
   ];
+
+  nix.settings.trusted-users = ["alan"];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -42,6 +46,7 @@
   networking = {
     hostName = "gamer-think";
     useDHCP = true;
+    dhcpcd.IPv6rs = false;
   };
 
   programs = {
