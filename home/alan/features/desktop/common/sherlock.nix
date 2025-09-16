@@ -1,6 +1,6 @@
 {inputs, ...}: {
   programs.sherlock = {
-    enable = true;
+    enable = false;
     systemd.enable = true;
     settings = {
       debug = {
