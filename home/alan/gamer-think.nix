@@ -1,6 +1,7 @@
 {
   inputs,
   outputs,
+  pkgs,
   ...
 }: {
   imports = [
@@ -20,6 +21,9 @@
   wallpaper = outputs.wallpapers.firewatch-purple;
 
   home.stateVersion = "24.05";
+  home.packages = with pkgs; [
+    mpv
+  ];
 
   monitors = [
     {
