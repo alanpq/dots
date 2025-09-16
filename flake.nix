@@ -2,7 +2,7 @@
   description = "my dots :)";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/734386e44a79717a89613654a9762aa37d1d4fdf";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     flake-utils.url = "github:numtide/flake-utils";
 
