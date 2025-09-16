@@ -17,7 +17,8 @@ in {
     ./features/games
     ./features/productivity
 
-    ./features/desktop/common/sherlock.nix
+    # ./features/desktop/common/sherlock.nix
+    ./features/desktop/common/wayland-wm/wofi.nix
 
     ./features/libvirt
     # ./features/rgb
@@ -34,8 +35,6 @@ in {
   services.hypridle = {
     enable = lib.mkForce false;
   };
-
-  programs.wofi.enable = lib.mkForce false;
 
   home.packages = with pkgs; [
     bruno
@@ -59,7 +58,7 @@ in {
       workspace = "1";
       refreshRate = 144;
       x = 840;
-      y = -450;
+      y = -645;
       transform = 1;
     }
     {
