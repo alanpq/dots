@@ -157,16 +157,16 @@
         ];
 
         animation = [
-          "windowsIn,1,3,easeoutback,slide"
-          "windowsOut,1,3,easeinback,slide"
-          "windowsMove,1,3,easeoutback"
-          "workspaces,1,2,easeoutback,slide"
-          "fadeIn,1,3,easeout"
-          "fadeOut,1,3,easein"
-          "fadeSwitch,1,3,easeout"
-          "fadeShadow,1,3,easeout"
-          "fadeDim,1,3,easeout"
-          "border,1,3,easeout"
+          "windowsIn,1,2,easeoutback,popin"
+          "windowsOut,1,2,easeinback,popin"
+          "windowsMove,1,2,easeoutback"
+          "workspaces,1,2,easeoutback,fade"
+          "fadeIn,1,2,easeout"
+          "fadeOut,1,2,easein"
+          "fadeSwitch,1,2,easeout"
+          "fadeShadow,1,2,easeout"
+          "fadeDim,1,2,easeout"
+          "border,1,2,easeout"
         ];
       };
 
