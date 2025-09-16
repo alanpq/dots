@@ -1,10 +1,12 @@
-{ outputs, inputs }:
-let
-  addPatches = pkg: patches: pkg.overrideAttrs (oldAttrs: {
-    patches = (oldAttrs.patches or [ ]) ++ patches;
-  });
-in
 {
+  outputs,
+  inputs,
+}: let
+  addPatches = pkg: patches:
+    pkg.overrideAttrs (oldAttrs: {
+      patches = (oldAttrs.patches or []) ++ patches;
+    });
+in {
   # Third party overlays
   nh = inputs.nh.overlays.default;
 
@@ -16,33 +18,52 @@ in
   # 'inputs.${flake}.packages.${pkgs.system}' or
   # 'inputs.${flake}.legacyPackages.${pkgs.system}'
   flake-inputs = final: _: {
-    inputs = builtins.mapAttrs
-      (_: flake: let
-        legacyPackages = ((flake.legacyPackages or {}).${final.system} or {});
-        packages = ((flake.packages or {}).${final.system} or {});
-      in
-        if legacyPackages != {} then legacyPackages else packages
+    inputs =
+      builtins.mapAttrs
+      (
+        _: flake: let
+          legacyPackages = (flake.legacyPackages or {}).${final.system} or {};
+          packages = (flake.packages or {}).${final.system} or {};
+        in
+          if legacyPackages != {}
+          then legacyPackages
+          else packages
       )
       inputs;
   };
 
   # Adds my custom packages
-  additions = final: prev: import ../pkgs { pkgs = final; } // {
-    formats = prev.formats // import ../pkgs/formats { pkgs = final; };
-  };
+  additions = final: prev:
+    import ../pkgs {pkgs = final;}
+    // {
+      formats = prev.formats // import ../pkgs/formats {pkgs = final;};
+    };
 
   node-pkgs = final: prev: {
     myNodePkgs = final.callPackage ../pkgs/node/node-packages.nix {
       nodeEnv = final.callPackage ../pkgs/node/node-env.nix (with final; {
         inherit stdenv lib python2 runCommand writeTextFile writeShellScript;
         inherit nodejs;
-        libtool = if stdenv.isDarwin then cctools or darwin.cctools else null;
+        libtool =
+          if stdenv.isDarwin
+          then cctools or darwin.cctools
+          else null;
       });
     };
   };
 
   # Modifies existing packages
   modifications = final: prev: {
+    debian-devscripts = prev.debian-devscripts.overrideAttrs (old: {
+      version = "2.25.15";
+      src = final.fetchFromGitlab {
+        domain = "salsa.debian.org";
+        owner = "debian";
+        repo = "devscripts";
+        tag = "v${final.version}";
+        hash = "sha256-s2QSfJyHsFr1eiia/yFj3jsS5k38xNewEe/g5PFpqag=";
+      };
+    });
     pfetch = prev.pfetch.overrideAttrs (oldAttrs: {
       version = "unstable-2021-12-10";
       src = final.fetchFromGitHub {
@@ -52,7 +73,7 @@ in
         sha256 = "sha256-9n5w93PnSxF53V12iRqLyj0hCrJ3jRibkw8VK3tFDvo=";
       };
       # Add term option, rename de to desktop, add scheme option
-      patches = (oldAttrs.patches or [ ]) ++ [ ./pfetch.patch ];
+      patches = (oldAttrs.patches or []) ++ [./pfetch.patch];
     });
   };
 }
