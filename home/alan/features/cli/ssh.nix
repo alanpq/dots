@@ -41,6 +41,11 @@ in {
         user = "root";
         identityFile = "~/.ssh/id_vps";
       };
+      "warwick" = {
+        hostname = builtins.concatStringsSep "." ["49" "12" "127" "28"];
+        user = "root";
+        identityFile = "~/.ssh/id_vps";
+      };
     };
   };
 
