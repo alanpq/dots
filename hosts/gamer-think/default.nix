@@ -11,6 +11,8 @@
     ./hardware-configuration.nix
     ../common/global
 
+    ../common/optional/distributed-builds.nix
+
     # ../common/optional/greetd.nix
     ../common/optional/tui-greetd.nix
 
