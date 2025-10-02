@@ -37,6 +37,8 @@
   services.openssh.settings.PasswordAuthentication = lib.mkForce true;
   services.openssh.settings.KbdInteractiveAuthentication = lib.mkForce true;
 
+  services.tailscale.enable = true;
+
   fileSystems."/" = pkgs.lib.mkForce {
     device = "/dev/pool/root";
     fsType = "ext4";
