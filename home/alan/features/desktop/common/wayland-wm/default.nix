@@ -7,7 +7,6 @@
     ./hypridle.nix
     ./hyprlock.nix
     ./waybar
-    ./wofi.nix
     ./zathura.nix
   ];
 

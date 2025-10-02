@@ -11,6 +11,8 @@
     ./features/desktop/common/vscode.nix
     # ./features/rgb
     ./features/productivity
+
+    ./features/desktop/common/walker.nix
     # ./features/pass
     # ./features/games
     # ./features/games/star-citizen.nix

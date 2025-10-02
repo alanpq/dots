@@ -13,6 +13,7 @@ in {
     [
       inputs.impermanence.nixosModules.home-manager.impermanence
       inputs.nix-colors.homeManagerModule
+      inputs.walker.homeManagerModules.default
       ../features/cli
       ../features/nvim
     ]

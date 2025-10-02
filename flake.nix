@@ -74,6 +74,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    elephant.url = "github:abenz1267/elephant";
+    walker.url = "github:abenz1267/walker";
+    walker.inputs.elephant.follows = "elephant";
+
     neovim = {
       url = "github:alanpq/neovim";
       inputs.nixpkgs.follows = "nixpkgs";
