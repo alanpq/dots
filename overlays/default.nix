@@ -54,14 +54,30 @@ in {
 
   # Modifies existing packages
   modifications = final: prev: {
-    debian-devscripts = prev.debian-devscripts.overrideAttrs (old: {
-      version = "2.25.15";
-      src = final.fetchFromGitlab {
+    checkbashisms = prev.checkbashisms.overrideAttrs (old: let
+      version = "2.25.15+deb13u1";
+    in {
+      inherit version;
+
+      src = final.fetchFromGitLab {
         domain = "salsa.debian.org";
         owner = "debian";
         repo = "devscripts";
-        tag = "v${final.version}";
-        hash = "sha256-s2QSfJyHsFr1eiia/yFj3jsS5k38xNewEe/g5PFpqag=";
+        tag = "v${version}";
+        hash = "sha256-szyVLpeIQozPXwBgL4nIYog4znUzweIt8q7nczo5q+g=";
+      };
+    });
+
+    debian-devscripts = prev.debian-devscripts.overrideAttrs (old: let
+      version = "2.25.15+deb13u1";
+    in {
+      inherit version;
+      src = final.fetchFromGitLab {
+        domain = "salsa.debian.org";
+        owner = "debian";
+        repo = "devscripts";
+        tag = "v${version}";
+        hash = "sha256-szyVLpeIQozPXwBgL4nIYog4znUzweIt8q7nczo5q+g=";
       };
     });
     pfetch = prev.pfetch.overrideAttrs (oldAttrs: {
