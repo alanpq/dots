@@ -18,7 +18,7 @@ in {
     ./features/productivity
 
     # ./features/desktop/common/sherlock.nix
-    ./features/desktop/common/wayland-wm/wofi.nix
+    ./features/desktop/common/walker.nix
 
     ./features/libvirt
     # ./features/rgb
