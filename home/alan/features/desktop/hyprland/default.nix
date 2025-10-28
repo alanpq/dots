@@ -17,6 +17,8 @@
   };
 
   xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
     extraPortals = lib.mkForce [
       pkgs.inputs.hyprland.xdg-desktop-portal-hyprland
       pkgs.kdePackages.xdg-desktop-portal-kde
@@ -98,10 +100,22 @@
       };
       dwindle.split_width_multiplier = 1.35;
       misc = {
+        disable_hyprland_logo = true;
+        disable_splash_rendering = true;
+
         vfr = true;
         close_special_on_empty = true;
         # Unfullscreen when opening something
         new_window_takes_over_fullscreen = 2;
+
+        key_press_enables_dpms = true;
+
+        enable_swallow = true;
+        swallow_regex = "(foot|kitty)";
+
+        allow_session_lock_restore = true;
+        session_lock_xray = true;
+        initial_workspace_tracking = 2;
       };
       layerrule = [
         # "blur,waybar"
@@ -186,6 +200,10 @@
         ++ (lib.optionals config.services.hypridle.enable [
           "${pkgs.hypridle}/bin/hypridle"
         ]);
+
+      binds = {
+        hide_special_on_workspace_change = true;
+      };
 
       bind = let
         swaylock = "${config.programs.swaylock.package}/bin/swaylock";

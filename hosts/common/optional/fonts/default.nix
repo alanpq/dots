@@ -30,6 +30,11 @@
       _3270font
       comic-mono
       comic-relief
+
+      twemoji-color-font
+      material-symbols
+      nerd-fonts.jetbrains-mono
+      rubik
     ];
     fontDir.enable = true;
     fontconfig = {

@@ -31,12 +31,6 @@ rec {
   serif = sansSerif;
   sansSerif = [
     "Noto Sans"
-    "Blobmoji"
-    "Twitter Color Emoji"
-    "JoyPixels"
-    "OpenMoji"
-    "Noto Color Emoji"
-    "Noto Emoji"
     "Noto Fangsong KSS Rotated"
     "Noto Fangsong KSS Vertical"
     "Noto Looped Thai"
@@ -262,6 +256,11 @@ rec {
     "Font Awesome 5 Free"
     "DejaVu Math TeX Gyre"
     "Code2000"
+    "Blobmoji"
+    "Twitter Color Emoji"
+    "JoyPixels"
+    "OpenMoji"
+    "Noto Color Emoji"
+    "Noto Emoji"
   ];
 }
-

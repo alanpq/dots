@@ -12,6 +12,8 @@
     ./hardware-configuration.nix
     ../common/global
 
+    ../common/optional/distributed-builds.nix
+
     # ../common/optional/kde.nix
     ../common/optional/tui-greetd.nix
 

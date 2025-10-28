@@ -78,6 +78,16 @@
     walker.url = "github:abenz1267/walker";
     walker.inputs.elephant.follows = "elephant";
 
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    matugen = {
+      url = "github:InioX/Matugen";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     neovim = {
       url = "github:alanpq/neovim";
       inputs.nixpkgs.follows = "nixpkgs";

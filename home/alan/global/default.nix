@@ -14,6 +14,7 @@ in {
       inputs.impermanence.nixosModules.home-manager.impermanence
       inputs.nix-colors.homeManagerModule
       inputs.walker.homeManagerModules.default
+      inputs.matugen.nixosModules.default
       ../features/cli
       ../features/nvim
     ]
