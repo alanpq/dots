@@ -6,7 +6,7 @@
 }: {
   programs.git = {
     enable = true;
-    package = pkgs.gitAndTools.gitFull;
+    package = pkgs.gitFull;
     aliases = {
       ff = "merge --ff-only";
       fast-forward = "merge --ff-only";

@@ -115,10 +115,16 @@
     lib = nixpkgs.lib // home-manager.lib;
     systems = ["x86_64-linux" "aarch64-linux"];
     forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
+    nixpkgsConfig = {
+      allowUnfree = true;
+      permittedInsecurePackages = [
+        "electron-36.9.5"
+      ];
+    };
     pkgsFor = lib.genAttrs systems (system:
       import nixpkgs {
         inherit system;
-        config.allowUnfree = true;
+        config = nixpkgsConfig;
       });
   in {
     inherit lib;
@@ -135,27 +141,31 @@
 
     wallpapers = import ./home/alan/wallpapers;
 
-    nixosConfigurations = {
+    nixosConfigurations = let
+      configModule = {
+        nixpkgs.config = nixpkgsConfig;
+      };
+    in {
       # Main desktop
       zwei-pc = lib.nixosSystem {
-        modules = [./hosts/zwei-pc];
+        modules = [configModule ./hosts/zwei-pc];
         specialArgs = {inherit inputs outputs;};
       };
       # Laptop
       gamer-think = lib.nixosSystem {
-        modules = [./hosts/gamer-think];
+        modules = [configModule ./hosts/gamer-think];
         specialArgs = {inherit inputs outputs;};
       };
 
       # Hetzner VPS
       zephyr = lib.nixosSystem {
-        modules = [disko.nixosModules.disko ./hosts/zephyr];
+        modules = [configModule disko.nixosModules.disko ./hosts/zephyr];
         specialArgs = {inherit inputs outputs;};
       };
 
       live-usb = lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [./hosts/live-usb];
+        modules = [configModule ./hosts/live-usb];
         specialArgs = {inherit inputs outputs;};
       };
     };

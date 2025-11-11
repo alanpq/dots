@@ -12,9 +12,8 @@
       iosevka
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       noto-fonts-emoji-blob-bin
-      noto-fonts-extra
       noto-fonts-lgc-plus
       joypixels
       dejavu_fonts
