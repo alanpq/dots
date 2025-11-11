@@ -11,10 +11,6 @@
     ./basic-binds.nix
     # ./hyprbars.nix
   ];
-  nix.settings = {
-    substituters = ["https://hyprland.cachix.org?priority=4"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  };
 
   xdg.portal = {
     enable = true;
@@ -115,7 +111,7 @@
 
         allow_session_lock_restore = true;
         session_lock_xray = true;
-        initial_workspace_tracking = 2;
+        initial_workspace_tracking = 0;
       };
       layerrule = [
         # "blur,waybar"
