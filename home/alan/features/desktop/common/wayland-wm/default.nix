@@ -3,6 +3,7 @@
     ./hyprland-vnc.nix
     ./gammastep.nix
     ./kitty.nix
+    ./alacritty.nix
     ./mako.nix
     ./hypridle.nix
     ./hyprlock.nix
