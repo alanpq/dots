@@ -7,8 +7,10 @@
 in {
   programs.ssh = {
     enable = true;
-    controlMaster = "auto"; # connection multiplexing
     matchBlocks = {
+      "*" = {
+        controlMaster = "auto"; # connection multiplexing
+      };
       "*github.com" = {
         user = "git";
         identityFile = "~/.ssh/id_git";
