@@ -4,6 +4,7 @@
     ./keepassxc.nix
     ./obsidian.nix
     ./mail.nix
+    ./slack.nix
   ];
 
   home.packages = with pkgs; [
