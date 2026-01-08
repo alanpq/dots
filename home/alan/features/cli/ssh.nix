@@ -9,7 +9,7 @@ in {
     enable = true;
     matchBlocks = {
       "*" = {
-        controlMaster = "auto"; # connection multiplexing
+        # controlMaster = "auto"; # connection multiplexing
       };
       "*github.com" = {
         user = "git";
