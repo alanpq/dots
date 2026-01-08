@@ -37,6 +37,8 @@ in {
   };
 
   home.packages = with pkgs; [
+    spotify
+
     bruno
     dbeaver-bin
     iaito
