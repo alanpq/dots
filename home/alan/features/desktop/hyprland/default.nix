@@ -121,6 +121,7 @@
         [
           "opacity 1.0 override,initialTitle:(Discord Popout)"
           "opacity 1.0 override,class:(firefox),title:(.*)(- YouTube — Mozilla Firefox)$"
+          "opacity 1.0 override,class:(firefox),initialTitle:^Picture-in-Picture$"
           "float,title:^(klipr)$"
         ]
         ++ ( # quick float by class rules
