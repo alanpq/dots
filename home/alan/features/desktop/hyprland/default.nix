@@ -107,7 +107,7 @@
         key_press_enables_dpms = true;
 
         enable_swallow = true;
-        swallow_regex = "(foot|kitty)";
+        swallow_regex = "(foot|kitty|alacritty)";
 
         allow_session_lock_restore = true;
         session_lock_xray = true;
