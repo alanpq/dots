@@ -13,6 +13,8 @@
     ./features/productivity
 
     ./features/desktop/common/walker.nix
+    ./features/games/lutris.nix
+
     # ./features/pass
     # ./features/games
     # ./features/games/star-citizen.nix
