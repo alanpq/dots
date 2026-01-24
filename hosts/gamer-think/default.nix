@@ -17,7 +17,7 @@
     ../common/optional/tui-greetd.nix
 
     ../common/optional/docker.nix
-    ../common/optional/wireless.nix
+    # ../common/optional/wireless.nix
     ../common/optional/lightd.nix
 
     ../common/optional/pipewire
@@ -27,6 +27,16 @@
 
     ../common/users/alan
   ];
+
+  environment.systemPackages = with pkgs; [
+    gnome-network-displays
+  ];
+
+  networking.firewall.trustedInterfaces = ["p2p-wl+"];
+  networking.firewall.allowedTCPPorts = [7236 7250];
+  networking.firewall.allowedUDPPorts = [7236 5353];
+
+  networking.networkmanager.enable = true;
 
   nix.settings.trusted-users = ["alan"];
 
@@ -49,7 +59,7 @@
 
   networking = {
     hostName = "gamer-think";
-    useDHCP = true;
+    useDHCP = lib.mkDefault true;
     dhcpcd.IPv6rs = false;
   };
 
