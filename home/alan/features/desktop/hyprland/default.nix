@@ -53,6 +53,11 @@
       # enableNvidiaPatches = true;
       enableXWayland = true;
     };
+
+    plugins = [
+      pkgs.inputs.hypr-dynamic-cursors.hypr-dynamic-cursors
+    ];
+
     systemd = {
       enable = true;
       # Same as default, but stop graphical-session too
