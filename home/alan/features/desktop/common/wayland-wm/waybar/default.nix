@@ -122,7 +122,7 @@ in {
         ];
 
         "custom/music" = {
-          format = "{icon}{}";
+          format = "{icon}{text}";
           format-icons = {
             # Playing= " "; # Uncomment if not using the dynamic script
             Paused = " ";
