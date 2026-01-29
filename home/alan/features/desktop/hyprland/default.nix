@@ -102,7 +102,7 @@
         vfr = true;
         close_special_on_empty = true;
         # Unfullscreen when opening something
-        new_window_takes_over_fullscreen = 2;
+        on_focus_under_fullscreen = 2;
 
         key_press_enables_dpms = true;
 
@@ -117,15 +117,15 @@
         # "blur,waybar"
         # "ignorezero,waybar"
       ];
-      windowrulev2 =
+      windowrule =
         [
-          "opacity 1.0 override,initialTitle:(Discord Popout)"
-          "opacity 1.0 override,class:(firefox),title:(.*)(- YouTube — Mozilla Firefox)$"
-          "opacity 1.0 override,class:(firefox),initialTitle:^Picture-in-Picture$"
-          "float,title:^(klipr)$"
+          "match:initial_title (Discord Popout), opacity 1.0 override"
+          "match:class firefox, match:title (.*)(- YouTube — Mozilla Firefox)$, opacity 1.0 override"
+          "match:class firefox, match:initial_title ^Picture-in-Picture$, opacity 1.0 override"
+          "match:title ^(klipr)$, float on"
         ]
         ++ ( # quick float by class rules
-          map (x: "float,class:^(${x})$")
+          map (x: "match:class ^(${x})$, float on")
           ["xdg-desktop-portal-gtk" "qalculate-gtk" "blender"]
         );
       blurls = [

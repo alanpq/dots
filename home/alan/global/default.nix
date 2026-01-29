@@ -11,7 +11,7 @@
 in {
   imports =
     [
-      inputs.impermanence.nixosModules.home-manager.impermanence
+      # inputs.impermanence.nixosModules.impermanence
       inputs.nix-colors.homeManagerModule
       inputs.walker.homeManagerModules.default
       inputs.matugen.nixosModules.default
