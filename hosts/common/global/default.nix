@@ -10,5 +10,6 @@
     ./optin-persistence.nix
     ./systemd-initrd.nix
     inputs.hyprspace.nixosModules.default
+    inputs.watt.nixosModules.default
   ];
 }

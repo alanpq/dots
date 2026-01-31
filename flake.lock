@@ -1260,6 +1260,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_7": {
+      "locked": {
+        "lastModified": 1766070988,
+        "narHash": "sha256-G/WVghka6c4bAzMhTwT2vjLccg/awmHkdKSd2JrycLc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "c6245e83d836d0433170a16eb185cefe0572f8b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -1329,7 +1345,8 @@
         "rose-pine-hyprcursor": "rose-pine-hyprcursor",
         "sherlock": "sherlock",
         "sops-nix": "sops-nix",
-        "walker": "walker"
+        "walker": "walker",
+        "watt": "watt"
       }
     },
     "rose-pine-hyprcursor": {
@@ -1632,6 +1649,24 @@
       "original": {
         "owner": "abenz1267",
         "repo": "walker",
+        "type": "github"
+      }
+    },
+    "watt": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_7"
+      },
+      "locked": {
+        "lastModified": 1769797186,
+        "narHash": "sha256-qB5TQpTvMlCHZ2nBYhqJ2fbaD0prpoiN53xwr5SFKVU=",
+        "owner": "NotAShelf",
+        "repo": "watt",
+        "rev": "7c568e88208f0b06289b8dafe7491bb2aa99eb4e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NotAShelf",
+        "repo": "watt",
         "type": "github"
       }
     },

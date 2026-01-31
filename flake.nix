@@ -39,6 +39,10 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    watt = {
+      url = "github:NotAShelf/watt";
+    };
+
     hyprland = {
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
       inputs.nixpkgs.follows = "nixpkgs";

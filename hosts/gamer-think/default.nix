@@ -32,6 +32,12 @@
     gnome-network-displays
   ];
 
+  services.watt = {
+    enable = true;
+  };
+
+  services.upower.enable = true;
+
   networking.firewall.trustedInterfaces = ["p2p-wl+"];
   networking.firewall.allowedTCPPorts = [7236 7250];
   networking.firewall.allowedUDPPorts = [7236 5353];
