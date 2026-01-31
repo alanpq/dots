@@ -13,6 +13,8 @@
 
     ../common/optional/distributed-builds.nix
 
+    ../common/optional/fonts
+
     # ../common/optional/greetd.nix
     ../common/optional/tui-greetd.nix
 
@@ -30,6 +32,8 @@
 
   environment.systemPackages = with pkgs; [
     gnome-network-displays
+
+    brightnessctl
   ];
 
   services.watt = {
