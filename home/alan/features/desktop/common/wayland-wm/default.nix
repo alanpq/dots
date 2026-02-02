@@ -7,7 +7,8 @@
     ./mako.nix
     ./hypridle.nix
     ./hyprlock.nix
-    ./waybar
+    # ./waybar
+    ./quickshell
     ./zathura.nix
   ];
 
