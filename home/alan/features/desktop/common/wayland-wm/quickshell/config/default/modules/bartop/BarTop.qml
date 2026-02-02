@@ -78,6 +78,7 @@ Scope {
           anchors.centerIn: parent
           Row{
               height: barHeight
+              Music { screen: topBar.screen }
           }
       }
 
