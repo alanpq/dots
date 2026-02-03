@@ -59,7 +59,7 @@ Singleton {
         property string secondary_fixed_dim: "#c7c9a6"
         property string shadow: "#000000"
         property string source_color: "#eceadc"
-        property string surface: "#3d3c74"
+        property string surface: "#1c2328"
         property string surface_bright: "#3a3a31"
         property string surface_container: "#202018"
         property string surface_container_high: "#2a2a22"

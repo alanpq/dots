@@ -10,7 +10,7 @@ Singleton {
   readonly property color textPrimaryColor: Theme.palette.primary
   readonly property color textInactiveColor: Theme.palette.primary_fixed_dim
   readonly property color barBgColor: Theme.palette.surface
-  readonly property double barHeight: 35
+  readonly property double barHeight: 30
   readonly property double barHorizontalMargin: 10
   readonly property double barSpacing: 10
   readonly property color pillBgColor: barBgColor
