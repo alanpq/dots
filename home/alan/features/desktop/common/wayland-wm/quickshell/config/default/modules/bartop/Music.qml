@@ -89,8 +89,15 @@ SectionV2 {
       LText {
         id: txt
         color: playerColors[0]
-        text: `${fmtTime(player.position)} / ${fmtTime(player.length)}\n${Util.capitalize(playerKind)}`
+        text: ``
         multiline: true
+      }
+      Timer {
+          interval: 500
+          running: true
+          repeat: true
+          triggeredOnStart: true
+          onTriggered: txt.text = `${fmtTime(player.position)} / ${fmtTime(player.length)}\n${Util.capitalize(playerKind)}`
       }
     }
   }
