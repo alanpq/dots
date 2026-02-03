@@ -49,7 +49,7 @@ in {
     zed-editor
     vlc
 
-    jetbrains.idea-ultimate
+    jetbrains.idea
   ];
 
   monitors = [
