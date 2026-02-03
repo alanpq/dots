@@ -56,6 +56,7 @@ SectionV2 {
         repeat: true
         onTriggered: {
             const event = calendarWidget.currentEvent;
+            calendarWidget.visible = true;
             if (event instanceof Error) {
                 eventTitle.text = event.toString();
                 return;
@@ -63,6 +64,7 @@ SectionV2 {
             if (event === undefined) {
                 eventTitle.text = "";
                 eventTiming.text = "";
+                calendarWidget.visible = false;
                 return;
             }
             eventTitle.text = event.title ?? "No Title";
@@ -79,6 +81,8 @@ SectionV2 {
 
     height: Style.barHeight
     width: eventDetails.implicitWidth
+
+    visible: true
 
     clip: true
 
