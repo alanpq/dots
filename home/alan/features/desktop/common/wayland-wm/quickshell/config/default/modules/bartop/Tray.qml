@@ -4,7 +4,7 @@ import QtQuick
 
 Row {
     height: parent.height
-    spacing: 10
+    spacing: size * 0.3
 
     property int size: 20
 
