@@ -17,6 +17,7 @@ SectionV2 {
   property var lastResolved: lastPlayer && resolvePlayerKind(lastPlayer)
   property var playerKind: (resolved && resolved.kind) ?? (lastResolved && lastResolved.kind)
   property var trackTitle: (resolved && resolved.trackTitle)
+  property var playerColors: colorLookup[playerKind ?? ""] ?? colorLookup[""]
 
   hoverable: true
 
@@ -34,16 +35,19 @@ SectionV2 {
         }
         return {kind: "firefox", trackTitle: player.trackTitle}
       }
-      default: return {kind: identity.toLowerCase(), trackTitle: player.trackTitle}
+      default: return {kind: player.identity.toLowerCase(), trackTitle: player.trackTitle}
     }
   }
 
   property var iconLookup: {
     "firefox": "\udb80\ude39 ",
     "youtube":  "\udb81\uddc3 ",
+    "spotify": "\uf1bc",
   }
   property var colorLookup: {
+    "": [Style.textPrimaryColor, Style.pillBgColor],
     "youtube": ["white", Qt.rgba(0.7,0,0,1)],
+    "spotify": ["black", "#1ed760"],
   }
 
   function format(player: MprisPlayer): string {
@@ -55,10 +59,10 @@ SectionV2 {
     }
   }
 
-  icon: player && iconLookup[playerKind]
-  property var desiredColor: (player && colorLookup[playerKind]?.[1]) ?? Style.pillBgColor
+  icon: playerKind && iconLookup[playerKind]
+  property var desiredColor: player?.isPlaying ? playerColors[1] : Style.pillBgColor
   color: "transparent"
-  textColor: (player && colorLookup[playerKind]?.[0]) ?? Style.textPrimaryColor
+  textColor: playerColors[player?.isPlaying ? 0 : 1]
   text: player ? format(player) : lastPlayer ? "" : ""
 
   onHover: () => {
@@ -81,9 +85,11 @@ SectionV2 {
       id: popup
       target: root
       above: false
+      bgColor: playerColors[1]
       LText {
         id: txt
-        text: `${fmtTime(player.position)} / ${fmtTime(player.length)}\n`
+        color: playerColors[0]
+        text: `${fmtTime(player.position)} / ${fmtTime(player.length)}\n${playerKind}`
         multiline: true
       }
     }
