@@ -18,7 +18,7 @@ import "root:/common"
 import "root:/settings"
 
 Scope {
-  property int barHeight: 35
+  property int barHeight: Style.barHeight
   property int barPadding: barHeight/2
   property var backgroundColor: Theme.palette.surface
 
@@ -87,7 +87,7 @@ Scope {
               color: music.desiredColor
               Behavior on color {
                   ColorAnimation {
-                      duration: 200
+                      duration: 100
                   }
               }
 
@@ -106,7 +106,7 @@ Scope {
           }
           Behavior on color {
               ColorAnimation {
-                  duration: 200
+                  duration: 100
               }
           }
       }
@@ -125,7 +125,7 @@ Scope {
               color: music.desiredColor
               Behavior on color {
                   ColorAnimation {
-                      duration: 200
+                      duration: 100
                   }
               }
           }
@@ -157,12 +157,28 @@ Scope {
             rightPadding: barPadding
 
             Network { screen: topBar.screen }
-            Brightness { screen: topBar.screen }
-            Battery { screen: topBar.screen }
 
-            Tray {rightPadding: barPadding; size: barHeight * 0.6}
+            Loader {
+              id: brightness
+              active: topBar.screenType === ScreenType.Laptop || topBar.screenType === ScreenType.Primary
+              visible: active
+              sourceComponent: Brightness {
+                screen: topBar.screen
+              }
+            }
 
-            ClockDisplay{width: 80; size: barHeight * 0.37}
+            Loader {
+              id: battery
+              active: UPower.devices.values.find(d => d.isLaptopBattery) !== null && topBar.screenType === ScreenType.Laptop
+              visible: active
+              sourceComponent: Battery {
+                  screen: topBar.screen
+              }
+            }
+
+            Tray {leftPadding: barPadding; rightPadding: barPadding * 1.5; size: barHeight * 0.5}
+
+            ClockDisplay{width: 80; size: barHeight * 0.4}
           }
       }
     }
