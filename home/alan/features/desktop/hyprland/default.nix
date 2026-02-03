@@ -72,6 +72,12 @@
       env = [
         "HYPRCURSOR_THEME,rose-pine-hyprcursor"
       ];
+
+      "plugin:dynamic-cursors" = {
+        enabled = true;
+        mode = "rotate";
+      };
+
       general = {
         gaps_in = 1;
         gaps_out = 0;
