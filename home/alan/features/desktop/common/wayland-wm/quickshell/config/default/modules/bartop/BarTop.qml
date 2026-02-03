@@ -176,9 +176,9 @@ Scope {
               }
             }
 
-            Tray {leftPadding: barPadding; rightPadding: barPadding * 1.5; size: barHeight * 0.5}
+            Tray {leftPadding: barPadding; rightPadding: barPadding * 1.5; size: Style.fontSize * 1.5}
 
-            ClockDisplay{width: 80; size: barHeight * 0.4}
+            ClockDisplay { width: 80 }
           }
       }
     }

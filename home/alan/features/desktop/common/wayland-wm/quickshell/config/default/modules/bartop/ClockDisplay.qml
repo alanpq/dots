@@ -1,13 +1,14 @@
 import Quickshell
 import QtQuick
 import "root:/settings"
+import "root:/options"
 
 Item {
     id: root
     implicitHeight: parent.height
     implicitWidth: parent.width
 
-    property var size: "12"
+    property var size: Style.fontSize
 
     SystemClock {
         id: clock
