@@ -89,7 +89,7 @@ SectionV2 {
       LText {
         id: txt
         color: playerColors[0]
-        text: `${fmtTime(player.position)} / ${fmtTime(player.length)}\n${playerKind}`
+        text: `${fmtTime(player.position)} / ${fmtTime(player.length)}\n${Util.capitalize(playerKind)}`
         multiline: true
       }
     }
