@@ -8,7 +8,9 @@ Text {
   property string value: ""
   property bool mono: false
   property bool multiline: false
-  color: active ? Style.textPrimaryColor : Style.textInactiveColor
+  property string activeColor: Style.textPrimaryColor
+  property string inactiveColor: Style.textInactiveColor
+  color: active ? activeColor : inactiveColor
   font.family: mono ? Style.monospaceFont : Style.sansSerifFont
   font.pointSize: Style.fontSize
   text: icon ? `${icon} ${value}` : value

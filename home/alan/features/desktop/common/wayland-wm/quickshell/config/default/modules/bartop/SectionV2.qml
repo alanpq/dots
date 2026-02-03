@@ -21,6 +21,7 @@ Item {
   property double verticalMargin: (rect.implicitHeight - row.implicitHeight) / 2
   property double spacing: Style.pillSpacing
   property string color: Style.pillBgColor
+  property string textColor: Style.textPrimaryColor
   property bool roundLeft: true
   property bool roundRight: true
   property string icon: ""
@@ -77,7 +78,25 @@ Item {
         mono: root.mono
         text: Util.flattenString([root.icon, root.text === "" ? "" : `${root.prefix}${root.text}${root.suffix}`].filter(x => x !== "").join(" "))
         font.pointSize: Style.pillFontSize
+        activeColor: textColor
+
+        Behavior on activeColor {
+            ColorAnimation {
+                duration: 200
+            }
+        }
       }
+        Behavior on implicitWidth {
+            NumberAnimation {
+                duration: 1000
+            }
+        }
+    }
+
+    Behavior on color {
+        ColorAnimation {
+            duration: 200
+        }
     }
   }
 

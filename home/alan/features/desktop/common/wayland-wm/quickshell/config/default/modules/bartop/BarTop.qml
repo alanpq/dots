@@ -64,7 +64,7 @@ Scope {
 
           Corner {
              anchors.fill: parent
-              corners: [0, 1]
+              corners: [1]
               cornerType: "cubic"
               cornerHeight: barHeight
               cornerWidth: barPadding*cornerFrac
@@ -72,13 +72,62 @@ Scope {
           }
       }
 
+      Item {
+          id: centerCornerLeft
+          height: barHeight
+          anchors.left: leftBar.right
+          anchors.right: centerBar.left
+
+          Corner {
+              anchors.fill: parent
+              corners: [0]
+              cornerType: "cubic"
+              cornerHeight: barHeight
+              cornerWidth: barPadding*cornerFrac
+              color: music.desiredColor
+              Behavior on color {
+                  ColorAnimation {
+                      duration: 200
+                  }
+              }
+
+          }
+      }
       WrapperRectangle{
           id: centerBar
-          color: backgroundColor
+          color: music.desiredColor
           anchors.centerIn: parent
           Row{
               height: barHeight
-              Music { screen: topBar.screen }
+              Music {
+                  id: music
+                  screen: topBar.screen
+              }
+          }
+          Behavior on color {
+              ColorAnimation {
+                  duration: 200
+              }
+          }
+      }
+      Item {
+          id: centerCornerRight
+          height: barHeight
+          anchors.left: centerBar.right
+          anchors.right: rightBar.left
+
+          Corner {
+              anchors.fill: parent
+              corners: [1]
+              cornerType: "cubic"
+              cornerHeight: barHeight
+              cornerWidth: barPadding*cornerFrac
+              color: music.desiredColor
+              Behavior on color {
+                  ColorAnimation {
+                      duration: 200
+                  }
+              }
           }
       }
 
@@ -90,7 +139,7 @@ Scope {
 
           Corner {
               anchors.fill: parent
-              corners: [0, 1]
+              corners: [0]
               cornerType: "cubic"
               cornerHeight: barHeight
               cornerWidth: barPadding*cornerFrac

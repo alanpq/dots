@@ -13,6 +13,10 @@ SectionV2 {
   id: root
   property var lastPlayer: null
   property var player: Mpris.players.values.filter(p => p.isPlaying)[0]
+  property var resolved: player && resolvePlayerKind(player)
+  property var lastResolved: lastPlayer && resolvePlayerKind(lastPlayer)
+  property var playerKind: (resolved && resolved.kind) ?? (lastResolved && lastResolved.kind)
+  property var trackTitle: (resolved && resolved.trackTitle)
 
   hoverable: true
 
@@ -22,36 +26,43 @@ SectionV2 {
   }
 
 
-  property var iconLookup: {
-  }
-  function getIcon(player: MprisPlayer): string {
+  function resolvePlayerKind(player: MprisPlayer): variant {
     switch (player.identity) {
       case "Mozilla firefox": {
         if (player.trackTitle.endsWith("YouTube")) {
-          return "\udb81\uddc3 "
+          return {kind: "youtube", trackTitle: player.trackTitle.replace(/( - YouTube)$/, '').trim()}
         }
-        return "\udb80\ude39 "
+        return {kind: "firefox", trackTitle: player.trackTitle}
       }
-      default: return iconLookup[identity] ?? null
+      default: return {kind: identity.toLowerCase(), trackTitle: player.trackTitle}
     }
   }
 
+  property var iconLookup: {
+    "firefox": "\udb80\ude39 ",
+    "youtube":  "\udb81\uddc3 ",
+  }
+  property var colorLookup: {
+    "youtube": ["white", Qt.rgba(0.7,0,0,1)],
+  }
+
   function format(player: MprisPlayer): string {
-    switch(player.identity) {
-      case "Mozilla firefox": return `${player.trackTitle.replace(/( - YouTube)$/, '').trim()}`;
+    switch (playerKind) {
+      case "firefox":
+      case "youtube":
+        return trackTitle;
       default: return `${player.trackTitle} - ${player.trackArtist}`;
     }
   }
 
-  LText {
-    mono: true
-    icon: player && getIcon(player)
-    value: player ? format(player) : "Nothing playing"
-  }
+  icon: player && iconLookup[playerKind]
+  property var desiredColor: (player && colorLookup[playerKind]?.[1]) ?? Style.pillBgColor
+  color: "transparent"
+  textColor: (player && colorLookup[playerKind]?.[0]) ?? Style.textPrimaryColor
+  text: player ? format(player) : lastPlayer ? "" : ""
 
   onHover: () => {
-    if(player)
-    popupLoader.active = true
+    if (player) popupLoader.active = true
   }
   onHoverEnd: () => {
     popupLoader.active = false
@@ -61,7 +72,7 @@ SectionV2 {
     const m = Math.floor(secs / 60);
     const h = Math.floor(m / 60);
     const s = Math.floor(secs % 60);
-    return `${h}:${m}:${s}`;
+    return h > 0 ? `${h.toString().padStart(2,"0")}:${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}` : `${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
   }
 
   LazyLoader {
@@ -72,7 +83,7 @@ SectionV2 {
       above: false
       LText {
         id: txt
-        text: `${fmtTime(player.position)} / ${fmtTime(player.length)}`
+        text: `${fmtTime(player.position)} / ${fmtTime(player.length)}\n`
         multiline: true
       }
     }
