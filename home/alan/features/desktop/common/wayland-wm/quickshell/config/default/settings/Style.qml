@@ -13,7 +13,7 @@ Singleton {
   readonly property double barHeight: 30
   readonly property double barHorizontalMargin: 10
   readonly property double barSpacing: 10
-  readonly property color pillBgColor: barBgColor
+  readonly property color pillBgColor: "transparent"
   readonly property double pillFontSize: fontSize
   readonly property double pillHeight: barHeight
   readonly property double pillMargin: 12
