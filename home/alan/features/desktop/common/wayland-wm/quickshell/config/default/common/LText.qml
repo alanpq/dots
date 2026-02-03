@@ -6,7 +6,7 @@ Text {
   property bool active: true
   property string icon
   property string value: ""
-  property bool mono: false
+  property bool mono: true
   property bool multiline: false
   property string activeColor: Style.textPrimaryColor
   property string inactiveColor: Style.textInactiveColor
