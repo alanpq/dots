@@ -53,6 +53,7 @@ Scope {
           Row{
               height: barHeight
               Workspaces { screen: topBar.screen }
+              UpcomingEvent { screen: topBar.screen }
           }
       }
 

@@ -11,6 +11,8 @@
     kdePackages.qt5compat
     libsForQt5.qt5.qtgraphicaleffects
 
+    bun
+
     #kdePackages.breeze
 
     darkly

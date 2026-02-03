@@ -30,6 +30,10 @@
       gnupg
       age
       nh
+
+      bun
+      nodePackages.typescript
+      nodePackages.typescript-language-server
     ];
   };
 }
