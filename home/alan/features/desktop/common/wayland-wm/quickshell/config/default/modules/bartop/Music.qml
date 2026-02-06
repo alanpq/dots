@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Shapes
+import QtQuick.Controls.Basic
 
 import Quickshell
 import Quickshell.Services.Mpris
@@ -72,6 +73,13 @@ SectionV2 {
     popupLoader.active = false
   }
 
+  onWheel: (wheel) => {
+    if (!player || !player.canControl || !player.volumeSupported) return;
+    player.volume = player.volume + wheel.angleDelta.y * 0.0005;
+    volOsdLoader.active = true;
+    volOsdCloseTimer.restart();
+  }
+
   function fmtTime(secs: number): string {
     const m = Math.floor(secs / 60);
     const h = Math.floor(m / 60);
@@ -85,6 +93,7 @@ SectionV2 {
       id: popup
       target: root
       above: false
+      anchor.margins.bottom: -((volOsdLoader.active ? volOsdLoader.item.implicitHeight + Style.popupOffset: 0) + Style.popupOffset)
       bgColor: playerColors[1]
       LText {
         id: txt
@@ -94,11 +103,73 @@ SectionV2 {
       }
       Timer {
           interval: 500
-          running: true
+          running: popupLoader.active
           repeat: true
           triggeredOnStart: true
-          onTriggered: txt.text = `${fmtTime(player.position)} / ${fmtTime(player.length)}\n${Util.capitalize(playerKind)}`
+          onTriggered: {
+              const pos = fmtTime(player.position);
+              txt.text = `${pos} / ${fmtTime(player.length)}\n${Util.capitalize(playerKind)}`;
+          }
       }
     }
+  }
+
+  LazyLoader {
+    id: volOsdLoader
+    Popup {
+      id: volOsd
+      target: root
+      above: false
+      bgColor: playerColors[1]
+
+      ProgressBar {
+          id: control
+          value: player.volume
+          padding: 0
+
+          Behavior on value {
+            NumberAnimation {
+              duration: 100
+            }
+          }
+
+          background: Rectangle {
+              implicitWidth: 200
+              implicitHeight: 6
+              color: Qt.lighter(playerColors[1], 2.0)
+              radius: 3
+          }
+
+          contentItem: Item {
+              implicitWidth: 200
+              implicitHeight: 4
+
+              // Progress indicator for determinate state.
+              Rectangle {
+                  width: control.visualPosition * parent.width
+                  height: parent.height
+                  radius: 2
+                  color: Qt.darker(playerColors[1], 2.0)
+                  visible: !control.indeterminate
+              }
+          }
+      }
+
+      // LText {
+      //   id: txt
+      //   color: playerColors[0]
+      //   text: `${player.volume}`
+      //   multiline: true
+      // }
+    }
+  }
+  Timer {
+      id: volOsdCloseTimer
+      interval: 1000
+      running: false
+      repeat: false
+      onTriggered: {
+          volOsdLoader.active = false
+      }
   }
 }
