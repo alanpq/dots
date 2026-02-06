@@ -34,6 +34,8 @@
       bun
       nodePackages.typescript
       nodePackages.typescript-language-server
+
+      kdePackages.qtdeclarative
     ];
   };
 }
