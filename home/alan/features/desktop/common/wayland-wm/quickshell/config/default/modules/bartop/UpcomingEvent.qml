@@ -124,8 +124,14 @@ SectionV2 {
         }
     }
 
+    readonly property bool eventShown: calendarWidget.currentEvent !== undefined && !(calendarWidget.currentEvent instanceof Error)
+    onClick: {
+        if (this.eventShown)
+            Quickshell.execDetached(["xdg-open", calendarWidget.currentEvent.link])
+    }
+
     // MouseArea {
-    //     readonly property bool eventShown: calendarWidget.currentEvent !== undefined && !(calendarWidget.currentEvent instanceof Error)
+    //     readonly property bool eventshown: calendarwidget.currentevent !== undefined && !(calendarwidget.currentevent instanceof error)
     //     cursorShape: eventShown ? Qt.PointingHandCursor : Qt.ArrowCursor
     //     anchors.fill: parent
     //     onPressed: {
