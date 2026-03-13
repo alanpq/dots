@@ -13,6 +13,7 @@
         blur = true;
         opacity = 0.6;
       };
+      terminal.osc52 = "CopyPaste";
     };
   };
 }
