@@ -51,5 +51,13 @@
     ltex-ls # Spell checking LSP
 
     tly # Tally counter
+
+    (pkgs.writeShellApplication {
+      name = "clipwrite";
+      text = ''
+        #!/usr/bin/env bash
+        printf "\033]52;c;%s\007" "$(base64 -w0 < /dev/stdin)"
+      '';
+    })
   ];
 }
