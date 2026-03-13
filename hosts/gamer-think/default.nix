@@ -34,6 +34,7 @@
     gnome-network-displays
 
     brightnessctl
+    android-tools
   ];
 
   services.watt = {
@@ -74,7 +75,6 @@
   };
 
   programs = {
-    adb.enable = true;
     dconf.enable = true;
     kdeconnect.enable = true;
   };
