@@ -50,6 +50,7 @@ in {
     vlc
 
     jetbrains.idea
+    bitwarden-desktop
   ];
 
   monitors = [
