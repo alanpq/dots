@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  lib,
   config,
   ...
 }: {
@@ -77,7 +78,7 @@
 
   networking = {
     hostName = "zwei-pc";
-    useDHCP = true;
+    useDHCP = lib.mkForce true;
   };
 
   programs = {
