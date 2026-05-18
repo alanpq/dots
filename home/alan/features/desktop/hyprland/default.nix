@@ -136,12 +136,19 @@
         # "ignorezero,waybar"
       ];
       windowrule =
-        [
-          "match:initial_title (Discord Popout), opacity 1.0 override"
-          "match:class firefox, match:title (.*)(- YouTube — Mozilla Firefox)$, opacity 1.0 override"
-          "match:class firefox, match:initial_title ^Picture-in-Picture$, opacity 1.0 override"
-          "match:title ^(klipr)$, float on"
-        ]
+        (lib.mapAttrsToList (matcher: rules: "${matcher}, ${lib.concatStringsSep "," rules}") {
+          "match:initial_title (Discord Popout)" = ["opacity 1.0 override"];
+
+          "match:class firefox" = ["suppress_event maximize"];
+          "match:class firefox, match:title (.*)(- YouTube — Mozilla Firefox)$" = ["opacity 1.0 override"];
+          "match:class firefox, match:initial_title ^Picture-in-Picture$" = [
+            "opacity 1.0 override"
+            "suppress_event fullscreen maximize"
+          ];
+          "match:title (.*Bitwarden.*)" = ["float on"];
+
+          "match:title ^(klipr)$" = ["float on"];
+        })
         ++ ( # quick float by class rules
           map (x: "match:class ^(${x})$, float on")
           ["xdg-desktop-portal-gtk" "qalculate-gtk" "blender"]
