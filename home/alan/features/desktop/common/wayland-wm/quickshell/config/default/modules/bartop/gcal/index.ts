@@ -172,6 +172,9 @@ async function getToken({ useRefreshToken }: { useRefreshToken: boolean }) {
             refresh_token: useRefreshToken ? REFRESH_TOKEN : undefined,
         }),
     }).then(r => r.json() as Promise<TokenData>)
+    if (!token.access_token) {
+        throw new Error(`Failed to get access token - ${token}`);
+    }
     ACCESS_TOKEN = token.access_token
     ACCESS_TOKEN_EXP = (Temporal.Now.instant().epochMilliseconds + (token.expires_in * 1000)).toString() // expires_in is how many seconds until the token is expired
     if (token?.refresh_token) REFRESH_TOKEN = token.refresh_token
