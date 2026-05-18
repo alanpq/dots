@@ -12,6 +12,10 @@
     # ./hyprbars.nix
   ];
 
+  home.sessionVariables = {
+    QT_QPA_PLATFORMTHEME = "qt5ct";
+  };
+
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
@@ -20,6 +24,9 @@
       pkgs.kdePackages.xdg-desktop-portal-kde
       pkgs.xdg-desktop-portal-gtk
     ];
+    config = {
+      common = {default = ["hyprland" "kde" "gtk"];};
+    };
     configPackages = [pkgs.inputs.hyprland.hyprland];
   };
 
