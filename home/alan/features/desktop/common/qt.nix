@@ -5,11 +5,10 @@
 }: {
   qt = {
     enable = true;
-    platformTheme.name = "gtk";
+    platformTheme.name = "qtct";
     style = {
-      name = "gtk2";
-      package = pkgs.qt6Packages.qt6gtk2;
+      name = "adwaita-dark";
+      # package = pkgs.qt6Packages.qt6gtk2;
     };
   };
 }
-
