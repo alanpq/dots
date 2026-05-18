@@ -50,7 +50,7 @@ in {
           basic_workspaces)
         ++ (map (n: {
           key = "F${toString n}";
-          name = toString (n + 10);
+          name = toString (n + 9);
         }) (range 1 12));
       # Map keys (arrows and hjkl) to hyprland directions (l, r, u, d)
       directions = rec {
