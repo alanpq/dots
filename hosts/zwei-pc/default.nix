@@ -36,6 +36,10 @@
     ../common/users/alan
   ];
 
+  networking.extraHosts = ''
+    ${builtins.concatStringsSep "." ["49" "12" "127" "28"]} uptrace.local
+  '';
+
   programs.ambxst = {
     enable = true;
   };
