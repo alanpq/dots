@@ -42,6 +42,7 @@
 
   services.udisks2.enable = true;
   services.tailscale.enable = true;
+  services.deluge.enable = true;
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
