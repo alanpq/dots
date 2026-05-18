@@ -11,5 +11,6 @@
     ./systemd-initrd.nix
     inputs.hyprspace.nixosModules.default
     inputs.watt.nixosModules.default
+    inputs.ambxst.nixosModules.default
   ];
 }

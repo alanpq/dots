@@ -35,6 +35,9 @@
     ../common/users/alan
   ];
 
+  programs.ambxst = {
+    enable = true;
+  };
   services.udisks2.enable = true;
   services.tailscale.enable = true;
 

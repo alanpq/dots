@@ -91,6 +91,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    ambxst = {
+      url = "github:Axenide/Ambxst";
+    };
+
     matugen = {
       url = "github:InioX/Matugen";
       inputs.nixpkgs.follows = "nixpkgs";
