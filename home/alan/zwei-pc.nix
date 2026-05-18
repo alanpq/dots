@@ -36,6 +36,11 @@ in {
     enable = lib.mkForce false;
   };
 
+  programs.anki = {
+    enable = true;
+    addons = with pkgs; [ankiAddons.anki-connect];
+  };
+
   home.packages = with pkgs; [
     spotify
 
