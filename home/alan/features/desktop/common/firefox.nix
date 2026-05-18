@@ -27,7 +27,7 @@
   };
 
   home = {
-    packages = with pkgs; [firefox];
+    packages = with pkgs; [firefox firefox-beta];
 
     # persistence = {
     #   # Not persisting is safer
