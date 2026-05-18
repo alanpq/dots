@@ -73,9 +73,9 @@
   services.caddy = {
     enable = true;
     # cloudflare covers us ssl-wise, we just need self signed certs
-    globalConfig = ''
-      local_certs
-    '';
+    # globalConfig = ''
+    #   local_certs
+    # '';
     virtualHosts."alanp.me".extraConfig = ''
       reverse_proxy http://${config.services.alanp-web.listenHost}:${toString config.services.alanp-web.port}
     '';
