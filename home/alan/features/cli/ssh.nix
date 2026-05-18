@@ -39,14 +39,17 @@ in {
         identityFile = "~/.ssh/id_pi";
       };
       "vps" = {
-        hostname = builtins.concatStringsSep "." ["65" "21" "108" "226"]; # revolutionary anti-scraper technology
+        hostname = builtins.concatStringsSep "." ["91" "99" "198" "252"]; # revolutionary anti-scraper technology
         user = "root";
         identityFile = "~/.ssh/id_vps";
       };
       "warwick" = {
         hostname = builtins.concatStringsSep "." ["49" "12" "127" "28"];
         user = "root";
-        identityFile = "~/.ssh/id_vps";
+      };
+      "singed" = {
+        hostname = builtins.concatStringsSep "." ["65" "109" "80" "74"];
+        user = "root";
       };
     };
   };
