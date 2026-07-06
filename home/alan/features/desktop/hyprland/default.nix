@@ -105,7 +105,8 @@
         };
       };
       input = {
-        kb_layout = "gb";
+        kb_layout = "gb,bg";
+        kb_variant = ",phonetic";
         touchpad = {
           natural_scroll = true;
           disable_while_typing = false;
