@@ -118,10 +118,10 @@
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
 
-        vfr = true;
+        # vfr = true;
         close_special_on_empty = true;
         # Unfullscreen when opening something
-        on_focus_under_fullscreen = 2;
+        # on_focus_under_fullscreen = 2;
 
         key_press_enables_dpms = true;
 
@@ -129,7 +129,7 @@
         swallow_regex = "(foot|kitty|alacritty)";
 
         allow_session_lock_restore = true;
-        session_lock_xray = true;
+        # session_lock_xray = true;
         initial_workspace_tracking = 0;
       };
       layerrule = [
@@ -225,7 +225,7 @@
         ]);
 
       binds = {
-        hide_special_on_workspace_change = true;
+        # hide_special_on_workspace_change = true;
       };
 
       bind = let

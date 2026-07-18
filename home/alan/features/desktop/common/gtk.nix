@@ -14,7 +14,7 @@ in rec {
     };
     theme = {
       name = "${config.colorscheme.slug}";
-      package = gtkThemeFromScheme {scheme = config.colorscheme;};
+      # package = gtkThemeFromScheme {scheme = config.colorscheme;};
     };
     iconTheme = {
       # name = "Papirus";

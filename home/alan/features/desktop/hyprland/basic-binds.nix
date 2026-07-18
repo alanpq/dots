@@ -30,6 +30,7 @@
     }
     + "/bin/killactive";
 in {
+  wayland.windowManager.hyprland.configType = "hyprlang";
   wayland.windowManager.hyprland.settings = {
     bindm = [
       "SUPER,mouse:272,movewindow"
@@ -70,18 +71,18 @@ in {
 
         "SUPERSHIFT,s,pin,active"
 
-        "SUPER,s,togglesplit"
+        "SUPER,s,layoutmsg,togglesplit"
         "SUPER,f,fullscreen,1"
         "SUPERSHIFT,f,fullscreen,0"
         "SUPERSHIFT,space,togglefloating"
 
-        "SUPER,minus,splitratio,-0.25"
-        "SUPERCONTROL,minus,splitratio,-0.1"
-        "SUPERSHIFT,minus,splitratio,-0.3333333"
+        "SUPER,minus,layoutmsg,splitratio,-0.25"
+        "SUPERCONTROL,minus,layoutmsg,splitratio,-0.1"
+        "SUPERSHIFT,minus,layoutmsg,splitratio,-0.3333333"
 
-        "SUPER,equal,splitratio,0.25"
-        "SUPERCONTROL,equal,splitratio,0.1"
-        "SUPERSHIFT,equal,splitratio,0.3333333"
+        "SUPER,equal,layoutmsg,splitratio,0.25"
+        "SUPERCONTROL,equal,layoutmsg,splitratio,0.1"
+        "SUPERSHIFT,equal,layoutmsg,splitratio,0.3333333"
 
         "SUPER,g,togglegroup"
         "SUPER,t,lockactivegroup,toggle"

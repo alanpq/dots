@@ -32,8 +32,8 @@
       nh
 
       bun
-      nodePackages.typescript
-      nodePackages.typescript-language-server
+      typescript
+      typescript-language-server
 
       kdePackages.qtdeclarative
     ];

@@ -9,7 +9,7 @@
   home.packages = with pkgs; [
     kdePackages.qtpositioning
     kdePackages.qt5compat
-    libsForQt5.qt5.qtgraphicaleffects
+    qt5.qtgraphicaleffects
 
     bun
 

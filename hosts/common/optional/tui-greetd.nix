@@ -17,7 +17,7 @@
 in {
   users.extraUsers.greeter = {
     packages = [
-      gtkTheme.package
+      # gtkTheme.package
       iconTheme.package
     ];
     # For caching and such

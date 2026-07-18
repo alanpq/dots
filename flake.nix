@@ -102,7 +102,7 @@
 
     neovim = {
       url = "github:alanpq/neovim";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     alanp-web = {
