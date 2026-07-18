@@ -1,11 +1,13 @@
-{
-  inputs,
-  self,
-  ...
-}: let
+{inputs, ...}: let
   username = "alan";
 in {
-  flake.modules.nixos."${username}" = {pkgs, ...}: {
+  flake.modules.nixos."${username}" = {
+    pkgs,
+    config,
+    ...
+  }: let
+    ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
+  in {
     imports = with inputs.self.modules.nixos; [
     ];
 
@@ -15,6 +17,25 @@ in {
       shell = pkgs.zsh;
 
       password = "temp";
+
+      extraGroups =
+        ["wheel"]
+        ++ ifTheyExist [
+          "video"
+          "audio"
+
+          "networkmanager"
+          "minecraft"
+          "network"
+          "wireshark"
+          "i2c"
+          "mysql"
+          "docker"
+          "podman"
+          "git"
+          "libvirtd"
+          "deluge"
+        ];
     };
 
     hjem.users."${username}" = {

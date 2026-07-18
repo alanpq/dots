@@ -15,7 +15,7 @@
     imports = with inputs.self.modules.hjem; [
       system-default
 
-      shell
+      # shell
     ];
   };
 }

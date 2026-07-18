@@ -3,7 +3,7 @@
 in {
   flake.modules.hjem."${username}" = {pkgs, ...}: {
     imports = with inputs.self.modules.hjem; [
-      system-default
+      system-laptop
       # messaging
     ];
     user = "${username}";

@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.niri = {pkgs, ...}: {
+  flake.modules.nixos.niri = {pkgs, ...}: {
     environment.systemPackages = with pkgs; [
       wl-clipboard
       wtype

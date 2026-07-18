@@ -16,6 +16,7 @@
 
   flake.modules.hjem.system-default = {
     imports = with inputs.self.modules.hjem; [
+      system-minimal
       # secrets
     ];
     # ++ [inputs.self.modules.generic.systemConstants];
