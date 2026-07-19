@@ -3,16 +3,16 @@
   lib,
   ...
 }: let
-  hostname = "chudpad";
+  hostname = "theseus";
 in {
   flake.modules.nixos.${hostname} = {pkgs, ...}: {
     imports = with inputs.self.modules.nixos; [
-      system-laptop
+      system-desktop
       systemd-boot
       # bluetooth
     ];
 
-    environment.systemPackages = [pkgs.wpa_supplicant_gui pkgs.steam];
+    environment.systemPackages = [];
 
     networking = {
       hostName = "${hostname}";
@@ -20,6 +20,6 @@ in {
       dhcpcd.IPv6rs = false;
     };
 
-    system.stateVersion = lib.mkForce "24.05";
+    system.stateVersion = lib.mkForce "22.11";
   };
 }

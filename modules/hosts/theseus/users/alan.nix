@@ -3,7 +3,7 @@
   self,
   ...
 }: {
-  flake.modules.nixos.chudpad = {config, ...}: {
+  flake.modules.nixos.theseus = {config, ...}: {
     imports = with inputs.self.modules.nixos; [
       alan
     ];

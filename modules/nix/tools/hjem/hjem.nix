@@ -5,7 +5,7 @@
     ];
     hjem = {
       extraModules = [
-        # inputs.hjem-rum.hjemModules.default
+        inputs.hjem-rum.hjemModules.default
       ];
       clobberByDefault = true;
     };
