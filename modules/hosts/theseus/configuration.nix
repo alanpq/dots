@@ -8,7 +8,7 @@ in {
   flake.modules.nixos.${hostname} = {pkgs, ...}: {
     imports = with inputs.self.modules.nixos; [
       system-desktop
-      systemd-boot
+      grub
       # bluetooth
     ];
 
