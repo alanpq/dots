@@ -7,6 +7,7 @@
       pipewire
 
       niri
+      walker
     ];
   };
 
