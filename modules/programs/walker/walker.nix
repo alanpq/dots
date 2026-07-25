@@ -1,10 +1,17 @@
 {inputs, ...}: {
-  flake.modules.nixos.walker = {pkgs,config,lib, ...}: let
-    providers = [
-      "desktopapplications"
-      "calc"
-      "symbols"
-    ] ++ lib.lists.optionals config.hardware.bluetooth.enable [ "bluetooth" ];
+  flake.modules.nixos.walker = {
+    config,
+    lib,
+    ...
+  }: let
+    providers =
+      [
+        "desktopapplications"
+        "calc"
+        "symbols"
+      ]
+      ++ lib.lists.optionals config.hardware.bluetooth.enable ["bluetooth"]
+      ++ lib.lists.optionals config.programs.niri.enable ["niriactions" "nirisessions"];
   in {
     imports = [inputs.walker.nixosModules.default];
     disabledModules = ["services/misc/elephant.nix"];
@@ -14,6 +21,8 @@
 
       elephant = {
         inherit providers;
+        provider = {
+        };
       };
 
       config = {
