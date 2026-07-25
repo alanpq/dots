@@ -1,4 +1,8 @@
 {
+  pkgs,
+  lib,
+  ...
+}: {
   flake.modules.nixos.niri = {pkgs, ...}: {
     environment.systemPackages = with pkgs; [
       wl-clipboard
@@ -38,6 +42,14 @@
   flake.modules.hjem.niri = {
     rum.desktops.niri = {
       enable = true;
+      config = ''
+
+        debug {
+            // wait-for-frame-completion-before-queueing
+            render-drm-device "/dev/dri/renderD129"
+        }
+      '';
+
       binds =
         {
           "Mod+Slash" = {
