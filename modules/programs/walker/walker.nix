@@ -1,12 +1,10 @@
 {inputs, ...}: {
-  flake.modules.nixos.walker = {pkgs, ...}: let
+  flake.modules.nixos.walker = {pkgs,config,lib, ...}: let
     providers = [
-      "bluetooth"
       "desktopapplications"
       "calc"
       "symbols"
-      "unicode"
-    ];
+    ] ++ lib.lists.optionals config.hardware.bluetooth.enable [ "bluetooth" ];
   in {
     imports = [inputs.walker.nixosModules.default];
     disabledModules = ["services/misc/elephant.nix"];
@@ -23,7 +21,7 @@
           input = "Search";
           list = "No results.";
         };
-        providers.default = ["desktopapplications" "calc" "symbols"];
+        providers.default = providers;
         keybinds.quick_activate = ["F1" "F2" "F3" "F4"];
       };
     };
