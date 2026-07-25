@@ -3,8 +3,8 @@
     providers = [
       "bluetooth"
       "desktopapplications"
-      "symbols"
       "calc"
+      "symbols"
       "unicode"
     ];
   in {
@@ -23,7 +23,7 @@
           input = "Search";
           list = "No results.";
         };
-        providers.default = providers;
+        providers.default = ["desktopapplications" "calc" "symbols"];
         keybinds.quick_activate = ["F1" "F2" "F3" "F4"];
       };
     };
