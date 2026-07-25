@@ -5,6 +5,8 @@
     imports = with inputs.self.modules.nixos; [
       system-default
 
+      tailscale
+
       ssh
       firmware
       cli-tools
