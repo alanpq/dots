@@ -9,6 +9,7 @@
 
       niri
       walker
+      thunar
 
       wireless
     ];
