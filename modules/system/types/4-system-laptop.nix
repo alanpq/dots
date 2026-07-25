@@ -5,6 +5,7 @@
       greetd
 
       niri
+      walker
 
       wireless
     ];
