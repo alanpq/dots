@@ -41,10 +41,7 @@
       config =
         builtins.readFile ./config.kdl
         + ''
-          debug {
-              // wait-for-frame-completion-before-queueing
-              render-drm-device "/dev/dri/renderD129"
-          }
+
         '';
     };
   };

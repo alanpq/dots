@@ -2,6 +2,9 @@ spawn-at-startup "elephant"
 spawn-sh-at-startup "walker --gapplication-service"
 
 input {
+    focus-follows-mouse max-scroll-amount="15%"
+    warp-mouse-to-focus
+
     keyboard {
         xkb {
             layout "ie"
@@ -27,9 +30,19 @@ blur {
 
 layout {
     focus-ring {
-        // off
+        on
+        width 1
     }
 
+    shadow {
+        on
+        softness 10
+        spread 3
+        offset x=0 y=5
+        draw-behind-window true
+        color "#00000054"
+        inactive-color "#00000080"
+    }
 }
 
 window-rule {
