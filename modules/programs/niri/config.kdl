@@ -37,45 +37,25 @@ window-rule {
 
     draw-border-with-background false
 }
-
-layer-rule {
-    match layer="bottom"
-    match layer="top"
-    match layer="overlay"
+window-rule {
+    match app-id="walker"
 
     background-effect {
-        blur true
+        blur false
     }
-
 }
 
-// binds {
+// layer-rule {
+//     match layer="bottom"
+//     match layer="top"
+//     match layer="overlay"
 //
+//     background-effect {
+//         blur true
+//     }
 //
-//
-//     Mod+O repeat=false { toggle-overview; }
-//
-//     Mod+Q repeat=false { close-window; }
-//
-//     Mod+Tab { focus-workspace-previous; }
-//     Mod+Left  { focus-column-left; }
-//     Mod+Down  { focus-window-down; }
-//     Mod+Up    { focus-window-up; }
-//     Mod+Right { focus-column-right; }
-//     Mod+H     { focus-column-left; }
-//     Mod+J     { focus-window-or-workspace-down; }
-//     Mod+K     { focus-window-or-workspace-up; }
-//     Mod+L     { focus-column-right; }
-//
-//     Mod+Ctrl+Left  { move-column-left; }
-//     Mod+Ctrl+Down  { move-window-down; }
-//     Mod+Ctrl+Up    { move-window-up; }
-//     Mod+Ctrl+Right { move-column-right; }
-//     Mod+Ctrl+H     { move-column-left; }
-//     Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
-//     Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
-//     Mod+Ctrl+L     { move-column-right; }
-//
+// }
+
 //     // Alternative commands that move across workspaces when reaching
 //     // the first or last window in a column.
 //
@@ -120,56 +100,3 @@ layer-rule {
 //     Mod+Shift+WheelScrollUp        { focus-column-left; }
 //     Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
 //     Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
-//
-//
-//     // The following binds move the focused window in and out of a column.
-//     // If the window is alone, they will consume it into the nearby column to the side.
-//     // If the window is already in a column, they will expel it out.
-//     Mod+BracketLeft  { consume-or-expel-window-left; }
-//     Mod+BracketRight { consume-or-expel-window-right; }
-//
-//
-//     // Consume one window from the right to the bottom of the focused column.
-//     Mod+Comma  { consume-window-into-column; }
-//     // Expel the bottom window from the focused column to the right.
-//     Mod+Period { expel-window-from-column; }
-//
-//     Mod+R { switch-preset-column-width; }
-//     // Cycling through the presets in reverse order is also possible.
-//     // Mod+R { switch-preset-column-width-back; }
-//     Mod+Shift+R { switch-preset-window-height; }
-//     Mod+Ctrl+R { reset-window-height; }
-//     Mod+F { maximize-column; }
-//     Mod+Shift+F { fullscreen-window; }
-//
-//
-//     // Expand the focused column to space not taken up by other fully visible columns.
-//     Mod+Ctrl+F { expand-column-to-available-width; }
-//
-//     Mod+C { center-column; }
-//
-//     // Center all fully visible columns on screen.
-//     Mod+Ctrl+C { center-visible-columns; }
-//
-//
-//     Mod+Minus { set-column-width "-10%"; }
-//     Mod+Equal { set-column-width "+10%"; }
-//
-//     // Finer height adjustments when in column with other windows.
-//     Mod+Shift+Minus { set-window-height "-10%"; }
-//     Mod+Shift+Equal { set-window-height "+10%"; }
-//
-//     // Move the focused window between the floating and the tiling layout.
-//     Mod+V       { toggle-window-floating; }
-//     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
-//
-//     // Toggle tabbed column display mode.
-//     // Windows in this column will appear as vertical tabs,
-//     // rather than stacked on top of each other.
-//     Mod+W { toggle-column-tabbed-display; }
-//
-//     Print { screenshot; }
-//     Ctrl+Print { screenshot-screen; }
-//     Alt+Print { screenshot-window; }
-//
-// }
