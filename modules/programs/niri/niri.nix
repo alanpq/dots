@@ -1,5 +1,8 @@
-{
+{inputs, ...}: {
   flake.modules.nixos.niri = {pkgs, ...}: {
+    imports = with inputs.self.modules.nixos; [
+      awww
+    ];
     environment.systemPackages = with pkgs; [
       wl-clipboard
       wtype

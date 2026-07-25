@@ -1,3 +1,5 @@
+spawn-at-startup "awww-daemon"
+spawn-sh-at-startup "awww img ~/Pictures/firewatch.png -t none"
 spawn-at-startup "elephant"
 spawn-sh-at-startup "walker --gapplication-service"
 
