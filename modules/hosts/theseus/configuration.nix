@@ -13,12 +13,15 @@ in {
     imports = with inputs.self.modules.nixos; [
       system-desktop
       grub
+      nvidia
       # bluetooth
     ];
 
-    services.tailscale.enable = true;
-
-    environment.systemPackages = [];
+    boot = {
+      kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+      binfmt.emulatedSystems = ["aarch64-linux" "i686-linux"];
+      supportedFilesystems = ["ntfs"];
+    };
 
     networking = {
       hostName = "${hostname}";
@@ -30,25 +33,28 @@ in {
       '';
     };
 
+    powerManagement.cpuFreqGovernor = "performance";
+
     system.stateVersion = lib.mkForce "22.11";
 
-    boot.kernelPackages = pkgs.linuxPackages;
     hardware = {
-      graphics = {
-        enable = true;
-        enable32Bit = true;
-        extraPackages = with pkgs; [
-          libva-vdpau-driver
-          libvdpau-va-gl
-        ];
-        extraPackages32 = with pkgs.pkgsi686Linux; [libva];
-      };
-      nvidia = {
-        open = false;
-        package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
-        modesetting.enable = true;
-      };
+      graphics.enable = true;
+      graphics.enable32Bit = true;
       opentabletdriver.enable = true;
+    };
+
+    services.xserver = {
+      enable = true;
+      # displayManager.gdm = {
+      #   enable = true;
+      #   wayland = true;
+      # };
+    };
+
+    environment.sessionVariables = {
+      # LIBVA_DRIVER_NAME = "nvidia";
+      # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      # __GL_VRR_ALLOWED = "1";
     };
 
     # TODO: modularise this

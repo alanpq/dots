@@ -4,6 +4,9 @@
       system-cli
       greetd
 
+      pipewire
+      bluetooth
+
       niri
       walker
 

@@ -4,6 +4,8 @@
       system-cli
       greetd
 
+      pipewire
+
       niri
     ];
   };

@@ -6,6 +6,7 @@
       system-default
 
       tailscale
+      podman
 
       ssh
       firmware
