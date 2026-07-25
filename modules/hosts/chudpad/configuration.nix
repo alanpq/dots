@@ -13,6 +13,8 @@ in {
     ];
 
     services.tailscale.enable = true;
+    programs.firefox.enable = true;
+    programs.steam.enable = true;
 
     environment.systemPackages = [pkgs.wpa_supplicant_gui];
 

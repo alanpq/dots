@@ -1,3 +1,6 @@
+spawn-at-startup "elephant"
+spawn-sh-at-startup "walker --gapplication-service"
+
 input {
     keyboard {
         xkb {

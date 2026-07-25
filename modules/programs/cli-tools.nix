@@ -4,6 +4,8 @@
       comma
 
       git
+      lazygit
+
       tmux
       # local.cowsay
     ];
