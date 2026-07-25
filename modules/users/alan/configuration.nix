@@ -26,7 +26,7 @@ in {
 
           "networkmanager"
           "minecraft"
-          "network"
+          "wpa_supplicant"
           "wireshark"
           "i2c"
           "mysql"

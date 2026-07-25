@@ -32,7 +32,7 @@ in {
 
     system.stateVersion = lib.mkForce "22.11";
 
-    boot.kernelPackages = pkgs.unstable.linuxPackages;
+    boot.kernelPackages = pkgs.linuxPackages;
     hardware = {
       graphics = {
         enable = true;

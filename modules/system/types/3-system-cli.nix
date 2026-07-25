@@ -15,6 +15,8 @@
     imports = with inputs.self.modules.hjem; [
       system-default
 
+      cli-tools
+
       # shell
     ];
   };

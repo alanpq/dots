@@ -1,8 +1,6 @@
 {
   flake.modules.nixos.wireless = {
-    # Ensure group exists
-    users.groups.network = {};
-    systemd.services.wpa_supplicant.preStart = "touch /etc/wpa_supplicant.conf";
+    # systemd.services.wpa_supplicant.preStart = "touch /etc/wpa_supplicant.conf";
 
     networking.wireless = {
       enable = true;
@@ -27,14 +25,11 @@
 
       # Imperative
       allowAuxiliaryImperativeNetworks = true;
-      userControlled = {
-        enable = true;
-        group = "network";
-      };
-      extraConfig = ''
-        ctrl_interface=DIR=/run/wpa_supplicant GROUP=network
-        update_config=1
-      '';
+      userControlled = true;
+      # extraConfig = ''
+      #   ctrl_interface=DIR=/run/wpa_supplicant GROUP=wpa_supplicant
+      #   update_config=1
+      # '';
     };
   };
 }

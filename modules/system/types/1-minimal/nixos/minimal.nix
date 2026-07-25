@@ -8,7 +8,7 @@
   flake.modules.nixos.system-minimal = {pkgs, ...}: {
     nixpkgs.overlays = [
       (final: _prev: {
-        unstable = import inputs.nixpkgs-unstable {
+        stable = import inputs.nixpkgs-stable {
           inherit (final) config;
           inherit (pkgs.stdenv.hostPlatform) system;
         };

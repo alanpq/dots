@@ -12,7 +12,15 @@ in {
       # bluetooth
     ];
 
-    environment.systemPackages = [pkgs.wpa_supplicant_gui pkgs.steam];
+    services.tailscale.enable = true;
+
+    environment.systemPackages = [pkgs.wpa_supplicant_gui];
+
+    hardware = {
+      graphics = {
+        enable = true;
+      };
+    };
 
     networking = {
       hostName = "${hostname}";

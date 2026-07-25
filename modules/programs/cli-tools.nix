@@ -15,4 +15,7 @@ in {
       neovim
     ];
   };
+  flake.modules.hjem.cli-tools = {
+    imports = with inputs.self.modules.hjem; [alacritty];
+  };
 }
