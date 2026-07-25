@@ -12,7 +12,6 @@ in {
       # bluetooth
     ];
 
-    programs.firefox.enable = true;
     programs.steam.enable = true;
 
     environment.systemPackages = [pkgs.wpa_supplicant_gui];

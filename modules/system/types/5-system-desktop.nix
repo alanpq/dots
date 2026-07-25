@@ -6,6 +6,9 @@
 
       pipewire
 
+      firefox
+      steam
+
       niri
       walker
       thunar

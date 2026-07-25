@@ -7,6 +7,9 @@
       pipewire
       bluetooth
 
+      firefox
+      steam
+
       niri
       walker
       thunar
