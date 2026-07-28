@@ -3,7 +3,11 @@
   self,
   ...
 }: {
-  flake.modules.nixos.theseus = {config, ...}: {
+  flake.modules.nixos.theseus = {
+    config,
+    pkgs,
+    ...
+  }: {
     imports = with inputs.self.modules.nixos; [
       alan
     ];
@@ -12,6 +16,8 @@
         system-desktop
         discord
       ];
+
+      packages = [pkgs.vscode];
     };
   };
 }
