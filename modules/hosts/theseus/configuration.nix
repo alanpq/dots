@@ -14,6 +14,7 @@ in {
       system-desktop
       grub
       nvidia
+      nix-ld
       # bluetooth
     ];
 
