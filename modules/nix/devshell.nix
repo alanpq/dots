@@ -1,29 +1,29 @@
 {
-    perSystem = {pkgs, ...}: {
-        devShells.default = pkgs.mkShell {
-            packages = with pkgs; [
-                nix
-                nixpkgs-fmt
-                alejandra
+  perSystem = {pkgs, ...}: {
+    devShells.default = pkgs.mkShell {
+      packages = with pkgs; [
+        nix
+        nixpkgs-fmt
+        alejandra
 
-                stylua
+        stylua
 
-                git
-                git-crypt
+        git
+        git-crypt
 
-                sops
-                ssh-to-age
-                gnupg
-                age
-                
-                nh
+        sops
+        ssh-to-age
+        gnupg
+        age
 
-                bun
-                typescript
-                typescript-language-server
+        nh
 
-                kdePackages.qtdeclarative
-            ];
-        };
+        bun
+        typescript
+        typescript-language-server
+
+        kdePackages.qtdeclarative
+      ];
     };
+  };
 }
