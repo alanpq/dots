@@ -7,6 +7,7 @@
       lazygit
 
       tmux
+      eza
       # local.cowsay
     ];
   };
