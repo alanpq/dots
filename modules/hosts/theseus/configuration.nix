@@ -66,8 +66,8 @@ in {
       #shadow.source = "/persist/etc/shadow";
 
       #group.source = "/persist/etc/group";
-      subgid.source = "/persist/etc/subgid";
-      subuid.source = "/persist/etc/subuid";
+      # subgid.source = "/persist/etc/subgid";
+      # subuid.source = "/persist/etc/subuid";
 
       adjtime.source = "/persist/etc/adjtime";
       NIXOS.source = "/persist/etc/NIXOS";

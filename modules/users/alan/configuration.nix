@@ -11,6 +11,8 @@ in {
     imports = with inputs.self.modules.nixos; [
     ];
 
+    users.mutableUsers = false;
+
     users.users."${username}" = {
       isNormalUser = true;
       name = "${username}";
@@ -36,6 +38,19 @@ in {
           "libvirtd"
           "deluge"
         ];
+
+      subGidRanges = [
+        {
+          count = 65536;
+          startGid = 100000;
+        }
+      ];
+      subUidRanges = [
+        {
+          count = 65536;
+          startUid = 100000;
+        }
+      ];
     };
 
     hjem.users."${username}" = {
