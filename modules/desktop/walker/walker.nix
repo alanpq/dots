@@ -35,4 +35,10 @@
       };
     };
   };
+
+  flake.modules.hjem.walker = {pkgs, ...}: {
+    desktop.appLauncher = {
+      package = pkgs.walker;
+    };
+  };
 }

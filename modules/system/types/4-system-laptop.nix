@@ -5,22 +5,27 @@
       greetd
 
       pipewire
-      bluetooth
 
       firefox
       steam
 
-      niri
-      walker
-      thunar
+      stylix
 
-      wireless
+      niri
+
+      walker
+      
+      thunar
     ];
   };
 
   flake.modules.hjem.system-laptop = {
     imports = with inputs.self.modules.hjem; [
       system-cli
+      desktop
+
+      vicinae
+      walker
 
       niri
     ];

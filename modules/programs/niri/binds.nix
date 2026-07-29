@@ -1,5 +1,9 @@
 {
-  flake.modules.hjem.niri = {lib, ...}: let
+  flake.modules.hjem.niri = {
+    lib,
+    config,
+    ...
+  }: let
     mkSimple = value: {action = value;};
   in {
     rum.desktops.niri = {
@@ -35,7 +39,7 @@
           };
 
           "Mod+Space" = {
-            spawn = ["walker"];
+            spawn = lib.strings.splitString " " config.desktop.appLauncher.openCmd;
             parameters = {
               hotkey-overlay-title = "App Launcher";
             };
