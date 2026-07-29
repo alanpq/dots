@@ -3,7 +3,7 @@
     url = "github:nix-community/stylix";
     inputs.nixpkgs.follows = "nixpkgs";
   };
-  flake.nixosModules.stylix = {pkgs, ...}: {
+  flake.modules.nixos.stylix = {pkgs, ...}: {
     imports = [inputs.stylix.nixosModules.stylix];
 
     stylix = {
