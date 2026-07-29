@@ -13,8 +13,6 @@
 
       niri
 
-      walker
-      
       thunar
     ];
   };
@@ -25,7 +23,6 @@
       desktop
 
       vicinae
-      walker
 
       niri
     ];
