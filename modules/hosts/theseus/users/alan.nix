@@ -17,7 +17,7 @@
         discord
       ];
 
-      packages = [pkgs.vscode];
+      packages = [pkgs.vscode pkgs.prismlauncher];
     };
   };
 }
