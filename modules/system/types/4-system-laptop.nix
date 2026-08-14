@@ -22,6 +22,8 @@
       system-cli
       desktop
 
+      stylix
+
       vicinae
 
       niri

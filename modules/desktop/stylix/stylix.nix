@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
   flake-file.inputs.stylix = {
     url = "github:nix-community/stylix";
     inputs.nixpkgs.follows = "nixpkgs";
@@ -18,6 +22,9 @@
       };
 
       fonts = {
+        sizes = {
+          terminal = 10;
+        };
         serif = {
           package = pkgs.poppins;
           name = "Poppins";
@@ -27,8 +34,8 @@
           name = "Poppins";
         };
         monospace = {
-          package = pkgs.maple-mono.truetype;
-          name = "Maple Mono";
+          package = pkgs.nerd-fonts.jetbrains-mono;
+          name = "JetBrainsMono NF";
         };
         emoji = {
           package = pkgs.noto-fonts-color-emoji;
@@ -36,5 +43,7 @@
         };
       };
     };
+  };
+  flake.modules.hjem.stylix = {
   };
 }

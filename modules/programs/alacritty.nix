@@ -1,11 +1,11 @@
 {
-  flake.modules.hjem.alacritty = {pkgs, ...}: {
+  flake.modules.hjem.alacritty = {lib, pkgs, ...}: {
     rum.programs.alacritty = {
       enable = true;
       package = pkgs.alacritty;
 
       settings = {
-        font.size = 10;
+        font.size = lib.mkDefault 10;
         window = {
           blur = true;
           decorations = "None";
