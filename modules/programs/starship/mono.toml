@@ -1,5 +1,5 @@
 palette = "grey"
-format = """$username$hostname$directory$fill[$all](grey)$time$line_break$character"""
+format = """$username$hostname$directory $fill [$all](grey)$time$line_break$character"""
 
 # ── Shell interaction ──────────────────────────────────────────────
 
