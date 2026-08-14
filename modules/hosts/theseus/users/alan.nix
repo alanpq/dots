@@ -17,7 +17,7 @@
         discord
       ];
 
-      packages = [pkgs.vscode pkgs.prismlauncher];
+      packages = [pkgs.vscode pkgs.prismlauncher pkgs.protontricks pkgs.spotify pkgs.spotifyd pkgs.mangohud pkgs.easyeffects];
     };
   };
 }

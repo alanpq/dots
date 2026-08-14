@@ -18,6 +18,10 @@ in {
       # bluetooth
     ];
 
+    programs.gamescope.enable = true;
+    programs.gamemode.enable = true;
+    programs.dconf.enable = true;
+
     boot = {
       kernelPackages = pkgs.linuxKernel.packages.linux_zen;
       binfmt.emulatedSystems = ["aarch64-linux" "i686-linux"];
@@ -57,6 +61,8 @@ in {
       # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       # __GL_VRR_ALLOWED = "1";
     };
+
+    # services.systemd.extraConfig = ''; echo madvise > /sys/kernel/mm/transparent_hugepage/enabled'';
 
     # TODO: modularise this
     # ============== PERSISTENCE RELATED CONFIG ================
