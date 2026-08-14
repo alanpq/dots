@@ -23,7 +23,7 @@
 
       fonts = {
         sizes = {
-          terminal = 10;
+          terminal = 9;
         };
         serif = {
           package = pkgs.poppins;
