@@ -41,6 +41,12 @@ in {
         integrations = {
           zsh.enable = true;
         };
+        settings = {
+          global = {
+            log_format = builtins.fromJSON ''"\u001B[2mdirenv: %s\u001B[0m" '';
+            hide_env_diff = true;
+          };
+        };
       };
     };
   };
