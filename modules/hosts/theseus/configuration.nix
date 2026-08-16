@@ -22,6 +22,8 @@ in {
     programs.gamemode.enable = true;
     programs.dconf.enable = true;
 
+    services.deluge.enable = true;
+
     boot = {
       kernelPackages = pkgs.linuxKernel.packages.linux_zen;
       binfmt.emulatedSystems = ["aarch64-linux" "i686-linux"];
