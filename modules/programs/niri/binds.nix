@@ -51,6 +51,7 @@
           "Print" = "screenshot";
           "Ctrl+Print" = "screenshot-screen";
           "Alt+Print" = "screenshot-window";
+          "Mod+Insert" = "screenshot";
 
           # Consume one window from the right to the bottom of the focused column.
           "Mod+Comma" = "consume-window-into-column";
