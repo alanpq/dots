@@ -16,6 +16,7 @@
         system-desktop
         discord
         easyeffects
+        spotifyd
       ];
 
       packages = [
