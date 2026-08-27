@@ -15,9 +15,19 @@
       imports = with inputs.self.modules.hjem; [
         system-desktop
         discord
+        easyeffects
       ];
 
-      packages = [pkgs.vscode pkgs.prismlauncher pkgs.protontricks pkgs.spotify pkgs.spotifyd pkgs.mangohud pkgs.easyeffects];
+      packages = [
+        pkgs.vscode
+        pkgs.prismlauncher
+        pkgs.protontricks
+        pkgs.spotify
+        pkgs.spotifyd
+        pkgs.mangohud
+        pkgs.easyeffects
+        pkgs.lutris
+      ];
     };
   };
 }
