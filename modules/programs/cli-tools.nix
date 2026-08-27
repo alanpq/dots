@@ -10,6 +10,11 @@
       eza
       bat
       # local.cowsay
+      (
+        pkgs.writeShellScriptBin "bell" ''
+          ${pkgs.pipewire}/bin/pw-play --volume 0.5 ${../../notification.wav}
+        ''
+      )
     ];
   };
 in {
