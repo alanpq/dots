@@ -13,7 +13,7 @@
       grim
       slurp
       swappy
-      wf-recorder
+      # wf-recorder
       brightnessctl
 
       adw-gtk3
