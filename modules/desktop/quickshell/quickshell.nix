@@ -91,9 +91,16 @@
     packages = [quickshell];
 
     xdg.config.files = {
-      # quickshell loads $XDG_CONFIG_HOME/quickshell/shell.qml by default.
-      "quickshell/shell.qml".source = ./shell.qml;
-      "quickshell/Theme.qml".text = themeQml;
+      # Loaded via `quickshell -c config` (see ExecStart), i.e.
+      # $XDG_CONFIG_HOME/quickshell/config/shell.qml. Components and the Style
+      # singleton are committed; Theme is generated from stylix below.
+      "quickshell/config/shell.qml".source = ./config/shell.qml;
+      "quickshell/config/Bar.qml".source = ./config/Bar.qml;
+      "quickshell/config/Section.qml".source = ./config/Section.qml;
+      "quickshell/config/Tray.qml".source = ./config/Tray.qml;
+      "quickshell/config/Media.qml".source = ./config/Media.qml;
+      "quickshell/config/Style.qml".source = ./config/Style.qml;
+      "quickshell/config/Theme.qml".text = themeQml;
     };
 
     systemd.services.quickshell = {
@@ -105,7 +112,7 @@
       wantedBy = ["graphical-session.target"];
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${quickshell}/bin/quickshell";
+        ExecStart = "${quickshell}/bin/quickshell -c config";
         Restart = "on-failure";
         RestartSec = "2";
         Slice = "session.slice";

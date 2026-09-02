@@ -1,0 +1,101 @@
+import Quickshell
+import Quickshell.Services.SystemTray
+import QtQuick
+
+// Right-cluster section: a fixed toggle pinned to the right edge; the tray
+// icons live in a clipped strip to its left that animates open, so they slide
+// out from behind the toggle. Hidden when there are no tray items.
+Section {
+    id: root
+
+    // The bar window, needed to anchor tray item menus.
+    required property var panelWindow
+
+    visible: SystemTray.items.values.length > 0
+
+    Item {
+        id: tray
+        property bool expanded: false
+
+        implicitHeight: Style.trayIconSize
+        implicitWidth: btn.width + reveal.width
+
+        Item {
+            id: reveal
+            anchors.right: btn.left
+            anchors.verticalCenter: parent.verticalCenter
+            height: parent.height
+            clip: true
+            width: tray.expanded ? (iconsRow.implicitWidth + Style.traySlotGap) : 0
+
+            Behavior on width {
+                NumberAnimation {
+                    duration: Style.trayExpandDuration
+                    easing.type: Easing.OutCubic
+                }
+            }
+
+            // Anchored to the strip's right (the toggle edge) so the clip
+            // uncovers it leftward.
+            Row {
+                id: iconsRow
+                anchors.right: parent.right
+                anchors.rightMargin: Style.traySlotGap
+                anchors.verticalCenter: parent.verticalCenter
+                spacing: Style.traySlotGap
+
+                Repeater {
+                    model: SystemTray.items
+
+                    delegate: Item {
+                        required property var modelData
+                        anchors.verticalCenter: parent.verticalCenter
+                        implicitWidth: Style.trayIconSize
+                        implicitHeight: Style.trayIconSize
+
+                        Image {
+                            anchors.fill: parent
+                            source: modelData.icon
+                            fillMode: Image.PreserveAspectFit
+                            smooth: true
+                        }
+
+                        MouseArea {
+                            id: trayMouse
+                            anchors.fill: parent
+                            acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
+                            onClicked: (mouse) => {
+                                if (mouse.button === Qt.LeftButton)
+                                    modelData.activate();
+                                else if (mouse.button === Qt.MiddleButton)
+                                    modelData.secondaryActivate();
+                                else if (mouse.button === Qt.RightButton && modelData.hasMenu) {
+                                    const pos = trayMouse.mapToItem(root.panelWindow, 0, trayMouse.height);
+                                    modelData.display(root.panelWindow, pos.x, pos.y);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Drawn last / z:1 so icons pass behind it.
+        Text {
+            id: btn
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            z: 1
+            color: Theme.foreground
+            font.family: Theme.monoFamily
+            font.pointSize: Theme.fontSize + Style.trayToggleFontBump
+            font.bold: true
+            text: tray.expanded ? "\u00BB" : "\u00AB"
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: tray.expanded = !tray.expanded
+            }
+        }
+    }
+}
