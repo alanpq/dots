@@ -1,0 +1,6 @@
+singleton Style Style.qml
+singleton Theme Theme.qml
+Bar Bar.qml
+Section Section.qml
+Tray Tray.qml
+Media Media.qml

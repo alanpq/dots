@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell
 import Quickshell.Services.SystemTray
 import QtQuick
@@ -48,6 +50,7 @@ Section {
                     model: SystemTray.items
 
                     delegate: Item {
+                        id: iconRoot
                         required property var modelData
                         anchors.verticalCenter: parent.verticalCenter
                         implicitWidth: Style.trayIconSize
@@ -55,7 +58,7 @@ Section {
 
                         Image {
                             anchors.fill: parent
-                            source: modelData.icon
+                            source: iconRoot.modelData.icon
                             fillMode: Image.PreserveAspectFit
                             smooth: true
                         }
@@ -64,14 +67,14 @@ Section {
                             id: trayMouse
                             anchors.fill: parent
                             acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
-                            onClicked: (mouse) => {
+                            onClicked: mouse => {
                                 if (mouse.button === Qt.LeftButton)
-                                    modelData.activate();
+                                    iconRoot.modelData.activate();
                                 else if (mouse.button === Qt.MiddleButton)
-                                    modelData.secondaryActivate();
-                                else if (mouse.button === Qt.RightButton && modelData.hasMenu) {
+                                    iconRoot.modelData.secondaryActivate();
+                                else if (mouse.button === Qt.RightButton && iconRoot.modelData.hasMenu) {
                                     const pos = trayMouse.mapToItem(root.panelWindow, 0, trayMouse.height);
-                                    modelData.display(root.panelWindow, pos.x, pos.y);
+                                    iconRoot.modelData.display(root.panelWindow, pos.x, pos.y);
                                 }
                             }
                         }

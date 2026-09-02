@@ -95,6 +95,7 @@
       # $XDG_CONFIG_HOME/quickshell/config/shell.qml. Components and the Style
       # singleton are committed; Theme is generated from stylix below.
       "quickshell/config/shell.qml".source = ./config/shell.qml;
+      "quickshell/config/qmldir".source = ./config/qmldir;
       "quickshell/config/Bar.qml".source = ./config/Bar.qml;
       "quickshell/config/Section.qml".source = ./config/Section.qml;
       "quickshell/config/Tray.qml".source = ./config/Tray.qml;
