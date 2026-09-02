@@ -1,7 +1,9 @@
+pragma ComponentBehavior: Bound
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Services.Notifications
 import QtQuick
+import QtQuick.Layouts
 
 // System notification handler and view. A single layer-shell overlay pinned to
 // the top-left, just under the bar, showing each active notification as a
@@ -57,93 +59,104 @@ PanelWindow {
                 id: card
                 required property var modelData
 
-                readonly property color textColor: card.modelData.urgency === NotificationUrgency.Critical ? "#3a1818" : Theme.accent
-
                 width: parent.width
-                implicitHeight: cardBody.implicitHeight + 2 * Style.notifyPad
-                color: card.modelData.urgency === NotificationUrgency.Critical ? Theme.yellow : Theme.surface
+                implicitHeight: Math.max(32, cardBody.implicitHeight) + 2 * Style.notifyPad
+
+                color: Theme.surface
                 radius: 0
 
-                // Urgency accent stripe down the left edge.
-                // Rectangle {
-                //     width: 3
-                //     height: parent.height
-                //     color: card.modelData.urgency === NotificationUrgency.Critical ? Theme.red : Theme.accent
-                // }
-                //
-                Text {
-                    height: parent.height
-                    anchors.left: parent.left
-                    anchors.leftMargin: Style.notifyPad
-                    verticalAlignment: Text.AlignVCenter
-
-                    text: card.modelData.urgency === NotificationUrgency.Critical ? "\uf071" : "\uf05a"
-                    color: card.modelData.urgency === NotificationUrgency.Critical ? "#3a1818" : Theme.accent
+                Rectangle {
+                    anchors.fill: parent
+                    anchors.margins: -1
+                    color: "transparent"
+                    border.width: card.modelData.urgency === NotificationUrgency.Critical ? 1 : 0
+                    border.color: Theme.yellow
                 }
 
-                Column {
-                    id: cardBody
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.top: parent.top
-                    anchors.leftMargin: Style.notifyPad * 2 + 13
-                    anchors.rightMargin: Style.notifyPad
-                    anchors.topMargin: Style.notifyPad
-                    spacing: 2
+                RowLayout {
+                    id: cardRow
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        top: parent.top
+                        leftMargin: Style.notifyPad
+                        rightMargin: Style.notifyPad
+                        topMargin: Style.notifyPad
+                    }
 
-                    Item {
-                        width: parent.width
-                        height: Math.max(summaryText.implicitHeight, appNameText.implicitHeight)
+                    spacing: card.modelData.image !== "" ? 12 : 0
+                    Loader {
+                        id: cardImg
+                        active: card.modelData.image !== ""
+                        sourceComponent: Image {
+                            source: card.modelData.image
 
-                        Text {
-                            id: appNameText
-                            anchors.right: parent.right
-                            text: card.modelData.appName
-                            color: card.textColor
-                            opacity: 0.6
-                            font.family: Theme.monoFamily
-                            font.pointSize: Theme.fontSize
-                            wrapMode: Text.NoWrap
+                            height: 40
+                            width: source !== "" ? height : 0
+
+                            fillMode: Image.PreserveAspectFit
+                        }
+                    }
+
+                    Column {
+                        id: cardBody
+
+                        Layout.fillWidth: true
+                        Layout.alignment: Qt.AlignTop
+
+                        spacing: 2
+
+                        Item {
+                            width: parent.width
+                            height: Math.max(summaryText.implicitHeight, appNameText.implicitHeight)
+
+                            Text {
+                                id: appNameText
+                                anchors.right: parent.right
+                                text: card.modelData.appName
+                                color: Theme.foreground
+                                opacity: 0.6
+                                font.family: Theme.monoFamily
+                                font.pointSize: Theme.fontSize
+                                wrapMode: Text.NoWrap
+                            }
+
+                            Text {
+                                id: summaryText
+                                anchors.left: parent.left
+                                anchors.right: appNameText.left
+                                anchors.rightMargin: Style.sectionSpacing
+                                text: card.modelData.summary
+                                color: card.modelData.urgency === NotificationUrgency.Critical ? Theme.green : Theme.foreground
+                                font.family: Theme.monoFamily
+                                font.pointSize: Theme.fontSize
+                                font.bold: true
+                                elide: Text.ElideRight
+                                wrapMode: Text.NoWrap
+                            }
                         }
 
                         Text {
-                            id: summaryText
-                            anchors.left: parent.left
-                            anchors.right: appNameText.left
-                            anchors.rightMargin: Style.sectionSpacing
-                            text: card.modelData.summary
-                            color: card.textColor
+                            width: parent.width
+                            visible: card.modelData.body.length > 0
+                            text: card.modelData.body
+                            color: card.modelData.urgency === NotificationUrgency.Critical ? Theme.green : Theme.foreground
+                            opacity: 0.8
                             font.family: Theme.monoFamily
                             font.pointSize: Theme.fontSize
-                            font.bold: true
+                            textFormat: Text.PlainText
+                            wrapMode: Text.WordWrap
+                            maximumLineCount: 4
                             elide: Text.ElideRight
-                            wrapMode: Text.NoWrap
                         }
-                    }
-
-                    Text {
-                        width: parent.width
-                        visible: card.modelData.body.length > 0
-                        text: card.modelData.body
-                        color: card.textColor
-                        opacity: 0.8
-                        font.family: Theme.monoFamily
-                        font.pointSize: Theme.fontSize
-                        textFormat: Text.PlainText
-                        wrapMode: Text.WordWrap
-                        maximumLineCount: 4
-                        elide: Text.ElideRight
                     }
                 }
 
-                // Click to dismiss.
                 MouseArea {
                     anchors.fill: parent
                     onClicked: card.modelData.dismiss()
                 }
 
-                // Auto-dismiss. Respect the app's expireTimeout when positive,
-                // otherwise fall back to the default.
                 Timer {
                     running: true
                     interval: card.modelData.expireTimeout > 0 ? card.modelData.expireTimeout : Style.notifyTimeout
