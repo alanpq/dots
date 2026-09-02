@@ -28,6 +28,7 @@
         pkgs.mangohud
         pkgs.easyeffects
         pkgs.lutris
+        pkgs.obs-studio
       ];
     };
   };
