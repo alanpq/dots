@@ -4,5 +4,8 @@ Bar Bar.qml
 Section Section.qml
 Tray Tray.qml
 Media Media.qml
+Battery Battery.qml
+Brightness Brightness.qml
+Volume Volume.qml
 Popup Popup.qml
 MenuView MenuView.qml

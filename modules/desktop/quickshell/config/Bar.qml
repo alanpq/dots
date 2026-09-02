@@ -33,12 +33,18 @@ PanelWindow {
         Media {}
     }
 
-    // Right cluster: tray, then date, then time.
+    // Right cluster: battery, brightness, volume, tray, then date, then time.
     Row {
         anchors.right: parent.right
         anchors.rightMargin: Style.gap
         height: parent.height
         spacing: Style.gap
+
+        Battery {}
+
+        Brightness {}
+
+        Volume {}
 
         Tray {
             panelWindow: panel

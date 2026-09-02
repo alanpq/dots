@@ -100,6 +100,9 @@
       "quickshell/config/Section.qml".source = ./config/Section.qml;
       "quickshell/config/Tray.qml".source = ./config/Tray.qml;
       "quickshell/config/Media.qml".source = ./config/Media.qml;
+      "quickshell/config/Battery.qml".source = ./config/Battery.qml;
+      "quickshell/config/Brightness.qml".source = ./config/Brightness.qml;
+      "quickshell/config/Volume.qml".source = ./config/Volume.qml;
       "quickshell/config/Popup.qml".source = ./config/Popup.qml;
       "quickshell/config/MenuView.qml".source = ./config/MenuView.qml;
       "quickshell/config/Style.qml".source = ./config/Style.qml;

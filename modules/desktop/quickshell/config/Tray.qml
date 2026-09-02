@@ -60,11 +60,46 @@ Section {
                         implicitWidth: Style.trayIconSize
                         implicitHeight: Style.trayIconSize
 
+                        // Some SNIs advertise a themed icon name absent from
+                        // the active icon theme (e.g. KDE Connect's
+                        // "kdeconnectindicatordark"); quickshell then renders a
+                        // magenta placeholder rather than erroring, so detect
+                        // the miss up front and substitute a Nerd Font glyph.
+                        // Icons provided by an explicit path or a pixmap are
+                        // trusted as-is.
+                        readonly property bool iconMissing: {
+                            const prefix = "image://icon/";
+                            const raw = "" + iconRoot.modelData.icon;
+                            if (!raw.startsWith(prefix))
+                                return raw.length === 0;
+                            if (raw.includes("?path="))
+                                return false;
+                            return !Quickshell.hasThemeIcon(raw.slice(prefix.length).split("?")[0]);
+                        }
+
+                        // Glyph keyed by id/title substring; generic otherwise.
+                        readonly property string fallbackGlyph: {
+                            const key = ((iconRoot.modelData.id || "") + " " + (iconRoot.modelData.title || "")).toLowerCase();
+                            if (key.includes("kdeconnect") || key.includes("kde connect"))
+                                return "\uf10b"; // nf-fa-mobile
+                            return "\uf059"; // nf-fa-question_circle
+                        }
+
                         Image {
                             anchors.fill: parent
-                            source: iconRoot.modelData.icon
+                            visible: !iconRoot.iconMissing
+                            source: visible ? iconRoot.modelData.icon : ""
                             fillMode: Image.PreserveAspectFit
                             smooth: true
+                        }
+
+                        Text {
+                            anchors.centerIn: parent
+                            visible: iconRoot.iconMissing
+                            text: iconRoot.fallbackGlyph
+                            color: Theme.foreground
+                            font.family: Theme.monoFamily
+                            font.pixelSize: Style.trayIconSize
                         }
 
                         MouseArea {
