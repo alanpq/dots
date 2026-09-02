@@ -1,4 +1,5 @@
 // Basic Quickshell config: a top bar per screen with a live clock.
+// Colors and fonts come from the stylix-generated Theme singleton.
 // https://quickshell.org/docs/
 import Quickshell
 import QtQuick
@@ -21,7 +22,7 @@ ShellRoot {
                 }
 
                 implicitHeight: 32
-                color: "#1e1e2e"
+                color: Theme.background
 
                 // Ticks once per second; drives the clock text below.
                 SystemClock {
@@ -31,9 +32,9 @@ ShellRoot {
 
                 Text {
                     anchors.centerIn: parent
-                    color: "#cdd6f4"
-                    font.family: "monospace"
-                    font.pixelSize: 14
+                    color: Theme.foreground
+                    font.family: Theme.monoFamily
+                    font.pointSize: Theme.fontSize
                     text: Qt.formatDateTime(clock.date, "ddd d MMM  HH:mm:ss")
                 }
             }
