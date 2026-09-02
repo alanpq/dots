@@ -19,8 +19,15 @@ PanelWindow {
         top: true
         right: true
     }
-    implicitWidth: Style.notifyWidth + 2 * Style.gap
-    implicitHeight: Math.max(1, column.implicitHeight + Style.barHeight + 2 * Style.gap)
+
+    margins {
+        top: Style.barHeight + Style.gap
+        right: Style.gap
+    }
+
+    implicitWidth: column.implicitWidth
+    implicitHeight: column.implicitHeight
+
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Overlay
@@ -47,12 +54,12 @@ PanelWindow {
 
     Column {
         id: column
-        x: Style.gap
-        y: Style.barHeight + Style.gap
+
         width: Style.notifyWidth
         spacing: Style.gap
 
         Repeater {
+            id: repeater
             model: server.trackedNotifications
 
             delegate: Rectangle {
@@ -60,31 +67,28 @@ PanelWindow {
                 required property var modelData
 
                 width: parent.width
-                implicitHeight: Math.max(32, cardBody.implicitHeight) + 2 * Style.notifyPad
+                height: cardBody.implicitHeight + (2 * Style.notifyPad)
 
                 color: Theme.surface
                 radius: 0
 
-                Rectangle {
-                    anchors.fill: parent
-                    anchors.margins: -1
-                    color: "transparent"
-                    border.width: card.modelData.urgency === NotificationUrgency.Critical ? 1 : 0
-                    border.color: Theme.yellow
-                }
+                // Rectangle {
+                //     anchors.fill: parent
+                //     anchors.margins: -1
+                //     color: "transparent"
+                // }
+                border.color: card.modelData.urgency === NotificationUrgency.Critical ? Theme.yellow : "transparent"
 
                 RowLayout {
                     id: cardRow
+
                     anchors {
-                        left: parent.left
-                        right: parent.right
-                        top: parent.top
-                        leftMargin: Style.notifyPad
-                        rightMargin: Style.notifyPad
-                        topMargin: Style.notifyPad
+                        fill: parent
+                        margins: Style.notifyPad
                     }
 
                     spacing: card.modelData.image !== "" ? 12 : 0
+
                     Loader {
                         id: cardImg
                         active: card.modelData.image !== ""
@@ -98,7 +102,7 @@ PanelWindow {
                         }
                     }
 
-                    Column {
+                    ColumnLayout {
                         id: cardBody
 
                         Layout.fillWidth: true
@@ -107,8 +111,8 @@ PanelWindow {
                         spacing: 2
 
                         Item {
-                            width: parent.width
-                            height: Math.max(summaryText.implicitHeight, appNameText.implicitHeight)
+                            Layout.fillWidth: true
+                            implicitHeight: Math.max(summaryText.implicitHeight, appNameText.implicitHeight)
 
                             Text {
                                 id: appNameText
@@ -137,11 +141,14 @@ PanelWindow {
                         }
 
                         Text {
-                            width: parent.width
+                            Layout.fillWidth: true
+
                             visible: card.modelData.body.length > 0
                             text: card.modelData.body
+
                             color: card.modelData.urgency === NotificationUrgency.Critical ? Theme.green : Theme.foreground
                             opacity: 0.8
+
                             font.family: Theme.monoFamily
                             font.pointSize: Theme.fontSize
                             textFormat: Text.PlainText

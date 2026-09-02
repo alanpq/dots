@@ -66,6 +66,11 @@ window-rule {
     }
 }
 
+layer-rule {
+    match namespace="^quickshell-notifications$"
+    block-out-from "screencast"
+}
+
 // layer-rule {
 //     match layer="bottom"
 //     match layer="top"
