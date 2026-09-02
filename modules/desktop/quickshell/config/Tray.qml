@@ -73,8 +73,8 @@ Section {
                                 else if (mouse.button === Qt.MiddleButton)
                                     iconRoot.modelData.secondaryActivate();
                                 else if (mouse.button === Qt.RightButton && iconRoot.modelData.hasMenu) {
-                                    const pos = trayMouse.mapToItem(root.panelWindow, 0, trayMouse.height);
-                                    iconRoot.modelData.display(root.panelWindow, pos.x, pos.y);
+                                    const pos = trayMouse.mapToItem(root.panelWindow.contentItem, 0, trayMouse.height);
+                                    iconRoot.modelData.display(root.panelWindow, Math.round(pos.x), Math.round(pos.y));
                                 }
                             }
                         }
