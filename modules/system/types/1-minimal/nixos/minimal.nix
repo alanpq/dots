@@ -17,6 +17,8 @@
     nixpkgs.config.allowUnfree = true;
     system.stateVersion = lib.mkDefault "25.05";
 
+    time.timeZone = "Europe/Dublin";
+
     nix.settings = {
       substituters = [
         # high priority since it's almost always used
