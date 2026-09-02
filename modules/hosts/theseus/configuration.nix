@@ -15,6 +15,9 @@ in {
       grub
       nvidia
       nix-ld
+
+      pipewire-virtual-outputs
+
       # bluetooth
     ];
 
