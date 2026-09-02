@@ -32,6 +32,8 @@ blur {
 }
 
 layout {
+    gaps 6
+
     focus-ring {
         on
         width 1
