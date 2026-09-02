@@ -9,3 +9,4 @@ Brightness Brightness.qml
 Volume Volume.qml
 Popup Popup.qml
 MenuView MenuView.qml
+Notifications Notifications.qml

@@ -23,6 +23,11 @@ Singleton {
     // Media.
     readonly property int mediaMaxWidth: 320
 
+    // Notifications.
+    readonly property int notifyWidth: 360
+    readonly property int notifyPad: 10
+    readonly property int notifyTimeout: 5000
+
     // Popup surface (menus, dialogs).
     readonly property int popupBorderWidth: 1
 

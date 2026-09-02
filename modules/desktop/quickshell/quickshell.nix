@@ -105,6 +105,7 @@
       "quickshell/config/Volume.qml".source = ./config/Volume.qml;
       "quickshell/config/Popup.qml".source = ./config/Popup.qml;
       "quickshell/config/MenuView.qml".source = ./config/MenuView.qml;
+      "quickshell/config/Notifications.qml".source = ./config/Notifications.qml;
       "quickshell/config/Style.qml".source = ./config/Style.qml;
       "quickshell/config/Theme.qml".text = themeQml;
     };
