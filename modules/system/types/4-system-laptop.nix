@@ -26,6 +26,8 @@
 
       vicinae
 
+      quickshell
+
       niri
     ];
   };
