@@ -22,4 +22,16 @@ Singleton {
 
     // Media.
     readonly property int mediaMaxWidth: 320
+
+    // Popup surface (menus, dialogs).
+    readonly property int popupBorderWidth: 1
+
+    // Menu.
+    readonly property int menuMinWidth: 180
+    readonly property int menuRowHPad: 12
+    readonly property int menuRowVPad: 6
+    readonly property int menuRowSpacing: 8
+    readonly property int menuSeparatorMargin: 4
+    readonly property int menuIconSize: 16
+    readonly property int menuIndent: 14
 }

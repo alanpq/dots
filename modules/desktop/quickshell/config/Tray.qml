@@ -13,6 +13,10 @@ Section {
     // The bar window, needed to anchor tray item menus.
     required property var panelWindow
 
+    // Populated on right-click; drive the shared menu popup below.
+    property var menuHandle: null
+    property Item menuAnchor: null
+
     visible: SystemTray.items.values.length > 0
 
     Item {
@@ -73,8 +77,9 @@ Section {
                                 else if (mouse.button === Qt.MiddleButton)
                                     iconRoot.modelData.secondaryActivate();
                                 else if (mouse.button === Qt.RightButton && iconRoot.modelData.hasMenu) {
-                                    const pos = trayMouse.mapToItem(root.panelWindow.contentItem, 0, trayMouse.height);
-                                    iconRoot.modelData.display(root.panelWindow, Math.round(pos.x), Math.round(pos.y));
+                                    root.menuHandle = iconRoot.modelData.menu;
+                                    root.menuAnchor = iconRoot;
+                                    trayMenu.open();
                                 }
                             }
                         }
@@ -99,6 +104,17 @@ Section {
                 anchors.fill: parent
                 onClicked: tray.expanded = !tray.expanded
             }
+        }
+    }
+
+    Popup {
+        id: trayMenu
+        anchorWindow: root.panelWindow
+        anchorItem: root.menuAnchor
+
+        MenuView {
+            handle: root.menuHandle
+            onCloseRequested: trayMenu.close()
         }
     }
 }

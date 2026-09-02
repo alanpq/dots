@@ -4,3 +4,5 @@ Bar Bar.qml
 Section Section.qml
 Tray Tray.qml
 Media Media.qml
+Popup Popup.qml
+MenuView MenuView.qml
