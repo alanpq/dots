@@ -103,6 +103,8 @@
       "quickshell/config/Battery.qml".source = ./config/Battery.qml;
       "quickshell/config/Brightness.qml".source = ./config/Brightness.qml;
       "quickshell/config/Volume.qml".source = ./config/Volume.qml;
+      "quickshell/config/VolumeControls.qml".source = ./config/VolumeControls.qml;
+      "quickshell/config/VolumeSlider.qml".source = ./config/VolumeSlider.qml;
       "quickshell/config/Popup.qml".source = ./config/Popup.qml;
       "quickshell/config/MenuView.qml".source = ./config/MenuView.qml;
       "quickshell/config/Notifications.qml".source = ./config/Notifications.qml;

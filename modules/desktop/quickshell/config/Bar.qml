@@ -44,7 +44,9 @@ PanelWindow {
 
         Brightness {}
 
-        Volume {}
+        Volume {
+            panelWindow: panel
+        }
 
         Tray {
             panelWindow: panel

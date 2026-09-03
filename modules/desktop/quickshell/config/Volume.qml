@@ -2,10 +2,14 @@ import Quickshell
 import Quickshell.Services.Pipewire
 import QtQuick
 
-// Right-cluster section: default sink volume. Scroll to adjust, click to toggle
-// mute. Always applicable, so never hidden.
+// Right-cluster section: default sink volume. Scroll to adjust, left-click to
+// toggle mute, right-click for the per-output slider popup. Always applicable,
+// so never hidden.
 Section {
     id: root
+
+    // The bar window, needed to anchor the volume popup.
+    required property var panelWindow
 
     readonly property var sink: Pipewire.defaultAudioSink
     readonly property var audio: (root.sink && root.sink.ready) ? root.sink.audio : null
@@ -36,8 +40,11 @@ Section {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: {
-                if (root.audio)
+            acceptedButtons: Qt.LeftButton | Qt.RightButton
+            onClicked: mouse => {
+                if (mouse.button === Qt.RightButton)
+                    volPopup.opened ? volPopup.close() : volPopup.open();
+                else if (root.audio)
                     root.audio.muted = !root.audio.muted;
             }
             onWheel: wheel => {
@@ -46,5 +53,13 @@ Section {
                 wheel.accepted = true;
             }
         }
+    }
+
+    Popup {
+        id: volPopup
+        anchorWindow: root.panelWindow
+        anchorItem: root
+
+        VolumeControls {}
     }
 }

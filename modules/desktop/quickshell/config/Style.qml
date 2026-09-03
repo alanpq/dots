@@ -39,4 +39,14 @@ Singleton {
     readonly property int menuSeparatorMargin: 4
     readonly property int menuIconSize: 16
     readonly property int menuIndent: 14
+
+    // Volume popup.
+    readonly property int volPopupPad: 10
+    readonly property int volSliderSpacing: 10
+    readonly property int volRowSpacing: 10
+    readonly property int volIconWidth: 20
+    readonly property int volSliderWidth: 150
+    readonly property int volSliderHeight: 4
+    readonly property int volKnobSize: 12
+    readonly property int volPctWidth: 44
 }

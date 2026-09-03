@@ -7,6 +7,8 @@ Media Media.qml
 Battery Battery.qml
 Brightness Brightness.qml
 Volume Volume.qml
+VolumeControls VolumeControls.qml
+VolumeSlider VolumeSlider.qml
 Popup Popup.qml
 MenuView MenuView.qml
 Notifications Notifications.qml
