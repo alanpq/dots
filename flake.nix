@@ -4,6 +4,7 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
+    ableton.url = "github:shibco/ableton-linux";
     awww.url = "git+https://codeberg.org/LGFae/awww";
     elephant.url = "github:abenz1267/elephant";
     flake-file.url = "github:vic/flake-file";

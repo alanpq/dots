@@ -17,6 +17,8 @@
         discord
         easyeffects
         spotifyd
+
+        ableton
       ];
 
       packages = [
