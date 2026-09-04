@@ -49,7 +49,7 @@ in {
       };
       scheme = mkOption {
         type = types.str;
-        default = "black-metal";
+        default = "chalk";
         description = "Basix scheme slug (see notashelf/basix `json/<system>`).";
       };
       colors = mkOption {
@@ -110,6 +110,14 @@ in {
         description = ''
           Theme GTK apps: recolor adw-gtk3/libadwaita from the active palette
           (per-user gtk.css via hjem) and set the dconf dark preference.
+        '';
+      };
+      qt.enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = ''
+          Theme Qt apps: Fusion style with a base16 QPalette (per-user
+          qt5ct/qt6ct config via hjem) so they match GTK and the terminal.
         '';
       };
     };
@@ -211,6 +219,14 @@ in {
             };
           }
         ];
+      })
+
+      (lib.mkIf cfg.qt.enable {
+        # qt5ct themes Qt5 apps; qt6ct's libqt6ct.so registers the "qt5ct" key
+        # too, so this single platformTheme covers Qt6 as well. The palette
+        # lives in the per-user qt5ct/qt6ct config (hjem module).
+        qt.enable = true;
+        qt.platformTheme = "qt5ct";
       })
     ];
   };
@@ -349,21 +365,99 @@ in {
       @define-color dark_4 #${hexOf "base05"};
       @define-color dark_5 #${hexOf "base05"};
     '';
+
+    # Qt: Fusion style + a base16 QPalette so Qt5/Qt6 apps match GTK and the
+    # terminal. The list is the 21 QPalette::ColorRole slots in enum order
+    # (WindowText..PlaceholderText); qt5ct/qt6ct load this color scheme.
+    qtArgb = k: "#ff${hexOf k}";
+    qtRow = keys: lib.concatMapStringsSep ", " qtArgb keys;
+    qtActive = [
+      "base05"
+      "base01"
+      "base02"
+      "base02"
+      "base00"
+      "base01"
+      "base05"
+      "base06"
+      "base05"
+      "base00"
+      "base00"
+      "base00"
+      "base0D"
+      "base00"
+      "base0D"
+      "base0E"
+      "base01"
+      "base00"
+      "base01"
+      "base05"
+      "base04"
+    ];
+    qtDisabled = [
+      "base03"
+      "base01"
+      "base02"
+      "base02"
+      "base00"
+      "base01"
+      "base03"
+      "base06"
+      "base03"
+      "base00"
+      "base00"
+      "base00"
+      "base02"
+      "base03"
+      "base0D"
+      "base0E"
+      "base01"
+      "base00"
+      "base01"
+      "base05"
+      "base04"
+    ];
+    qtColorScheme = pkgs.writeText "base16-qtct-colors.conf" ''
+      [ColorScheme]
+      active_colors=${qtRow qtActive}
+      disabled_colors=${qtRow qtDisabled}
+      inactive_colors=${qtRow qtActive}
+    '';
+    qtctConf = ''
+      [Appearance]
+      style=Fusion
+      custom_palette=true
+      color_scheme_path=${qtColorScheme}
+      icon_theme=${cfg.iconTheme.name}
+      standard_dialogs=default
+
+      [Fonts]
+      general="${cfg.fonts.sansSerif.name},${toString cfg.fonts.sizes.applications}"
+      fixed="${cfg.fonts.monospace.name},${toString cfg.fonts.sizes.terminal}"
+    '';
   in
-    lib.mkIf cfg.gtk.enable {
-      rum.misc.gtk = {
-        enable = true;
-        packages = [pkgs.adw-gtk3 cfg.iconTheme.package];
-        settings = {
-          theme-name = gtkThemeName;
-          icon-theme-name = cfg.iconTheme.name;
-          cursor-theme-name = cfg.cursor.name;
-          cursor-theme-size = cfg.cursor.size;
-          font-name = appFont;
-          application-prefer-dark-theme = cfg.polarity == "dark";
+    lib.mkMerge [
+      (lib.mkIf cfg.gtk.enable {
+        rum.misc.gtk = {
+          enable = true;
+          packages = [pkgs.adw-gtk3 cfg.iconTheme.package];
+          settings = {
+            theme-name = gtkThemeName;
+            icon-theme-name = cfg.iconTheme.name;
+            cursor-theme-name = cfg.cursor.name;
+            cursor-theme-size = cfg.cursor.size;
+            font-name = appFont;
+            application-prefer-dark-theme = cfg.polarity == "dark";
+          };
+          css.gtk3 = gtkCss;
+          css.gtk4 = gtkCss;
         };
-        css.gtk3 = gtkCss;
-        css.gtk4 = gtkCss;
-      };
-    };
+      })
+      (lib.mkIf cfg.qt.enable {
+        xdg.config.files = {
+          "qt5ct/qt5ct.conf".text = qtctConf;
+          "qt6ct/qt6ct.conf".text = qtctConf;
+        };
+      })
+    ];
 }
