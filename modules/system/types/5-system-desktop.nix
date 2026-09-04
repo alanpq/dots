@@ -9,7 +9,7 @@
       firefox
       steam
 
-      stylix
+      theme
 
       niri
 
@@ -22,8 +22,7 @@
       system-cli
       desktop
 
-      stylix
-
+      theme
       vicinae
 
       quickshell

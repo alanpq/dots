@@ -16,9 +16,7 @@
       # wf-recorder
       brightnessctl
 
-      adw-gtk3
       gnome-themes-extra
-      papirus-icon-theme
     ];
 
     programs.niri.enable = true;

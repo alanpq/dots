@@ -7,19 +7,43 @@
   }: let
     quickshell = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
-    colors = osConfig.lib.stylix.colors.withHashtag;
-    inherit (osConfig.stylix) fonts;
+    palette = osConfig.theme.colors;
+    inherit (osConfig.theme) fonts;
 
     # Pick the accent from the palette instead of a fixed slot: some base16
     # schemes (e.g. black-metal) only put chroma in a few of the base08-base0F
     # accent slots and leave the rest gray. Ranking by HSL saturation keeps the
-    # accent vivid whichever scheme is active.
-    palette = osConfig.lib.stylix.colors;
+    # accent vivid whichever scheme is active. basix hands us `#rrggbb` only, so
+    # decode channels here rather than expecting precomputed rgb attrs.
+    hexDigit = c:
+      {
+        "0" = 0;
+        "1" = 1;
+        "2" = 2;
+        "3" = 3;
+        "4" = 4;
+        "5" = 5;
+        "6" = 6;
+        "7" = 7;
+        "8" = 8;
+        "9" = 9;
+        "a" = 10;
+        "b" = 11;
+        "c" = 12;
+        "d" = 13;
+        "e" = 14;
+        "f" = 15;
+      }
+      .${c};
+    channel = key: off: let
+      h = lib.toLower (lib.removePrefix "#" palette.${key});
+    in
+      hexDigit (builtins.substring off 1 h) * 16 + hexDigit (builtins.substring (off + 1) 1 h);
     accentKeys = ["base08" "base09" "base0A" "base0B" "base0C" "base0D" "base0E" "base0F"];
     saturation = key: let
-      r = lib.toInt palette."${key}-rgb-r";
-      g = lib.toInt palette."${key}-rgb-g";
-      b = lib.toInt palette."${key}-rgb-b";
+      r = channel key 0;
+      g = channel key 2;
+      b = channel key 4;
       maxc = lib.max r (lib.max g b);
       minc = lib.min r (lib.min g b);
       sum = maxc + minc; # 2*lightness on the 0-510 scale
@@ -53,15 +77,15 @@
       "base0E"
       "base0F"
     ];
-    baseProps = lib.concatMapStringsSep "\n" (k: ''readonly property color ${k}: "${colors.${k}}";'') baseKeys;
+    baseProps = lib.concatMapStringsSep "\n" (k: ''readonly property color ${k}: "${palette.${k}}";'') baseKeys;
 
-    # Generated from stylix; edit theme in modules/desktop/stylix, not here.
+    # Generated from the theme module; edit the palette/fonts in modules/desktop/theme, not here.
     themeQml = ''
       pragma Singleton
       import Quickshell
       import QtQuick
 
-      // Auto-generated from stylix (base16 scheme + fonts). Do not edit by hand.
+      // Auto-generated from the theme module (base16 scheme + fonts). Do not edit by hand.
       Singleton {
           ${baseProps}
 
@@ -93,7 +117,7 @@
     xdg.config.files = {
       # Loaded via `quickshell -c config` (see ExecStart), i.e.
       # $XDG_CONFIG_HOME/quickshell/config/shell.qml. Components and the Style
-      # singleton are committed; Theme is generated from stylix below.
+      # singleton are committed; Theme is generated from the theme module below.
       "quickshell/config/shell.qml".source = ./config/shell.qml;
       "quickshell/config/qmldir".source = ./config/qmldir;
       "quickshell/config/Bar.qml".source = ./config/Bar.qml;

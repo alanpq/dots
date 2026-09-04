@@ -3,7 +3,7 @@ import Quickshell
 import QtQuick
 
 // Static design tokens: spacing, sizes, radii, and animation timings.
-// Colors and fonts live in the stylix-generated Theme singleton.
+// Colors and fonts live in the generated Theme singleton.
 Singleton {
     // Bar geometry.
     readonly property int barHeight: 34
