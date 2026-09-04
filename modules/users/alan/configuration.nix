@@ -26,6 +26,7 @@ in {
           "video"
           "audio"
 
+          "uinput"
           "networkmanager"
           "minecraft"
           "wpa_supplicant"

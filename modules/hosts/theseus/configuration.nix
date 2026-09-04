@@ -17,6 +17,7 @@ in {
       nix-ld
 
       pipewire-virtual-outputs
+      sunshine
 
       # bluetooth
     ];
