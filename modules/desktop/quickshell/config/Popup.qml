@@ -59,7 +59,13 @@ PanelWindow {
     }
     exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Overlay
-    WlrLayershell.keyboardFocus: opened ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
+    // No keyboard focus. This popup is pointer-driven and dismisses on outside
+    // click (catcher, below). Requesting focus makes niri tie the surface's
+    // focus to a click, which races pointer delivery on this separate Overlay
+    // surface -- OnDemand eats the first click (focus-transfer), Exclusive races
+    // at map and eats clicks intermittently. The bar runs with None and never
+    // drops one.
+    WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
     WlrLayershell.namespace: "quickshell-popup"
 
     // Whole window interactive while open; empty (click-through) while closed.
@@ -122,13 +128,6 @@ PanelWindow {
                 implicitWidth: childrenRect.width
                 implicitHeight: childrenRect.height
             }
-        },
-
-        // Escape to dismiss (once the overlay has keyboard focus).
-        Item {
-            anchors.fill: parent
-            focus: root.opened
-            Keys.onEscapePressed: root.close()
         }
     ]
 }
