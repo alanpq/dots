@@ -43,7 +43,7 @@ PanelWindow {
     NotificationServer {
         id: server
         keepOnReload: false
-        actionsSupported: false
+        actionsSupported: true
         bodySupported: true
         imageSupported: false
 
@@ -81,6 +81,9 @@ PanelWindow {
 
                 RowLayout {
                     id: cardRow
+
+                    // so the dismiss MouseArea doesn't block action buttons
+                    z: 1
 
                     anchors {
                         fill: parent
@@ -155,6 +158,21 @@ PanelWindow {
                             wrapMode: Text.WordWrap
                             maximumLineCount: 4
                             elide: Text.ElideRight
+                        }
+                        RowLayout {
+                            id: actionsRow
+
+                            Repeater {
+                                id: actionRepeater
+                                model: card.modelData.actions
+
+                                delegate: Button {
+                                    required property var modelData
+                                    baseColor: Theme.background
+                                    label: modelData.text
+                                    onClicked: modelData.invoke()
+                                }
+                            }
                         }
                     }
                 }

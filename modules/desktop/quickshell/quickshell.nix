@@ -34,7 +34,9 @@
         "e" = 14;
         "f" = 15;
       }
-      .${c};
+      .${
+        c
+      };
     channel = key: off: let
       h = lib.toLower (lib.removePrefix "#" palette.${key});
     in
@@ -50,7 +52,14 @@
     in
       if maxc == minc
       then 0.0
-      else (maxc - minc) * 1.0 / (if sum <= 255 then sum else 510 - sum);
+      else
+        (maxc - minc)
+        * 1.0
+        / (
+          if sum <= 255
+          then sum
+          else 510 - sum
+        );
     ranked = lib.sort (a: b: a.sat > b.sat) (map (k: {
         key = k;
         sat = saturation k;
@@ -125,6 +134,7 @@
       "quickshell/config/Tray.qml".source = ./config/Tray.qml;
       "quickshell/config/Media.qml".source = ./config/Media.qml;
       "quickshell/config/Battery.qml".source = ./config/Battery.qml;
+      "quickshell/config/Button.qml".source = ./config/Button.qml;
       "quickshell/config/Brightness.qml".source = ./config/Brightness.qml;
       "quickshell/config/Volume.qml".source = ./config/Volume.qml;
       "quickshell/config/VolumeControls.qml".source = ./config/VolumeControls.qml;

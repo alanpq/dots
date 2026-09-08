@@ -2,6 +2,7 @@ singleton Style Style.qml
 singleton Theme Theme.qml
 Bar Bar.qml
 Section Section.qml
+Button Button.qml
 Tray Tray.qml
 Media Media.qml
 Battery Battery.qml
