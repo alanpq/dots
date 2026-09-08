@@ -9,7 +9,7 @@ input {
 
     keyboard {
         xkb {
-            layout "ie"
+            layout "gb"
         }
         repeat-delay 200
         repeat-rate 35
