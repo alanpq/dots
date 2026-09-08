@@ -14,9 +14,11 @@
     hjem.users.alan = {
       imports = with inputs.self.modules.hjem; [
         system-desktop
+
         discord
         easyeffects
         spotifyd
+        obs
 
         ableton
       ];
@@ -30,7 +32,6 @@
         pkgs.mangohud
         pkgs.easyeffects
         pkgs.lutris
-        pkgs.obs-studio
       ];
     };
   };
