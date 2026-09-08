@@ -97,11 +97,14 @@ in {
       iconTheme = {
         package = mkOption {
           type = types.package;
-          default = pkgs.papirus-icon-theme;
+          default = pkgs.tela-icon-theme;
         };
         name = mkOption {
           type = types.str;
-          default = "Papirus-Dark";
+          default =
+            if cfg.polarity == "dark"
+            then "Tela-dark"
+            else "Tela-light";
         };
       };
       gtk.enable = mkOption {
