@@ -20,6 +20,7 @@
         output=$(timeout 0.1s obs-cmd replay save 2>&1 >/dev/null)
         status="$?"
         message="$output"
+        args=()
         case "$status" in
             0)
                 ${pkgs.pipewire}/bin/pw-play --volume 0.5 ${./click.wav}
@@ -27,6 +28,7 @@
             ;;
             124)
                 message="OBS (ws) is not running!"
+                args+=(-A "Start OBS")
             ;;
             *)
                 if [[ "$output" == *"OutputNotRunning"* ]]; then
@@ -37,7 +39,11 @@
                 fi
             ;;
         esac
-        ${pkgs.libnotify}/bin/notify-send "Failed to save replay" "$message" -a Clips -u critical
+        action=$(${pkgs.libnotify}/bin/notify-send "Failed to save replay" "$message" -a Clips -u critical "''${args[@]}")
+        case "$action" in
+            0) obs --startreplaybuffer --minimize-to-tray >/dev/null 2>&1 </dev/null & disown;;
+            *) ;;
+        esac
       '')
     ];
 
