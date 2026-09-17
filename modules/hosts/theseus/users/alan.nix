@@ -32,6 +32,8 @@
         pkgs.mangohud
         pkgs.easyeffects
         pkgs.lutris
+        pkgs.parsec-bin
+        pkgs.chromium
       ];
     };
   };
