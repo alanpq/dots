@@ -1,4 +1,7 @@
 {inputs, ...}: {
+  flake-file.inputs = {
+    biri.url = "github:barrulus/biri";
+  };
   flake.modules.nixos.niri = {pkgs, ...}: {
     imports = with inputs.self.modules.nixos; [
       awww
@@ -19,7 +22,10 @@
       gnome-themes-extra
     ];
 
-    programs.niri.enable = true;
+    programs.niri = {
+      enable = true;
+      package = inputs.biri.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    };
     security.polkit.enable = true;
     services.gnome.gnome-keyring.enable = true;
 

@@ -10,6 +10,7 @@
       url = "github:notashelf/basix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    biri.url = "github:barrulus/biri";
     elephant.url = "github:abenz1267/elephant";
     flake-file.url = "github:vic/flake-file";
     flake-parts.url = "github:hercules-ci/flake-parts";
