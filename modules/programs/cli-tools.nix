@@ -9,7 +9,7 @@
       tmux
       eza
       bat
-      # local.cowsay
+      local.imp
       (
         pkgs.writeShellScriptBin "bell" ''
           ${pkgs.pipewire}/bin/pw-play --volume 0.5 ${../../notification.wav}
