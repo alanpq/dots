@@ -4,5 +4,8 @@
       inputs.neovim.packages.${pkgs.stdenv.hostPlatform.system}.neovim
       pkgs.alejandra
     ];
+    environment.sessionVariables = {
+      EDITOR = "nvim";
+    };
   };
 }
