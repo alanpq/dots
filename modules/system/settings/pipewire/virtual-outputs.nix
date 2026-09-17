@@ -3,6 +3,44 @@
     physicalOutput = "alsa_output.usb-BurrBrown_from_Texas_Instruments_USB_AUDIO_CODEC-00.analog-stereo";
   in {
     services.pipewire = {
+      extraConfig.pipewire."10-virtual-mic" = {
+        "context.objects" = [
+          {
+            factory = "adapter";
+            args = {
+              "factory.name" = "support.null-audio-sink";
+              "node.name" = "virtual_mic_sink";
+              "node.description" = "Virtual Microphone Sink";
+              "media.class" = "Audio/Sink";
+              "audio.position" = ["FL" "FR"];
+            };
+          }
+        ];
+
+        "context.modules" = [
+          {
+            name = "libpipewire-module-loopback";
+            args = {
+              "node.description" = "Virtual Microphone";
+
+              "capture.props" = {
+                "node.name" = "virtual_mic_source_capture";
+                "target.object" = "virtual_mic_sink";
+                "stream.capture.sink" = true;
+                "stream.dont-remix" = true;
+                "audio.position" = ["FL" "FR"];
+              };
+
+              "playback.props" = {
+                "node.name" = "virtual_mic_source";
+                "node.description" = "Virtual Microphone Source";
+                "media.class" = "Audio/Source";
+                "audio.position" = ["FL" "FR"];
+              };
+            };
+          }
+        ];
+      };
       extraConfig.pipewire."93-virtual-sinks" = {
         "context.modules" = [
           {
