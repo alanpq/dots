@@ -41,6 +41,10 @@ in {
     ];
 
     rum.programs = {
+      fzf = {
+        enable = true;
+        integrations.zsh.enable = true;
+      };
       direnv = {
         enable = true;
         integrations = {
