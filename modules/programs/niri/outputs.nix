@@ -53,6 +53,12 @@
           height = 1080;
           rate = "144.001";
           transform = "90";
+          extra = ''
+            layout {
+              main-axis "vertical"
+              default-column-width { proportion 0.5; }
+            }
+          '';
         };
         "DVI-D-1" =
           place.rightOf "DP-4" {
@@ -82,6 +88,7 @@
                 mode "${toString cfg.width}x${toString cfg.height}@${(cfg.rate or "60")}"
                 position x=${toString pos.x} y=${toString pos.y}
                 transform "${cfg.transform or "normal"}"
+                ${cfg.extra or ""}
             }
           ''
         )
