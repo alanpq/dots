@@ -23,17 +23,22 @@
         ableton
       ];
 
-      packages = [
-        pkgs.vscode
-        pkgs.prismlauncher
-        pkgs.protontricks
-        pkgs.spotify
-        pkgs.spotifyd
-        pkgs.mangohud
-        pkgs.easyeffects
-        pkgs.lutris
-        pkgs.parsec-bin
-        pkgs.chromium
+      packages = with pkgs; [
+        chromium
+        vscode
+
+        spotify
+        spotifyd
+
+        pavucontrol
+        easyeffects
+
+        protontricks
+        mangohud
+        prismlauncher
+        lutris
+
+        parsec-bin
       ];
     };
   };
