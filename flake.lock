@@ -404,11 +404,11 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1787771327,
-        "narHash": "sha256-4w3OpswMCpuanIdcmLivjKPhYowB7/tFfsvrlEBb/L8=",
+        "lastModified": 1790678691,
+        "narHash": "sha256-bXQekJ20LMQyUtQTkjDkKFGE1oUBHfbOeVxkacjORzU=",
         "owner": "alanpq",
         "repo": "neovim",
-        "rev": "64710a258c283254e25ff6a71d84b3044fc31513",
+        "rev": "fe688776c5bf8298d78df4b109e1bc8fbd23980e",
         "type": "github"
       },
       "original": {
