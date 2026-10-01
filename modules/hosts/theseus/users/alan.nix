@@ -24,7 +24,9 @@
       ];
 
       packages = with pkgs; [
-        chromium
+        (chromium.override {
+          commandLineArgs = "--ignore-gpu-blocklist --enable-features=VaapiVideoDecoder,VaapiVideoDecodeLinuxGL --ozone-platform=x11";
+        })
         vscode
 
         spotify
