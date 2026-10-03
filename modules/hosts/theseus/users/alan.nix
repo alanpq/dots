@@ -3,13 +3,11 @@
   self,
   ...
 }: {
-  flake.modules.nixos.theseus = {
-    config,
-    pkgs,
-    ...
-  }: {
+  flake.modules.nixos.theseus = {pkgs, ...}: {
     imports = with inputs.self.modules.nixos; [
       alan
+
+      obs
     ];
     hjem.users.alan = {
       imports = with inputs.self.modules.hjem; [

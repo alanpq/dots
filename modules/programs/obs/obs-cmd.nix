@@ -1,10 +1,10 @@
 {
   flake.modules.hjem.obs = {
     pkgs,
-    config,
+    osConfig,
     ...
   }: let
-    cfg = config.programs.obs-studio;
+    cfg = osConfig.programs.obs-studio;
   in {
     packages = [
       (pkgs.writeShellApplication {

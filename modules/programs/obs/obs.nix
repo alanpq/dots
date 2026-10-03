@@ -1,10 +1,5 @@
 {
-  flake.modules.hjem.obs = {
-    pkgs,
-    lib,
-    config,
-    ...
-  }: {
+  flake.modules.nixos.obs = {lib, ...}: {
     options = let
       inherit (lib) mkOption types;
     in {
@@ -25,41 +20,43 @@
         };
       };
     };
-    config = let
-      cfg = config.programs.obs-studio;
-    in {
-      packages = [
-        pkgs.obs-studio
-      ];
-
-      xdg.data.files."applications/custom-obs-replay-buffer.desktop".text = ''
-        [Desktop Entry]
-        Version=1.0
-        Name=OBS Replay Buffer
-        GenericName=Streaming/Recording Software
-        Comment=Free and Open Source Streaming/Recording Software
-        Exec=obs --startreplaybuffer --minimize-to-tray
-        Icon=com.obsproject.Studio
-        Terminal=false
-        Type=Application
-        Categories=AudioVideo;Recorder;
-        StartupNotify=true
-        StartupWMClass=obs
-      '';
-
-      xdg.config.files."obs-studio/plugin_config/obs-websocket/config.json".text = builtins.toJSON {
-        alerts_enabled = false;
-        auth_required = true;
-        first_load = false;
-        server_enabled = cfg.websocket.enable;
-        server_password = cfg.websocket.password;
-        server_port = cfg.websocket.port;
+    config = {
+      programs.obs-studio = {
+        enable = true;
+        enableVirtualCamera = true;
       };
+    };
+  };
+  flake.modules.hjem.obs = {osConfig, ...}: let
+    cfg = osConfig.programs.obs-studio;
+  in {
+    xdg.data.files."applications/custom-obs-replay-buffer.desktop".text = ''
+      [Desktop Entry]
+      Version=1.0
+      Name=OBS Replay Buffer
+      GenericName=Streaming/Recording Software
+      Comment=Free and Open Source Streaming/Recording Software
+      Exec=obs --startreplaybuffer --minimize-to-tray
+      Icon=com.obsproject.Studio
+      Terminal=false
+      Type=Application
+      Categories=AudioVideo;Recorder;
+      StartupNotify=true
+      StartupWMClass=obs
+    '';
 
-      rum.desktops.niri.binds = {
-        "Mod+End" = {
-          spawn = ["obs-save-replay"];
-        };
+    xdg.config.files."obs-studio/plugin_config/obs-websocket/config.json".text = builtins.toJSON {
+      alerts_enabled = false;
+      auth_required = true;
+      first_load = false;
+      server_enabled = cfg.websocket.enable;
+      server_password = cfg.websocket.password;
+      server_port = cfg.websocket.port;
+    };
+
+    rum.desktops.niri.binds = {
+      "Mod+End" = {
+        spawn = ["obs-save-replay"];
       };
     };
   };
