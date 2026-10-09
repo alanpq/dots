@@ -12,5 +12,13 @@
 
       wantedBy = ["default.target"];
     };
+    # TODO: expose audio backend/device as nixos config
+    xdg.config.files."spotifyd/spotifyd.conf".source = (pkgs.formats.toml {}).generate "spotifyd.conf" {
+      global = {
+        backend = "pulseaudio";
+        device = "music_output";
+        initial_volume = 50;
+      };
+    };
   };
 }
