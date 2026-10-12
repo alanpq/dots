@@ -22,6 +22,8 @@ in {
     imports = with inputs.self.modules.nixos; [
       genericPackages
       neovim
+
+      gnupg
     ];
 
     environment.shellAliases = {
