@@ -49,4 +49,10 @@ Singleton {
     readonly property int volSliderHeight: 4
     readonly property int volKnobSize: 12
     readonly property int volPctWidth: 44
+
+    // Output-device dropdown at the bottom of the volume popup. Width matches a
+    // slider row so the surface keeps one width.
+    readonly property int volRowWidth: volIconWidth + 2 * volRowSpacing + volSliderWidth + volPctWidth
+    readonly property int volSelectorSpacing: 8
+    readonly property int volSelectorRowVPad: 6
 }

@@ -7,6 +7,33 @@
   }: let
     quickshell = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
+    # Runtime output-device switch for the volume popup's dropdown. The three
+    # virtual outputs (Music/Chat/Default) each expose a `<name>_playback` node
+    # whose links feed one hardware sink; re-pointing all three is a matter of
+    # moving those links. Disconnect only their existing links to real sink
+    # inputs (leaving e.g. pavucontrol monitor taps alone), then create passive
+    # links to the chosen sink (passive matches the loopback config so an idle
+    # sink can still suspend). Runtime-only: the NixOS pipewire config still
+    # sets the boot-time target.
+    volRoute = pkgs.writeShellApplication {
+      name = "quickshell-vol-route";
+      runtimeInputs = [pkgs.pipewire pkgs.gawk];
+      text = ''
+        target="''${1:?usage: quickshell-vol-route SINK_NODE_NAME}"
+        pw-link -I -l | awk '
+          /\|->/ { if (keep && $NF ~ /:playback_(FL|FR)$/) print $1; next }
+          /\|<-/ { next }
+          { split($2, a, ":"); n = a[1];
+            keep = (n == "music_output_playback" || n == "chat_output_playback" || n == "default_output_playback") }
+        ' | while read -r id; do
+          pw-link -d "$id" || true
+        done
+        for n in music_output_playback chat_output_playback default_output_playback; do
+          pw-link -P "$n" "$target" || true
+        done
+      '';
+    };
+
     palette = osConfig.theme.colors;
     inherit (osConfig.theme) fonts;
 
@@ -121,7 +148,7 @@
       }
     '';
   in {
-    packages = [quickshell];
+    packages = [quickshell volRoute];
 
     xdg.config.files = {
       # Loaded via `quickshell -c config` (see ExecStart), i.e.
@@ -138,6 +165,7 @@
       "quickshell/config/Brightness.qml".source = ./config/Brightness.qml;
       "quickshell/config/Volume.qml".source = ./config/Volume.qml;
       "quickshell/config/VolumeControls.qml".source = ./config/VolumeControls.qml;
+      "quickshell/config/OutputSelector.qml".source = ./config/OutputSelector.qml;
       "quickshell/config/VolumeSlider.qml".source = ./config/VolumeSlider.qml;
       "quickshell/config/Popup.qml".source = ./config/Popup.qml;
       "quickshell/config/MenuView.qml".source = ./config/MenuView.qml;

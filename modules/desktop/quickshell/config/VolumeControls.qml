@@ -105,4 +105,10 @@ Column {
             icon: modelData.icon
         }
     }
+
+    // Output-device dropdown: re-points all three virtual outputs at one sink.
+    OutputSelector {
+        current: root.masterSink
+        rowWidth: Style.volRowWidth
+    }
 }
