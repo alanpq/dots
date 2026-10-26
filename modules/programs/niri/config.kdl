@@ -1,7 +1,7 @@
 spawn-at-startup "awww-daemon"
 spawn-sh-at-startup "awww img ~/Pictures/firewatch.png -t none"
-spawn-at-startup "elephant"
-spawn-sh-at-startup "walker --gapplication-service"
+// spawn-at-startup "elephant"
+// spawn-sh-at-startup "walker --gapplication-service"
 
 input {
     focus-follows-mouse max-scroll-amount="15%"
@@ -50,26 +50,6 @@ layout {
     }
 }
 
-window-rule {
-    match app-id="^Alacritty$"
-
-    draw-border-with-background false
-    background-effect {
-        blur true
-    }
-}
-window-rule {
-    match app-id="walker"
-
-    background-effect {
-        blur false
-    }
-}
-
-layer-rule {
-    match namespace="^quickshell-notifications$"
-    block-out-from "screencast"
-}
 
 // layer-rule {
 //     match layer="bottom"

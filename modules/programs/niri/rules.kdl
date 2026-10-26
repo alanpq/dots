@@ -1,0 +1,56 @@
+// Layer Rules
+// https://niri-wm.github.io/niri/Configuration%3A-Layer-Rules.html
+
+layer-rule {
+    match namespace="^quickshell-notifications$"
+    block-out-from "screencast"
+}
+
+
+// Window Rules
+// https://niri-wm.github.io/niri/Configuration:-Window-Rules
+
+// terminal
+window-rule {
+    match app-id="^Alacritty$"
+
+    draw-border-with-background false
+    background-effect {
+        blur true
+    }
+}
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+    draw-border-with-background false
+}
+
+// app launcher
+window-rule {
+    match app-id="walker"
+
+    background-effect {
+        blur false
+    }
+}
+
+window-rule {
+    match app-id="vesktop"
+    open-on-workspace "alt"
+}
+
+// make some firefox windows float
+window-rule {
+    match app-id=r#"firefox$"# title="^(Library|Picture-in-Picture)$"
+    match app-id=r#"firefox$"# title="^Extension:.*Bitwarden" // bitwarden unlock popup
+    open-floating true
+}
+
+// password manager related screen capture blocking
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    match app-id=r#"firefox$"# title="^Extension:.*Bitwarden" // bitwarden unlock popup
+
+    block-out-from "screen-capture"
+}

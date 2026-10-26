@@ -43,13 +43,32 @@
     };
   };
   flake.modules.hjem.niri = {
+    osConfig,
+    lib,
+    ...
+  }: let
+    cfg = osConfig;
+
+    # TODO: improve monitor/output abstraction
+    # named workspaces for easier output mapping
+    output-workspaces = builtins.concatStringsSep "\n" (lib.mapAttrsToList (name: output: ''
+        workspace "${name}" {
+            open-on-output "${output}"
+        }
+      '') {
+        main = "DVI-D-1";
+        alt = "DP-4";
+      });
+  in {
     rum.desktops.niri = {
       enable = true;
+      spawn-at-startup = with cfg.programs.steam; lib.optionals enable [["${package}/bin/steam" "-silent"]];
       config =
-        builtins.readFile ./config.kdl
-        + ''
-
-        '';
+        output-workspaces
+        + lib.concatMapStringsSep "\n" builtins.readFile [
+          ./config.kdl
+          ./rules.kdl
+        ];
     };
   };
 }
