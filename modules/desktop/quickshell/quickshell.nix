@@ -181,6 +181,9 @@
       partOf = ["graphical-session.target"];
       bindsTo = ["graphical-session.target"];
       wantedBy = ["graphical-session.target"];
+      # OutputSelector spawns `quickshell-vol-route`; the user service's default
+      # PATH excludes the hjem profile, so put the helper on PATH explicitly.
+      path = [volRoute];
       serviceConfig = {
         Type = "simple";
         ExecStart = "${quickshell}/bin/quickshell -c config";

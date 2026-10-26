@@ -11,8 +11,8 @@ import QtQuick
 // `quickshell-vol-route` helper. Runtime-only; the NixOS pipewire config still
 // sets the boot-time target.
 //
-// Only unbound-safe node fields are read (name/description/nickname/isSink/id),
-// so the candidate nodes need no PwObjectTracker.
+// Only unbound-safe node fields are read (name/description/nickname/isSink
+// /isStream/id), so the candidate nodes need no PwObjectTracker.
 Column {
     id: root
 
@@ -37,7 +37,7 @@ Column {
         const nodes = Pipewire.nodes.values;
         for (let i = 0; i < nodes.length; i++) {
             const nd = nodes[i];
-            if (nd.isSink && root.excluded.indexOf(nd.name) === -1)
+            if (nd.isSink && !nd.isStream && root.excluded.indexOf(nd.name) === -1)
                 out.push(nd);
         }
         return out;

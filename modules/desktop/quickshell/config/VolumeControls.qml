@@ -20,12 +20,15 @@ import QtQuick
 Column {
     id: root
 
-    // First sink node matching name/description/nickname (case-exact).
+    // First *device* sink matching name/description/nickname (case-exact).
+    // Quickshell reports isSink==true for playback-direction streams too (e.g.
+    // `default_output_playback`, whose description is also "Default"), so
+    // `!isStream` is required to skip them and land on the real Audio/Sink.
     function sinkByName(wanted) {
         const nodes = Pipewire.nodes.values;
         for (let i = 0; i < nodes.length; i++) {
             const nd = nodes[i];
-            if (nd.isSink && (nd.name === wanted || nd.description === wanted || nd.nickname === wanted))
+            if (nd.isSink && !nd.isStream && (nd.name === wanted || nd.description === wanted || nd.nickname === wanted))
                 return nd;
         }
         return null;
