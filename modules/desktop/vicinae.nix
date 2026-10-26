@@ -4,7 +4,7 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  flake.modules.hjem.vicinae = {pkgs, ...}: let
+  flake.modules.hjem.vicinae = {pkgs, config, ...}: let
     vicinae = inputs.vicinae.packages.${pkgs.stdenv.hostPlatform.system}.default;
   in {
     packages = [vicinae];
@@ -23,7 +23,7 @@
         KillMode = "process";
         Environment = [
           "USE_LAYER_SHELL=1"
-          "PATH=/run/current-system/sw/bin:${pkgs.coreutils}/bin:${pkgs.findutils}/bin"
+          "PATH=/run/current-system/sw/bin:/etc/profiles/per-user/${config.user}/bin:${config.directory}/.nix-profile/bin:${config.directory}/.local/bin:${pkgs.coreutils}/bin:${pkgs.findutils}/bin"
         ];
       };
     };
