@@ -57,7 +57,7 @@
         }
       '') {
         main = "DVI-D-1";
-        alt = "DP-4";
+        alt = "DP-6";
       });
   in {
     rum.desktops.niri = {

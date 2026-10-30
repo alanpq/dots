@@ -48,7 +48,7 @@
       };
 
       outputs = lib.fix (self: {
-        "DP-4" = {
+        "DP-6" = {
           width = 1920;
           height = 1080;
           rate = "144.001";
@@ -61,7 +61,7 @@
           '';
         };
         "DVI-D-1" =
-          place.rightOf "DP-4" {
+          place.rightOf "DP-6" {
             width = 1920;
             height = 1080;
             rate = "144.001";
