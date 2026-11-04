@@ -1,6 +1,9 @@
 {inputs, ...}: {
   flake-file.inputs = {
-    biri.url = "github:barrulus/biri";
+    biri = {
+      url = "github:barrulus/biri";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   flake.modules.nixos.niri = {pkgs, ...}: {
     imports = with inputs.self.modules.nixos; [
