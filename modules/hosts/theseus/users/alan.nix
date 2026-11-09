@@ -39,6 +39,8 @@
         lutris
 
         parsec-bin
+
+        slack
       ];
     };
   };
