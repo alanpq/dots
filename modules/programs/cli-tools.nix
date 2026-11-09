@@ -4,6 +4,7 @@
       comma
 
       git
+      git-lfs
       lazygit
 
       tmux
