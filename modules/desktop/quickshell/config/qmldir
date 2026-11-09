@@ -1,6 +1,9 @@
 singleton Style Style.qml
 singleton Theme Theme.qml
 Bar Bar.qml
+Calendar Calendar.qml
+CalendarAgenda CalendarAgenda.qml
+CalendarEventDetail CalendarEventDetail.qml
 Section Section.qml
 Button Button.qml
 Tray Tray.qml

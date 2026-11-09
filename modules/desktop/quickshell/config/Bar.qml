@@ -24,6 +24,18 @@ PanelWindow {
         precision: SystemClock.Seconds
     }
 
+    // Left cluster: upcoming calendar events.
+    Row {
+        anchors.left: parent.left
+        anchors.leftMargin: Style.gap
+        height: parent.height
+        spacing: Style.gap
+
+        Calendar {
+            panelWindow: panel
+        }
+    }
+
     // Center cluster: now-playing media.
     Row {
         anchors.horizontalCenter: parent.horizontalCenter

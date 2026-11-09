@@ -23,6 +23,27 @@ Singleton {
     // Media.
     readonly property int mediaMaxWidth: 320
 
+    // Calendar.
+    readonly property int calTitleMaxWidth: 160
+    readonly property int calPopupPad: 12
+    readonly property int calAgendaSpacing: 6
+    readonly property int calAgendaColGap: 12
+    readonly property int calTimeWidth: 56
+    readonly property int calAgendaTitleMaxWidth: 280
+    // Agenda list rows (clickable).
+    readonly property int calListWidth: 300
+    readonly property int calRowHPad: 12
+    readonly property int calRowVPad: 5
+    // Event detail sidebar.
+    readonly property int calDetailWidth: 340
+    readonly property int calDetailSpacing: 8
+    readonly property int calDetailGlyphW: 18
+    readonly property int calDetailRowGap: 8
+    readonly property int calDetailDescMaxLines: 10
+    readonly property int calSlideDuration: 180
+    readonly property int calDetailBtnPadY: 5
+    readonly property int calDetailBtnSpacing: 2
+
     // Notifications.
     readonly property int notifyWidth: 360
     readonly property int notifyPad: 10

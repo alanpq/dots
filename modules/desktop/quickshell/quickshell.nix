@@ -147,8 +147,16 @@
           readonly property int fontSize: ${toString fonts.sizes.desktop};
       }
     '';
+
+    # Aggregates upcoming events from every authenticated gcalcli account into
+    # one JSON array for Calendar.qml. gcalcli is on PATH for its subprocesses.
+    calendarFetch = pkgs.writeShellApplication {
+      name = "quickshell-calendar";
+      runtimeInputs = [pkgs.gcalcli pkgs.python3];
+      text = ''exec python3 ${./calendar-fetch.py} "$@"'';
+    };
   in {
-    packages = [quickshell volRoute];
+    packages = [quickshell volRoute calendarFetch pkgs.gcalcli];
 
     xdg.config.files = {
       # Loaded via `quickshell -c config` (see ExecStart), i.e.
@@ -157,6 +165,9 @@
       "quickshell/config/shell.qml".source = ./config/shell.qml;
       "quickshell/config/qmldir".source = ./config/qmldir;
       "quickshell/config/Bar.qml".source = ./config/Bar.qml;
+      "quickshell/config/Calendar.qml".source = ./config/Calendar.qml;
+      "quickshell/config/CalendarAgenda.qml".source = ./config/CalendarAgenda.qml;
+      "quickshell/config/CalendarEventDetail.qml".source = ./config/CalendarEventDetail.qml;
       "quickshell/config/Section.qml".source = ./config/Section.qml;
       "quickshell/config/Tray.qml".source = ./config/Tray.qml;
       "quickshell/config/Media.qml".source = ./config/Media.qml;
@@ -181,9 +192,10 @@
       partOf = ["graphical-session.target"];
       bindsTo = ["graphical-session.target"];
       wantedBy = ["graphical-session.target"];
-      # OutputSelector spawns `quickshell-vol-route`; the user service's default
-      # PATH excludes the hjem profile, so put the helper on PATH explicitly.
-      path = [volRoute];
+      # OutputSelector spawns `quickshell-vol-route` and Calendar spawns
+      # `quickshell-calendar`; the user service's default PATH excludes the hjem
+      # profile, so put the helpers on PATH explicitly.
+      path = [volRoute calendarFetch];
       serviceConfig = {
         Type = "simple";
         ExecStart = "${quickshell}/bin/quickshell -c config";
