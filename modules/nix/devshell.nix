@@ -17,7 +17,7 @@
     # replacing the managed service for the duration of the session.
     qs-dev = pkgs.writeShellApplication {
       name = "qs-dev";
-      runtimeInputs = [quickshell pkgs.git pkgs.systemd pkgs.coreutils];
+      runtimeInputs = [quickshell pkgs.git pkgs.systemd pkgs.coreutils pkgs.gcalcli pkgs.python3];
       text = ''
         repo=$(git rev-parse --show-toplevel)
         config="$repo/modules/desktop/quickshell/config"
@@ -36,8 +36,19 @@
         fi
         ln -sf "$theme" "$config/Theme.qml"
 
+        # Shadow the nix-built `quickshell-calendar` (which bakes calendar-fetch.py
+        # into the store) with a shim that runs the in-repo script, so edits to it
+        # take effect without a rebuild. gcalcli/python3 come from runtimeInputs.
+        bin=$(mktemp -d)
+        cat > "$bin/quickshell-calendar" <<EOF
+        #!/usr/bin/env bash
+        exec python3 "$repo/modules/desktop/quickshell/calendar-fetch.py" "\$@"
+        EOF
+        chmod +x "$bin/quickshell-calendar"
+        export PATH="$bin:$PATH"
+
         # Hand the managed service back whenever the dev instance exits.
-        trap 'echo "qs-dev: restarting managed service"; systemctl --user start quickshell || true' EXIT
+        trap 'echo "qs-dev: restarting managed service"; systemctl --user start quickshell || true; rm -rf "$bin"' EXIT
 
         echo "qs-dev: stopping managed quickshell service"
         systemctl --user stop quickshell || true
