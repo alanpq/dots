@@ -15,6 +15,8 @@
 
       thunar
     ];
+
+    services.upower.enable = true;
   };
 
   flake.modules.hjem.system-laptop = {
