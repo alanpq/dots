@@ -10,6 +10,8 @@
     hjem.users.alan = {
       imports = with inputs.self.modules.hjem; [
         system-laptop
+
+        polkit-gnome
       ];
     };
   };
