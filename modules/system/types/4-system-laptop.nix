@@ -2,6 +2,7 @@
   flake.modules.nixos.system-laptop = {
     imports = with inputs.self.modules.nixos; [
       system-cli
+      watt
       greetd
 
       pipewire
