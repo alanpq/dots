@@ -46,12 +46,10 @@ Section {
     // timer independent of the gcalcli fetch, so "in N min" counts down live.
     property double now: Date.now()
 
-    // Relative countdown for the collapsed bar: all-day events read "all day",
-    // in-progress events "now", otherwise "in N min" / "in N hr" until start.
+    // Relative countdown for the collapsed bar: in-progress events read "now",
+    // otherwise "in N min" / "in N hr" until start.
     // Reads root.now so the binding re-evaluates on every minute tick.
     function timeLabel(e) {
-        if (e.allDay)
-            return "all day";
         const diffMin = Math.round((new Date(e.start).getTime() - root.now) / 60000);
         if (diffMin <= 0)
             return "now";
@@ -63,8 +61,8 @@ Section {
     // Filter the fetched list to today, then collapse today's *upcoming* timed
     // events into overlap clusters for the bar: a new cluster begins only once
     // an event starts at/after the running end of the current one; everything
-    // else folds into the cluster's "extra" count. All-day events stand alone
-    // (each its own entry) so they never swallow the day's timed meetings.
+    // else folds into the cluster's "extra" count. All-day events are skipped
+    // for the bar (they stay in the dropdown agenda).
     function rebuild(events) {
         const today = events.filter(e => root.isToday(e));
         root.agenda = today;
@@ -74,18 +72,10 @@ Section {
         let cur = null;
         let curEnd = 0;
         for (const e of today) {
-            if (Date.parse(e.end) <= now)
+            if (e.allDay || Date.parse(e.end) <= now)
                 continue;
             const start = Date.parse(e.start);
             const end = Date.parse(e.end);
-            if (e.allDay) {
-                out.push({
-                    head: e,
-                    extra: 0
-                });
-                cur = null;
-                continue;
-            }
             if (!cur || start >= curEnd) {
                 cur = {
                     head: e,
