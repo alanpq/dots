@@ -17,6 +17,8 @@
     nixpkgs.config.allowUnfree = true;
     system.stateVersion = lib.mkDefault "25.05";
 
+    services.speechd.enable = lib.mkForce false;
+
     time.timeZone = "Europe/Dublin";
 
     nix.settings = {
