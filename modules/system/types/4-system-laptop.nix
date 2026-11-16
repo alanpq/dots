@@ -7,7 +7,6 @@
       pipewire
 
       firefox
-      steam
 
       theme
 
