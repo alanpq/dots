@@ -7,6 +7,8 @@
       git-lfs
       lazygit
 
+      libnotify
+
       tmux
       eza
       bat
