@@ -14,6 +14,7 @@
       url = "github:barrulus/biri";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko.url = "github:nix-community/disko";
     elephant.url = "github:abenz1267/elephant";
     flake-file.url = "github:vic/flake-file";
     flake-parts.url = "github:hercules-ci/flake-parts";
