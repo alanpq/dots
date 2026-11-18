@@ -11,6 +11,8 @@
       packages = with pkgs; [
         local.linear
         slack
+
+        bitwarden-desktop
       ];
       imports = with inputs.self.modules.hjem; [
         system-laptop
