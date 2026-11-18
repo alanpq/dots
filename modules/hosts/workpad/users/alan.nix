@@ -10,6 +10,7 @@
     hjem.users.alan = {
       packages = with pkgs; [
         local.linear
+        slack
       ];
       imports = with inputs.self.modules.hjem; [
         system-laptop
