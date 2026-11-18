@@ -11,6 +11,8 @@ in {
       systemd-boot
       wireless
       # bluetooth
+
+      clamav
     ];
 
     # keep timezone imperative for travel
