@@ -6,7 +6,7 @@
       [
         system-minimal
         hjem
-        # secrets
+        secrets
       ]
       ++ (with inputs.self.modules.generic; [
         # systemConstants

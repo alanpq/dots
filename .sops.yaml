@@ -2,29 +2,28 @@ keys:
   # Users
   - &users:
     - &alan 111D6C0637278F94E3438D9B6B2B471B33BC4E0B
-  # Hosts
+  # Hosts: `ssh-to-age < /etc/ssh/ssh_host_ed25519_key.pub`
   - &hosts:
-    - &gamer-think age1wxml3qqg7r23u6w3ppj59lrljrqveah70l2dyg35trwz9gzwcakse7m496
-    - &zwei-pc age18vakqv3hzk030lusaanj0z52cke4trcf2je7dj94mansm8rujqts5tf2u3
+    - &chudpad age1wxml3qqg7r23u6w3ppj59lrljrqveah70l2dyg35trwz9gzwcakse7m496
+    - &theseus age1ad6tzef0sf9g5jgp37cfyupfjuzr5e4gyd9flfxjq6rchu2hcvvq0wzgq2
+    - &workpad age1hl2yv5440vfrek5yufdctxyrnndjk4rtjdxt890dxfkxa6t3deaqjp3n8d
 
 creation_rules:
-  - path_regex: hosts/gamer-think/secrets.ya?ml$
+  - path_regex: modules/hosts/chudpad/secrets\.ya?ml$
     key_groups:
       - age:
-          - *gamer-think
+          - *chudpad
         pgp:
           - *alan
-  - path_regex: hosts/zwei-pc/secrets.ya?ml$
+  - path_regex: modules/hosts/theseus/secrets\.ya?ml$
     key_groups:
       - age:
-          - *zwei-pc
+          - *theseus
         pgp:
           - *alan
-
-  - path_regex: hosts/common/secrets.ya?ml$
+  - path_regex: modules/hosts/workpad/secrets\.ya?ml$
     key_groups:
       - age:
-          - *gamer-think
-          - *zwei-pc
+          - *workpad
         pgp:
           - *alan
