@@ -13,6 +13,7 @@ in {
       # bluetooth
 
       clamav
+      secureframe-agent
     ];
 
     # keep timezone imperative for travel
