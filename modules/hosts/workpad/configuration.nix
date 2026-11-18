@@ -12,6 +12,8 @@ in {
       wireless
       # bluetooth
 
+      fingerprint
+
       clamav
       secureframe-agent
     ];
